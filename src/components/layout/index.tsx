@@ -36,7 +36,7 @@ const Layout = (props) => {
           >
             <Navbar.Text className="me-1">Have an account?</Navbar.Text>
             <Link href="/signin" passHref>
-              <Button variant="outline-primary">Login</Button>
+              <Button variant="outline-primary px-2">Log in</Button>
             </Link>
           </Navbar.Collapse>
         </Container>
@@ -52,7 +52,7 @@ const Layout = (props) => {
         <Container>
           <Row>
             <Col className="d-md-flex justify-content-between align-items-center">
-              <p className="m-0">© 2021 Kado. All rights reserved.</p>
+              <p className="m-0">© 2022 Kado. All rights reserved.</p>
               <Nav>
                 <Nav.Item>
                   <Link href="/" passHref>
