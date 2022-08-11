@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  height: 355px;
+  background: url(/footer-bg.svg) center bottom no-repeat;
+  background-size: cover;
+}
