@@ -12,7 +12,7 @@ import Image from "next/image";
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h1 className="mb-2">Sign in</h1>

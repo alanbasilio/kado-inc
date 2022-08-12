@@ -34,9 +34,13 @@ const Layout = (props) => {
             id="basic-navbar-nav"
             className="justify-content-end"
           >
-            <Navbar.Text className="me-1">Have an account?</Navbar.Text>
-            <Link href="/signin" passHref>
-              <Button variant="outline-primary px-2">Log in</Button>
+            <Navbar.Text className="me-1">
+              {props.signin ? "New to Kado?" : "Have an account?"}
+            </Navbar.Text>
+            <Link href={props.signin ? "/signup" : "/signin"} passHref>
+              <Button variant="outline-primary">
+                {props.signin ? "Create an account" : "Log in"}
+              </Button>
             </Link>
           </Navbar.Collapse>
         </Container>
