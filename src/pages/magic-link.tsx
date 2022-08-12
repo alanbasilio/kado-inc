@@ -13,13 +13,13 @@ const MagicLink: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2">
             <div className="text-center">
               <h1 className="mb-3">Check your inbox</h1>
-              <p className="mb-3 text-light">
+              <p className="mb-3 text-muted">
                 We have sent a magic link to <br />
                 <span className="text-dark">bill.sanders@example.com</span>.
                 <br /> The magic link expires shortly so please check your
                 email.
               </p>
-              <p className="mb-3 text-light">
+              <p className="mb-3 text-muted">
                 Not your email address?{" "}
                 <Link href="/signin" passHref>
                   <a className="text-dark">Go back</a>

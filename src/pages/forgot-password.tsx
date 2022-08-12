@@ -13,7 +13,7 @@ const ForgotPassword: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2">
             <div className="text-center">
               <h1 className="mb-3">Forgot Password</h1>
-              <p className="mb-3 text-light">
+              <p className="mb-3 text-muted">
                 Please enter the email associated with your account and we’ll
                 send an email with instructions to reset your password.
               </p>
