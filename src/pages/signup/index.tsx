@@ -77,7 +77,7 @@ const Signup: NextPage = () => {
             </Col>
           </Row>
 
-          <Link href={`/signup/${active}`} passHref>
+          <Link href={`/signup/waitlist`} passHref>
             <Button
               variant="primary"
               type="submit"
