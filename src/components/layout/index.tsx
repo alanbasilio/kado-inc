@@ -22,7 +22,7 @@ const Layout = (props) => {
           <Link href="/" passHref>
             <Navbar.Brand>
               <Image
-                src="/logo.svg"
+                src="/images/logo.svg"
                 width="96"
                 height="26"
                 alt="React Bootstrap logo"
