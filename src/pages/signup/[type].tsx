@@ -4,14 +4,14 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import Layout from "../../components/layout";
 
-const ForgotPassword: NextPage = () => {
+const SignupType: NextPage = () => {
   return (
     <Layout>
       <Row className="justify-content-center">
-        <Col md={5} className="bg-white rounded shadow p-2 text-center"></Col>
+        <Col md={6} className="bg-white rounded shadow p-2 text-center"></Col>
       </Row>
     </Layout>
   );
 };
 
-export default ForgotPassword;
+export default SignupType;

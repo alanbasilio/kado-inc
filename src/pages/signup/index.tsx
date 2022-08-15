@@ -20,8 +20,8 @@ const Signup: NextPage = () => {
           <Row className="mb-5">
             <Col>
               <Card
-                onClick={() => setActive("student")}
-                className={active === "student" ? "active" : ""}
+                onClick={() => setActive("student-1")}
+                className={active === "student-1" ? "active" : ""}
               >
                 <Card.Img
                   width={35}
@@ -39,8 +39,8 @@ const Signup: NextPage = () => {
             </Col>
             <Col>
               <Card
-                onClick={() => setActive("school")}
-                className={active === "school" ? "active" : ""}
+                onClick={() => setActive("school-1")}
+                className={active === "school-1" ? "active" : ""}
               >
                 <Card.Img
                   width={35}
@@ -58,8 +58,8 @@ const Signup: NextPage = () => {
             </Col>
             <Col>
               <Card
-                onClick={() => setActive("company")}
-                className={active === "company" ? "active" : ""}
+                onClick={() => setActive("business-1")}
+                className={active === "business-1" ? "active" : ""}
               >
                 <Card.Img
                   width={35}
@@ -77,7 +77,7 @@ const Signup: NextPage = () => {
             </Col>
           </Row>
 
-          <Link href={`/signup/waitlist`} passHref>
+          <Link href={`/signup/${active}`} passHref>
             <Button
               variant="primary"
               type="submit"

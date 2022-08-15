@@ -9,25 +9,28 @@
 .card {
   cursor: pointer;
   &.active {
-    background-color: #ebebeb;
+    background-color: $gray-400;
   }
   .card-img {
     padding: 12.5px;
-    border: 1px solid black;
+    border: 1px solid $black;
     display: block;
     max-width: 70px;
     max-height: 70px;
     height: 70px;
     border-radius: 50%;
     margin: 20px auto;
-    background: #fff;
+    background: $white;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .card-text {
+    font-size: 14px;
   }
 }
 
-.card-title {
-  font-size: 18px;
-  font-weight: 600;
-}
-.card-text {
-  font-size: 14px;
+.btn-light {
+  background-color: $gray-400;
 }
