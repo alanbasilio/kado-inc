@@ -26,8 +26,9 @@ const Business3: NextPage = () => {
                     placeholder="Intro yourself"
                     aria-label="Intro yourself"
                     aria-describedby="basic-addon1"
-                    type="textarea"
+                    as="textarea"
                     size="lg"
+                    rows={3}
                   />
                 </Form.Group>
                 <div className="d-grid gap-2 mt-2">

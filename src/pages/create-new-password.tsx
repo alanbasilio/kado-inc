@@ -9,26 +9,30 @@ const ForgotPassword: NextPage = () => {
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Forgot Password</h1>
+          <h2 className="mb-2">Create New Password</h2>
           <p className="mb-2 text-muted">
-            Please enter the email associated with your account and we’ll send
-            an email with instructions to reset your password.
+            Your new password must be different from previously used passswords.
           </p>
           <Form>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <MdOutlineAlternateEmail />
-              </InputGroup.Text>
               <Form.Control
-                placeholder="Your E-mail"
-                aria-label="Your E-mail"
+                placeholder="Enter your password"
+                aria-label="Password"
                 aria-describedby="basic-addon1"
-                type="email"
+                type="password"
+              />
+            </InputGroup>
+            <InputGroup className="mb-2" size="lg">
+              <Form.Control
+                placeholder="Confirm your password"
+                aria-label="Confirm Password"
+                aria-describedby="basic-addon1"
+                type="password"
               />
             </InputGroup>
             <div className="d-grid gap-2">
-              <Button variant="primary" type="submit" size="lg">
-                Send email instructions
+              <Button href="/signin" variant="primary" type="submit" size="lg">
+                Create
               </Button>
             </div>
           </Form>

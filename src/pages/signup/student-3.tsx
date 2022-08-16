@@ -9,92 +9,40 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import Layout from "../../components/layout";
 import Image from "next/image";
 
-const Signin: NextPage = () => {
+const Business3: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <Layout signin>
+    <Layout>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Join Waitlist</h1>
-          <p className="mb-2 text-muted">Create an account to continue!</p>
-          <Link href="#" passHref>
-            <a className="mb-2 d-block">
-              <Image
-                src="/images/login-google.png"
-                width={231}
-                height={51}
-                alt="login with google"
-              />
-            </a>
-          </Link>
-          <p className="mb-2 text-muted">OR</p>
+          <p className="mb-2 text-muted">Step 2 of 2</p>
+          <h2 className="mb-2">Intro yourself</h2>
+
           <Form>
             <Row>
               <Col>
                 <Form.Group className="mb-2">
                   <Form.Control
-                    placeholder="First Name"
-                    aria-label="First Name"
+                    placeholder="Intro yourself"
+                    aria-label="Intro yourself"
                     aria-describedby="basic-addon1"
-                    type="email"
+                    as="textarea"
                     size="lg"
+                    rows={3}
                   />
                 </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="Last Name"
-                    aria-label="Last Name"
-                    aria-describedby="basic-addon1"
-                    type="email"
-                    size="lg"
-                  />
-                </Form.Group>
+                <div className="d-grid gap-2 mt-2">
+                  <Link href={"./business-4"} passHref>
+                    <Button variant="primary" type="submit" size="lg">
+                      Next
+                    </Button>
+                  </Link>
+                  <Link href="./business-5" passHref>
+                    <a className="text-muted">Skip</a>
+                  </Link>
+                </div>
               </Col>
             </Row>
-            <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <MdOutlineAlternateEmail />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Your E-mail"
-                aria-label="Your E-mail"
-                aria-describedby="basic-addon1"
-                type="email"
-              />
-            </InputGroup>
-            <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <FaLock />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Password"
-                aria-label="Password"
-                aria-describedby="basic-addon1"
-                type={showPassword ? "text" : "password"}
-              />
-              <InputGroup.Text
-                id="basic-addon2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
-              </InputGroup.Text>
-            </InputGroup>
-            <Form.Group
-              className="mb-2 text-start text-muted"
-              id="formGridCheckbox"
-            >
-              <Form.Check
-                type="checkbox"
-                label="I agree to the Terms & Conditions"
-              />
-            </Form.Group>
-            <div className="d-grid gap-2">
-              <Button variant="primary" type="submit" size="lg">
-                Join Waitlist
-              </Button>
-            </div>
           </Form>
         </Col>
       </Row>
@@ -102,4 +50,4 @@ const Signin: NextPage = () => {
   );
 };
 
-export default Signin;
+export default Business3;

@@ -17,7 +17,7 @@ const MagicLink: NextPage = () => {
           </p>
           <p className="text-muted">
             Not your email address?{" "}
-            <Link href="/signin" passHref>
+            <Link href="/forgot-password-01" passHref>
               <a className="text-dark">Go back</a>
             </Link>
           </p>

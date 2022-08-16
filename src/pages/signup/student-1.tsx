@@ -15,7 +15,7 @@ const Signin: NextPage = () => {
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Join Waitlist</h1>
+          <h1 className="mb-2">Getting Started</h1>
           <p className="mb-2 text-muted">Create an account to continue!</p>
           <Link href="#" passHref>
             <a className="mb-2 d-block">

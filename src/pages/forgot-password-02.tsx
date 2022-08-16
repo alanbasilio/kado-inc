@@ -6,7 +6,7 @@ import { useState } from "react";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
-import Layout from "../../components/layout";
+import Layout from "../components/layout";
 import Image from "next/image";
 
 const CompanyInfo: NextPage = () => {
@@ -15,36 +15,32 @@ const CompanyInfo: NextPage = () => {
     <Layout>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h2 className="mb-2">Hang tight</h2>
-          <h3 className="mb-2">You are currently the number 2345</h3>
           <div className="mb-2">
             <Image
-              width="214"
-              height="172"
-              src="/images/sticker.png"
+              width="150"
+              height="135"
+              src="/images/check-email.png"
               alt="React Bootstrap logo"
             />
           </div>
-          <Form>
-            <Form.Group className="mb-2">
-              <Form.Control
-                placeholder="Enter VIP code"
-                aria-label="First Name"
-                aria-describedby="basic-addon1"
-                type="email"
-                size="lg"
-              />
-            </Form.Group>
-          </Form>
+          <h2 className="mb-2">Check your e-mail</h2>
+          <p className="mb-2 text-muted">
+            We have sent an instruction on how to recover your password to your
+            email.
+          </p>
+
           <div className="d-grid gap-2 my-2">
-            <Link href={"./business-3"} passHref>
+            <Link href={"./create-new-password"} passHref>
               <Button variant="primary" type="submit" size="lg">
-                Unlock Access
+                Open Mail
               </Button>
             </Link>
-            <Link href="./business-5" passHref>
-              <a className="text-muted">Skip</a>
-            </Link>
+            <Form.Text className="text-center">
+              Did not receive any mail? Check your spam filter, or{" "}
+              <Link href="/signin" passHref>
+                <a className="primary">try another email address</a>
+              </Link>
+            </Form.Text>
           </div>
         </Col>
       </Row>

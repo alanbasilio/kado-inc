@@ -40,37 +40,21 @@ const Signin: NextPage = () => {
                 type="email"
               />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <FaLock />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Password"
-                aria-label="Password"
-                aria-describedby="basic-addon1"
-                type={showPassword ? "text" : "password"}
-              />
-              <InputGroup.Text
-                id="basic-addon2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
-              </InputGroup.Text>
-            </InputGroup>
-            <p className="text-start form-text">
-              <Link href="/forgot-password-01" passHref>
-                <a className="text-dark">Forgot password?</a>
-              </Link>
-            </p>
+
             <div className="d-grid gap-2 my-2">
-              <Button variant="primary" type="submit" size="lg">
-                Sign in
+              <Button
+                href="/magic-link-02"
+                variant="primary"
+                type="submit"
+                size="lg"
+              >
+                Sign in with email
               </Button>
             </div>
             <Form.Text className="text-center">
               You can also sign in with a{" "}
-              <Link href="/magic-link-01" passHref>
-                <a className="text-dark">Magic Link</a>
+              <Link href="/signin" passHref>
+                <a className="text-dark">Password</a>
               </Link>
             </Form.Text>
           </Form>
