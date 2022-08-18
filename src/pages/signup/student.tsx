@@ -1,20 +1,45 @@
 import type { NextPage } from "next";
 import { Button, Col, Form, Row, InputGroup, Card } from "react-bootstrap";
 import { useState } from "react";
-
+import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import swal from "sweetalert";
+import Image from "next/image";
 
 import Layout from "../../components/layout";
-import Image from "next/image";
+import API from "../../services";
 
 const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    data.account_id = 1;
+    API.post("/user", data)
+      .then((response) => {
+        console.log(response);
+        reset();
+        swal(
+          "Success",
+          "Now you are in the waiting list. We will contact you very soon.",
+          "success"
+        );
+      })
+      .catch((err) => {
+        swal("Oops", "An error occured: " + err, "error");
+      });
+  };
+
   return (
-    <Layout signin>
+    <Layout>
       <Row className="justify-content-center">
         {step === 1 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
