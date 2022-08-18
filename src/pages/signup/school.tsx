@@ -14,6 +14,7 @@ import API from "../../services";
 
 const School: NextPage = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -24,8 +25,10 @@ const School: NextPage = () => {
   } = useForm();
   const onSubmit = (data) => {
     data.account_id = 2;
+    setLoading(true);
     API.post("/user", data)
       .then((response) => {
+        setLoading(false);
         console.log(response);
         reset();
         swal(
@@ -33,6 +36,7 @@ const School: NextPage = () => {
           "Our Partner Relations Team will be in touch soon!",
           "success"
         ).then(function () {
+          setLoading(false);
           router.push("/");
         });
       })
@@ -116,7 +120,12 @@ const School: NextPage = () => {
             </Form.Group>
 
             <div className="d-grid gap-2">
-              <Button variant="primary" type="submit" size="lg">
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={loading}
+              >
                 Submit
               </Button>
             </div>

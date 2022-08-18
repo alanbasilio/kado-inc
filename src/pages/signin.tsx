@@ -5,12 +5,47 @@ import { useState } from "react";
 
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import { useRouter } from "next/router";
 
+import API from "../services";
 import Layout from "../components/layout";
 import Image from "next/image";
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    setLoading(true);
+    API.post("/user/authenticate", data)
+      .then((response) => {
+        setLoading(false);
+        console.log(response);
+        reset();
+        swal(
+          "Success",
+          response.data.data.first_name + ", you are logged in.",
+          "success"
+        ).then(function () {
+          setLoading(false);
+          router.push("/");
+        });
+      })
+      .catch((err) => {
+        swal("Oops", "An error occured: " + err, "error");
+      });
+  };
+
   return (
     <Layout signin>
       <Row className="justify-content-center">
@@ -28,7 +63,7 @@ const Signin: NextPage = () => {
             </a>
           </Link>
           <p className="mb-2 text-muted">OR</p>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
               <InputGroup.Text id="basic-addon1">
                 <MdOutlineAlternateEmail />
@@ -38,17 +73,19 @@ const Signin: NextPage = () => {
                 aria-label="Your E-mail"
                 aria-describedby="basic-addon1"
                 type="email"
+                {...register("email", { required: true })}
               />
             </InputGroup>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
+              <InputGroup.Text id="basic-addon2">
                 <FaLock />
               </InputGroup.Text>
               <Form.Control
                 placeholder="Password"
                 aria-label="Password"
-                aria-describedby="basic-addon1"
+                aria-describedby="basic-addon2"
                 type={showPassword ? "text" : "password"}
+                {...register("password", { required: true })}
               />
               <InputGroup.Text
                 id="basic-addon2"
@@ -63,7 +100,12 @@ const Signin: NextPage = () => {
               </Link>
             </p>
             <div className="d-grid gap-2 my-2">
-              <Button variant="primary" type="submit" size="lg">
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                disabled={loading}
+              >
                 Sign in
               </Button>
             </div>

@@ -6,14 +6,19 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import Layout from "../../components/layout";
 import API from "../../services";
 
 const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [base64File, setBase64File] = useState();
+  const [user, setUser] = useState();
   const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -21,19 +26,60 @@ const Student: NextPage = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const signup = (data) => {
+    setLoading(true);
     data.account_id = 1;
     API.post("/user", data)
       .then((response) => {
-        console.log(response);
+        setLoading(false);
+        console.log(response.data.user);
+        setUser(response.data.user);
         reset();
-        swal(
-          "Success",
-          "Now you are in the waiting list. We will contact you very soon.",
-          "success"
-        );
+        swal("Success", "Now you are signed up.", "success").then(function () {
+          setStep(2);
+        });
       })
       .catch((err) => {
+        setLoading(false);
+        swal("Oops", "An error occured: " + err, "error");
+      });
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleFileRead = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertBase64(file);
+    setBase64File(base64);
+  };
+
+  const uploadPhoto = () => {
+    const data = {
+      base64Image: base64File,
+      fileName: "teste.png",
+      user_id: user.id,
+    };
+    setLoading(true);
+    API.post("/user/upload-single-base64", data)
+      .then((response) => {
+        setLoading(false);
+        console.log(response);
+        reset();
+        setStep(3);
+      })
+      .catch((err) => {
+        setLoading(false);
         swal("Oops", "An error occured: " + err, "error");
       });
   };
@@ -54,16 +100,17 @@ const Student: NextPage = () => {
               />
             </a>
             <p className="mb-2 text-muted">OR</p>
-            <Form>
+            <Form onSubmit={handleSubmit(signup)}>
               <Row>
                 <Col>
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="First Name"
                       aria-label="First Name"
-                      aria-describedby="basic-addon1"
-                      type="email"
+                      type="text"
                       size="lg"
+                      isInvalid={errors.first_name ? true : false}
+                      {...register("first_name", { required: true })}
                     />
                   </Form.Group>
                 </Col>
@@ -72,9 +119,10 @@ const Student: NextPage = () => {
                     <Form.Control
                       placeholder="Last Name"
                       aria-label="Last Name"
-                      aria-describedby="basic-addon1"
-                      type="email"
+                      type="text"
                       size="lg"
+                      isInvalid={errors.last_name ? true : false}
+                      {...register("last_name", { required: true })}
                     />
                   </Form.Group>
                 </Col>
@@ -88,17 +136,21 @@ const Student: NextPage = () => {
                   aria-label="Your E-mail"
                   aria-describedby="basic-addon1"
                   type="email"
+                  isInvalid={errors.email ? true : false}
+                  {...register("email", { required: true })}
                 />
               </InputGroup>
               <InputGroup className="mb-2" size="lg">
-                <InputGroup.Text id="basic-addon1">
+                <InputGroup.Text id="basic-addon2">
                   <FaLock />
                 </InputGroup.Text>
                 <Form.Control
                   placeholder="Password"
                   aria-label="Password"
-                  aria-describedby="basic-addon1"
+                  aria-describedby="basic-addon2"
                   type={showPassword ? "text" : "password"}
+                  isInvalid={errors.password ? true : false}
+                  {...register("password", { required: true })}
                 />
                 <InputGroup.Text
                   id="basic-addon2"
@@ -114,14 +166,15 @@ const Student: NextPage = () => {
                 <Form.Check
                   type="checkbox"
                   label="I agree to the Terms & Conditions"
+                  {...register("agree", { required: true })}
                 />
               </Form.Group>
               <div className="d-grid gap-2">
                 <Button
                   variant="primary"
-                  type="button"
+                  type="submit"
                   size="lg"
-                  onClick={() => setStep(2)}
+                  disabled={loading}
                 >
                   Signup
                 </Button>
@@ -137,22 +190,31 @@ const Student: NextPage = () => {
             <div className="mb-2">
               <Image
                 className="img-fluid border rounded-circle"
-                src="/images/photo.png"
+                src={base64File ? base64File : "/images/photo.png"}
                 width="151"
                 height="151"
                 alt="React Bootstrap logo"
               />
             </div>
 
-            <Button className="w-50" variant="light" type="button" size="lg">
-              Upload Photo
-            </Button>
+            <Form>
+              <Form.Group controlId="formFileLg" className="mb-3">
+                <Form.Control
+                  type="file"
+                  size="lg"
+                  accept="image/*"
+                  onChange={(e) => handleFileRead(e)}
+                />
+              </Form.Group>
+            </Form>
+
             <div className="d-grid gap-2 my-2">
               <Button
                 variant="primary"
                 type="button"
                 size="lg"
-                onClick={() => setStep(3)}
+                disabled={!base64File}
+                onClick={() => uploadPhoto()}
               >
                 Next
               </Button>

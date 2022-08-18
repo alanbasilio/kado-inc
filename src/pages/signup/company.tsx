@@ -26,9 +26,11 @@ const Company: NextPage = () => {
   } = useForm();
   const onSubmit = (data) => {
     data.account_id = 3;
+    setLoading(true);
     API.post("/user", data)
       .then((response) => {
         console.log(response);
+        setLoading(false);
         reset();
         swal(
           "Success",
@@ -39,6 +41,7 @@ const Company: NextPage = () => {
         });
       })
       .catch((err) => {
+        setLoading(false);
         swal("Oops", "An error occured: " + err, "error");
       });
   };
