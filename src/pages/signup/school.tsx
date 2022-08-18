@@ -9,25 +9,16 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import Layout from "../../components/layout";
 import Image from "next/image";
 
-const Signin: NextPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
+const School: NextPage = () => {
   return (
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Getting Started</h1>
-          <p className="mb-2 text-muted">Create an account to continue!</p>
-          <Link href="#" passHref>
-            <a className="mb-2 d-block">
-              <Image
-                src="/images/login-google.png"
-                width={231}
-                height={51}
-                alt="login with google"
-              />
-            </a>
-          </Link>
-          <p className="mb-2 text-muted">OR</p>
+          <h2 className="mb-2">Getting started</h2>
+          <p className="mb-2 text-muted">
+            Complete the form below and our Partner Relations Team will be in
+            touch soon!
+          </p>
           <Form>
             <Row>
               <Col>
@@ -54,42 +45,40 @@ const Signin: NextPage = () => {
               </Col>
             </Row>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <MdOutlineAlternateEmail />
-              </InputGroup.Text>
               <Form.Control
-                placeholder="Your E-mail"
-                aria-label="Your E-mail"
+                placeholder="School Name"
+                aria-label="School Name"
                 aria-describedby="basic-addon1"
-                type="email"
+                type="schoolname"
               />
             </InputGroup>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
-                <FaLock />
-              </InputGroup.Text>
               <Form.Control
-                placeholder="Password"
-                aria-label="Password"
+                placeholder="Contact Email"
+                aria-label="Contact Email"
                 aria-describedby="basic-addon1"
-                type={showPassword ? "text" : "password"}
+                type="contactemail"
               />
-              <InputGroup.Text
-                id="basic-addon2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
-              </InputGroup.Text>
             </InputGroup>
-            <Form.Group
-              className="mb-2 text-start text-muted"
-              id="formGridCheckbox"
-            >
-              <Form.Check
-                type="checkbox"
-                label="I agree to the Terms & Conditions"
+            <InputGroup className="mb-2" size="lg">
+              <Form.Control
+                placeholder="Phone Number (optional)"
+                aria-label="Phone Number (optional)"
+                aria-describedby="basic-addon1"
+                type="phonenumber"
+              />
+            </InputGroup>
+            <Form.Group className="mb-2">
+              <Form.Control
+                placeholder="Any additional comments (optional)"
+                aria-label="Any additional comments (optional)"
+                aria-describedby="basic-addon1"
+                as="textarea"
+                size="lg"
+                rows={3}
               />
             </Form.Group>
+
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" size="lg">
                 Join Waitlist
@@ -102,4 +91,4 @@ const Signin: NextPage = () => {
   );
 };
 
-export default Signin;
+export default School;
