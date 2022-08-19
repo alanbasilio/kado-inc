@@ -86,8 +86,8 @@ const School: NextPage = () => {
                 aria-label="School Name"
                 type="text"
                 size="lg"
-                isInvalid={errors.school ? true : false}
-                {...register("school", { required: true })}
+                isInvalid={errors.school_name ? true : false}
+                {...register("school_name", { required: true })}
               />
             </Form.Group>
             <Form.Group className="mb-2">
@@ -98,6 +98,16 @@ const School: NextPage = () => {
                 size="lg"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Control
+                placeholder="Password"
+                aria-label="Password"
+                type="password"
+                size="lg"
+                isInvalid={errors.password ? true : false}
+                {...register("password", { required: true })}
               />
             </Form.Group>
             <Form.Group className="mb-2">

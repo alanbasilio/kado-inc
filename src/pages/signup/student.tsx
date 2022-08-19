@@ -15,6 +15,7 @@ const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [base64File, setBase64File] = useState();
   const [user, setUser] = useState();
+  const [token, setToken] = useState();
   const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
   const router = useRouter();
@@ -34,6 +35,7 @@ const Student: NextPage = () => {
         setLoading(false);
         console.log(response.data.user);
         setUser(response.data.user);
+        setToken(response.data.token);
         reset();
         swal("Success", "Now you are signed up.", "success").then(function () {
           setStep(2);
@@ -71,7 +73,11 @@ const Student: NextPage = () => {
       user_id: user.id,
     };
     setLoading(true);
-    API.post("/user/upload-single-base64", data)
+    API.post("/user/upload-single-base64", data, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
       .then((response) => {
         setLoading(false);
         console.log(response);
