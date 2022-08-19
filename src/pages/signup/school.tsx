@@ -14,7 +14,7 @@ import API from "../../services";
 
 const School: NextPage = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     control,
@@ -41,7 +41,14 @@ const School: NextPage = () => {
         });
       })
       .catch((err) => {
-        swal("Oops", "An error occured: " + err, "error");
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
       });
   };
   return (

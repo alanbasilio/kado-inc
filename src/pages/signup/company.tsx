@@ -42,7 +42,13 @@ const Company: NextPage = () => {
       })
       .catch((err) => {
         setLoading(false);
-        swal("Oops", "An error occured: " + err, "error");
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
       });
   };
 

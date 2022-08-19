@@ -42,7 +42,14 @@ const Signin: NextPage = () => {
         });
       })
       .catch((err) => {
-        swal("Oops", "An error occured: " + err, "error");
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
       });
   };
 
@@ -73,6 +80,7 @@ const Signin: NextPage = () => {
                 aria-label="Your E-mail"
                 aria-describedby="basic-addon1"
                 type="email"
+                isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
               />
             </InputGroup>
@@ -85,6 +93,7 @@ const Signin: NextPage = () => {
                 aria-label="Password"
                 aria-describedby="basic-addon2"
                 type={showPassword ? "text" : "password"}
+                isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
               />
               <InputGroup.Text

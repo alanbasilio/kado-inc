@@ -15,7 +15,6 @@ const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [base64File, setBase64File] = useState();
   const [user, setUser] = useState();
-  const [token, setToken] = useState();
   const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
   const router = useRouter();
@@ -33,17 +32,19 @@ const Student: NextPage = () => {
     API.post("/user", data)
       .then((response) => {
         setLoading(false);
-        console.log(response.data.user);
         setUser(response.data.user);
-        setToken(response.data.token);
         reset();
-        swal("Success", "Now you are signed up.", "success").then(function () {
-          setStep(2);
-        });
+        setStep(2);
       })
       .catch((err) => {
         setLoading(false);
-        swal("Oops", "An error occured: " + err, "error");
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
       });
   };
 
@@ -75,18 +76,44 @@ const Student: NextPage = () => {
     setLoading(true);
     API.post("/user/upload-single-base64", data, {
       headers: {
-        Authorization: `${token}`,
+        Authorization: `${user.token}`,
       },
     })
       .then((response) => {
         setLoading(false);
-        console.log(response);
         reset();
         setStep(3);
       })
       .catch((err) => {
         setLoading(false);
-        swal("Oops", "An error occured: " + err, "error");
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
+  const updateProfile = (data) => {
+    data.user_id = user.id;
+    setLoading(true);
+    API.put("/user/update-profile", data)
+      .then((response) => {
+        setLoading(false);
+        reset();
+        setStep(4);
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
       });
   };
 
@@ -172,6 +199,7 @@ const Student: NextPage = () => {
                 <Form.Check
                   type="checkbox"
                   label="I agree to the Terms & Conditions"
+                  isInvalid={errors.agree ? true : false}
                   {...register("agree", { required: true })}
                 />
               </Form.Group>
@@ -236,26 +264,22 @@ const Student: NextPage = () => {
             <p className="mb-2 text-muted">Step 2 of 2</p>
             <h2 className="mb-2">Intro yourself</h2>
 
-            <Form>
+            <Form onSubmit={handleSubmit(updateProfile)}>
               <Row>
                 <Col>
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="Intro yourself"
                       aria-label="Intro yourself"
-                      aria-describedby="basic-addon1"
                       as="textarea"
                       size="lg"
                       rows={3}
+                      isInvalid={errors.intro_yourself ? true : false}
+                      {...register("intro_yourself", { required: true })}
                     />
                   </Form.Group>
                   <div className="d-grid gap-2 mt-2">
-                    <Button
-                      variant="primary"
-                      type="button"
-                      size="lg"
-                      onClick={() => setStep(4)}
-                    >
+                    <Button variant="primary" type="submit" size="lg">
                       Next
                     </Button>
                     <a className="text-muted" onClick={() => setStep(4)}>
@@ -270,7 +294,8 @@ const Student: NextPage = () => {
 
         {step === 4 && (
           <Col md={8} className="text-center">
-            <h2 className="mb-2 fs-2">Project Interest</h2>
+            <h3 className="mb-2 text-danger">PAGE IN PROGRESS</h3>
+            <h2 className="mb-2">Project Interest</h2>
             <p className="mb-5 text-muted">
               Select a maximum of 5 categories from below
             </p>

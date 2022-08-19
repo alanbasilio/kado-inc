@@ -11,7 +11,7 @@ import Head from "next/head";
 
 const Layout = (props) => {
   return (
-    <div className={`${styles.layout} d-flex flex-column pt-10`}>
+    <div className={`${styles.layout} d-flex flex-column pt-8`}>
       <Head>
         <title>Kado Inc</title>
         <meta name="description" content="Kado Inc" />
@@ -45,7 +45,10 @@ const Layout = (props) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container as={"main"} className="flex-fill">
+      <Container
+        as={"main"}
+        className="flex-fill d-flex flex-column justify-content-center py-3"
+      >
         {props.children}
       </Container>
       <Container
