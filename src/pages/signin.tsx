@@ -30,7 +30,7 @@ const Signin: NextPage = () => {
     API.post("/user/authenticate", data)
       .then((response) => {
         setLoading(false);
-        console.log(response);
+        localStorage.setItem("user", JSON.stringify(response.data.data));
         reset();
         swal(
           "Success",

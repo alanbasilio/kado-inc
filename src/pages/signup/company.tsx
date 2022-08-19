@@ -29,7 +29,6 @@ const Company: NextPage = () => {
     setLoading(true);
     API.post("/user", data)
       .then((response) => {
-        console.log(response);
         setLoading(false);
         reset();
         swal(

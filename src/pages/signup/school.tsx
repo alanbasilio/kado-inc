@@ -29,7 +29,6 @@ const School: NextPage = () => {
     API.post("/user", data)
       .then((response) => {
         setLoading(false);
-        console.log(response);
         reset();
         swal(
           "Success",

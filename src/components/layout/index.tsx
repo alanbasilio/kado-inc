@@ -8,8 +8,26 @@ import styles from "../../styles/Layout.module.scss";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 const Layout = (props) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // storing input name
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+      console.log(JSON.parse(localStorage.getItem("user")));
+    } else {
+      setUser(null);
+    }
+  }, []);
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+
   return (
     <div className={`${styles.layout} d-flex flex-column pt-8`}>
       <Head>
@@ -34,14 +52,27 @@ const Layout = (props) => {
             id="basic-navbar-nav"
             className="justify-content-end"
           >
-            <Navbar.Text className="me-1">
-              {props.signin ? "New to Kado?" : "Have an account?"}
-            </Navbar.Text>
-            <Link href={props.signin ? "/signup" : "/signin"} passHref>
-              <Button variant="outline-primary">
-                {props.signin ? "Create an account" : "Log in"}
-              </Button>
-            </Link>
+            {user ? (
+              <>
+                <Navbar.Text className="me-1">
+                  {`Welcome, ${user.first_name}`}
+                </Navbar.Text>
+                <Button variant="outline-primary" onClick={() => logout()}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Navbar.Text className="me-1">
+                  {props.signin ? "New to Kado?" : "Have an account?"}
+                </Navbar.Text>
+                <Link href={props.signin ? "/signup" : "/signin"} passHref>
+                  <Button variant="outline-primary">
+                    {props.signin ? "Create an account" : "Log in"}
+                  </Button>
+                </Link>
+              </>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
