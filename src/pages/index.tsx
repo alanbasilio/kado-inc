@@ -6,7 +6,9 @@ import styles from "../styles/Home.module.scss";
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Layout>here the future home page or dashboard</Layout>
+      <Layout>
+        <h1>HERE THE FUTURE HOME PAGE OR DASHBOARD</h1>
+      </Layout>
     </div>
   );
 };
