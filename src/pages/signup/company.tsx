@@ -73,7 +73,7 @@ const Company: NextPage = () => {
             <p className="mb-2 text-muted">OR</p>
 
             <Row>
-              <Col>
+              <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="First Name"
@@ -85,7 +85,7 @@ const Company: NextPage = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="Last Name"

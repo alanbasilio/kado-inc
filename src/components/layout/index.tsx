@@ -89,9 +89,9 @@ const Layout = (props) => {
       >
         <Container>
           <Row>
-            <Col className="d-md-flex justify-content-between align-items-center">
+            <Col className="text-center d-md-flex justify-content-between align-items-center">
               <p className="m-0">© 2022 Kado. All rights reserved.</p>
-              <Nav>
+              <Nav className="d-inline-flex">
                 <Nav.Item>
                   <Link href="/" passHref>
                     <Nav.Link>Terms</Nav.Link>

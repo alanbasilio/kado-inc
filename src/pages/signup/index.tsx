@@ -17,8 +17,8 @@ const Signup: NextPage = () => {
           <p className="mb-5 text-muted">
             We’ll streamline your experience accordingly
           </p>
-          <Row className="mb-5">
-            <Col>
+          <Row>
+            <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("student")}
                 className={active === "student" ? "active" : ""}
@@ -37,7 +37,7 @@ const Signup: NextPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col>
+            <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("school")}
                 className={active === "school" ? "active" : ""}
@@ -56,7 +56,7 @@ const Signup: NextPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col>
+            <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("company")}
                 className={active === "company" ? "active" : ""}
@@ -75,19 +75,26 @@ const Signup: NextPage = () => {
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
-
-          <Link href={`/signup/${active}`} passHref>
-            <Button
-              variant="primary"
-              type="submit"
-              size="lg"
-              className="w-50"
-              disabled={!active}
+            <Col
+              md={{
+                span: 4,
+                offset: 4,
+              }}
+              className="mt-md-3"
             >
-              Continue
-            </Button>
-          </Link>
+              <Link href={`/signup/${active}`} passHref>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  size="lg"
+                  className="w-100"
+                  disabled={!active}
+                >
+                  Continue
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Layout>

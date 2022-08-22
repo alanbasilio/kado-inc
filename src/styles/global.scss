@@ -42,3 +42,9 @@
   outline: none;
   border: 0;
 }
+
+.shadow {
+  @include media-breakpoint-down(md) {
+    box-shadow: none !important;
+  }
+}

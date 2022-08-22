@@ -15,6 +15,7 @@ import API from "../../services";
 const School: NextPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const {
     control,
@@ -61,7 +62,7 @@ const School: NextPage = () => {
           </p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Row>
-              <Col>
+              <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="First Name"
@@ -73,7 +74,7 @@ const School: NextPage = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="Last Name"
@@ -96,26 +97,40 @@ const School: NextPage = () => {
                 {...register("school_name", { required: true })}
               />
             </Form.Group>
-            <Form.Group className="mb-2">
+
+            <InputGroup className="mb-2" size="lg">
+              <InputGroup.Text id="basic-addon1">
+                <MdOutlineAlternateEmail />
+              </InputGroup.Text>
               <Form.Control
                 placeholder="Contact Email"
                 aria-label="Contact Email"
+                aria-describedby="basic-addon1"
                 type="email"
-                size="lg"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
               />
-            </Form.Group>
-            <Form.Group className="mb-2">
+            </InputGroup>
+
+            <InputGroup className="mb-2" size="lg">
+              <InputGroup.Text id="basic-addon2">
+                <FaLock />
+              </InputGroup.Text>
               <Form.Control
                 placeholder="Password"
                 aria-label="Password"
-                type="password"
-                size="lg"
+                aria-describedby="basic-addon2"
+                type={showPassword ? "text" : "password"}
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
               />
-            </Form.Group>
+              <InputGroup.Text
+                id="basic-addon2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </InputGroup.Text>
+            </InputGroup>
             <Form.Group className="mb-2">
               <PhoneInputWithCountry
                 name="phone_number"

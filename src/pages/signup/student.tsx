@@ -135,7 +135,7 @@ const Student: NextPage = () => {
             <p className="mb-2 text-muted">OR</p>
             <Form onSubmit={handleSubmit(signup)}>
               <Row>
-                <Col>
+                <Col md={6}>
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="First Name"
@@ -147,7 +147,7 @@ const Student: NextPage = () => {
                     />
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col md={6}>
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="Last Name"
