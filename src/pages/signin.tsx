@@ -25,8 +25,13 @@ const Signin: NextPage = () => {
     formState: { errors },
   } = useForm();
 
-  const responseGoogle = (response) => {
+  const responseGoogleSuccess = (response) => {
     console.log(response);
+    swal("Success", response, "success");
+  };
+
+  const responseGoogleError = (response) => {
+    swal("Error", response.error, "error");
   };
 
   const onSubmit = (data) => {
@@ -63,13 +68,15 @@ const Signin: NextPage = () => {
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h1 className="mb-2">Sign in</h1>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
-          <GoogleLogin
-            clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-            buttonText="Signin with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
+          <div className="mb-2">
+            <GoogleLogin
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
+              buttonText="Signin with Google"
+              onSuccess={responseGoogleSuccess}
+              onFailure={responseGoogleError}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
           <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
