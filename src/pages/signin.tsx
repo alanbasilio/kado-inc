@@ -8,10 +8,10 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
+import GoogleLogin from "react-google-login";
 
 import API from "../services";
 import Layout from "../components/layout";
-import Image from "next/image";
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,12 +19,16 @@ const Signin: NextPage = () => {
   const router = useRouter();
 
   const {
-    control,
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
   const onSubmit = (data) => {
     setLoading(true);
     API.post("/user/authenticate", data)
@@ -59,16 +63,13 @@ const Signin: NextPage = () => {
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h1 className="mb-2">Sign in</h1>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
-          <Link href="#" passHref>
-            <a className="mb-2 d-block">
-              <Image
-                src="/images/login-google.png"
-                width={231}
-                height={51}
-                alt="login with google"
-              />
-            </a>
-          </Link>
+          <GoogleLogin
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+            buttonText="Signin with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
           <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
