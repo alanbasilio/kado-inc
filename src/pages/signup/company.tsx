@@ -7,6 +7,7 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import GoogleLogin from "react-google-login";
 
 import Layout from "../../components/layout";
 import API from "../../services";
@@ -51,6 +52,15 @@ const Company: NextPage = () => {
       });
   };
 
+  const responseGoogleSuccess = (response) => {
+    console.log(response);
+    swal("Success", response, "success");
+  };
+
+  const responseGoogleError = (response) => {
+    swal("Error", response.error, "error");
+  };
+
   return (
     <Layout>
       <Row
@@ -62,16 +72,16 @@ const Company: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
             <h1 className="mb-2">Join Waitlist</h1>
             <p className="mb-2 text-muted">Create an account to continue!</p>
-            <a className="mb-2 d-block">
-              <Image
-                src="/images/login-google.png"
-                width={231}
-                height={51}
-                alt="login with google"
+            <div className="mb-2">
+              <GoogleLogin
+                clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
+                buttonText="Signup with Google"
+                onSuccess={responseGoogleSuccess}
+                onFailure={responseGoogleError}
+                cookiePolicy={"single_host_origin"}
               />
-            </a>
+            </div>
             <p className="mb-2 text-muted">OR</p>
-
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-2">

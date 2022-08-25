@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import Image from "next/image";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { useRouter } from "next/router";
+import GoogleLogin from "react-google-login";
 
 import Layout from "../../components/layout";
 import API from "../../services";
@@ -51,6 +52,16 @@ const School: NextPage = () => {
         );
       });
   };
+
+  const responseGoogleSuccess = (response) => {
+    console.log(response);
+    swal("Success", response, "success");
+  };
+
+  const responseGoogleError = (response) => {
+    swal("Error", response.error, "error");
+  };
+
   return (
     <Layout>
       <Row className="justify-content-center">
@@ -60,6 +71,16 @@ const School: NextPage = () => {
             Complete the form below and our Partner Relations Team will be in
             touch soon!
           </p>
+          <div className="mb-2">
+            <GoogleLogin
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
+              buttonText="Signup with Google"
+              onSuccess={responseGoogleSuccess}
+              onFailure={responseGoogleError}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
+          <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Row>
               <Col md={6}>
