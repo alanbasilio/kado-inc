@@ -54,7 +54,7 @@ const Company: NextPage = () => {
   return (
     <Layout>
       <Row>
-        <h2 className="mb-2">Upload your photo</h2>
+        <h2 className="mb-2">Edit Profile</h2>
       </Row>
       <Row
         className=" bg-white rounded shadow p-2"
@@ -64,8 +64,8 @@ const Company: NextPage = () => {
         <Col md={12}>
           <h4 className="mb-2">Personal and Company Information</h4>
         </Col>
-        <Col md={2}>
-          <div className="mb-2">
+        <Row>
+          <Col className="d-flex align-items-center mb-2">
             <Image
               className="img-fluid border rounded-circle"
               src="/images/photo.png"
@@ -73,17 +73,146 @@ const Company: NextPage = () => {
               height="151"
               alt="React Bootstrap logo"
             />
-          </div>
+            <Button className="mx-2" variant="primary" type="button" size="lg">
+              Upload new picture
+            </Button>
+            <Button variant="light" type="button" size="lg">
+              Remove
+            </Button>
+          </Col>
+        </Row>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              placeholder="First Name"
+              aria-label="First Name"
+              type="text"
+              size="lg"
+              isInvalid={errors.first_name ? true : false}
+              {...register("first_name", { required: true })}
+            />
+          </Form.Group>
         </Col>
-        <Col md={3}>
-          <Button className="w-100" variant="primary" type="button" size="lg">
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              placeholder="Last Name"
+              aria-label="Last Name"
+              type="text"
+              size="lg"
+              isInvalid={errors.last_name ? true : false}
+              {...register("last_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              placeholder="Email Address"
+              aria-label="Email Address"
+              type="text"
+              size="lg"
+              isInvalid={errors.first_name ? true : false}
+              {...register("first_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
+              placeholder="Phone Number"
+              aria-label="Phone Number"
+              type="text"
+              size="lg"
+              isInvalid={errors.last_name ? true : false}
+              {...register("last_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={12}>
+          <Form.Group className="mb-2">
+            <Form.Label>About</Form.Label>
+            <Form.Control
+              placeholder="About"
+              aria-label="About"
+              aria-describedby="basic-addon1"
+              as="textarea"
+              size="lg"
+              rows={3}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Company Name</Form.Label>
+            <Form.Control
+              placeholder="Company Name"
+              aria-label="Company Name"
+              type="text"
+              size="lg"
+              isInvalid={errors.first_name ? true : false}
+              {...register("first_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Location</Form.Label>
+            <Form.Control
+              placeholder="Location"
+              aria-label="Location"
+              type="text"
+              size="lg"
+              isInvalid={errors.last_name ? true : false}
+              {...register("last_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Website</Form.Label>
+            <Form.Control
+              placeholder="Website"
+              aria-label="Website"
+              type="text"
+              size="lg"
+              isInvalid={errors.first_name ? true : false}
+              {...register("first_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group className="mb-2">
+            <Form.Label>Company Phone Number</Form.Label>
+            <Form.Control
+              placeholder="Company Phone Number"
+              aria-label="Company Phone Number"
+              type="text"
+              size="lg"
+              isInvalid={errors.last_name ? true : false}
+              {...register("last_name", { required: true })}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={12} className="text-end">
+          <Button variant="primary" type="button" size="lg">
             Upload new picture
           </Button>
-        </Col>
-        <Col md={2}>
-          <Button className="w-100" variant="light" type="button" size="lg">
-            Remove
-          </Button>
+          <div className={"form-group"}>
+            <label className={"control-label"} htmlFor={fieldName}>
+              {fieldName + ":"}
+            </label>
+            <input
+              type="checkbox"
+              id={fieldName}
+              name={fieldName}
+              checked={fieldValue}
+            />
+          </div>
         </Col>
       </Row>
     </Layout>
