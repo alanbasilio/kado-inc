@@ -202,17 +202,6 @@ const Company: NextPage = () => {
           <Button variant="primary" type="button" size="lg">
             Upload new picture
           </Button>
-          <div className={"form-group"}>
-            <label className={"control-label"} htmlFor={fieldName}>
-              {fieldName + ":"}
-            </label>
-            <input
-              type="checkbox"
-              id={fieldName}
-              name={fieldName}
-              checked={fieldValue}
-            />
-          </div>
         </Col>
       </Row>
     </Layout>
