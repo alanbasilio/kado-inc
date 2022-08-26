@@ -31,7 +31,7 @@ const Signin: NextPage = () => {
   };
 
   const responseGoogleError = (response) => {
-    swal("Error", response.error, "error");
+    console.log("Error", response.error, "error");
   };
 
   const onSubmit = (data) => {
