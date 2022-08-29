@@ -8,7 +8,7 @@ import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import Layout from "../components/layout";
+import Layout from "../components/dashboard-layout";
 import API from "../services";
 
 const Company: NextPage = () => {
@@ -86,7 +86,6 @@ const Company: NextPage = () => {
             <Form.Label>First Name</Form.Label>
             <Form.Control
               placeholder="First Name"
-              aria-label="First Name"
               type="text"
               size="lg"
               isInvalid={errors.first_name ? true : false}
@@ -99,7 +98,6 @@ const Company: NextPage = () => {
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               placeholder="Last Name"
-              aria-label="Last Name"
               type="text"
               size="lg"
               isInvalid={errors.last_name ? true : false}
@@ -112,11 +110,10 @@ const Company: NextPage = () => {
             <Form.Label>Email address</Form.Label>
             <Form.Control
               placeholder="Email Address"
-              aria-label="Email Address"
-              type="text"
+              type="email"
               size="lg"
-              isInvalid={errors.first_name ? true : false}
-              {...register("first_name", { required: true })}
+              isInvalid={errors.email ? true : false}
+              {...register("email", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -125,11 +122,10 @@ const Company: NextPage = () => {
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               placeholder="Phone Number"
-              aria-label="Phone Number"
-              type="text"
+              type="tel"
               size="lg"
-              isInvalid={errors.last_name ? true : false}
-              {...register("last_name", { required: true })}
+              isInvalid={errors.phone ? true : false}
+              {...register("phone", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -138,11 +134,11 @@ const Company: NextPage = () => {
             <Form.Label>About</Form.Label>
             <Form.Control
               placeholder="About"
-              aria-label="About"
-              aria-describedby="basic-addon1"
               as="textarea"
               size="lg"
               rows={3}
+              isInvalid={errors.about ? true : false}
+              {...register("about", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -151,11 +147,10 @@ const Company: NextPage = () => {
             <Form.Label>Company Name</Form.Label>
             <Form.Control
               placeholder="Company Name"
-              aria-label="Company Name"
               type="text"
               size="lg"
-              isInvalid={errors.first_name ? true : false}
-              {...register("first_name", { required: true })}
+              isInvalid={errors.company ? true : false}
+              {...register("company", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -164,11 +159,10 @@ const Company: NextPage = () => {
             <Form.Label>Location</Form.Label>
             <Form.Control
               placeholder="Location"
-              aria-label="Location"
               type="text"
               size="lg"
-              isInvalid={errors.last_name ? true : false}
-              {...register("last_name", { required: true })}
+              isInvalid={errors.location ? true : false}
+              {...register("location", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -177,11 +171,10 @@ const Company: NextPage = () => {
             <Form.Label>Website</Form.Label>
             <Form.Control
               placeholder="Website"
-              aria-label="Website"
-              type="text"
+              type="url"
               size="lg"
-              isInvalid={errors.first_name ? true : false}
-              {...register("first_name", { required: true })}
+              isInvalid={errors.website ? true : false}
+              {...register("website", { required: true })}
             />
           </Form.Group>
         </Col>
@@ -190,17 +183,16 @@ const Company: NextPage = () => {
             <Form.Label>Company Phone Number</Form.Label>
             <Form.Control
               placeholder="Company Phone Number"
-              aria-label="Company Phone Number"
-              type="text"
+              type="tel"
               size="lg"
-              isInvalid={errors.last_name ? true : false}
-              {...register("last_name", { required: true })}
+              isInvalid={errors.company_phone ? true : false}
+              {...register("company_phone", { required: true })}
             />
           </Form.Group>
         </Col>
         <Col md={12} className="text-end">
-          <Button variant="primary" type="button" size="lg">
-            Upload new picture
+          <Button variant="primary" type="submit" size="lg">
+            Submit
           </Button>
         </Col>
       </Row>

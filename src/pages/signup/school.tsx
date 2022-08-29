@@ -10,7 +10,7 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { useRouter } from "next/router";
 import GoogleLogin from "react-google-login";
 
-import Layout from "../../components/layout";
+import Layout from "../../components/main-layout";
 import API from "../../services";
 
 const School: NextPage = () => {

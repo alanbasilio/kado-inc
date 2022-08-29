@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
-import styles from "../../styles/Layout.module.scss";
+import styles from "./main-layout.module.scss";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 import Head from "next/head";

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-import Layout from "../components/layout";
+import Layout from "../components/main-layout";
 
 const ForgotPassword: NextPage = () => {
   return (

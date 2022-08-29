@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import GoogleLogin from "react-google-login";
 
-import Layout from "../../components/layout";
+import Layout from "../../components/main-layout";
 import API from "../../services";
 
 const Student: NextPage = () => {

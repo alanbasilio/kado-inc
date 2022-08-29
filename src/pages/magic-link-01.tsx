@@ -6,7 +6,7 @@ import { useState } from "react";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
-import Layout from "../components/layout";
+import Layout from "../components/main-layout";
 import Image from "next/image";
 
 const Signin: NextPage = () => {

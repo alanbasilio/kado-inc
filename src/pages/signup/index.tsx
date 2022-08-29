@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import Layout from "../../components/layout";
+import Layout from "../../components/main-layout";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");

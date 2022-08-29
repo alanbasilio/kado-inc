@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import GoogleLogin from "react-google-login";
 
 import API from "../services";
-import Layout from "../components/layout";
+import Layout from "../components/main-layout";
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
