@@ -159,7 +159,7 @@ const Student: NextPage = () => {
                     google_id: userInfo.sub,
                     image_url_google: userInfo.picture,
                     name: userInfo.name,
-                    token_id: userInfo.sub,
+                    token_id: credential,
                   };
                   googleSignup(user);
                 }}
