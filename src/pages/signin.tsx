@@ -8,7 +8,8 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 import API from "../services";
 import Layout from "../components/main-layout";
@@ -25,18 +26,47 @@ const Signin: NextPage = () => {
     formState: { errors },
   } = useForm();
 
-  const responseGoogleSuccess = (response) => {
-    console.log(response);
-    swal("Success", response, "success");
-  };
-
-  const responseGoogleError = (response) => {
-    console.log("Error", response.error, "error");
-  };
-
   const onSubmit = (data) => {
     setLoading(true);
     API.post("/user/authenticate", data)
+      .then((response) => {
+        setLoading(false);
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        reset();
+        swal(
+          "Success",
+          response.data.data.first_name + ", you are logged in.",
+          "success"
+        ).then(function () {
+          setLoading(false);
+          router.push("/");
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
+  const googleSignin = async (credential) => {
+    const userInfo = jwtDecode(credential);
+    const user = {
+      email: userInfo.email,
+      first_name: userInfo.family_name,
+      last_name: userInfo.given_name,
+      google_id: userInfo.sub,
+      image_url_google: userInfo.picture,
+      name: userInfo.name,
+      token_id: userInfo.sub,
+    };
+    setLoading(true);
+    API.post("/user/authenticate-google", user)
       .then((response) => {
         setLoading(false);
         localStorage.setItem("user", JSON.stringify(response.data.data));
@@ -68,13 +98,14 @@ const Signin: NextPage = () => {
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h1 className="mb-2">Sign in</h1>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
-          <div className="mb-2">
+          <div className="mb-2 d-flex justify-content-center">
             <GoogleLogin
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
-              buttonText="Signin with Google"
-              onSuccess={responseGoogleSuccess}
-              onFailure={responseGoogleError}
-              cookiePolicy={"single_host_origin"}
+              onSuccess={({ credential }) => {
+                googleSignin(credential);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
             />
           </div>
           <p className="mb-2 text-muted">OR</p>
