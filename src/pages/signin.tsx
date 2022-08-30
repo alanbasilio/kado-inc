@@ -75,7 +75,6 @@ const Signin: NextPage = () => {
 
   // Google Login Area
   const onSuccess = async (res) => {
-    console.log("Google Login Name", res.profileObj);
     API.post(`/user/authenticate-google`, {
       headers: {
         "Content-Type": "application/json",
@@ -88,15 +87,31 @@ const Signin: NextPage = () => {
       image_url_google: res.profileObj.imageUrl,
       name: res.profileObj.name,
       token_id: res.tokenId,
-    }).then((res) => {
-      if (res.data.success === true) {
-        console.log("success", res.data.usersid);
-        localStorage.setItem("loginID", JSON.stringify(res.data.usersid));
-      }
-      if (res.data.success === false) {
-        console.log("error", res);
-      }
-    });
+    })
+      .then((response) => {
+        console.log(response);
+        setLoading(false);
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        reset();
+        swal(
+          "Success",
+          response.data.data.first_name + ", you are logged in.",
+          "success"
+        ).then(function () {
+          setLoading(false);
+          router.push("/");
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
   };
 
   const onFailure = (res) => {
