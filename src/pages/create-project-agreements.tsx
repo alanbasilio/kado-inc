@@ -9,7 +9,7 @@ import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import Layout from "../components/layout";
+import Layout from "../components/dashboard-layout";
 import API from "../services";
 
 const Company: NextPage = () => {
