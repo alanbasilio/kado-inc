@@ -54,17 +54,7 @@ const Signin: NextPage = () => {
       });
   };
 
-  const googleSignin = async (credential) => {
-    const userInfo = jwtDecode(credential);
-    const user = {
-      email: userInfo.email,
-      first_name: userInfo.family_name,
-      last_name: userInfo.given_name,
-      google_id: userInfo.sub,
-      image_url_google: userInfo.picture,
-      name: userInfo.name,
-      token_id: userInfo.sub,
-    };
+  const googleSignin = async (user) => {
     setLoading(true);
     API.post("/user/authenticate-google", user)
       .then((response) => {
@@ -101,7 +91,17 @@ const Signin: NextPage = () => {
           <div className="mb-2 d-flex justify-content-center">
             <GoogleLogin
               onSuccess={({ credential }) => {
-                googleSignin(credential);
+                const userInfo = jwtDecode(credential);
+                const user = {
+                  email: userInfo.email,
+                  first_name: userInfo.family_name,
+                  last_name: userInfo.given_name,
+                  google_id: userInfo.sub,
+                  image_url_google: userInfo.picture,
+                  name: userInfo.name,
+                  token_id: userInfo.sub,
+                };
+                googleSignin(user);
               }}
               onError={() => {
                 console.log("Login Failed");

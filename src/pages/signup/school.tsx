@@ -8,7 +8,8 @@ import swal from "sweetalert";
 import Image from "next/image";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { useRouter } from "next/router";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 import Layout from "../../components/main-layout";
 import API from "../../services";
@@ -53,13 +54,32 @@ const School: NextPage = () => {
       });
   };
 
-  const responseGoogleSuccess = (response) => {
-    console.log(response);
-    swal("Success", response, "success");
-  };
-
-  const responseGoogleError = (response) => {
-    console.log("Error", response.error, "error");
+  const googleSignup = (data) => {
+    data.account_id = 2;
+    setLoading(true);
+    API.post("/user/authenticate-google", data)
+      .then((response) => {
+        setLoading(false);
+        reset();
+        swal(
+          "Success",
+          "Our Partner Relations Team will be in touch soon!",
+          "success"
+        ).then(function () {
+          setLoading(false);
+          router.push("/");
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
   };
 
   return (
@@ -71,13 +91,24 @@ const School: NextPage = () => {
             Complete the form below and our Partner Relations Team will be in
             touch soon!
           </p>
-          <div className="mb-2">
+          <div className="mb-2 d-flex justify-content-center">
             <GoogleLogin
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
-              buttonText="Signup with Google"
-              onSuccess={responseGoogleSuccess}
-              onFailure={responseGoogleError}
-              cookiePolicy={"single_host_origin"}
+              onSuccess={({ credential }) => {
+                const userInfo = jwtDecode(credential);
+                const user = {
+                  email: userInfo.email,
+                  first_name: userInfo.family_name,
+                  last_name: userInfo.given_name,
+                  google_id: userInfo.sub,
+                  image_url_google: userInfo.picture,
+                  name: userInfo.name,
+                  token_id: userInfo.sub,
+                };
+                googleSignup(user);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
             />
           </div>
           <p className="mb-2 text-muted">OR</p>
