@@ -56,7 +56,11 @@ const Signin: NextPage = () => {
 
   const googleSignin = async (user) => {
     setLoading(true);
-    API.post("/user/authenticate-google", user)
+    API.post("/user/authenticate-google", user, {
+      headers: {
+        Authorization: `${user.token_id}`,
+      },
+    })
       .then((response) => {
         setLoading(false);
         localStorage.setItem("user", JSON.stringify(response.data.data));
