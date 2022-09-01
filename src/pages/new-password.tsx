@@ -62,6 +62,16 @@ const NewPassword: NextPage = () => {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
               <Form.Control
+                placeholder="Enter your email"
+                aria-label="Email"
+                aria-describedby="basic-addon1"
+                type="email"
+                isInvalid={errors.email ? true : false}
+                {...register("email", { required: true })}
+              />
+            </InputGroup>
+            <InputGroup className="mb-2" size="lg">
+              <Form.Control
                 placeholder="Enter your password"
                 aria-label="Password"
                 aria-describedby="basic-addon1"
