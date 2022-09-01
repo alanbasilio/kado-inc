@@ -22,7 +22,7 @@ const ForgotPassword: NextPage = () => {
   const onSubmit = (data) => {
     data.url_origin = `${window.location.origin}/new-password`;
     setLoading(true);
-    API.post("/user/update-password", data)
+    API.post("/user/forgot-password", data)
       .then((response) => {
         setLoading(false);
         router.push("/email-sent");

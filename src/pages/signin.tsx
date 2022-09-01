@@ -147,7 +147,7 @@ const Signin: NextPage = () => {
               </InputGroup.Text>
             </InputGroup>
             <p className="text-start form-text">
-              <Link href="/forgot-password-01" passHref>
+              <Link href="/forgot-password" passHref>
                 <a className="text-dark">Forgot password?</a>
               </Link>
             </p>
