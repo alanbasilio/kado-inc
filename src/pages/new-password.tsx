@@ -12,7 +12,7 @@ import API from "../services";
 const NewPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { token } = router.query;
+  const { token, email } = router.query;
 
   const {
     register,
@@ -25,6 +25,7 @@ const NewPassword: NextPage = () => {
       swal("Error", "The passwords must match.", "error");
       return;
     }
+    data.email = email;
 
     setLoading(true);
     API.post("/user/update-password", data, {
@@ -60,16 +61,6 @@ const NewPassword: NextPage = () => {
             Your new password must be different from previously used passswords.
           </p>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mb-2" size="lg">
-              <Form.Control
-                placeholder="Enter your email"
-                aria-label="Email"
-                aria-describedby="basic-addon1"
-                type="email"
-                isInvalid={errors.email ? true : false}
-                {...register("email", { required: true })}
-              />
-            </InputGroup>
             <InputGroup className="mb-2" size="lg">
               <Form.Control
                 placeholder="Enter your password"
