@@ -17,7 +17,6 @@ const Layout = (props) => {
     // storing input name
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
-      console.log(JSON.parse(localStorage.getItem("user")));
     } else {
       setUser(null);
     }

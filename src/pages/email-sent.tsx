@@ -30,14 +30,9 @@ const CompanyInfo: NextPage = () => {
           </p>
 
           <div className="d-grid gap-2 my-2">
-            <Link href={"./create-new-password"} passHref>
-              <Button variant="primary" type="submit" size="lg">
-                Open Mail
-              </Button>
-            </Link>
             <Form.Text className="text-center">
               Did not receive any mail? Check your spam filter, or{" "}
-              <Link href="/signin" passHref>
+              <Link href="/forgot-password" passHref>
                 <a className="primary">try another email address</a>
               </Link>
             </Form.Text>
