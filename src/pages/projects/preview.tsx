@@ -76,7 +76,7 @@ const Company: NextPage = () => {
                 <Col md={3}>
                   <Image
                     className="img-fluid border rounded-circle"
-                    src="/images/photo.png"
+                    src="/images/design.png"
                     width="60"
                     height="60"
                     alt="React Bootstrap logo"
@@ -117,7 +117,7 @@ const Company: NextPage = () => {
                 <Col md={3}>
                   <Image
                     className="img-fluid border rounded-circle"
-                    src="/images/photo.png"
+                    src="/images/jerome.png"
                     width="60"
                     height="60"
                     alt="React Bootstrap logo"
@@ -141,16 +141,34 @@ const Company: NextPage = () => {
               <h4>Compensation:</h4>
               <p>Paid</p>
             </Col>
+            <Row className="mt-5">
+              <Col md={6}>
+                <div className="d-grid gap-2">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    size="lg"
+                    disabled={loading}
+                  >
+                    Go Back and Edit
+                  </Button>
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="d-grid">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    size="lg"
+                    disabled={loading}
+                  >
+                    Review Terms and Submit
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </Row>
         </Col>
-      </Row>
-      <Row className="d-flex align-items-center">
-        <Button variant="primary" type="submit" size="lg" disabled={loading}>
-          Post Project
-        </Button>
-        <Button variant="primary" type="submit" size="lg" disabled={loading}>
-          Post Project
-        </Button>
       </Row>
     </Layout>
   );
