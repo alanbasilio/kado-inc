@@ -388,6 +388,8 @@ $spacers: (
   8: $spacer * 8,
   9: $spacer * 9,
   10: $spacer * 10,
+  11: $spacer * 11,
+  12: $spacer * 12,
 ) !default;
 // scss-docs-end spacer-variables-maps
 
@@ -1089,8 +1091,8 @@ $zindex-toast: 1090 !default;
 // scss-docs-start nav-variables
 $nav-link-padding-y: 0.5rem !default;
 $nav-link-padding-x: 1rem !default;
-$nav-link-font-size: null !default;
-$nav-link-font-weight: null !default;
+$nav-link-font-size: 1.8rem !default;
+$nav-link-font-weight: 500 !default;
 $nav-link-color: var(--#{$prefix}link-color) !default;
 $nav-link-hover-color: var(--#{$prefix}link-hover-color) !default;
 $nav-link-transition: color 0.15s ease-in-out,

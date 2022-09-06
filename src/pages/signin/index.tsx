@@ -33,14 +33,7 @@ const Signin: NextPage = () => {
         setLoading(false);
         localStorage.setItem("user", JSON.stringify(response.data.data));
         reset();
-        swal(
-          "Success",
-          response.data.data.first_name + ", you are logged in.",
-          "success"
-        ).then(function () {
-          setLoading(false);
-          router.push("/");
-        });
+        router.push("/home");
       })
       .catch((err) => {
         setLoading(false);
@@ -65,14 +58,7 @@ const Signin: NextPage = () => {
         setLoading(false);
         localStorage.setItem("user", JSON.stringify(response.data.data));
         reset();
-        swal(
-          "Success",
-          response.data.data.first_name + ", you are logged in.",
-          "success"
-        ).then(function () {
-          setLoading(false);
-          router.push("/");
-        });
+        router.push("/home");
       })
       .catch((err) => {
         setLoading(false);

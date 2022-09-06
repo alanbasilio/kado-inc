@@ -43,36 +43,87 @@ const DashboardLayout = ({ children }) => {
       <Container fluid className="bg-light">
         <Row className="vh-100">
           <Col lg={2} md={3} sm={6} xs={12} className="px-4 py-3 bg-white">
-            <Image
-              src={"/images/logo.svg"}
-              alt={`KADO INC`}
-              width={161}
-              height={45}
-            />
-            <Nav defaultActiveKey="/home" className="flex-column mt-5">
+            <Link href="/home" passHref>
+              <a>
+                <Image
+                  src={"/images/logo.svg"}
+                  alt={`KADO INC`}
+                  width={161}
+                  height={45}
+                />
+              </a>
+            </Link>
+            <Nav defaultActiveKey="/home" className="flex-column mt-12">
               <Link href="/home" passHref>
-                <Nav.Link className="mb-3 p-0">
-                  <MdDashboard className="fs-4" /> Dashboard
+                <Nav.Link
+                  className={`mb-4 p-0 ${
+                    router.pathname === "/home" ? "fw-bold" : "text-muted"
+                  }`}
+                >
+                  <MdDashboard
+                    className={`fs-4 ${
+                      router.pathname === "/home" && "text-primary"
+                    }`}
+                  />{" "}
+                  Dashboard
                 </Nav.Link>
               </Link>
               <Link href="/bookmarks" passHref>
-                <Nav.Link className="mb-3 p-0">
-                  <MdBookmarkBorder className="fs-4" /> Bookmarks
+                <Nav.Link
+                  className={`mb-4 p-0 ${
+                    router.pathname === "/bookmarks" ? "fw-bold" : "text-muted"
+                  }`}
+                >
+                  <MdBookmarkBorder
+                    className={`fs-4 ${
+                      router.pathname === "/bookmarks" && "text-primary"
+                    }`}
+                  />{" "}
+                  Bookmarks
                 </Nav.Link>
               </Link>
               <Link href="/my-projects" passHref>
-                <Nav.Link className="mb-3 p-0">
-                  <MdDashboardCustomize className="fs-4" /> My Projects
+                <Nav.Link
+                  className={`mb-4 p-0 ${
+                    router.pathname === "/my-projects"
+                      ? "fw-bold"
+                      : "text-muted"
+                  }`}
+                >
+                  <MdDashboardCustomize
+                    className={`fs-4 ${
+                      router.pathname === "/my-projects" && "text-primary"
+                    }`}
+                  />{" "}
+                  My Projects
                 </Nav.Link>
               </Link>
               <Link href="/payments" passHref>
-                <Nav.Link className="mb-3 p-0">
-                  <AiOutlineBank className="fs-4" /> Payments
+                <Nav.Link
+                  className={`mb-4 p-0 ${
+                    router.pathname === "/payments" ? "fw-bold" : "text-muted"
+                  }`}
+                >
+                  <AiOutlineBank
+                    className={`fs-4 ${
+                      router.pathname === "/payments" && "text-primary"
+                    }`}
+                  />{" "}
+                  Payments
                 </Nav.Link>
               </Link>
               <Link href="/settings" passHref>
-                <Nav.Link className="p-0">
-                  <MdSettings className="fs-4" /> Settings
+                <Nav.Link
+                  className={`p-0 ${
+                    router.pathname === "/settings" ? "fw-bold" : "text-muted"
+                  }`}
+                >
+                  <MdSettings
+                    className={`fs-4 ${
+                      router.pathname === "/settings" && "text-primary"
+                    }`}
+                  />{" "}
+                  Settings
                 </Nav.Link>
               </Link>
             </Nav>
@@ -111,7 +162,11 @@ const DashboardLayout = ({ children }) => {
                     width={40}
                     height={40}
                   />
-                  <MdKeyboardArrowDown className="fs-4" />
+                  <MdKeyboardArrowDown
+                    className={`fs-4 ${
+                      router.pathname === "/home" && "text-primary"
+                    }`}
+                  />
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
