@@ -26,7 +26,7 @@ const MagicLink: NextPage = () => {
           <p className="mb-2 text-muted">OR</p>
           <Form>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
+              <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
               <Form.Control placeholder="Your E-mail" type="email" />

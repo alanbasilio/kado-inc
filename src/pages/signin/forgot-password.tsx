@@ -50,7 +50,7 @@ const ForgotPassword: NextPage = () => {
           </p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
+              <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
               <Form.Control

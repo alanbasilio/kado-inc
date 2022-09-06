@@ -196,7 +196,7 @@ const Student: NextPage = () => {
                 </Col>
               </Row>
               <InputGroup className="mb-2" size="lg">
-                <InputGroup.Text id="basic-addon1">
+                <InputGroup.Text>
                   <MdOutlineAlternateEmail />
                 </InputGroup.Text>
                 <Form.Control
@@ -207,7 +207,7 @@ const Student: NextPage = () => {
                 />
               </InputGroup>
               <InputGroup className="mb-2" size="lg">
-                <InputGroup.Text id="basic-addon2">
+                <InputGroup.Text>
                   <FaLock />
                 </InputGroup.Text>
                 <Form.Control
@@ -216,10 +216,7 @@ const Student: NextPage = () => {
                   isInvalid={errors.password ? true : false}
                   {...register("password", { required: true })}
                 />
-                <InputGroup.Text
-                  id="basic-addon2"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
+                <InputGroup.Text onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </InputGroup.Text>
               </InputGroup>

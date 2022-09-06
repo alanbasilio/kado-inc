@@ -179,6 +179,20 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tabler/core@^1.0.0-beta11":
+  version "1.0.0-beta11"
+  resolved "https://registry.yarnpkg.com/@tabler/core/-/core-1.0.0-beta11.tgz#d8de270ea05f7612c79cc51a3fee121406e21b50"
+  integrity sha512-sHW3zXzKHy8fNb3lWF1hZ9dPNVzLCWKq6WQXVwc2TcypN+/3XIu7Yqt8EmQtDU9rl8nktuX6nZHtbZ+v6PWFHw==
+  dependencies:
+    "@popperjs/core" "^2.11.5"
+    "@tabler/icons" "^1.78.1"
+    bootstrap "5.2.0"
+
+"@tabler/icons@^1.78.1":
+  version "1.93.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.93.0.tgz#466a0bc96e0b90a2cac9e9b4cf49f4fd8ad1761b"
+  integrity sha512-PNvchJ7wUkMmSi5L1fxSj1eCuQHhznLoZiUtsf7rv+/58fd4SaZPMTqC+c3tw8Ha8VvsmZfLTRlSffDTE9KkJQ==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
@@ -366,7 +380,7 @@ binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
 
-bootstrap@^5.2.0:
+bootstrap@5.2.0, bootstrap@^5.2.0:
   version "5.2.0"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.2.0.tgz"
 

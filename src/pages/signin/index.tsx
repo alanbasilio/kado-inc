@@ -115,7 +115,7 @@ const Signin: NextPage = () => {
           <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon1">
+              <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
               <Form.Control
@@ -126,7 +126,7 @@ const Signin: NextPage = () => {
               />
             </InputGroup>
             <InputGroup className="mb-2" size="lg">
-              <InputGroup.Text id="basic-addon2">
+              <InputGroup.Text>
                 <FaLock />
               </InputGroup.Text>
               <Form.Control
@@ -135,10 +135,7 @@ const Signin: NextPage = () => {
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
               />
-              <InputGroup.Text
-                id="basic-addon2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
+              <InputGroup.Text onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </InputGroup.Text>
             </InputGroup>
