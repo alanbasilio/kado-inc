@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Col,
   Container,
@@ -11,6 +11,8 @@ import {
   Form,
   Button,
   InputGroup,
+  Overlay,
+  Popover,
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
 import {
@@ -23,10 +25,21 @@ import {
   MdBookmarkBorder,
   MdDashboardCustomize,
   MdSettings,
+  MdPerson,
+  MdLogout,
 } from "react-icons/md";
 
 const DashboardLayout = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
+
+  const handleClick = (event) => {
+    setShow(!show);
+    setTarget(event.target);
+  };
+
   const router = useRouter();
 
   useEffect(() => {
@@ -37,6 +50,12 @@ const DashboardLayout = ({ children }) => {
       router.push("/");
     }
   }, []);
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    router.push("/");
+  };
 
   return (
     user && (
@@ -154,19 +173,39 @@ const DashboardLayout = ({ children }) => {
                 <Nav.Link className="mx-1 fs-4">
                   <MdOutlineMailOutline />
                 </Nav.Link>
-                <Nav.Link className="mx-1 d-flex align-items-center">
+                <Nav.Link className="mx-1 d-flex align-items-center" ref={ref}>
                   <Image
                     src={user.image_url_google || user.image}
                     className="rounded-circle"
                     alt={`${user.first_name} ${user.last_name}`}
                     width={40}
                     height={40}
+                    onClick={handleClick}
                   />
                   <MdKeyboardArrowDown
                     className={`fs-4 ${
                       router.pathname === "/home" && "text-primary"
                     }`}
                   />
+                  <Overlay
+                    show={show}
+                    target={target}
+                    placement="bottom"
+                    container={ref}
+                  >
+                    <Popover className="p-2">
+                      <Nav className="flex-column">
+                        <Link href="/profile" passHref>
+                          <Nav.Link className="mb-2">
+                            <MdPerson /> Profile
+                          </Nav.Link>
+                        </Link>
+                        <Nav.Link onClick={logout}>
+                          <MdLogout /> Logout
+                        </Nav.Link>
+                      </Nav>
+                    </Popover>
+                  </Overlay>
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
