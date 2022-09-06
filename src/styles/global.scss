@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap");
 @import "~bootstrap/scss/_functions";
 
-@import "_variables.scss";
+@import "variables";
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
@@ -46,5 +46,21 @@
 .shadow {
   @include media-breakpoint-down(md) {
     box-shadow: none !important;
+  }
+}
+
+.input-group-text {
+  &:first-child {
+    border-right: 0;
+    + input {
+      border-left: 0;
+      padding-left: 0;
+      &:not(:last-child) {
+        border-right: 0;
+      }
+    }
+  }
+  &:last-child {
+    border-left: 0;
   }
 }

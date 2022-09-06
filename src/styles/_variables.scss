@@ -576,9 +576,9 @@ $line-height-lg: 2 !default;
 
 $h1-font-size: 4.8rem !default;
 $h2-font-size: 4rem !default;
-$h3-font-size: 1.75rem !default;
-$h4-font-size: 1.5rem !default;
-$h5-font-size: 1.25rem !default;
+$h3-font-size: 3.2rem !default;
+$h4-font-size: 2.4rem !default;
+$h5-font-size: 1.6rem !default;
 $h6-font-size: 1rem !default;
 // scss-docs-end font-variables
 
@@ -727,8 +727,8 @@ $input-btn-font-family: null !default;
 $input-btn-font-size: $font-size-sm !default;
 $input-btn-line-height: $line-height-base !default;
 
-$input-btn-focus-width: 0.25rem !default;
-$input-btn-focus-color-opacity: 0.25 !default;
+$input-btn-focus-width: 0 !default;
+$input-btn-focus-color-opacity: 0 !default;
 $input-btn-focus-color: rgba(
   $component-active-bg,
   $input-btn-focus-color-opacity
@@ -848,7 +848,7 @@ $input-border-radius-sm: $border-radius-sm !default;
 $input-border-radius-lg: $border-radius-lg !default;
 
 $input-focus-bg: $input-bg !default;
-$input-focus-border-color: tint-color($component-active-bg, 50%) !default;
+$input-focus-border-color: $input-border-color !default;
 $input-focus-color: $input-color !default;
 $input-focus-width: $input-btn-focus-width !default;
 $input-focus-box-shadow: $input-btn-focus-box-shadow !default;

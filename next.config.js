@@ -10,6 +10,9 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+  images: {
+    domains: ["google.com", "vercel.app", "lh3.googleusercontent.com"],
+  },
+};
 
 module.exports = nextConfig
