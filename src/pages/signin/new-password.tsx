@@ -1,13 +1,12 @@
 import type { NextPage } from "next";
 import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import swal from "sweetalert";
 
-import Layout from "../components/main-layout";
-import API from "../services";
+import Layout from "../../components/main-layout";
+import API from "../../services";
 
 const NewPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +24,7 @@ const NewPassword: NextPage = () => {
       swal("Error", "The passwords must match.", "error");
       return;
     }
+
     data.email = email;
 
     setLoading(true);
@@ -64,8 +64,6 @@ const NewPassword: NextPage = () => {
             <InputGroup className="mb-2" size="lg">
               <Form.Control
                 placeholder="Enter your password"
-                aria-label="Password"
-                aria-describedby="basic-addon1"
                 type="password"
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
@@ -74,8 +72,6 @@ const NewPassword: NextPage = () => {
             <InputGroup className="mb-2" size="lg">
               <Form.Control
                 placeholder="Confirm your password"
-                aria-label="Confirm Password"
-                aria-describedby="basic-addon1"
                 type="password"
                 isInvalid={errors.confirm_password ? true : false}
                 {...register("confirm_password", { required: true })}

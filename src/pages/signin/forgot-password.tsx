@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import swal from "sweetalert";
 
-import Layout from "../components/main-layout";
-import API from "../services";
+import Layout from "../../components/main-layout";
+import API from "../../services";
 
 const ForgotPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const ForgotPassword: NextPage = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    data.url_origin = `${window.location.origin}/new-password`;
+    data.url_origin = `${window.location.origin}/signin/new-password`;
     setLoading(true);
     API.post("/user/forgot-password", data)
       .then((response) => {
@@ -55,7 +55,6 @@ const ForgotPassword: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Your E-mail"
-                aria-label="Your E-mail"
                 type="email"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}

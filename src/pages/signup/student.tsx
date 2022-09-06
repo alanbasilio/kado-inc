@@ -28,7 +28,8 @@ const Student: NextPage = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const signup = (data) => {
+
+  const onSubmit = (data) => {
     setLoading(true);
     data.account_id = 1;
     API.post("/user", data)
@@ -169,13 +170,12 @@ const Student: NextPage = () => {
               />
             </div>
             <p className="mb-2 text-muted">OR</p>
-            <Form onSubmit={handleSubmit(signup)}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="First Name"
-                      aria-label="First Name"
                       type="text"
                       size="lg"
                       isInvalid={errors.first_name ? true : false}
@@ -187,7 +187,6 @@ const Student: NextPage = () => {
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="Last Name"
-                      aria-label="Last Name"
                       type="text"
                       size="lg"
                       isInvalid={errors.last_name ? true : false}
@@ -202,8 +201,6 @@ const Student: NextPage = () => {
                 </InputGroup.Text>
                 <Form.Control
                   placeholder="Your E-mail"
-                  aria-label="Your E-mail"
-                  aria-describedby="basic-addon1"
                   type="email"
                   isInvalid={errors.email ? true : false}
                   {...register("email", { required: true })}
@@ -215,8 +212,6 @@ const Student: NextPage = () => {
                 </InputGroup.Text>
                 <Form.Control
                   placeholder="Password"
-                  aria-label="Password"
-                  aria-describedby="basic-addon2"
                   type={showPassword ? "text" : "password"}
                   isInvalid={errors.password ? true : false}
                   {...register("password", { required: true })}
@@ -306,7 +301,6 @@ const Student: NextPage = () => {
                   <Form.Group className="mb-2">
                     <Form.Control
                       placeholder="Intro yourself"
-                      aria-label="Intro yourself"
                       as="textarea"
                       size="lg"
                       rows={3}

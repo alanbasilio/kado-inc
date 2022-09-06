@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 
-import Layout from "../components/main-layout";
+import Layout from "../../components/main-layout";
 
 const MagicLink: NextPage = () => {
   return (
@@ -17,7 +17,7 @@ const MagicLink: NextPage = () => {
           </p>
           <p className="text-muted">
             Not your email address?{" "}
-            <Link href="/forgot-password-01" passHref>
+            <Link href="/signin/forgot-password-01" passHref>
               <a className="text-dark">Go back</a>
             </Link>
           </p>

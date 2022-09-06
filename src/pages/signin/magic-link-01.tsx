@@ -1,16 +1,12 @@
 import type { NextPage } from "next";
 import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
 import Link from "next/link";
-import { useState } from "react";
-
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import Layout from "../components/main-layout";
 import Image from "next/image";
 
-const Signin: NextPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
+import Layout from "../../components/main-layout";
+
+const MagicLink: NextPage = () => {
   return (
     <Layout signin>
       <Row className="justify-content-center">
@@ -33,12 +29,7 @@ const Signin: NextPage = () => {
               <InputGroup.Text id="basic-addon1">
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
-              <Form.Control
-                placeholder="Your E-mail"
-                aria-label="Your E-mail"
-                aria-describedby="basic-addon1"
-                type="email"
-              />
+              <Form.Control placeholder="Your E-mail" type="email" />
             </InputGroup>
 
             <div className="d-grid gap-2 my-2">
@@ -64,4 +55,4 @@ const Signin: NextPage = () => {
   );
 };
 
-export default Signin;
+export default MagicLink;

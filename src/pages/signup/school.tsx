@@ -5,11 +5,8 @@ import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
-import Image from "next/image";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { useRouter } from "next/router";
-import { GoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
 
 import Layout from "../../components/main-layout";
 import API from "../../services";
@@ -26,38 +23,11 @@ const School: NextPage = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     data.account_id = 2;
     setLoading(true);
     API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal(
-          "Success",
-          "Our Partner Relations Team will be in touch soon!",
-          "success"
-        ).then(function () {
-          setLoading(false);
-          router.push("/");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
-  const googleSignup = (data) => {
-    data.account_id = 2;
-    setLoading(true);
-    API.post("/user/authenticate-google", data)
       .then((response) => {
         setLoading(false);
         reset();
@@ -91,34 +61,12 @@ const School: NextPage = () => {
             Complete the form below and our Partner Relations Team will be in
             touch soon!
           </p>
-          <div className="mb-2 d-flex justify-content-center">
-            <GoogleLogin
-              onSuccess={({ credential }) => {
-                const userInfo = jwtDecode(credential);
-                const user = {
-                  email: userInfo.email,
-                  first_name: userInfo.family_name,
-                  last_name: userInfo.given_name,
-                  google_id: userInfo.sub,
-                  image_url_google: userInfo.picture,
-                  name: userInfo.name,
-                  token_id: credential,
-                };
-                googleSignup(user);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
-          </div>
-          <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="First Name"
-                    aria-label="First Name"
                     type="text"
                     size="lg"
                     isInvalid={errors.first_name ? true : false}
@@ -130,7 +78,6 @@ const School: NextPage = () => {
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="Last Name"
-                    aria-label="Last Name"
                     type="text"
                     size="lg"
                     isInvalid={errors.last_name ? true : false}
@@ -142,7 +89,6 @@ const School: NextPage = () => {
             <Form.Group className="mb-2">
               <Form.Control
                 placeholder="School Name"
-                aria-label="School Name"
                 type="text"
                 size="lg"
                 isInvalid={errors.school_name ? true : false}
@@ -156,8 +102,6 @@ const School: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Contact Email"
-                aria-label="Contact Email"
-                aria-describedby="basic-addon1"
                 type="email"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
@@ -170,8 +114,6 @@ const School: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Password"
-                aria-label="Password"
-                aria-describedby="basic-addon2"
                 type={showPassword ? "text" : "password"}
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
@@ -194,7 +136,6 @@ const School: NextPage = () => {
             <Form.Group className="mb-2">
               <Form.Control
                 placeholder="Any additional comments (optional)"
-                aria-label="Any additional comments (optional)"
                 as="textarea"
                 size="lg"
                 rows={3}

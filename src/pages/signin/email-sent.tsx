@@ -1,16 +1,11 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import Link from "next/link";
-import { useState } from "react";
 
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-
-import Layout from "../components/main-layout";
+import Layout from "../../components/main-layout";
 import Image from "next/image";
 
-const CompanyInfo: NextPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
+const EmailSent: NextPage = () => {
   return (
     <Layout>
       <Row className="justify-content-center">
@@ -32,7 +27,7 @@ const CompanyInfo: NextPage = () => {
           <div className="d-grid gap-2 my-2">
             <Form.Text className="text-center">
               Did not receive any mail? Check your spam filter, or{" "}
-              <Link href="/forgot-password" passHref>
+              <Link href="/signin/forgot-password" passHref>
                 <a className="primary">try another email address</a>
               </Link>
             </Form.Text>
@@ -43,4 +38,4 @@ const CompanyInfo: NextPage = () => {
   );
 };
 
-export default CompanyInfo;
+export default EmailSent;

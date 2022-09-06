@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,11 +9,8 @@ import { useRouter } from "next/router";
 import Layout from "../components/dashboard-layout";
 import API from "../services";
 
-const Company: NextPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isWaitingList, setIsWaitingList] = useState(true);
+const Settings: NextPage = () => {
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1);
   const router = useRouter();
 
   const {
@@ -24,18 +19,14 @@ const Company: NextPage = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
-    data.account_id = 3;
     setLoading(true);
     API.post("/user", data)
       .then((response) => {
         setLoading(false);
         reset();
-        swal(
-          "Success",
-          "Now you are in the waiting list. We will contact you very soon.",
-          "success"
-        ).then(function () {
+        swal("Success", "Message", "success").then(function () {
           router.push("/");
         });
       })
@@ -200,4 +191,4 @@ const Company: NextPage = () => {
   );
 };
 
-export default Company;
+export default Settings;

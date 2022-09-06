@@ -11,8 +11,8 @@ import { useRouter } from "next/router";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
-import API from "../services";
-import Layout from "../components/main-layout";
+import API from "../../services";
+import Layout from "../../components/main-layout";
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -120,8 +120,6 @@ const Signin: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Your E-mail"
-                aria-label="Your E-mail"
-                aria-describedby="basic-addon1"
                 type="email"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
@@ -133,8 +131,6 @@ const Signin: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Password"
-                aria-label="Password"
-                aria-describedby="basic-addon2"
                 type={showPassword ? "text" : "password"}
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
@@ -147,7 +143,7 @@ const Signin: NextPage = () => {
               </InputGroup.Text>
             </InputGroup>
             <p className="text-start form-text">
-              <Link href="/forgot-password" passHref>
+              <Link href="/signin/forgot-password" passHref>
                 <a className="text-dark">Forgot password?</a>
               </Link>
             </p>
@@ -163,7 +159,7 @@ const Signin: NextPage = () => {
             </div>
             <Form.Text className="text-center">
               You can also sign in with a{" "}
-              <Link href="/magic-link-01" passHref>
+              <Link href="/signin/magic-link-01" passHref>
                 <a className="text-dark">Magic Link</a>
               </Link>
             </Form.Text>

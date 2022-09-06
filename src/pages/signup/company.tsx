@@ -7,8 +7,6 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { GoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
 
 import Layout from "../../components/main-layout";
 import API from "../../services";
@@ -26,37 +24,11 @@ const Company: NextPage = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     data.account_id = 3;
     setLoading(true);
     API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal(
-          "Success",
-          "Now you are in the waiting list. We will contact you very soon.",
-          "success"
-        ).then(function () {
-          router.push("/");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
-  const googleSignup = async (data) => {
-    data.account_id = 3;
-    setLoading(true);
-    API.post("/user/authenticate-google", data)
       .then((response) => {
         setLoading(false);
         reset();
@@ -91,33 +63,11 @@ const Company: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
             <h1 className="mb-2">Join Waitlist</h1>
             <p className="mb-2 text-muted">Create an account to continue!</p>
-            <div className="mb-2 d-flex justify-content-center">
-              <GoogleLogin
-                onSuccess={({ credential }) => {
-                  const userInfo = jwtDecode(credential);
-                  const user = {
-                    email: userInfo.email,
-                    first_name: userInfo.family_name,
-                    last_name: userInfo.given_name,
-                    google_id: userInfo.sub,
-                    image_url_google: userInfo.picture,
-                    name: userInfo.name,
-                    token_id: credential,
-                  };
-                  googleSignup(user);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            </div>
-            <p className="mb-2 text-muted">OR</p>
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="First Name"
-                    aria-label="First Name"
                     type="text"
                     size="lg"
                     isInvalid={errors.first_name ? true : false}
@@ -129,7 +79,6 @@ const Company: NextPage = () => {
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="Last Name"
-                    aria-label="Last Name"
                     type="text"
                     size="lg"
                     isInvalid={errors.last_name ? true : false}
@@ -144,8 +93,6 @@ const Company: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Your E-mail"
-                aria-label="Your E-mail"
-                aria-describedby="basic-addon1"
                 type="email"
                 isInvalid={errors.email ? true : false}
                 {...register("email", { required: true })}
@@ -157,8 +104,6 @@ const Company: NextPage = () => {
               </InputGroup.Text>
               <Form.Control
                 placeholder="Password"
-                aria-label="Password"
-                aria-describedby="basic-addon2"
                 type={showPassword ? "text" : "password"}
                 isInvalid={errors.password ? true : false}
                 {...register("password", { required: true })}
@@ -235,8 +180,6 @@ const Company: NextPage = () => {
                 <Form.Group className="mb-2">
                   <Form.Control
                     placeholder="Intro yourself"
-                    aria-label="Intro yourself"
-                    aria-describedby="basic-addon1"
                     as="textarea"
                     size="lg"
                     rows={3}
@@ -265,37 +208,17 @@ const Company: NextPage = () => {
             <p className="text-muted mb-2">Add company details</p>
 
             <InputGroup className="mb-2" size="lg">
-              <Form.Control
-                placeholder="Name"
-                aria-label="Name"
-                aria-describedby="basic-addon1"
-                type="text"
-              />
+              <Form.Control placeholder="Name" type="text" />
             </InputGroup>
             <InputGroup className="mb-2" size="lg">
-              <Form.Control
-                placeholder="Location"
-                aria-label="Location"
-                aria-describedby="basic-addon1"
-                type="email"
-              />
+              <Form.Control placeholder="Location" type="email" />
             </InputGroup>
             <InputGroup className="mb-2" size="lg">
-              <Form.Control
-                placeholder="Website"
-                aria-label="Website"
-                aria-describedby="basic-addon1"
-                type="url"
-              />
+              <Form.Control placeholder="Website" type="url" />
             </InputGroup>
 
             <InputGroup className="mb-2" size="lg">
-              <Form.Control
-                placeholder="Phone Number"
-                aria-label="Phone Number"
-                aria-describedby="basic-addon1"
-                type="tel"
-              />
+              <Form.Control placeholder="Phone Number" type="tel" />
             </InputGroup>
 
             <div className="d-grid gap-2">
@@ -326,8 +249,6 @@ const Company: NextPage = () => {
             <Form.Group className="mb-2">
               <Form.Control
                 placeholder="Enter VIP code"
-                aria-label="First Name"
-                aria-describedby="basic-addon1"
                 type="email"
                 size="lg"
               />
