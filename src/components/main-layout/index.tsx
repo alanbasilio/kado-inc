@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";

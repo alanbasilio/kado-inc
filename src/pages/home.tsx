@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 
-import Layout from "../components/main-layout";
+import Layout from "../components/dashboard-layout";
 import API from "../services";
 
 const Home: NextPage = () => {
