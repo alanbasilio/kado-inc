@@ -64,3 +64,15 @@
     border-left: 0;
   }
 }
+
+.container-md {
+  max-width: 855px;
+}
+
+.col-form-label {
+  font-size: $form-label-font-size;
+}
+
+.react-datepicker-popper {
+  z-index: 10000000;
+}

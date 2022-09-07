@@ -57,10 +57,43 @@ const DashboardLayout = ({ children }) => {
     router.push("/");
   };
 
+  const routes = [
+    {
+      url: "/home",
+      icon: <MdDashboard />,
+      title: "Dashboard",
+      hidden: false,
+    },
+    {
+      url: "/bookmarks",
+      icon: <MdBookmarkBorder />,
+      title: "Bookmarks",
+      hidden: false,
+    },
+    {
+      url: "/my-projects",
+      icon: <MdDashboardCustomize />,
+      title: "My Projects",
+      hidden: false,
+    },
+    {
+      url: "/payments",
+      icon: <AiOutlineBank />,
+      title: "Payments",
+      hidden: false,
+    },
+    {
+      url: "/settings",
+      icon: <MdSettings />,
+      title: "Settings",
+      hidden: false,
+    },
+  ];
+
   return (
     user && (
-      <Container fluid className="bg-light">
-        <Row className="vh-100">
+      <Container fluid>
+        <Row className="vh-100  ">
           <Col lg={2} md={3} sm={6} xs={12} className="px-4 py-3 bg-white">
             <Link href="/home" passHref>
               <a>
@@ -72,82 +105,29 @@ const DashboardLayout = ({ children }) => {
                 />
               </a>
             </Link>
-            <Nav defaultActiveKey="/home" className="flex-column mt-12">
-              <Link href="/home" passHref>
-                <Nav.Link
-                  className={`mb-4 p-0 ${
-                    router.pathname === "/home" ? "fw-bold" : "text-muted"
-                  }`}
-                >
-                  <MdDashboard
-                    className={`fs-4 ${
-                      router.pathname === "/home" && "text-primary"
-                    }`}
-                  />{" "}
-                  Dashboard
-                </Nav.Link>
-              </Link>
-              <Link href="/bookmarks" passHref>
-                <Nav.Link
-                  className={`mb-4 p-0 ${
-                    router.pathname === "/bookmarks" ? "fw-bold" : "text-muted"
-                  }`}
-                >
-                  <MdBookmarkBorder
-                    className={`fs-4 ${
-                      router.pathname === "/bookmarks" && "text-primary"
-                    }`}
-                  />{" "}
-                  Bookmarks
-                </Nav.Link>
-              </Link>
-              <Link href="/my-projects" passHref>
-                <Nav.Link
-                  className={`mb-4 p-0 ${
-                    router.pathname === "/my-projects"
-                      ? "fw-bold"
-                      : "text-muted"
-                  }`}
-                >
-                  <MdDashboardCustomize
-                    className={`fs-4 ${
-                      router.pathname === "/my-projects" && "text-primary"
-                    }`}
-                  />{" "}
-                  My Projects
-                </Nav.Link>
-              </Link>
-              <Link href="/payments" passHref>
-                <Nav.Link
-                  className={`mb-4 p-0 ${
-                    router.pathname === "/payments" ? "fw-bold" : "text-muted"
-                  }`}
-                >
-                  <AiOutlineBank
-                    className={`fs-4 ${
-                      router.pathname === "/payments" && "text-primary"
-                    }`}
-                  />{" "}
-                  Payments
-                </Nav.Link>
-              </Link>
-              <Link href="/settings" passHref>
-                <Nav.Link
-                  className={`p-0 ${
-                    router.pathname === "/settings" ? "fw-bold" : "text-muted"
-                  }`}
-                >
-                  <MdSettings
-                    className={`fs-4 ${
-                      router.pathname === "/settings" && "text-primary"
-                    }`}
-                  />{" "}
-                  Settings
-                </Nav.Link>
-              </Link>
+            <Nav className="flex-column mt-12">
+              {routes.map((route, index) => {
+                const isActive = router.pathname === route.url;
+                return (
+                  !route.hidden && (
+                    <Link key={index} href={route.url} passHref>
+                      <Nav.Link
+                        className={`mb-4 p-0 ${
+                          isActive ? "fw-bold" : "text-muted"
+                        }`}
+                      >
+                        <span className={`fs-4 ${isActive && "text-primary"}`}>
+                          {route.icon}
+                        </span>{" "}
+                        {route.title}
+                      </Nav.Link>
+                    </Link>
+                  )
+                );
+              })}
             </Nav>
           </Col>
-          <Col lg={10} md={9} sm={6} xs={12}>
+          <Col lg={10} md={9} sm={6} xs={12} className="bg-light">
             <Navbar bg="light" expand="lg" className="px-2">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
