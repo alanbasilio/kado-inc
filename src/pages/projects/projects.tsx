@@ -26,7 +26,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
@@ -78,7 +78,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
@@ -133,7 +133,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
@@ -186,7 +186,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
@@ -236,7 +236,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
@@ -290,7 +290,7 @@ const Signup: NextPage = () => {
           <Card
             className="p-2"
             onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
+            // className={active === "student" ? "active" : ""}
           >
             <Row>
               <Col className="p-2">
