@@ -26,7 +26,7 @@ const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [base64File, setBase64File] = useState();
   const [user, setUser] = useState();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);

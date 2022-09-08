@@ -49,7 +49,7 @@ const DashboardLayout = ({ children }) => {
     } else {
       router.push("/");
     }
-  }, []);
+  }, [router]);
 
   const logout = () => {
     setUser(null);

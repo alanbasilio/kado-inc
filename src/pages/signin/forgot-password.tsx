@@ -25,7 +25,7 @@ const ForgotPassword: NextPage = () => {
     API.post("/user/forgot-password", data)
       .then((response) => {
         setLoading(false);
-        router.push("/email-sent");
+        router.push("/signin/email-sent");
       })
       .catch((err) => {
         setLoading(false);

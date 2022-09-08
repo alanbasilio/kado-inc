@@ -4,12 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import swal from "sweetalert";
 import { Col, Row, Breadcrumb, Container, Form, Button } from "react-bootstrap";
-import Select from "react-select";
-import { Editor } from "@tinymce/tinymce-react";
-import DatePicker from "react-datepicker";
+import moment from "moment";
 
 import Layout from "../../components/dashboard-layout";
 import FileUploader from "../../components/file-uploader";
+import HTMLEditor from "../../components/editor";
+import Select from "../../components/select";
+import DatePicker from "../../components/datepicker";
+
 import API from "../../services";
 import ProjectCategories from "../../mocks/project-categories.json";
 import Image from "next/image";
@@ -22,6 +24,9 @@ type Inputs = {
   users: [];
   company: string;
   icon: FileList;
+  expiration_date: any;
+  end_date: any;
+  start_date: any;
 };
 
 const NewProject: NextPage = () => {
@@ -32,6 +37,16 @@ const NewProject: NextPage = () => {
   const router = useRouter();
   const editorRef = useRef(null);
   const API_KEY = process.env.NEXT_PUBLIC_TINY_CLOUD_KEY;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // storing input name
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    } else {
+      router.push("/");
+    }
+  }, [router]);
 
   const {
     register,
@@ -40,35 +55,36 @@ const NewProject: NextPage = () => {
     reset,
     setValue,
     watch,
+    setFocus,
     formState: { errors },
   } = useForm<Inputs>();
 
   const values = watch();
 
-  const options = [
-    { value: "1", label: "Kado Inc" },
-    { value: "2", label: "Acme" },
-    { value: "3", label: "John e Penny" },
+  const companies = [
+    { value: 1, label: "Kado Inc" },
+    { value: 2, label: "Acme" },
+    { value: 3, label: "John e Penny" },
   ];
 
   const cities = [
-    { value: "1", label: "New York" },
-    { value: "2", label: "Chicago" },
-    { value: "3", label: "Salem" },
+    { value: 1, label: "New York" },
+    { value: 2, label: "Chicago" },
+    { value: 3, label: "Salem" },
   ];
 
   const users = [
-    { value: "1", label: "All" },
-    { value: "2", label: "Match Location" },
+    { value: 1, label: "All" },
+    { value: 2, label: "Match Location" },
   ];
 
-  const skillOptions = [
-    { value: "1", label: "HTML" },
-    { value: "2", label: "CSS" },
-    { value: "3", label: "HTML5" },
-    { value: "5", label: "Design" },
-    { value: "5", label: "Marketing" },
-    { value: "6", label: "Technology" },
+  const skills = [
+    { value: 1, label: "Javascript" },
+    { value: 2, label: "CSS" },
+    { value: 3, label: "HTML5" },
+    { value: 4, label: "Design" },
+    { value: 5, label: "Marketing" },
+    { value: 6, label: "Technology" },
   ];
 
   const handlePaid = (checked) => {
@@ -80,32 +96,62 @@ const NewProject: NextPage = () => {
     setStep(2);
   };
 
+  const getCities = () => {
+    API.get("/cities", {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // setLoading(true);
-    // API.post("/user", data)
-    //   .then((response) => {
-    //     setLoading(false);
-    //     reset();
-    //     swal("Success", "Message", "success").then(function () {
-    //       router.push("/");
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     swal(
-    //       "Error",
-    //       err.response?.data?.message
-    //         ? err.response?.data?.message
-    //         : "An error occured: " + err,
-    //       "error"
-    //     );
-    //   });
+    setLoading(true);
+    API.post("/project", data, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    })
+      .then((response) => {
+        setLoading(false);
+        reset();
+        swal("Success", "Project created", "success").then(function () {
+          router.push("/my-projects");
+        });
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
   };
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
+    if (user) {
+      getCities();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setValue("end_date", null);
+  }, [values.start_date, setValue]);
 
   return (
     <Layout>
@@ -164,23 +210,14 @@ const NewProject: NextPage = () => {
                 Company / Organization
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Controller
+                <Select
+                  placeholder="Select or Search for a Company"
+                  options={companies}
                   control={control}
                   name="company"
-                  rules={{ required: true }}
-                  render={({ field: { value } }) => (
-                    <Select
-                      placeholder="Select or Search for a Company"
-                      options={options}
-                      value={options.find((c) => c.value === value)}
-                      onChange={(option) => setValue("company", option.value)}
-                      className={
-                        errors.company
-                          ? "form-control p-0 is-invalid react-select"
-                          : "react-select"
-                      }
-                    />
-                  )}
+                  required={true}
+                  setValue={setValue}
+                  errors={errors}
                 />
               </Col>
             </Row>
@@ -204,39 +241,11 @@ const NewProject: NextPage = () => {
                 Project Description
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Editor
-                  apiKey={API_KEY}
-                  onInit={(evt, editor) => (editorRef.current = editor)}
-                  init={{
-                    height: 400,
-                    menubar: false,
-                    plugins: [
-                      "advlist",
-                      "autolink",
-                      "lists",
-                      "link",
-                      "image",
-                      "charmap",
-                      "preview",
-                      "anchor",
-                      "searchreplace",
-                      "visualblocks",
-                      "code",
-                      "fullscreen",
-                      "insertdatetime",
-                      "media",
-                      "table",
-                      "code",
-                      "help",
-                      "wordcount",
-                    ],
-                    toolbar: `undo redo | blocks | 
-                      bold italic | alignleft aligncenter 
-                      alignright alignjustify | bullist numlist outdent indent | 
-                      removeformat`,
-                    content_style:
-                      "body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:14px }",
-                  }}
+                <HTMLEditor
+                  name={"description"}
+                  control={control}
+                  required={true}
+                  setValue={setValue}
                 />
               </Col>
               <Form.Label column sm={4}>
@@ -249,30 +258,15 @@ const NewProject: NextPage = () => {
                 Job Skills
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Controller
+                <Select
+                  placeholder="Search your skills"
+                  options={skills}
                   control={control}
                   name="skills"
-                  rules={{ required: true }}
-                  render={({ field: { value } }) => (
-                    <Select
-                      placeholder="Search your skills"
-                      options={skillOptions}
-                      value={skillOptions.find((c) => c.value === value)}
-                      onChange={(results) => {
-                        const temp = [];
-                        results.map((result) => {
-                          temp.push(result.label);
-                        });
-                        setValue("skills", temp);
-                      }}
-                      className={
-                        errors.skills
-                          ? "form-control p-0 is-invalid react-select"
-                          : "react-select"
-                      }
-                      isMulti
-                    />
-                  )}
+                  required={true}
+                  setValue={setValue}
+                  errors={errors}
+                  multiple
                 />
               </Col>
             </Row>
@@ -304,51 +298,37 @@ const NewProject: NextPage = () => {
                 Start Date
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <DatePicker className="form-control  w-50" />
+                <DatePicker
+                  required={true}
+                  errors={errors}
+                  control={control}
+                  name="start_date"
+                  setValue={setValue}
+                  minDate={moment().toDate()}
+                />
               </Col>
               <Form.Label column sm={4}>
                 Due Date
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <DatePicker className="form-control  w-50" />
+                <DatePicker
+                  required={true}
+                  errors={errors}
+                  control={control}
+                  name="end_date"
+                  setValue={setValue}
+                  minDate={values.start_date}
+                />
               </Col>
               <Form.Label column sm={4}>
                 Project Requirements
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Editor
-                  apiKey={API_KEY}
-                  onInit={(evt, editor) => (editorRef.current = editor)}
-                  init={{
-                    height: 400,
-                    menubar: false,
-                    plugins: [
-                      "advlist",
-                      "autolink",
-                      "lists",
-                      "link",
-                      "image",
-                      "charmap",
-                      "preview",
-                      "anchor",
-                      "searchreplace",
-                      "visualblocks",
-                      "code",
-                      "fullscreen",
-                      "insertdatetime",
-                      "media",
-                      "table",
-                      "code",
-                      "help",
-                      "wordcount",
-                    ],
-                    toolbar: `undo redo | blocks | 
-                      bold italic | alignleft aligncenter 
-                      alignright alignjustify | bullist numlist outdent indent | 
-                      removeformat`,
-                    content_style:
-                      "body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:14px }",
-                  }}
+                <HTMLEditor
+                  name={"requirements"}
+                  control={control}
+                  required={true}
+                  setValue={setValue}
                 />
               </Col>
             </Row>
@@ -362,75 +342,65 @@ const NewProject: NextPage = () => {
                 Notify this project to the following users
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Controller
+                <Select
+                  placeholder="Select users"
+                  options={users}
                   control={control}
                   name="users"
-                  rules={{ required: true }}
-                  render={({ field: { value } }) => (
-                    <Select
-                      placeholder="Select users"
-                      options={users}
-                      value={users.find((c) => c.value === value)}
-                      onChange={(results) => {
-                        const temp = [];
-                        results.map((result) => {
-                          temp.push(result.value);
-                        });
-                        setValue("users", temp);
-                      }}
-                      className={
-                        errors.users
-                          ? "form-control p-0 is-invalid react-select"
-                          : "react-select"
-                      }
-                      isMulti
-                    />
-                  )}
+                  required={true}
+                  setValue={setValue}
+                  errors={errors}
+                  multiple
                 />
               </Col>
               <Form.Label column sm={4}>
                 Location
               </Form.Label>
-              <Col sm={2} className="mb-2">
+              <Col sm={3} className="mb-2">
                 <Form.Check
                   inline
                   label="Remote"
                   name="location"
                   type="radio"
+                  checked
                 />
-                <Form.Check inline name="location" type="radio" />
+                <Form.Check inline name="location" label="Local" type="radio" />
               </Col>
-              <Col sm={6} className="mb-2">
-                <Controller
+              <Col sm={5} className="mb-2">
+                <Select
+                  placeholder="Select city"
+                  options={cities}
                   control={control}
                   name="city"
-                  rules={{ required: true }}
-                  render={({ field: { value } }) => (
-                    <Select
-                      placeholder="Select city"
-                      options={cities}
-                      value={cities.find((c) => c.value === value)}
-                      onChange={(option) => setValue("city", option.value)}
-                      className={
-                        errors.city
-                          ? "form-control p-0 is-invalid react-select"
-                          : "react-select"
-                      }
-                    />
-                  )}
+                  required={true}
+                  setValue={setValue}
+                  errors={errors}
                 />
               </Col>
               <Form.Label column sm={4}>
                 Expiration Date
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <DatePicker className="form-control  w-50" />
+                <DatePicker
+                  required={true}
+                  errors={errors}
+                  control={control}
+                  name="expiration_date"
+                  setValue={setValue}
+                  minDate={moment().toDate()}
+                />
               </Col>
               <Form.Label column sm={4}>
                 Require resume
               </Form.Label>
               <Col sm={8} className="mb-2">
-                <Form.Check inline label="Yes" name="resume" type="radio" />
+                <Form.Check
+                  inline
+                  label="Yes"
+                  name="resume"
+                  type="radio"
+                  checked
+                />
                 <Form.Check inline label="No" name="resume" type="radio" />
               </Col>
               <Form.Label column sm={4}>
