@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
-import { Button, Col, Form, Row, InputGroup, Card } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import Layout from "../../components/dashboard-layout";
 import API from "../../services";

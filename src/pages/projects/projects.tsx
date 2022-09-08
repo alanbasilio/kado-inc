@@ -7,6 +7,8 @@ import Image from "next/image";
 
 import Layout from "../../components/main-layout";
 import ProgBar from "../../components/progress-bar/progress-bar";
+import CardProject from "../../components/card-project";
+import CardProjectProgbar from "../../components/card-project-progbar";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");
@@ -23,321 +25,27 @@ const Signup: NextPage = () => {
       <Row>
         <Col md={4} className="mb-2">
           <h3>TODO</h3>
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-              </Col>
-            </Row>
-          </Card>
+          <CardProject />
         </Col>
 
         <Col md={4} className="mb-2">
           <h3>ONGOING</h3>
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <ProgBar />
-                <div className="mt-2">
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                </div>
-              </Col>
-            </Row>
-          </Card>
+          <CardProjectProgbar />
         </Col>
 
         <Col md={4} className="mb-2">
           <h3>COMPLETED</h3>
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <ProgBar />
-                <div className="mt-2">
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                </div>
-              </Col>
-            </Row>
-          </Card>
+          <CardProjectProgbar />
         </Col>
         <Col md={4} className="mb-2">
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-                <Image
-                  className="img-fluid border rounded-circle"
-                  src="/images/design.png"
-                  width="40"
-                  height="40"
-                  alt="React Bootstrap logo"
-                />
-              </Col>
-            </Row>
-          </Card>
+          <CardProject />
         </Col>
         <Col md={4} className="mb-2">
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <ProgBar />
-                <div className="mt-2">
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                </div>
-              </Col>
-            </Row>
-          </Card>
+          <CardProjectProgbar />
         </Col>
 
         <Col md={4} className="mb-2">
-          <Card
-            className="p-2"
-            onClick={() => setActive("student")}
-            className={active === "student" ? "active" : ""}
-          >
-            <Row>
-              <Col className="p-2">
-                <h4 className="mt-2">Boxboard Multipurpose Ui Kit</h4>
-                <h6 className="mb-2 text-muted">Boxboard</h6>
-                <p className="mb-2 text-muted">15 Days left</p>
-                <ProgBar />
-                <div className="mt-2">
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src="/images/design.png"
-                    width="40"
-                    height="40"
-                    alt="React Bootstrap logo"
-                  />
-                </div>
-              </Col>
-            </Row>
-          </Card>
+          <CardProjectProgbar />
         </Col>
 
         <Col
