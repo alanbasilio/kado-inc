@@ -69,7 +69,6 @@ const Company: NextPage = () => {
                   <Form.Control
                     placeholder="First Name"
                     type="text"
-                    size="lg"
                     isInvalid={errors.first_name ? true : false}
                     {...register("first_name", { required: true })}
                   />
@@ -80,14 +79,13 @@ const Company: NextPage = () => {
                   <Form.Control
                     placeholder="Last Name"
                     type="text"
-                    size="lg"
                     isInvalid={errors.last_name ? true : false}
                     {...register("last_name", { required: true })}
                   />
                 </Form.Group>
               </Col>
             </Row>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
@@ -98,7 +96,7 @@ const Company: NextPage = () => {
                 {...register("email", { required: true })}
               />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <FaLock />
               </InputGroup.Text>
@@ -124,12 +122,7 @@ const Company: NextPage = () => {
               />
             </Form.Group>
             <div className="d-grid gap-2">
-              <Button
-                variant="primary"
-                type="submit"
-                size="lg"
-                disabled={loading}
-              >
+              <Button variant="primary" type="submit" disabled={loading}>
                 Join Waitlist
               </Button>
             </div>
@@ -149,14 +142,13 @@ const Company: NextPage = () => {
               />
             </div>
 
-            <Button className="w-50" variant="light" type="button" size="lg">
+            <Button className="w-50" variant="light" type="button">
               Upload Photo
             </Button>
             <div className="d-grid gap-2 my-2">
               <Button
                 variant="primary"
                 type="button"
-                size="lg"
                 onClick={() => setStep(2)}
               >
                 Next
@@ -178,7 +170,6 @@ const Company: NextPage = () => {
                   <Form.Control
                     placeholder="Intro yourself"
                     as="textarea"
-                    size="lg"
                     rows={3}
                   />
                 </Form.Group>
@@ -186,7 +177,6 @@ const Company: NextPage = () => {
                   <Button
                     variant="primary"
                     type="button"
-                    size="lg"
                     onClick={() => setStep(4)}
                   >
                     Next
@@ -204,17 +194,17 @@ const Company: NextPage = () => {
             <h1 className="mb-2">Company Info</h1>
             <p className="text-muted mb-2">Add company details</p>
 
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control placeholder="Name" type="text" />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control placeholder="Location" type="email" />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control placeholder="Website" type="url" />
             </InputGroup>
 
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control placeholder="Phone Number" type="tel" />
             </InputGroup>
 
@@ -222,7 +212,6 @@ const Company: NextPage = () => {
               <Button
                 variant="primary"
                 type="button"
-                size="lg"
                 onClick={() => setStep(4)}
               >
                 Continue
@@ -244,18 +233,13 @@ const Company: NextPage = () => {
             </div>
 
             <Form.Group className="mb-2">
-              <Form.Control
-                placeholder="Enter VIP code"
-                type="email"
-                size="lg"
-              />
+              <Form.Control placeholder="Enter VIP code" type="email" />
             </Form.Group>
 
             <div className="d-grid gap-2 my-2">
               <Button
                 variant="primary"
                 type="button"
-                size="lg"
                 onClick={() => alert("Access unlocked")}
               >
                 Unlock Access

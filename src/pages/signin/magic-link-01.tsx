@@ -25,7 +25,7 @@ const MagicLink: NextPage = () => {
           </Link>
           <p className="mb-2 text-muted">OR</p>
           <Form>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
@@ -33,12 +33,7 @@ const MagicLink: NextPage = () => {
             </InputGroup>
 
             <div className="d-grid gap-2 my-2">
-              <Button
-                href="/magic-link-02"
-                variant="primary"
-                type="submit"
-                size="lg"
-              >
+              <Button href="/magic-link-02" variant="primary" type="submit">
                 Sign in with email
               </Button>
             </div>

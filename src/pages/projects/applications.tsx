@@ -349,7 +349,6 @@ const Signup: NextPage = () => {
                 <Button
                   variant="primary"
                   type="submit"
-                  size="lg"
                   className="w-100"
                   disabled={!active}
                 >

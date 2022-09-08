@@ -61,7 +61,7 @@ const NewPassword: NextPage = () => {
             Your new password must be different from previously used passswords.
           </p>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control
                 placeholder="Enter your password"
                 type="password"
@@ -69,7 +69,7 @@ const NewPassword: NextPage = () => {
                 {...register("password", { required: true })}
               />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <Form.Control
                 placeholder="Confirm your password"
                 type="password"
@@ -78,12 +78,7 @@ const NewPassword: NextPage = () => {
               />
             </InputGroup>
             <div className="d-grid gap-2">
-              <Button
-                variant="primary"
-                type="submit"
-                size="lg"
-                disabled={loading}
-              >
+              <Button variant="primary" type="submit" disabled={loading}>
                 Create
               </Button>
             </div>

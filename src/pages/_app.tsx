@@ -1,5 +1,4 @@
 import "react-phone-number-input/style.css";
-import "react-datepicker/dist/react-datepicker.css";
 import "../styles/global.scss";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 

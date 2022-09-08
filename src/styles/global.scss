@@ -2,8 +2,9 @@
 @import "~bootstrap/scss/_functions";
 
 @import "variables";
+@import "datepicker-variables";
 
-/* import bootstrap to set changes */
+@import "~react-datepicker/src/stylesheets/datepicker";
 @import "~bootstrap/scss/bootstrap";
 
 .card {
@@ -75,4 +76,11 @@
 
 .react-datepicker-popper {
   z-index: 10000000;
+}
+
+.react-select > div {
+  min-height: 48px;
+  // > div {
+  //   padding-left: 1.6rem;
+  // }
 }

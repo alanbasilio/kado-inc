@@ -1,18 +1,28 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import swal from "sweetalert";
 import { Col, Row, Breadcrumb, Container, Form, Button } from "react-bootstrap";
 import Select from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
-import Switch from "react-switch";
 import DatePicker from "react-datepicker";
 
 import Layout from "../../components/dashboard-layout";
+import FileUploader from "../../components/file-uploader";
 import API from "../../services";
 import ProjectCategories from "../../mocks/project-categories.json";
 import Image from "next/image";
+
+type Inputs = {
+  title: string;
+  duration: string;
+  city: string;
+  skills: [];
+  users: [];
+  company: string;
+  icon: FileList;
+};
 
 const NewProject: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -28,8 +38,12 @@ const NewProject: NextPage = () => {
     handleSubmit,
     control,
     reset,
+    setValue,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<Inputs>();
+
+  const values = watch();
 
   const options = [
     { value: "1", label: "Kado Inc" },
@@ -66,7 +80,7 @@ const NewProject: NextPage = () => {
     setStep(2);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     // setLoading(true);
     // API.post("/user", data)
@@ -89,37 +103,19 @@ const NewProject: NextPage = () => {
     //   });
   };
 
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
+
   return (
     <Layout>
       <Breadcrumb className="mb-2">
-        <Breadcrumb.Item
-          // href="#"
-          active={step === 1}
-          // onClick={() => setStep(1)}
-        >
+        <Breadcrumb.Item active={step === 1}>
           Select Project Template
         </Breadcrumb.Item>
-        <Breadcrumb.Item
-          // href="#"
-          active={step === 2}
-          // onClick={() => setStep(2)}
-        >
-          Add Details
-        </Breadcrumb.Item>
-        <Breadcrumb.Item
-          // href="#"
-          active={step === 3}
-          // onClick={() => setStep(3)}
-        >
-          Preview Project
-        </Breadcrumb.Item>
-        <Breadcrumb.Item
-          // href="#"
-          active={step === 4}
-          // onClick={() => setStep(4)}
-        >
-          Post Project
-        </Breadcrumb.Item>
+        <Breadcrumb.Item active={step === 2}>Add Details</Breadcrumb.Item>
+        <Breadcrumb.Item active={step === 3}>Preview Project</Breadcrumb.Item>
+        <Breadcrumb.Item active={step === 4}>Post Project</Breadcrumb.Item>
       </Breadcrumb>
 
       <h3 className="fw-semibold">Create Project</h3>
@@ -128,21 +124,21 @@ const NewProject: NextPage = () => {
           <p className="text-muted mb-4">Pick a category to get started</p>
           <Container className="container-md">
             <Row>
-              {ProjectCategories.map(({ icon, title, id }) => (
-                <Col key={id} md={4} sm={6} className="my-1">
+              {ProjectCategories.map((category) => (
+                <Col key={category.id} md={4} sm={6} className="my-1">
                   <a
                     href="#"
                     className="bg-white rounded pt-4 pb-2 px-5 text-center d-block"
-                    onClick={() => handleCategory(id)}
+                    onClick={() => handleCategory(category.id)}
                   >
                     <Image
                       className="no-border"
                       width={65}
                       height={65}
-                      src={icon}
+                      src={category.icon}
                       alt="title"
                     />
-                    <h5 className="mt-2 mb-0">{title}</h5>
+                    <h5 className="mt-2 mb-0">{category.title}</h5>
                   </a>
                 </Col>
               ))}
@@ -159,7 +155,7 @@ const NewProject: NextPage = () => {
             as="form"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Form.Group as={Row} className="mb-3 bg-white p-2 rounded">
+            <Row className="mb-3 bg-white p-2 rounded">
               <Col sm={12}>
                 <h5>Company Details</h5>
                 <hr className="my-2" />
@@ -167,23 +163,28 @@ const NewProject: NextPage = () => {
               <Form.Label column sm={4}>
                 Company / Organization
               </Form.Label>
-              <Col sm={8}>
+              <Col sm={8} className="mb-2">
                 <Controller
                   control={control}
-                  defaultValue={""}
-                  name="select"
-                  render={({ onChange, value, name, ref }) => (
+                  name="company"
+                  rules={{ required: true }}
+                  render={({ field: { value } }) => (
                     <Select
                       placeholder="Select or Search for a Company"
-                      inputRef={ref}
                       options={options}
                       value={options.find((c) => c.value === value)}
+                      onChange={(option) => setValue("company", option.value)}
+                      className={
+                        errors.company
+                          ? "form-control p-0 is-invalid react-select"
+                          : "react-select"
+                      }
                     />
                   )}
                 />
               </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3 bg-white p-2 rounded">
+            </Row>
+            <Row className="mb-3 bg-white p-2 rounded">
               <Col sm={12}>
                 <h5>Project Basics</h5>
                 <hr className="my-2" />
@@ -191,15 +192,13 @@ const NewProject: NextPage = () => {
               <Form.Label column sm={4}>
                 Project Title/Role
               </Form.Label>
-              <Col sm={8}>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="Enter a title"
-                    type="text"
-                    isInvalid={errors.title ? true : false}
-                    {...register("title", { required: true })}
-                  />
-                </Form.Group>
+              <Col sm={8} className="mb-2">
+                <Form.Control
+                  placeholder="Enter a title"
+                  type="text"
+                  isInvalid={errors.title && true}
+                  {...register("title", { required: true })}
+                />
               </Col>
               <Form.Label column sm={4}>
                 Project Description
@@ -231,50 +230,53 @@ const NewProject: NextPage = () => {
                       "help",
                       "wordcount",
                     ],
-                    toolbar:
-                      "undo redo | blocks | " +
-                      "bold italic forecolor | alignleft aligncenter " +
-                      "alignright alignjustify | bullist numlist outdent indent | " +
-                      "removeformat | help",
+                    toolbar: `undo redo | blocks | 
+                      bold italic | alignleft aligncenter 
+                      alignright alignjustify | bullist numlist outdent indent | 
+                      removeformat`,
                     content_style:
-                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                      "body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:14px }",
                   }}
                 />
               </Col>
               <Form.Label column sm={4}>
                 Project Icon
               </Form.Label>
-              <Col sm={8}>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="Enter a title"
-                    type="text"
-                    isInvalid={errors.title ? true : false}
-                    {...register("title", { required: true })}
-                  />
-                </Form.Group>
+              <Col sm={8} className="mb-2">
+                <FileUploader required={true} setValue={setValue} name="icon" />
               </Col>
               <Form.Label column sm={4}>
                 Job Skills
               </Form.Label>
-              <Col sm={8}>
+              <Col sm={8} className="mb-2">
                 <Controller
                   control={control}
-                  defaultValue={""}
-                  name="select"
-                  render={({ onChange, value, name, ref }) => (
+                  name="skills"
+                  rules={{ required: true }}
+                  render={({ field: { value } }) => (
                     <Select
                       placeholder="Search your skills"
-                      inputRef={ref}
                       options={skillOptions}
                       value={skillOptions.find((c) => c.value === value)}
+                      onChange={(results) => {
+                        const temp = [];
+                        results.map((result) => {
+                          temp.push(result.label);
+                        });
+                        setValue("skills", temp);
+                      }}
+                      className={
+                        errors.skills
+                          ? "form-control p-0 is-invalid react-select"
+                          : "react-select"
+                      }
                       isMulti
                     />
                   )}
                 />
               </Col>
-            </Form.Group>
-            <Form.Group as={Row} className="mb-3 bg-white p-2 rounded">
+            </Row>
+            <Row className="mb-3 bg-white p-2 rounded">
               <Col sm={12}>
                 <h5>Additional details</h5>
                 <hr className="my-2" />
@@ -282,44 +284,38 @@ const NewProject: NextPage = () => {
               <Form.Label column sm={4}>
                 Paid
               </Form.Label>
-              <Col sm={8}>
-                <Form.Check
-                  type="switch"
-                  id="paid"
-                  // label="Check this switch"
-                />
+              <Col sm={8} className="mb-2">
+                <Form.Check type="switch" id="paid" />
               </Col>
 
               <Form.Label column sm={4}>
                 Duration (hours)
               </Form.Label>
-              <Col sm={8}>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="Hours"
-                    type="number"
-                    isInvalid={errors.duration ? true : false}
-                    {...register("duration", { required: true })}
-                    className="w-25"
-                  />
-                </Form.Group>
+              <Col sm={8} className="mb-2">
+                <Form.Control
+                  placeholder="Hours"
+                  type="number"
+                  isInvalid={errors.duration && true}
+                  {...register("duration", { required: true })}
+                  className="w-25"
+                />
               </Col>
               <Form.Label column sm={4}>
                 Start Date
               </Form.Label>
-              <Col sm={8}>
-                <DatePicker className="form-control mb-2 w-50" />
+              <Col sm={8} className="mb-2">
+                <DatePicker className="form-control  w-50" />
               </Col>
               <Form.Label column sm={4}>
                 Due Date
               </Form.Label>
-              <Col sm={8}>
-                <DatePicker className="form-control mb-2 w-50" />
+              <Col sm={8} className="mb-2">
+                <DatePicker className="form-control  w-50" />
               </Col>
               <Form.Label column sm={4}>
                 Project Requirements
               </Form.Label>
-              <Col sm={8}>
+              <Col sm={8} className="mb-2">
                 <Editor
                   apiKey={API_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
@@ -346,19 +342,18 @@ const NewProject: NextPage = () => {
                       "help",
                       "wordcount",
                     ],
-                    toolbar:
-                      "undo redo | blocks | " +
-                      "bold italic forecolor | alignleft aligncenter " +
-                      "alignright alignjustify | bullist numlist outdent indent | " +
-                      "removeformat | help",
+                    toolbar: `undo redo | blocks | 
+                      bold italic | alignleft aligncenter 
+                      alignright alignjustify | bullist numlist outdent indent | 
+                      removeformat`,
                     content_style:
-                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                      "body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:14px }",
                   }}
                 />
               </Col>
-            </Form.Group>
+            </Row>
 
-            <Form.Group as={Row} className="mb-3 bg-white p-2 rounded">
+            <Row className="mb-3 bg-white p-2 rounded">
               <Col sm={12}>
                 <h5>Application Preferences</h5>
                 <hr className="my-2" />
@@ -366,17 +361,28 @@ const NewProject: NextPage = () => {
               <Form.Label column sm={4}>
                 Notify this project to the following users
               </Form.Label>
-              <Col sm={8}>
+              <Col sm={8} className="mb-2">
                 <Controller
                   control={control}
-                  defaultValue={""}
-                  name="select"
-                  render={({ onChange, value, name, ref }) => (
+                  name="users"
+                  rules={{ required: true }}
+                  render={({ field: { value } }) => (
                     <Select
                       placeholder="Select users"
-                      inputRef={ref}
                       options={users}
                       value={users.find((c) => c.value === value)}
+                      onChange={(results) => {
+                        const temp = [];
+                        results.map((result) => {
+                          temp.push(result.value);
+                        });
+                        setValue("users", temp);
+                      }}
+                      className={
+                        errors.users
+                          ? "form-control p-0 is-invalid react-select"
+                          : "react-select"
+                      }
                       isMulti
                     />
                   )}
@@ -392,25 +398,24 @@ const NewProject: NextPage = () => {
                   name="location"
                   type="radio"
                 />
-                <Form.Check
-                  inline
-                  // label="Remote"
-                  name="location"
-                  type="radio"
-                />
+                <Form.Check inline name="location" type="radio" />
               </Col>
               <Col sm={6} className="mb-2">
                 <Controller
                   control={control}
-                  defaultValue={""}
-                  name="select"
-                  render={({ onChange, value, name, ref }) => (
+                  name="city"
+                  rules={{ required: true }}
+                  render={({ field: { value } }) => (
                     <Select
                       placeholder="Select city"
-                      inputRef={ref}
                       options={cities}
                       value={cities.find((c) => c.value === value)}
-                      isMulti
+                      onChange={(option) => setValue("city", option.value)}
+                      className={
+                        errors.city
+                          ? "form-control p-0 is-invalid react-select"
+                          : "react-select"
+                      }
                     />
                   )}
                 />
@@ -418,8 +423,8 @@ const NewProject: NextPage = () => {
               <Form.Label column sm={4}>
                 Expiration Date
               </Form.Label>
-              <Col sm={8}>
-                <DatePicker className="form-control mb-2 w-50" />
+              <Col sm={8} className="mb-2">
+                <DatePicker className="form-control  w-50" />
               </Col>
               <Form.Label column sm={4}>
                 Require resume
@@ -435,11 +440,11 @@ const NewProject: NextPage = () => {
                 <Form.Check inline name="documents" type="switch" />
               </Col>
               <Col md={12} className="text-center my-2">
-                <Button size="lg" type="submit" className="px-2 fs-4">
+                <Button type="submit" size="lg">
                   Preview and Submit
                 </Button>
               </Col>
-            </Form.Group>
+            </Row>
           </Container>
         </>
       )}

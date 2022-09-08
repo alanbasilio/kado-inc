@@ -68,7 +68,6 @@ const School: NextPage = () => {
                   <Form.Control
                     placeholder="First Name"
                     type="text"
-                    size="lg"
                     isInvalid={errors.first_name ? true : false}
                     {...register("first_name", { required: true })}
                   />
@@ -79,7 +78,6 @@ const School: NextPage = () => {
                   <Form.Control
                     placeholder="Last Name"
                     type="text"
-                    size="lg"
                     isInvalid={errors.last_name ? true : false}
                     {...register("last_name", { required: true })}
                   />
@@ -90,13 +88,12 @@ const School: NextPage = () => {
               <Form.Control
                 placeholder="School Name"
                 type="text"
-                size="lg"
                 isInvalid={errors.school_name ? true : false}
                 {...register("school_name", { required: true })}
               />
             </Form.Group>
 
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
@@ -108,7 +105,7 @@ const School: NextPage = () => {
               />
             </InputGroup>
 
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <FaLock />
               </InputGroup.Text>
@@ -126,7 +123,7 @@ const School: NextPage = () => {
               <PhoneInputWithCountry
                 name="phone_number"
                 control={control}
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Phone Number (optional)"
               />
             </Form.Group>
@@ -134,19 +131,13 @@ const School: NextPage = () => {
               <Form.Control
                 placeholder="Any additional comments (optional)"
                 as="textarea"
-                size="lg"
                 rows={3}
                 {...register("any_additional_comments")}
               />
             </Form.Group>
 
             <div className="d-grid gap-2">
-              <Button
-                variant="primary"
-                type="submit"
-                size="lg"
-                disabled={loading}
-              >
+              <Button variant="primary" type="submit" disabled={loading}>
                 Submit
               </Button>
             </div>

@@ -134,24 +134,14 @@ const ProjectDetails: NextPage = () => {
             <Row className="mt-5">
               <Col md={6}>
                 <div className="d-grid gap-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    size="lg"
-                    disabled={loading}
-                  >
+                  <Button variant="primary" type="submit" disabled={loading}>
                     Go Back and Edit
                   </Button>
                 </div>
               </Col>
               <Col md={6}>
                 <div className="d-grid">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    size="lg"
-                    disabled={loading}
-                  >
+                  <Button variant="primary" type="submit" disabled={loading}>
                     Review Terms and Submit
                   </Button>
                 </div>

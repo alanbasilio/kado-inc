@@ -64,10 +64,10 @@ const Settings: NextPage = () => {
               height="151"
               alt="React Bootstrap logo"
             />
-            <Button className="mx-2" variant="primary" type="button" size="lg">
+            <Button className="mx-2" variant="primary" type="button">
               Upload new picture
             </Button>
-            <Button variant="light" type="button" size="lg">
+            <Button variant="light" type="button">
               Remove
             </Button>
           </Col>
@@ -78,7 +78,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="First Name"
               type="text"
-              size="lg"
               isInvalid={errors.first_name ? true : false}
               {...register("first_name", { required: true })}
             />
@@ -90,7 +89,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Last Name"
               type="text"
-              size="lg"
               isInvalid={errors.last_name ? true : false}
               {...register("last_name", { required: true })}
             />
@@ -102,7 +100,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Email Address"
               type="email"
-              size="lg"
               isInvalid={errors.email ? true : false}
               {...register("email", { required: true })}
             />
@@ -114,7 +111,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Phone Number"
               type="tel"
-              size="lg"
               isInvalid={errors.phone ? true : false}
               {...register("phone", { required: true })}
             />
@@ -126,7 +122,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="About"
               as="textarea"
-              size="lg"
               rows={3}
               isInvalid={errors.about ? true : false}
               {...register("about", { required: true })}
@@ -139,7 +134,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Company Name"
               type="text"
-              size="lg"
               isInvalid={errors.company ? true : false}
               {...register("company", { required: true })}
             />
@@ -151,7 +145,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Location"
               type="text"
-              size="lg"
               isInvalid={errors.location ? true : false}
               {...register("location", { required: true })}
             />
@@ -163,7 +156,6 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Website"
               type="url"
-              size="lg"
               isInvalid={errors.website ? true : false}
               {...register("website", { required: true })}
             />
@@ -175,14 +167,13 @@ const Settings: NextPage = () => {
             <Form.Control
               placeholder="Company Phone Number"
               type="tel"
-              size="lg"
               isInvalid={errors.company_phone ? true : false}
               {...register("company_phone", { required: true })}
             />
           </Form.Group>
         </Col>
         <Col md={12} className="text-end">
-          <Button variant="primary" type="submit" size="lg">
+          <Button variant="primary" type="submit">
             Submit
           </Button>
         </Col>
