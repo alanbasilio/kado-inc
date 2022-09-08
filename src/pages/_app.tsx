@@ -1,5 +1,5 @@
-import "../styles/global.scss";
 import "react-phone-number-input/style.css";
+import "../styles/global.scss";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import type { AppProps } from "next/app";

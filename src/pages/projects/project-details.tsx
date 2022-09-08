@@ -59,7 +59,7 @@ const ProjectDetails: NextPage = () => {
           }}
         >
           <div className="mb-3">
-            <Button variant="light" type="submit" size="lg" disabled={loading}>
+            <Button variant="light" type="submit" disabled={loading}>
               Mark complete
             </Button>
           </div>

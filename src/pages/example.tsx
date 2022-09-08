@@ -54,7 +54,6 @@ const Example: NextPage = () => {
             <Form.Control
               placeholder="Test"
               type="text"
-              size="lg"
               isInvalid={errors.test ? true : false}
               {...register("test", { required: true })}
             />
@@ -66,14 +65,13 @@ const Example: NextPage = () => {
             <Form.Control
               placeholder="Test 2"
               type="text"
-              size="lg"
               isInvalid={errors.test2 ? true : false}
               {...register("test2", { required: true })}
             />
           </Form.Group>
         </Col>
 
-        <InputGroup className="mb-2" size="lg">
+        <InputGroup className="mb-2">
           <InputGroup.Text>
             <MdOutlineAlternateEmail />
           </InputGroup.Text>
@@ -85,7 +83,7 @@ const Example: NextPage = () => {
           />
         </InputGroup>
 
-        <Button variant="primary" type="submit" size="lg" disabled={!loading}>
+        <Button variant="primary" type="submit" disabled={!loading}>
           Continue
         </Button>
       </Row>

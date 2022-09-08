@@ -49,7 +49,7 @@ const ForgotPassword: NextPage = () => {
             an email with instructions to reset your password.
           </p>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
@@ -61,12 +61,7 @@ const ForgotPassword: NextPage = () => {
               />
             </InputGroup>
             <div className="d-grid gap-2">
-              <Button
-                variant="primary"
-                type="submit"
-                size="lg"
-                disabled={loading}
-              >
+              <Button variant="primary" type="submit" disabled={loading}>
                 Send email instructions
               </Button>
             </div>

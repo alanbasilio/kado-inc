@@ -120,7 +120,6 @@ const Agreements: NextPage = () => {
                   className="text-center"
                   placeholder="Sign your name here"
                   type="text"
-                  size="lg"
                   isInvalid={errors.first_name ? true : false}
                   {...register("first_name", { required: true })}
                 />
@@ -139,12 +138,7 @@ const Agreements: NextPage = () => {
               </Col>
               <Col md={6}>
                 <div className="d-grid gap-2">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    size="lg"
-                    disabled={loading}
-                  >
+                  <Button variant="primary" type="submit" disabled={loading}>
                     Post Project
                   </Button>
                 </div>

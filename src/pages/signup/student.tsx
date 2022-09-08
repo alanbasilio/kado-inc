@@ -1,5 +1,13 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Card } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Form,
+  Row,
+  InputGroup,
+  Card,
+  Container,
+} from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -9,6 +17,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import ProjectCategories from "../../mocks/project-categories.json";
 
 import Layout from "../../components/main-layout";
 import API from "../../services";
@@ -17,7 +26,7 @@ const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [base64File, setBase64File] = useState();
   const [user, setUser] = useState();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const [active, setActive] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -177,7 +186,6 @@ const Student: NextPage = () => {
                     <Form.Control
                       placeholder="First Name"
                       type="text"
-                      size="lg"
                       isInvalid={errors.first_name ? true : false}
                       {...register("first_name", { required: true })}
                     />
@@ -188,14 +196,13 @@ const Student: NextPage = () => {
                     <Form.Control
                       placeholder="Last Name"
                       type="text"
-                      size="lg"
                       isInvalid={errors.last_name ? true : false}
                       {...register("last_name", { required: true })}
                     />
                   </Form.Group>
                 </Col>
               </Row>
-              <InputGroup className="mb-2" size="lg">
+              <InputGroup className="mb-2">
                 <InputGroup.Text>
                   <MdOutlineAlternateEmail />
                 </InputGroup.Text>
@@ -206,7 +213,7 @@ const Student: NextPage = () => {
                   {...register("email", { required: true })}
                 />
               </InputGroup>
-              <InputGroup className="mb-2" size="lg">
+              <InputGroup className="mb-2">
                 <InputGroup.Text>
                   <FaLock />
                 </InputGroup.Text>
@@ -232,12 +239,7 @@ const Student: NextPage = () => {
                 />
               </Form.Group>
               <div className="d-grid gap-2">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  size="lg"
-                  disabled={loading}
-                >
+                <Button variant="primary" type="submit" disabled={loading}>
                   Signup
                 </Button>
               </div>
@@ -263,7 +265,6 @@ const Student: NextPage = () => {
               <Form.Group controlId="formFileLg" className="mb-3">
                 <Form.Control
                   type="file"
-                  size="lg"
                   accept="image/*"
                   onChange={(e) => handleFileRead(e)}
                 />
@@ -274,7 +275,6 @@ const Student: NextPage = () => {
               <Button
                 variant="primary"
                 type="button"
-                size="lg"
                 disabled={!base64File}
                 onClick={() => uploadPhoto()}
               >
@@ -299,14 +299,13 @@ const Student: NextPage = () => {
                     <Form.Control
                       placeholder="Intro yourself"
                       as="textarea"
-                      size="lg"
                       rows={3}
                       isInvalid={errors.intro_yourself ? true : false}
                       {...register("intro_yourself", { required: true })}
                     />
                   </Form.Group>
                   <div className="d-grid gap-2 mt-2">
-                    <Button variant="primary" type="submit" size="lg">
+                    <Button variant="primary" type="submit">
                       Next
                     </Button>
                     <a className="text-muted" onClick={() => setStep(4)}>
@@ -326,141 +325,30 @@ const Student: NextPage = () => {
             <p className="mb-5 text-muted">
               Select a maximum of 5 categories from below
             </p>
-            <Row className="mb-5">
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/design.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Graphics & Design</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/marketing.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Digital Marketing</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/write.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Writing & Translation</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-            <Row className="mb-5">
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/video.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Video & Animation</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/music.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Music & Audio</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    width={65}
-                    height={65}
-                    src="/images/programming.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Programming & Tech</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-            <Row className="mb-5">
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/data.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Data</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/business.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Business</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col>
-                <Card>
-                  <Card.Img
-                    className="no-border"
-                    width={65}
-                    height={65}
-                    src="/images/lifestyle.png"
-                  />
-
-                  <Card.Body>
-                    <Card.Title>Lifestyle</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+            <Container>
+              <Row>
+                {ProjectCategories.map(({ icon, title, id }) => (
+                  <Col key={id} md={4} sm={6} className="my-2">
+                    <a
+                      href="#"
+                      className="shadow rounded bg-white rounded pt-4 pb-2 px-5 text-center d-block"
+                    >
+                      <Image
+                        className="no-border"
+                        width={65}
+                        height={65}
+                        src={icon}
+                        alt="title"
+                      />
+                      <h5 className="mt-2 mb-0">{title}</h5>
+                    </a>
+                  </Col>
+                ))}
+              </Row>
+            </Container>
             <Button
               variant="primary"
               type="button"
-              size="lg"
               className="w-50"
               disabled={!active}
               onClick={() => alert("ok")}

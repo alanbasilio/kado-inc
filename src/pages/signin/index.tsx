@@ -100,7 +100,7 @@ const Signin: NextPage = () => {
           </div>
           <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
               </InputGroup.Text>
@@ -111,7 +111,7 @@ const Signin: NextPage = () => {
                 {...register("email", { required: true })}
               />
             </InputGroup>
-            <InputGroup className="mb-2" size="lg">
+            <InputGroup className="mb-2">
               <InputGroup.Text>
                 <FaLock />
               </InputGroup.Text>
@@ -131,12 +131,7 @@ const Signin: NextPage = () => {
               </Link>
             </p>
             <div className="d-grid gap-2 my-2">
-              <Button
-                variant="primary"
-                type="submit"
-                size="lg"
-                disabled={loading}
-              >
+              <Button variant="primary" type="submit" disabled={loading}>
                 Sign in
               </Button>
             </div>
