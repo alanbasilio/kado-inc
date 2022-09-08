@@ -175,11 +175,6 @@ const DashboardLayout = ({ children }) => {
                   >
                     <Popover className="p-2">
                       <Nav className="flex-column">
-                        <Link href="/profile" passHref>
-                          <Nav.Link className="mb-2">
-                            <MdPerson /> Profile
-                          </Nav.Link>
-                        </Link>
                         <Nav.Link onClick={logout}>
                           <MdLogout /> Logout
                         </Nav.Link>
