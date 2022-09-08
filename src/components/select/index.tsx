@@ -10,6 +10,7 @@ const SelectKADO = ({
   setValue,
   multiple = false,
   errors,
+  defaultValue,
 }) => {
   return (
     <Controller
@@ -20,7 +21,9 @@ const SelectKADO = ({
         <Select
           placeholder={placeholder}
           options={options}
+          // defaultValue={defaultValue}
           value={options.find((c) => c.value === value)}
+          isLoading={!options}
           onChange={(results) => {
             if (multiple) {
               const temp = [];

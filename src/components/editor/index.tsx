@@ -2,7 +2,14 @@ import { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 
-const EditorComponent = ({ size = 400, control, name, required, setValue }) => {
+const EditorComponent = ({
+  size = 400,
+  control,
+  name,
+  required,
+  setValue,
+  initialValue,
+}) => {
   const API_KEY = process.env.NEXT_PUBLIC_TINY_CLOUD_KEY;
   const editorRef = useRef(null);
   const onChange = () => {
@@ -21,6 +28,7 @@ const EditorComponent = ({ size = 400, control, name, required, setValue }) => {
           apiKey={API_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
           onChange={onChange}
+          initialValue={initialValue}
           init={{
             height: size,
             menubar: false,

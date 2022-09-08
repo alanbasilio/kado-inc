@@ -14,8 +14,8 @@ const Layout = (props) => {
 
   useEffect(() => {
     // storing input name
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
+    if (localStorage.getItem("user_kado")) {
+      setUser(JSON.parse(localStorage.getItem("user_kado")));
     } else {
       setUser(null);
     }
@@ -23,7 +23,8 @@ const Layout = (props) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("user_kado");
+    localStorage.removeItem("token_kado");
   };
 
   return (

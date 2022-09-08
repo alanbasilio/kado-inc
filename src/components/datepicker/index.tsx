@@ -1,5 +1,6 @@
-import { Controller } from "react-hook-form";
+import { Controller, ControllerProps } from "react-hook-form";
 import DatePicker from "react-datepicker";
+import moment from "moment";
 
 const DatePickerKado = ({
   control,

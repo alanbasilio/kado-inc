@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import swal from "sweetalert";
-import { Col, Row, Breadcrumb, Container, Form, Button } from "react-bootstrap";
+import {
+  Col,
+  Row,
+  Breadcrumb,
+  Container,
+  Form,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import moment from "moment";
 
 import Layout from "../../components/dashboard-layout";
@@ -28,12 +36,12 @@ type Inputs = {
   job_skills: string; //ok
   paid: boolean; //ok
   duration_hours_week: number; //ok
-  start_date: string; //ok
-  due_date: string; //ok
+  start_date: Date; //ok
+  due_date: Date; //ok
   project_requeriments: string; //ok
   notify_project_following_users: string; //ok
   location_remote: boolean; //ok
-  expiration_date: string; //ok
+  expiration_date: Date; //ok
   require_resume: number; //ok
   request_additional_documents: boolean; //ok
 };
@@ -42,16 +50,21 @@ const NewProject: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState();
-  // const [paid, setPaid] = useState(true);
   const router = useRouter();
-  const editorRef = useRef(null);
-  const API_KEY = process.env.NEXT_PUBLIC_TINY_CLOUD_KEY;
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [companies, setCompanies] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     // storing input name
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
+    if (
+      localStorage.getItem("user_kado") &&
+      localStorage.getItem("token_kado")
+    ) {
+      setUser(JSON.parse(localStorage.getItem("user_kado")));
+      setToken(JSON.parse(localStorage.getItem("token_kado")));
     } else {
       router.push("/");
     }
@@ -66,39 +79,37 @@ const NewProject: NextPage = () => {
     watch,
     setFocus,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      user_id: 3,
+      profile_id: 3,
+      location_city_id: 1,
+      photo_id: 19,
+      company_organization_id: 1,
+      proposal_title_role: "Web Design",
+      proposal_description:
+        "Review requirements, study industry standards and apply it to design a website.Deliverables: Collaborate with out Marketing team to define marketing strategy and create marketing collaterals Create the end-to-end website along with Google Analytics ",
+      job_skills: "Social Media Marketing,Web Design,User Interface,HTML",
+      paid: true,
+      duration_hours_week: 30,
+      start_date: moment("2021-12-10", "YYYY-MM-DD").toDate(),
+      due_date: moment("2021-12-10", "YYYY-MM-DD").toDate(),
+      project_requeriments:
+        "Familiarity with webiste design best practices, attention to detail and collaborative working style. Website content management software experience preferred ( like Wordpress, Squarespace etc.)",
+      notify_project_following_users: "All,Match location",
+      location_remote: true,
+      expiration_date: moment("2021-12-12", "YYYY-MM-DD").toDate(),
+      require_resume: 1,
+      request_additional_documents: true,
+    },
+  });
 
   const values = watch();
-
-  const companies = [
-    { value: 1, label: "Kado Inc" },
-    { value: 2, label: "Acme" },
-    { value: 3, label: "John e Penny" },
-  ];
-
-  const cities = [
-    { value: 1, label: "New York" },
-    { value: 2, label: "Chicago" },
-    { value: 3, label: "Salem" },
-  ];
 
   const users = [
     { value: 1, label: "All" },
     { value: 2, label: "Match Location" },
   ];
-
-  const skills = [
-    { value: 1, label: "Javascript" },
-    { value: 2, label: "CSS" },
-    { value: 3, label: "HTML5" },
-    { value: 4, label: "Design" },
-    { value: 5, label: "Marketing" },
-    { value: 6, label: "Technology" },
-  ];
-
-  // const handlePaid = (checked) => {
-  //   setPaid(checked);
-  // };
 
   const handleCategory = (id) => {
     setCategory(id);
@@ -108,15 +119,78 @@ const NewProject: NextPage = () => {
   const getCities = () => {
     API.get("/cities", {
       headers: {
-        Authorization: `${user.token}`,
+        Authorization: `${token}`,
       },
     })
       .then((response) => {
-        console.log(response);
+        const results = response.data.data.map((result) => {
+          return {
+            value: result.id,
+            label: result.city,
+          };
+        });
+        localStorage.setItem("cities_kado", JSON.stringify(results));
+        setCities(results);
       })
       .catch((err) => {
         setLoading(false);
-        swal(
+        console.log(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
+  const getSkills = () => {
+    API.get("/job-skills", {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+      .then((response) => {
+        const results = response.data.data.map((result) => {
+          return {
+            value: result.label,
+            label: result.label,
+          };
+        });
+        localStorage.setItem("skills_kado", JSON.stringify(results));
+        setSkills(results);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
+  const getCompanies = () => {
+    API.get("/companies", {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+      .then((response) => {
+        const results = response.data.data.map((result) => {
+          return {
+            value: result.id,
+            label: result.name,
+          };
+        });
+        localStorage.setItem("companies_kado", JSON.stringify(results));
+        setCompanies(results);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(
           "Error",
           err.response?.data?.message
             ? err.response?.data?.message
@@ -127,33 +201,32 @@ const NewProject: NextPage = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // const data = {
-    //   user_id: 3,
-    //   profile_id: 3,
-    //   location_city_id: 1,
-    //   photo_id: 19,
-    //   company_organization_id: 1,
-    //   proposal_title_role: "Web Desingn",
-    //   proposal_description:
-    //     "Review requirements, study industry standards and apply it to design a website.Deliverables: Collaborate with out Marketing team to define marketing strategy and create marketing collaterals Create the end-to-end website along with Google Analytics ",
-    //   job_skills: "Social Media Marketing,Web Design,User Interface,HTML",
-    //   paid: true,
-    //   duration_hours_week: 30,
-    //   start_date: "2021-12-10",
-    //   due_date: "2021-12-10",
-    //   project_requeriments:
-    //     "Familiarity with webiste design best practices, attention to detail and collaborative working style. Website content management software experience preferred ( like Wordpress, Squarespace etc.)",
-    //   notify_project_following_users: "All,Match location",
-    //   location_remote: true,
-    //   expiration_date: "2021-12-12",
-    //   require_resume: 1,
-    //   request_additional_documents: true,
-    // };
-
     setLoading(true);
-    API.post("/project", data, {
+    const defaultValues = {
+      user_id: user ? user.id : 3,
+      profile_id: 3,
+      location_city_id: 1,
+      photo_id: 19,
+      company_organization_id: 1,
+      proposal_title_role: "Web Design",
+      proposal_description:
+        "Review requirements, study industry standards and apply it to design a website.Deliverables: Collaborate with out Marketing team to define marketing strategy and create marketing collaterals Create the end-to-end website along with Google Analytics ",
+      job_skills: "Social Media Marketing,Web Design,User Interface,HTML",
+      paid: true,
+      duration_hours_week: 30,
+      start_date: "2021-12-10",
+      due_date: "2021-12-10",
+      project_requeriments:
+        "Familiarity with webiste design best practices, attention to detail and collaborative working style. Website content management software experience preferred ( like Wordpress, Squarespace etc.)",
+      notify_project_following_users: "All,Match location",
+      location_remote: true,
+      expiration_date: "2021-12-12",
+      require_resume: 1,
+      request_additional_documents: true,
+    };
+    API.post("/project", defaultValues, {
       headers: {
-        Authorization: `${user.token}`,
+        Authorization: `${token}`,
       },
     })
       .then((response) => {
@@ -175,13 +248,27 @@ const NewProject: NextPage = () => {
       });
   };
 
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
+  // useEffect(() => {
+  //   console.log(values);
+  // }, [values]);
 
   useEffect(() => {
-    setValue("due_date", null);
-  }, [values.start_date, setValue]);
+    if (token) {
+      if (localStorage.getItem("cities_kado")) {
+        setCities(JSON.parse(localStorage.getItem("cities_kado")));
+      }
+      if (localStorage.getItem("companies_kado")) {
+        setCompanies(JSON.parse(localStorage.getItem("companies_kado")));
+      }
+      if (localStorage.getItem("skills_kado")) {
+        setSkills(JSON.parse(localStorage.getItem("skills_kado")));
+      }
+
+      getCompanies();
+      getCities();
+      getSkills();
+    }
+  }, [token]);
 
   return (
     <Layout>
@@ -237,6 +324,7 @@ const NewProject: NextPage = () => {
                 </Form.Label>
                 <Col sm={8} className="mb-2">
                   <Select
+                    defaultValue=""
                     placeholder="Select or Search for a Company"
                     options={companies}
                     control={control}
@@ -267,6 +355,7 @@ const NewProject: NextPage = () => {
                 </Form.Label>
                 <Col sm={8} className="mb-2">
                   <HTMLEditor
+                    initialValue={values.proposal_description}
                     name={"proposal_description"}
                     control={control}
                     required={true}
@@ -288,6 +377,7 @@ const NewProject: NextPage = () => {
                 </Form.Label>
                 <Col sm={8} className="mb-2">
                   <Select
+                    defaultValue=""
                     placeholder="Search your skills"
                     options={skills}
                     control={control}
@@ -308,12 +398,16 @@ const NewProject: NextPage = () => {
                   Paid
                 </Form.Label>
                 <Col sm={8} className="mb-2">
-                  <Form.Check
-                    type="switch"
-                    id="paid"
-                    isInvalid={errors.paid && true}
-                    {...register("paid")}
-                  />
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="flexSwitchCheckChecked"
+                      value={values.paid ? 1 : 2}
+                      checked={values.paid === true}
+                      onChange={() => setValue("paid", !values.paid)}
+                    />
+                  </div>
                 </Col>
 
                 <Form.Label column sm={4}>
@@ -359,6 +453,7 @@ const NewProject: NextPage = () => {
                 </Form.Label>
                 <Col sm={8} className="mb-2">
                   <HTMLEditor
+                    initialValue={values.project_requeriments}
                     name={"project_requeriments"}
                     control={control}
                     required={true}
@@ -377,6 +472,7 @@ const NewProject: NextPage = () => {
                 </Form.Label>
                 <Col sm={8} className="mb-2">
                   <Select
+                    defaultValue=""
                     placeholder="Select users"
                     options={users}
                     control={control}
@@ -390,31 +486,49 @@ const NewProject: NextPage = () => {
                 <Form.Label column sm={4}>
                   Location
                 </Form.Label>
-                <Col sm={3} className="mb-2">
-                  <Form.Check
-                    inline
-                    label="Remote"
-                    type="radio"
-                    checked
-                    {...register("location_remote")}
-                  />
-                  <Form.Check
-                    inline
-                    label="Local"
-                    type="radio"
-                    {...register("location_remote")}
-                  />
+                <Col sm={3} className="mb-2 d-flex align-items-center">
+                  <div className="form-check form-check-inline me-3">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="location_remote"
+                      id="inlineRadio1"
+                      value={1}
+                      checked={values.location_remote === true}
+                      onChange={() => setValue("location_remote", true)}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio1">
+                      Remote
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="location_remote"
+                      id="inlineRadio2"
+                      value={2}
+                      checked={values.location_remote === false}
+                      onChange={() => setValue("location_remote", false)}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio2">
+                      Local
+                    </label>
+                  </div>
                 </Col>
                 <Col sm={5} className="mb-2">
-                  <Select
-                    placeholder="Select city"
-                    options={cities}
-                    control={control}
-                    name="location_city_id"
-                    required={true}
-                    setValue={setValue}
-                    errors={errors}
-                  />
+                  {!values.location_remote && (
+                    <Select
+                      defaultValue=""
+                      placeholder="Select city"
+                      options={cities}
+                      control={control}
+                      name="location_city_id"
+                      required={true}
+                      setValue={setValue}
+                      errors={errors}
+                    />
+                  )}
                 </Col>
                 <Form.Label column sm={4}>
                   Expiration Date
@@ -433,33 +547,59 @@ const NewProject: NextPage = () => {
                   Require resume
                 </Form.Label>
                 <Col sm={8} className="mb-2">
-                  <Form.Check
-                    inline
-                    label="Yes"
-                    type="radio"
-                    checked
-                    {...register("require_resume")}
-                  />
-                  <Form.Check
-                    inline
-                    label="No"
-                    type="radio"
-                    {...register("require_resume")}
-                  />
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="require_resume"
+                      id="inlineRadio3"
+                      value={1}
+                      checked={values.require_resume === 1}
+                      onChange={() => setValue("require_resume", 1)}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio3">
+                      Yes
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="require_resume"
+                      id="inlineRadio4"
+                      value={2}
+                      checked={values.require_resume === 2}
+                      onChange={() => setValue("require_resume", 2)}
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio4">
+                      No
+                    </label>
+                  </div>
                 </Col>
                 <Form.Label column sm={4}>
                   Request Additional Documents
                 </Form.Label>
-                <Col sm={8} className="mb-2">
-                  <Form.Check
-                    inline
-                    type="switch"
-                    {...register("request_additional_documents")}
-                  />
+                <Col sm={8} className="mb-2 mt-1">
+                  <div className="form-check form-switch form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      name="request_additional_documents"
+                      value={1}
+                      checked={values.request_additional_documents === true}
+                      onChange={() =>
+                        setValue(
+                          "request_additional_documents",
+                          !values.request_additional_documents
+                        )
+                      }
+                    />
+                  </div>
                 </Col>
                 <Col md={12} className="text-center my-2">
-                  <Button type="submit" size="lg">
-                    Preview and Submit
+                  <Button type="submit" size="lg" disabled={loading}>
+                    {loading && <Spinner animation="border" />}{" "}
+                    {loading ? "Publishing" : "Preview and Submit"}
                   </Button>
                 </Col>
               </Row>

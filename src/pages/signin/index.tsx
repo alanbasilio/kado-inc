@@ -31,7 +31,8 @@ const Signin: NextPage = () => {
     API.post("/user/authenticate", data)
       .then((response) => {
         setLoading(false);
-        localStorage.setItem("user", JSON.stringify(response.data.data));
+        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
+        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
         reset();
         router.push("/home");
       })
@@ -56,7 +57,8 @@ const Signin: NextPage = () => {
     })
       .then((response) => {
         setLoading(false);
-        localStorage.setItem("user", JSON.stringify(response.data.data));
+        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
+        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
         reset();
         router.push("/home");
       })
