@@ -44,6 +44,8 @@ type Inputs = {
   expiration_date: Date; //ok
   require_resume: number; //ok
   request_additional_documents: boolean; //ok
+  signature: string;
+  agree: boolean;
 };
 
 const NewProject: NextPage = () => {
@@ -78,31 +80,8 @@ const NewProject: NextPage = () => {
     setValue,
     watch,
     setFocus,
-    formState: { errors },
-  } = useForm<Inputs>({
-    defaultValues: {
-      user_id: 3,
-      profile_id: 3,
-      location_city_id: 1,
-      photo_id: 19,
-      company_organization_id: 1,
-      proposal_title_role: "Web Design",
-      proposal_description:
-        "Review requirements, study industry standards and apply it to design a website.Deliverables: Collaborate with out Marketing team to define marketing strategy and create marketing collaterals Create the end-to-end website along with Google Analytics ",
-      job_skills: "Social Media Marketing,Web Design,User Interface,HTML",
-      paid: true,
-      duration_hours_week: 30,
-      start_date: moment("2021-12-10", "YYYY-MM-DD").toDate(),
-      due_date: moment("2021-12-10", "YYYY-MM-DD").toDate(),
-      project_requeriments:
-        "Familiarity with webiste design best practices, attention to detail and collaborative working style. Website content management software experience preferred ( like Wordpress, Squarespace etc.)",
-      notify_project_following_users: "All,Match location",
-      location_remote: true,
-      expiration_date: moment("2021-12-12", "YYYY-MM-DD").toDate(),
-      require_resume: 1,
-      request_additional_documents: true,
-    },
-  });
+    formState: { errors, isValid },
+  } = useForm<Inputs>();
 
   const values = watch();
 
@@ -248,9 +227,9 @@ const NewProject: NextPage = () => {
       });
   };
 
-  // useEffect(() => {
-  //   console.log(values);
-  // }, [values]);
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   useEffect(() => {
     if (token) {
@@ -597,9 +576,18 @@ const NewProject: NextPage = () => {
                   </div>
                 </Col>
                 <Col md={12} className="text-center my-2">
-                  <Button type="submit" size="lg" disabled={loading}>
-                    {loading && <Spinner animation="border" />}{" "}
-                    {loading ? "Publishing" : "Preview and Submit"}
+                  <Button
+                    size="lg"
+                    onClick={() => {
+                      setStep(3);
+                      // if (isValid) {
+                      //   setStep(3);
+                      // }else{
+                      //   swal('Ops', 'Please fill the required fields', 'warning')
+                      // }
+                    }}
+                  >
+                    Preview and Submit
                   </Button>
                 </Col>
               </Row>
@@ -609,10 +597,229 @@ const NewProject: NextPage = () => {
 
         {step === 3 && (
           <>
-            <p className="text-muted mb-4">Pick a category to get started</p>
+            <p className="text-muted mb-4">Preview details of the project</p>
             <Container className="container-md">
-              <Row>
-                <Col></Col>
+              <Row className="mb-3 bg-white p-2 rounded">
+                <Col md={12}>
+                  <h5>Company Details</h5>
+                  <hr className="my-2" />
+                </Col>
+                <Col md={8}>
+                  <Row className="mb-4 d-flex align-items-center">
+                    {values.icon && (
+                      <Col md={2}>
+                        <Image
+                          src={values.icon}
+                          width={47}
+                          height={47}
+                          alt={"icon"}
+                        />
+                      </Col>
+                    )}
+                    <Col md={9}>
+                      <p>Kado</p>
+                      <h5 className="fw-semibold">
+                        {values.proposal_title_role}
+                      </h5>
+                    </Col>
+                  </Row>
+                  <h5 className="fw-semibold">Project Description</h5>
+                  <div
+                    className="text-muted my-2"
+                    dangerouslySetInnerHTML={{
+                      __html: values.proposal_description,
+                    }}
+                  ></div>
+
+                  <h5 className="fw-semibold">Project Requirements</h5>
+                  <div
+                    className="text-muted my-2"
+                    dangerouslySetInnerHTML={{
+                      __html: values.project_requeriments,
+                    }}
+                  ></div>
+                </Col>
+                <Col md={4}>
+                  <p>Project Posted By:</p>
+                  <Row className="mt-1 mb-4 d-flex align-items-center">
+                    <Col md={3}>
+                      <Image
+                        src={user.image_url_google || user.image}
+                        width={47}
+                        height={47}
+                        alt={"icon"}
+                        className="rounded-circle"
+                      />
+                    </Col>
+
+                    <Col md={9}>
+                      <p className="fw-semibold">
+                        {user.first_name} {user.last_name}
+                      </p>
+                      <p className="fw-semibold small">{user.description}</p>
+                    </Col>
+                  </Row>
+                  <h5 className="fw-semibold">Posted on:</h5>
+                  <p className="text-muted text-small">
+                    {moment().format("LL")}
+                  </p>
+                  <h5 className="fw-semibold">Post Expires:</h5>
+                  <p className="text-muted text-small">
+                    {moment(values.expiration_date).format("LL")}
+                  </p>
+                  <h5 className="fw-semibold">Duration:</h5>
+                  <p className="text-muted text-small">
+                    {values.duration_hours_week} hours/week
+                  </p>
+                  <h5 className="fw-semibold">Start Date:</h5>
+                  <p className="text-muted text-small">
+                    {moment(values.start_date).format("LL")}
+                  </p>
+                  <h5 className="fw-semibold">Due Date:</h5>
+                  <p className="text-muted text-small">
+                    {moment(values.due_date).format("LL")}
+                  </p>
+                  <h5 className="fw-semibold">Compensation:</h5>
+                  <p className="text-muted text-small">
+                    {values.paid ? "Paid" : "Unpaid"}
+                  </p>
+                </Col>
+                <Row className="mt-5">
+                  <Col
+                    md={{
+                      span: 4,
+                      offset: 2,
+                    }}
+                  >
+                    <div className="d-grid gap-2">
+                      <Button
+                        variant="outline-primary"
+                        onClick={() => setStep(2)}
+                      >
+                        Go Back and Edit
+                      </Button>
+                    </div>
+                  </Col>
+                  <Col md={4}>
+                    <div className="d-grid">
+                      <Button variant="primary" onClick={() => setStep(4)}>
+                        Review Terms and Submit
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Row>
+            </Container>
+          </>
+        )}
+
+        {step === 4 && (
+          <>
+            <p className="text-muted mb-4">Review Terms and Post the Project</p>
+            <Container className="container-md">
+              <Row className="mb-3 bg-white p-2 rounded">
+                <h5 className="mb-2">Project Terms of Service Agreement</h5>
+                <hr />
+
+                <Row>
+                  <Col className="align-items-center mt-2">
+                    <div
+                      className="bg-light"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        overflow: "hidden",
+                        borderRadius: 10,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "100%",
+                          height: 300,
+                          overflowY: "scroll",
+                          padding: 20,
+                          fontSize: 14,
+                          lineHeight: "27px",
+                          borderRadius: 20,
+                        }}
+                      >
+                        <h4>Project Posting - Terms and Conditions</h4>
+                        <p className="mt-2">
+                          Thank you for agreeing to post a project and help
+                          bridge the gap between education and meaningful work
+                          experience within your community. Please read and
+                          understand the following terms when posting a project.
+                          By submitting your project you are agreeing to the
+                          following terms between you, (the “Poster”) and the
+                          applicant (the “Project Recipient”). You must agree to
+                          these terms to post a project. Please feel free to
+                          contact us if you have any questions. Payment for
+                          projects If this project is a paid project, you, the
+                          Poster, are responsible for arranging payment with the
+                          Project Recipient. If payments for the project exceed
+                          $600 in any calendar year, the Poster is responsible
+                          for any necessary tax documents such as a W9 or 1099.
+                          Thank you for agreeing to post a project and help
+                          bridge the gap between education and meaningful work
+                          experience within your community. Please read and
+                          understand the following terms when posting a project.
+                          By submitting your project you are agreeing to the
+                          following terms between you, (the “Poster”) and the
+                          applicant (the “Project Recipient”). You must agree to
+                          these terms to post a project. Please feel free to
+                          contact us if you have any questions. Payment for
+                          projects If this project is a paid project, you, the
+                          Poster, are responsible for arranging payment with the
+                          Project Recipient. If payments for the project exceed
+                          $600 in any calendar year, the Poster is responsible
+                          for any necessary tax documents such as a W9 or 1099.
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-muted mt-2">Your Signature</p>
+                  </Col>
+                  <Col md={9} className="mx-10">
+                    <Form.Group className="mb-2">
+                      <Form.Control
+                        className="text-center"
+                        placeholder="Sign your name here"
+                        type="text"
+                        isInvalid={errors.signature ? true : false}
+                        {...register("signature", { required: true })}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Row className="d-flex align-items-center">
+                    <Col md={6}>
+                      <Form>
+                        <Form.Check
+                          type="checkbox"
+                          label="I've read and agree to the terms"
+                          isInvalid={errors.agree ? true : false}
+                          {...register("agree", { required: true })}
+                        />
+                      </Form>
+                    </Col>
+                    <Col md={6}>
+                      <div className="d-grid gap-2">
+                        <Button
+                          variant={
+                            !values.agree || !values.signature
+                              ? "light"
+                              : "primary"
+                          }
+                          type="submit"
+                          disabled={
+                            loading || !values.agree || !values.signature
+                          }
+                        >
+                          {loading && <Spinner animation="border" />}{" "}
+                          {loading ? "Publishing" : "Post Project"}
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                </Row>
               </Row>
             </Container>
           </>
