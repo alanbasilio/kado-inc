@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { NextPage } from "next";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
-import ProgBar from "../progress-bar/progress-bar";
 
 const CardApplications: NextPage = () => {
   return (
