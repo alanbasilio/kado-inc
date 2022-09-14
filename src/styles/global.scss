@@ -7,6 +7,12 @@
 @import "~react-datepicker/src/stylesheets/datepicker";
 @import "~bootstrap/scss/bootstrap";
 
+.background-wave {
+  background: url(/images/wave-background.png) center center no-repeat;
+  background-size: 100% auto;
+  min-height: 457px;
+}
+
 .card {
   cursor: pointer;
   &.active {
