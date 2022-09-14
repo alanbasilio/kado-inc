@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <Row className="align-items-center">
           <Col md={6}>
             <h1>On-Demand Jobs for College Students.</h1>
-            <p>
+            <p className="ff-poppins">
               On-demand marketplace connecting college students to projects,
               <br />
               internships, and full-time roles with great companies.
@@ -25,11 +25,7 @@ const Home: NextPage = () => {
               </Link>
 
               <Link href="/signup/student" passHref>
-                <Button
-                  className="ms-2 p-1 text-primary"
-                  variant="link"
-                  type="submit"
-                >
+                <Button className="ms-2 p-1 " variant="link" type="submit">
                   Find Jobs
                 </Button>
               </Link>
@@ -40,7 +36,7 @@ const Home: NextPage = () => {
               src="/images/home/sapiens.svg"
               width="649"
               height="587"
-              alt="React Bootstrap logo"
+              alt=""
             />
           </Col>
         </Row>
@@ -63,10 +59,10 @@ const Home: NextPage = () => {
         </Col>
       </Row>
 
-      <div className="d-flex background-wave align-items-center">
+      <div className="d-flex background-wave align-items-center ff-poppins">
         <Container>
           <Row>
-            <Col md={4} className="px-md-4">
+            <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow p-3 h-100">
                 <Image
                   alt=""
@@ -75,15 +71,17 @@ const Home: NextPage = () => {
                   src="/images/home/company-icon.svg"
                 />
                 <h5 className="my-1">COMPANIES LOVE THE SPEED</h5>
-                <p>
+                <p className="fs-12">
                   Our algorithms make the smartest matches, but real-life human
                   experts support each student and employer, making the best
                   matches.
                 </p>
-                <a href="#">Learn more</a>
+                <Link href="/signup/company" passHref>
+                  <a className="fw-semibold fs-12">LEARN MORE</a>
+                </Link>
               </div>
             </Col>
-            <Col md={4} className="px-md-4">
+            <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow p-3 h-100">
                 <Image
                   alt=""
@@ -92,14 +90,16 @@ const Home: NextPage = () => {
                   src="/images/home/school-icon.svg"
                 />
                 <h5 className="my-1">SCHOOLS PREPARE THEIR STUDENTS</h5>
-                <p>
+                <p className="fs-12">
                   Launch and manage experiential learning projects using
                   Kado&apos;s powerful marketplace and project management tools.
                 </p>
-                <a href="#">Learn more</a>
+                <Link href="/signup/school" passHref>
+                  <a className="fw-semibold fs-12">LEARN MORE</a>
+                </Link>
               </div>
             </Col>
-            <Col md={4} className="px-md-4">
+            <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow p-3 h-100">
                 <Image
                   alt=""
@@ -108,175 +108,222 @@ const Home: NextPage = () => {
                   src="/images/home/student-icon.svg"
                 />
                 <h5 className="my-1">STUDENTS LOVE THIS MODEL</h5>
-                <p>
+                <p className="fs-12">
                   Complete Kado projects to gain hands-on experience,
                   demonstrate employable skills and network with employers.
                 </p>
-                <a href="#">Learn more</a>
+                <Link href="/signup/student" passHref>
+                  <a className="fw-semibold fs-12">LEARN MORE</a>
+                </Link>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
 
-      <Container>
-        <Row className="mt-5 align-items-center">
-          <Col md={6}>
+      <Container className="mt-10">
+        <Row className="align-items-center">
+          <Col md={6} className="text-center">
             <Image
-              className="img-fluid"
-              src="/images/student-card.png"
-              width="1863"
-              height="1495"
-              alt="React Bootstrap logo"
+              src="/images/home/students.svg"
+              width="622"
+              height="499"
+              alt=""
             />
           </Col>
           <Col md={6}>
-            <h4>Earn Money and Gain Skills</h4>
-            <p>
-              Students use Kado to work on projects, get internships/entry-level
-              roles. They are building skills and real-world experience while
-              earning a degree.
+            <h2 className="fs-35">Discover the best talents</h2>
+            <p className="mt-3 mb-2 fs-20 ff-poppins">
+              Employers apply to students, not the other way around. Flip the
+              script and enjoy the feeling when employers compete for you. It’s
+              a refreshing change.
             </p>
-            {/* <a href="/">Talk With Us &#x2794;</a> */}
+            <Link href="/">
+              <a className="fw-semibold">Talk With Us &#x2794;</a>
+            </Link>
           </Col>
         </Row>
-        <Row className="mt-5 align-items-center">
+        <Row className="mt-10 align-items-center">
           <Col md={6}>
-            <h4>Earn Money and Gain Skills</h4>
-            <p>
+            <h2 className="fs-35">Earn Money and Gain Skills</h2>
+            <p className="mt-3 mb-2 fs-20 ff-poppins">
               Students use Kado to work on projects, get internships/entry-level
               roles. They are building skills and real-world experience while
               earning a degree.
             </p>
-            {/* <a href="/">Talk With Us &#x2794;</a> */}
+            <Link href="/">
+              <a className="fw-semibold">Talk With Us &#x2794;</a>
+            </Link>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="text-center">
             <Image
-              className="img-fluid"
               src="/images/dashboard-example.png"
               width="997"
               height="759"
-              alt="React Bootstrap logo"
+              alt=""
             />
           </Col>
         </Row>
-        <Row className="mt-5 align-items-center">
-          <Col md={6}>
+        <Row className="mt-10 align-items-center">
+          <Col md={6} className="text-center">
             <Image
-              className="img-fluid"
-              src="/images/integrated-payment.png"
-              width="1863"
-              height="1495"
-              alt="React Bootstrap logo"
+              src="/images/home/integrations.svg"
+              width="524"
+              height="373"
+              alt=""
             />
           </Col>
           <Col md={6}>
-            <h4>Integrated payment and 1099 filing.</h4>
-            <p>
+            <h2 className="fs-35">Integrated payment and 1099 filing.</h2>
+            <p className="mt-3 mb-2 fs-20 ff-poppins">
               Students use our platform to track their time and get paid. At the
               end of the year, we file 1099s with the IRS and mail the student a
               copy so you do not have to.
             </p>
-            {/* <a href="/">Talk With Us &#x2794;</a> */}
-          </Col>
-        </Row>
-        <Row className="my-5">
-          <Col className="text-center" md={12}>
-            <h1>Get started with Kado</h1>
-            <Button
-              className="p-1 mt-3"
-              variant="primary"
-              type="submit"
-              size="lg"
-            >
-              Register now
-            </Button>
+            <Link href="/">
+              <a className="fw-semibold">Talk With Us &#x2794;</a>
+            </Link>
           </Col>
         </Row>
       </Container>
 
-      <Row className="my-5 d-none">
-        <Col>
-          <Image
-            className="img-fluid"
-            src="/images/footer-logo.png"
-            width="127"
-            height="35"
-            alt="React Bootstrap logo"
-          />
-          <p>
-            <span style={{ fontSize: "14px" }}>
-              © 2020 Rocket Global.
-              <br />
+      <Container fluid className="mt-10 py-10 bg-light">
+        <Row>
+          <Col className="text-center" md={12}>
+            <h2 className="fs-44">Get started with Kado</h2>
+            <Link href="/signup" passHref>
+              <Button className="mt-3" variant="primary" type="submit">
+                Register now
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container>
+        <Row className="my-5">
+          <Col
+            md={2}
+            xs={12}
+            className="my-2 my-md-0 text-center text-md-start"
+          >
+            <Image
+              src="/images/footer-logo.png"
+              width="127"
+              height="35"
+              alt=""
+            />
+            <p className="fs-14 text-muted">
+              © 2020 Rocket Global. <br />
               All rights reserved.
-            </span>
-          </p>
-        </Col>
-        <Col className="offset-1">
-          <h5>About</h5>
-          <p>{/* <a href="/">Our Story</a> */}</p>
-          <p>{/* <a href="/">Carreers</a> */}</p>
-          <p>{/* <a href="/">Contact us</a> */}</p>
-        </Col>
-        <Col>
-          <h5>Services</h5>
-          <p>{/* <a href="/">For Students</a> */}</p>
-          <p>{/* <a href="/">For Companies</a> */}</p>
-          <p>{/* <a href="/">For Institutes</a> */}</p>
-        </Col>
-        <Col>
-          <h5>Product</h5>
-          <p>{/* <a href="/">Discover Projects</a> */}</p>
-          <p>{/* <a href="/">Discover Students</a> */}</p>
-          <p>{/* <a href="/">FAQ</a> */}</p>
-        </Col>
-        <Col>
-          <h5>Legal</h5>
-          <p>{/* <a href="/">Terms of Service</a> */}</p>
-          <p>{/* <a href="/">Privacy Policy</a> */}</p>
-        </Col>
-        <Col>
-          <h5>Get Social</h5>
-          <Row>
-            <Col md={3}>
-              <Image
-                className="img-fluid"
-                src="/images/footer-linkedin.png"
-                width="24"
-                height="26"
-                alt="React Bootstrap logo"
-              />
-            </Col>
-            <Col md={3}>
-              <Image
-                className="img-fluid"
-                src="/images/footer-facebook.png"
-                width="24"
-                height="26"
-                alt="React Bootstrap logo"
-              />
-            </Col>
-            <Col md={3}>
-              <Image
-                className="img-fluid"
-                src="/images/footer-instagram.png"
-                width="24"
-                height="26"
-                alt="React Bootstrap logo"
-              />
-            </Col>
-            <Col md={3}>
-              <Image
-                className="img-fluid"
-                src="/images/footer-twitter.png"
-                width="24"
-                height="26"
-                alt="React Bootstrap logo"
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+            </p>
+          </Col>
+          <Col md={2} xs={6} className="my-2 my-md-0">
+            <p className="fs-14 fw-semibold">About</p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Our Story</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Carreers</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Contact us</a>
+              </Link>
+            </p>
+          </Col>
+          <Col md={2} xs={6} className="my-2 my-md-0">
+            <p className="fs-14 fw-semibold">Services</p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">For Students</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">For Companies</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">For Institutes</a>
+              </Link>
+            </p>
+          </Col>
+          <Col md={2} xs={6} className="my-2 my-md-0">
+            <p className="fs-14 fw-semibold">Product</p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Discover Projects</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Discover Students</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">FAQ</a>
+              </Link>
+            </p>
+          </Col>
+          <Col md={2} xs={6} className="my-2 my-md-0">
+            <p className="fs-14 fw-semibold">Legal</p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Terms of Service</a>
+              </Link>
+            </p>
+            <p>
+              <Link href="/" passHref>
+                <a className="text-muted fs-14">Privacy Policy</a>
+              </Link>
+            </p>
+          </Col>
+          <Col md={2} xs={12} className="my-2 my-md-0">
+            <p className="fs-14 fw-semibold mb-3 mb-md-1">Get Social</p>
+            <Row>
+              <Col className="text-center">
+                <Image
+                  src="/images/footer-linkedin.png"
+                  width="24"
+                  height="26"
+                  alt=""
+                />
+              </Col>
+              <Col className="text-center">
+                <Image
+                  src="/images/footer-facebook.png"
+                  width="24"
+                  height="26"
+                  alt=""
+                />
+              </Col>
+              <Col className="text-center">
+                <Image
+                  src="/images/footer-instagram.png"
+                  width="24"
+                  height="26"
+                  alt=""
+                />
+              </Col>
+              <Col className="text-center">
+                <Image
+                  src="/images/footer-twitter.png"
+                  width="24"
+                  height="26"
+                  alt=""
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </Layout>
   );
 };

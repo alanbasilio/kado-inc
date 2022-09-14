@@ -13,7 +13,7 @@ const Signup: NextPage = () => {
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={8} className="text-center">
-          <h2 className="mb-2 fs-2">How do you plan on using Kado?</h2>
+          <h2 className="mb-2">How do you plan on using Kado?</h2>
           <p className="mb-5 text-muted">
             We’ll streamline your experience accordingly
           </p>

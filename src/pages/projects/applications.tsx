@@ -12,7 +12,7 @@ const Signup: NextPage = () => {
     <Layout>
       <Row className="d-flex justify-content-left">
         <Col md={12}>
-          <h2 className="mt-5 fs-2">Projects</h2>
+          <h2 className="mt-5">Projects</h2>
         </Col>
       </Row>
 
