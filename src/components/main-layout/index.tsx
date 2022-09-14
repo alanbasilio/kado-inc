@@ -62,7 +62,7 @@ const Layout = (props) => {
           >
             {props.home && (
               <>
-                <NavDropdown title="Services" className="ms-2">
+                <NavDropdown title="Services" className="ms-2 my-2 my-md-0">
                   <NavDropdown.Item href="#for-company">
                     For Company
                   </NavDropdown.Item>
@@ -74,22 +74,22 @@ const Layout = (props) => {
                     For Student
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#how-it-works" className="ms-2">
+                <Nav.Link href="#how-it-works" className="ms-2 my-2 my-md-0">
                   How it works
                 </Nav.Link>
-                <Nav.Link href="#about" className="ms-2">
+                <Nav.Link href="#about" className="ms-2 my-2 my-md-0">
                   About
                 </Nav.Link>
               </>
             )}
             {user ? (
               <>
-                <Navbar.Text className="ms-2">{`Welcome, ${user.first_name}`}</Navbar.Text>
+                <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${user.first_name}`}</Navbar.Text>
                 <Button
                   size="sm"
                   variant="primary"
                   onClick={() => logout()}
-                  className="ms-2"
+                  className="ms-2 my-2 my-md-0"
                 >
                   Logout
                 </Button>
@@ -97,27 +97,35 @@ const Layout = (props) => {
             ) : (
               <>
                 {props.home && (
-                  <Link href="/signin" passHref>
-                    <Nav.Link className="ms-2">Signin</Nav.Link>
-                  </Link>
-                )}
-                {props.home && (
-                  <Link href="/signup" passHref>
-                    <Button size="sm" variant="primary" className="ms-2">
-                      Signup
-                    </Button>
-                  </Link>
+                  <>
+                    <Link href="/signin" passHref>
+                      <Nav.Link className="ms-2 my-2 my-md-0">Signin</Nav.Link>
+                    </Link>
+                    <Link href="/signup" passHref>
+                      <Button size="sm" variant="primary" className="ms-2">
+                        Signup
+                      </Button>
+                    </Link>
+                  </>
                 )}
                 {props.signin && !props.home && (
                   <Link href="/signin" passHref>
-                    <Button size="sm" variant="primary" className="ms-2">
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      className="ms-2 my-2 my-md-0"
+                    >
                       Signin
                     </Button>
                   </Link>
                 )}
                 {props.signup && !props.home && (
                   <Link href="/signup" passHref>
-                    <Button size="sm" variant="primary" className="ms-2">
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      className="ms-2 my-2 my-md-0"
+                    >
                       Signup
                     </Button>
                   </Link>

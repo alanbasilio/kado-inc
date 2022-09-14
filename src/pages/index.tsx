@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { Button, Card, Col, Row, Container } from "react-bootstrap";
 import Image from "next/image";
 import Layout from "../components/main-layout";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -16,21 +17,25 @@ const Home: NextPage = () => {
               internships, and full-time roles with great companies.
             </p>
 
-            <div className="mt-10">
-              <Button variant="primary" type="submit">
-                Hire Talent
-              </Button>
+            <div className="mt-3 mt-md-10">
+              <Link href="/signup/company" passHref>
+                <Button variant="primary" type="submit">
+                  Hire Talent
+                </Button>
+              </Link>
 
-              <Button
-                className="ms-2 p-1 text-primary"
-                variant="link"
-                type="submit"
-              >
-                Find Jobs
-              </Button>
+              <Link href="/signup/student" passHref>
+                <Button
+                  className="ms-2 p-1 text-primary"
+                  variant="link"
+                  type="submit"
+                >
+                  Find Jobs
+                </Button>
+              </Link>
             </div>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="d-flex align-items-center">
             <Image
               src="/images/home/sapiens.svg"
               width="649"
@@ -45,7 +50,7 @@ const Home: NextPage = () => {
               span: 4,
               offset: 4,
             }}
-            className="my-7"
+            className="my-2 my-md-7"
           >
             <hr className="text-primary" />
           </Col>
@@ -61,13 +66,13 @@ const Home: NextPage = () => {
       <div className="d-flex background-wave align-items-center">
         <Container>
           <Row>
-            <Col md={4}>
-              <Card className="p-2">
-                <Card.Img
-                  className="rounded-circle"
+            <Col md={4} className="px-md-4">
+              <div className="bg-white rounded shadow p-3 h-100">
+                <Image
+                  alt=""
                   width={67}
-                  height={67}
-                  src="/images/companies.png"
+                  height={66}
+                  src="/images/home/company-icon.svg"
                 />
                 <h5 className="my-1">COMPANIES LOVE THE SPEED</h5>
                 <p>
@@ -75,40 +80,40 @@ const Home: NextPage = () => {
                   experts support each student and employer, making the best
                   matches.
                 </p>
-                {/* <a>LEARN MORE</a> */}
-              </Card>
+                <a href="#">Learn more</a>
+              </div>
             </Col>
-            <Col md={4}>
-              <Card className="p-2">
-                <Card.Img
-                  className="rounded-circle"
+            <Col md={4} className="px-md-4">
+              <div className="bg-white rounded shadow p-3 h-100">
+                <Image
+                  alt=""
                   width={67}
-                  height={67}
-                  src="/images/schools.png"
+                  height={66}
+                  src="/images/home/school-icon.svg"
                 />
                 <h5 className="my-1">SCHOOLS PREPARE THEIR STUDENTS</h5>
                 <p>
                   Launch and manage experiential learning projects using
                   Kado&apos;s powerful marketplace and project management tools.
                 </p>
-                {/* <a>LEARN MORE</a> */}
-              </Card>
+                <a href="#">Learn more</a>
+              </div>
             </Col>
-            <Col md={4}>
-              <Card className="p-2">
-                <Card.Img
-                  className="rounded-circle"
+            <Col md={4} className="px-md-4">
+              <div className="bg-white rounded shadow p-3 h-100">
+                <Image
+                  alt=""
                   width={67}
-                  height={67}
-                  src="/images/students.png"
+                  height={66}
+                  src="/images/home/student-icon.svg"
                 />
                 <h5 className="my-1">STUDENTS LOVE THIS MODEL</h5>
                 <p>
                   Complete Kado projects to gain hands-on experience,
                   demonstrate employable skills and network with employers.
                 </p>
-                {/* <a>LEARN MORE</a> */}
-              </Card>
+                <a href="#">Learn more</a>
+              </div>
             </Col>
           </Row>
         </Container>
