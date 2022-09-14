@@ -53,7 +53,7 @@ const School: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h2 className="mb-2">Getting started</h2>

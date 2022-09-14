@@ -5,7 +5,7 @@ import Layout from "../components/main-layout";
 
 const Home: NextPage = () => {
   return (
-    <Layout fluid>
+    <Layout fluid home>
       <Container>
         <Row className="align-items-center">
           <Col md={6}>
@@ -190,7 +190,7 @@ const Home: NextPage = () => {
         </Row>
       </Container>
 
-      <Row className="my-5">
+      <Row className="my-5 d-none">
         <Col>
           <Image
             className="img-fluid"

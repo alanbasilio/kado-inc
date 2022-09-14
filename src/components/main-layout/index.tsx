@@ -1,13 +1,18 @@
 import Image from "next/image";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import styles from "./main-layout.module.scss";
 import Link from "next/link";
-import { Col, Row } from "react-bootstrap";
+import {
+  Col,
+  Row,
+  NavDropdown,
+  Container,
+  Nav,
+  Navbar,
+  Button,
+} from "react-bootstrap";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+
+import styles from "./main-layout.module.scss";
 
 const Layout = (props) => {
   const [user, setUser] = useState(null);
@@ -28,7 +33,11 @@ const Layout = (props) => {
   };
 
   return (
-    <div className={`${styles.layout} d-flex flex-column pt-8`}>
+    <div
+      className={`${
+        !props.home && styles.defaultBG
+      } d-flex flex-column pt-8 min-vh-100`}
+    >
       <Head>
         <title>Kado Inc</title>
         <meta name="description" content="Kado Inc" />
@@ -51,25 +60,68 @@ const Layout = (props) => {
             id="basic-navbar-nav"
             className="justify-content-end"
           >
+            {props.home && (
+              <>
+                <NavDropdown title="Services" className="ms-2">
+                  <NavDropdown.Item href="#for-company">
+                    For Company
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item href="#for-school">
+                    For School
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#for-student">
+                    For Student
+                  </NavDropdown.Item>
+                </NavDropdown>
+                <Nav.Link href="#how-it-works" className="ms-2">
+                  How it works
+                </Nav.Link>
+                <Nav.Link href="#about" className="ms-2">
+                  About
+                </Nav.Link>
+              </>
+            )}
             {user ? (
               <>
-                <Navbar.Text className="me-1">
-                  {`Welcome, ${user.first_name}`}
-                </Navbar.Text>
-                <Button variant="outline-primary" onClick={() => logout()}>
+                <Navbar.Text className="ms-2">{`Welcome, ${user.first_name}`}</Navbar.Text>
+                <Button
+                  size="sm"
+                  variant="primary"
+                  onClick={() => logout()}
+                  className="ms-2"
+                >
                   Logout
                 </Button>
               </>
             ) : (
               <>
-                <Navbar.Text className="me-1">
-                  {props.signin ? "New to Kado?" : "Have an account?"}
-                </Navbar.Text>
-                <Link href={props.signin ? "/signup" : "/signin"} passHref>
-                  <Button variant="outline-primary">
-                    {props.signin ? "Create an account" : "Log in"}
-                  </Button>
-                </Link>
+                {props.home && (
+                  <Link href="/signin" passHref>
+                    <Nav.Link className="ms-2">Signin</Nav.Link>
+                  </Link>
+                )}
+                {props.home && (
+                  <Link href="/signup" passHref>
+                    <Button size="sm" variant="primary" className="ms-2">
+                      Signup
+                    </Button>
+                  </Link>
+                )}
+                {props.signin && !props.home && (
+                  <Link href="/signin" passHref>
+                    <Button size="sm" variant="primary" className="ms-2">
+                      Signin
+                    </Button>
+                  </Link>
+                )}
+                {props.signup && !props.home && (
+                  <Link href="/signup" passHref>
+                    <Button size="sm" variant="primary" className="ms-2">
+                      Signup
+                    </Button>
+                  </Link>
+                )}
               </>
             )}
           </Navbar.Collapse>
@@ -82,40 +134,42 @@ const Layout = (props) => {
       >
         {props.children}
       </Container>
-      <Container
-        as={"footer"}
-        className="d-flex flex-column justify-content-end align-items-center py-2"
-      >
-        <Container>
-          <Row>
-            <Col className="text-center d-md-flex justify-content-between align-items-center">
-              <p className="m-0">© 2022 Kado. All rights reserved.</p>
-              <Nav className="d-inline-flex">
-                <Nav.Item>
-                  <Link href="/" passHref>
-                    <Nav.Link>Terms</Nav.Link>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link href="/" passHref>
-                    <Nav.Link>Privacy</Nav.Link>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link href="/" passHref>
-                    <Nav.Link>Security</Nav.Link>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link href="/" passHref>
-                    <Nav.Link>Get in touch</Nav.Link>
-                  </Link>
-                </Nav.Item>
-              </Nav>
-            </Col>
-          </Row>
+      {!props.home && (
+        <Container
+          as={"footer"}
+          className="d-flex flex-column justify-content-end align-items-center py-2"
+        >
+          <Container>
+            <Row>
+              <Col className="text-center d-md-flex justify-content-between align-items-center">
+                <p className="m-0">© 2022 Kado. All rights reserved.</p>
+                <Nav className="d-inline-flex">
+                  <Nav.Item>
+                    <Link href="/" passHref>
+                      <Nav.Link>Terms</Nav.Link>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link href="/" passHref>
+                      <Nav.Link>Privacy</Nav.Link>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link href="/" passHref>
+                      <Nav.Link>Security</Nav.Link>
+                    </Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Link href="/" passHref>
+                      <Nav.Link>Get in touch</Nav.Link>
+                    </Link>
+                  </Nav.Item>
+                </Nav>
+              </Col>
+            </Row>
+          </Container>
         </Container>
-      </Container>
+      )}
     </div>
   );
 };

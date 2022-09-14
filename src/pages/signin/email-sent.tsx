@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const EmailSent: NextPage = () => {
   return (
-    <Layout>
+    <Layout signup>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <div className="mb-2">

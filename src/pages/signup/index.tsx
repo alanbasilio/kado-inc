@@ -10,7 +10,7 @@ import Layout from "../../components/main-layout";
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         <Col md={8} className="text-center">
           <h2 className="mb-2 fs-2">How do you plan on using Kado?</h2>

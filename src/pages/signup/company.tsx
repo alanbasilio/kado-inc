@@ -53,7 +53,7 @@ const Company: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout signin>
       <Row
         className="justify-content-center"
         as="form"

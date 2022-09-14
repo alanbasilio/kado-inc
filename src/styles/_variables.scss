@@ -646,8 +646,8 @@ $hr-height: null !default; // Deprecated in v5.2.0
 // fusv-enable
 
 $hr-border-color: null !default; // Allows for inherited colors
-$hr-border-width: $border-width !default;
-$hr-opacity: 0.25 !default;
+$hr-border-width: 0.3rem !default;
+$hr-opacity: 1 !default;
 
 $legend-margin-bottom: 0.5rem !default;
 $legend-font-size: 1.5rem !default;
@@ -1165,7 +1165,7 @@ $dropdown-min-width: 10rem !default;
 $dropdown-padding-x: 0 !default;
 $dropdown-padding-y: 0.5rem !default;
 $dropdown-spacer: 0.125rem !default;
-$dropdown-font-size: $font-size-base !default;
+$dropdown-font-size: $font-size-sm !default;
 $dropdown-color: $body-color !default;
 $dropdown-bg: $white !default;
 $dropdown-border-color: var(--#{$prefix}border-color-translucent) !default;

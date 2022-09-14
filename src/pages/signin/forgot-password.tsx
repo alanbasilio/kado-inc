@@ -40,7 +40,7 @@ const ForgotPassword: NextPage = () => {
   };
 
   return (
-    <Layout signin>
+    <Layout signup>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h2 className="mb-2">Forgot Password</h2>

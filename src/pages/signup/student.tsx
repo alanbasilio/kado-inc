@@ -152,7 +152,7 @@ const Student: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         {step === 1 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
