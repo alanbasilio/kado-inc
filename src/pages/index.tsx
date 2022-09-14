@@ -75,7 +75,7 @@ const Home: NextPage = () => {
                   experts support each student and employer, making the best
                   matches.
                 </p>
-                <a href="/#">LEARN MORE</a>
+                {/* <a>LEARN MORE</a> */}
               </Card>
             </Col>
             <Col md={4}>
@@ -88,10 +88,10 @@ const Home: NextPage = () => {
                 />
                 <h5 className="my-1">SCHOOLS PREPARE THEIR STUDENTS</h5>
                 <p>
-                  Launch and manage experiential learning projects using Kado's
-                  powerful marketplace and project management tools.
+                  Launch and manage experiential learning projects using
+                  Kado&apos;s powerful marketplace and project management tools.
                 </p>
-                <a href="/#">LEARN MORE</a>
+                {/* <a>LEARN MORE</a> */}
               </Card>
             </Col>
             <Col md={4}>
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
                   Complete Kado projects to gain hands-on experience,
                   demonstrate employable skills and network with employers.
                 </p>
-                <a href="/#">LEARN MORE</a>
+                {/* <a>LEARN MORE</a> */}
               </Card>
             </Col>
           </Row>
@@ -132,7 +132,7 @@ const Home: NextPage = () => {
               roles. They are building skills and real-world experience while
               earning a degree.
             </p>
-            <a href="/">Talk With Us &#x2794;</a>
+            {/* <a href="/">Talk With Us &#x2794;</a> */}
           </Col>
         </Row>
         <Row className="mt-5 align-items-center">
@@ -143,7 +143,7 @@ const Home: NextPage = () => {
               roles. They are building skills and real-world experience while
               earning a degree.
             </p>
-            <a href="/">Talk With Us &#x2794;</a>
+            {/* <a href="/">Talk With Us &#x2794;</a> */}
           </Col>
           <Col md={6}>
             <Image
@@ -172,7 +172,7 @@ const Home: NextPage = () => {
               end of the year, we file 1099s with the IRS and mail the student a
               copy so you do not have to.
             </p>
-            <a href="/">Talk With Us &#x2794;</a>
+            {/* <a href="/">Talk With Us &#x2794;</a> */}
           </Col>
         </Row>
         <Row className="my-5">
@@ -209,48 +209,26 @@ const Home: NextPage = () => {
         </Col>
         <Col className="offset-1">
           <h5>About</h5>
-          <p>
-            <a href="/">Our Story</a>
-          </p>
-          <p>
-            <a href="/">Carreers</a>
-          </p>
-          <p>
-            <a href="/">Contact us</a>
-          </p>
+          <p>{/* <a href="/">Our Story</a> */}</p>
+          <p>{/* <a href="/">Carreers</a> */}</p>
+          <p>{/* <a href="/">Contact us</a> */}</p>
         </Col>
         <Col>
           <h5>Services</h5>
-          <p>
-            <a href="/">For Students</a>
-          </p>
-          <p>
-            <a href="/">For Companies</a>
-          </p>
-          <p>
-            <a href="/">For Institutes</a>
-          </p>
+          <p>{/* <a href="/">For Students</a> */}</p>
+          <p>{/* <a href="/">For Companies</a> */}</p>
+          <p>{/* <a href="/">For Institutes</a> */}</p>
         </Col>
         <Col>
           <h5>Product</h5>
-          <p>
-            <a href="/">Discover Projects</a>
-          </p>
-          <p>
-            <a href="/">Discover Students</a>
-          </p>
-          <p>
-            <a href="/">FAQ</a>
-          </p>
+          <p>{/* <a href="/">Discover Projects</a> */}</p>
+          <p>{/* <a href="/">Discover Students</a> */}</p>
+          <p>{/* <a href="/">FAQ</a> */}</p>
         </Col>
         <Col>
           <h5>Legal</h5>
-          <p>
-            <a href="/">Terms of Service</a>
-          </p>
-          <p>
-            <a href="/">Privacy Policy</a>
-          </p>
+          <p>{/* <a href="/">Terms of Service</a> */}</p>
+          <p>{/* <a href="/">Privacy Policy</a> */}</p>
         </Col>
         <Col>
           <h5>Get Social</h5>
