@@ -156,7 +156,7 @@ const Student: NextPage = () => {
       <Row className="justify-content-center">
         {step === 1 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Getting Started</h1>
+            <h2 className="mb-2">Getting Started</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
             <div className="mb-2 d-flex justify-content-center">
               <GoogleLogin

@@ -11,7 +11,7 @@ const MagicLink: NextPage = () => {
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Sign in</h1>
+          <h2 className="mb-2">Sign in</h2>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
           <Link href="#" passHref>
             <a className="mb-2 d-block">

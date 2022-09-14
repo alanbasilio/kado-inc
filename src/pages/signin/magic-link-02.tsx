@@ -9,7 +9,7 @@ const MagicLink: NextPage = () => {
     <Layout signin>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Check your inbox</h1>
+          <h2 className="mb-2">Check your inbox</h2>
           <p className="mb-2 text-muted">
             We have sent a magic link to <br />
             <span className="text-dark">bill.sanders@example.com</span>.

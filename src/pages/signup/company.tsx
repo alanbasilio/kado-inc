@@ -61,7 +61,7 @@ const Company: NextPage = () => {
       >
         {isWaitingList && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Join Waitlist</h1>
+            <h2 className="mb-2">Join Waitlist</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
             <Row>
               <Col md={6}>
@@ -191,7 +191,7 @@ const Company: NextPage = () => {
         )}
         {!isWaitingList && step === 3 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Company Info</h1>
+            <h2 className="mb-2">Company Info</h2>
             <p className="text-muted mb-2">Add company details</p>
 
             <InputGroup className="mb-2">
