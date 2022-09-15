@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, Card } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 import Layout from "../../components/main-layout";
 

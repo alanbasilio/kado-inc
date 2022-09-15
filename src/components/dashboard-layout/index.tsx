@@ -13,6 +13,7 @@ import {
   InputGroup,
   Overlay,
   Popover,
+  Breadcrumb,
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
 import {
@@ -29,7 +30,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = (props) => {
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -94,7 +95,7 @@ const DashboardLayout = ({ children }) => {
   return (
     user && (
       <Container fluid>
-        <Row className="vh-100  ">
+        <Row className="vh-100">
           <Col lg={2} md={3} sm={6} xs={12} className="px-4 py-3 bg-white">
             <Link href="/home" passHref>
               <a>
@@ -185,7 +186,27 @@ const DashboardLayout = ({ children }) => {
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
-            <main className="p-2">{children}</main>
+            <Container className="py-2">
+              {props.breadcrumb && props.step && (
+                <Breadcrumb className="mb-2">
+                  {props.breadcrumb.map((item, index) => (
+                    <Breadcrumb.Item
+                      key={index}
+                      active={props.step === index + 1}
+                      onClick={() => props.setStep(index + 1)}
+                    >
+                      {item}
+                    </Breadcrumb.Item>
+                  ))}
+                </Breadcrumb>
+              )}
+
+              {props.title && <h3 className="fw-semibold">{props.title}</h3>}
+              {props.subtitle && (
+                <p className="text-muted mb-4">{props.subtitle}</p>
+              )}
+              {props.children}
+            </Container>
           </Col>
         </Row>
       </Container>

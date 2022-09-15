@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
-import { Col, Row } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 
-import Layout from "../../components/main-layout";
 import CardApplications from "../../components/card-applications";
+import Layout from "../../components/main-layout";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");

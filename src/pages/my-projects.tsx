@@ -1,23 +1,50 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, Card } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 
-import Layout from "../components/dashboard-layout";
-import ProgBar from "../components/progress-bar/progress-bar";
 import CardProject from "../components/card-project";
 import CardProjectProgbar from "../components/card-project-progbar";
+import Layout from "../components/dashboard-layout";
+import API from "../services";
+import swal from "sweetalert";
 
 const MyProjects: NextPage = () => {
-  const [active, setActive] = useState("");
+  const [loading, setLoading] = useState(false);
+  let token;
+
+  const getProjects = () => {
+    setLoading(true);
+    API.get("/categories", {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
+      .then((response) => {
+        setLoading(false);
+        console.log(response);
+      })
+      .catch((err) => {
+        setLoading(false);
+        swal(
+          "Error",
+          err.response?.data?.message
+            ? err.response?.data?.message
+            : "An error occured: " + err,
+          "error"
+        );
+      });
+  };
+
+  useEffect(() => {
+    token = JSON.parse(localStorage.getItem("token_kado"));
+    if (token) {
+      getProjects();
+    }
+  }, []);
+
   return (
-    <Layout>
+    <Layout title="My projects">
       <Row className="mt-2">
-        <Col md={12} className="mb-2">
-          <h3 className="mb-4">My Projects</h3>
-        </Col>
         <Col md={4} className="mb-2">
           <h5 className="mb-2 fw-semibold">TODO</h5>
           <CardProject />

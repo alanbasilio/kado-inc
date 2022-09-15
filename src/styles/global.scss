@@ -103,3 +103,7 @@
 .navbar {
   box-shadow: 0px 1px 0px rgba(87, 136, 242, 0.15);
 }
+
+.breadcrumb-item > a {
+  color: $body-color;
+}
