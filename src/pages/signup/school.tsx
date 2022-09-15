@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -138,7 +138,8 @@ const School: NextPage = () => {
 
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Submit
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Submit"}
               </Button>
             </div>
           </Form>

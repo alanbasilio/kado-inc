@@ -3,6 +3,9 @@ import { Button, Card, Col, Row, Container } from "react-bootstrap";
 import Image from "next/image";
 import Layout from "../components/main-layout";
 import Link from "next/link";
+import { TbBrandLinkedin, TbBrandTwitter } from "react-icons/tb";
+import { AiOutlineFacebook } from "react-icons/ai";
+import { FaInstagram } from "react-icons/fa";
 
 const Home: NextPage = () => {
   return (
@@ -19,13 +22,11 @@ const Home: NextPage = () => {
 
             <div className="mt-3 mt-md-10">
               <Link href="/signup/company" passHref>
-                <Button variant="primary" type="submit">
-                  Hire Talent
-                </Button>
+                <Button variant="primary">Hire Talent</Button>
               </Link>
 
               <Link href="/signup/student" passHref>
-                <Button className="ms-2 p-1 " variant="link" type="submit">
+                <Button className="ms-2 p-1 " variant="link">
                   Find Jobs
                 </Button>
               </Link>
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
         <Container>
           <Row>
             <Col md={4} className="px-md-3">
-              <div className="bg-white rounded shadow p-3 h-100">
+              <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
                   alt=""
                   width={67}
@@ -82,7 +83,7 @@ const Home: NextPage = () => {
               </div>
             </Col>
             <Col md={4} className="px-md-3">
-              <div className="bg-white rounded shadow p-3 h-100">
+              <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
                   alt=""
                   width={67}
@@ -100,7 +101,7 @@ const Home: NextPage = () => {
               </div>
             </Col>
             <Col md={4} className="px-md-3">
-              <div className="bg-white rounded shadow p-3 h-100">
+              <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
                   alt=""
                   width={67}
@@ -157,7 +158,7 @@ const Home: NextPage = () => {
           </Col>
           <Col md={6} className="text-center">
             <Image
-              src="/images/dashboard-example.png"
+              src="/images/home/dashboard-example.png"
               width="997"
               height="759"
               alt=""
@@ -192,7 +193,7 @@ const Home: NextPage = () => {
           <Col className="text-center" md={12}>
             <h2 className="fs-44">Get started with Kado</h2>
             <Link href="/signup" passHref>
-              <Button className="mt-3" variant="primary" type="submit">
+              <Button className="mt-3" variant="primary">
                 Register now
               </Button>
             </Link>
@@ -207,12 +208,7 @@ const Home: NextPage = () => {
             xs={12}
             className="my-2 my-md-0 text-center text-md-start"
           >
-            <Image
-              src="/images/footer-logo.png"
-              width="127"
-              height="35"
-              alt=""
-            />
+            <Image src="/images/logo.svg" width="127" height="35" alt="" />
             <p className="fs-14 text-muted">
               © 2020 Rocket Global. <br />
               All rights reserved.
@@ -287,38 +283,18 @@ const Home: NextPage = () => {
           </Col>
           <Col md={2} xs={12} className="my-2 my-md-0">
             <p className="fs-14 fw-semibold mb-3 mb-md-1">Get Social</p>
-            <Row>
-              <Col className="text-center">
-                <Image
-                  src="/images/footer-linkedin.png"
-                  width="24"
-                  height="26"
-                  alt=""
-                />
+            <Row className="text-center text-md-start fs-28">
+              <Col>
+                <TbBrandLinkedin />
               </Col>
-              <Col className="text-center">
-                <Image
-                  src="/images/footer-facebook.png"
-                  width="24"
-                  height="26"
-                  alt=""
-                />
+              <Col>
+                <AiOutlineFacebook />
               </Col>
-              <Col className="text-center">
-                <Image
-                  src="/images/footer-instagram.png"
-                  width="24"
-                  height="26"
-                  alt=""
-                />
+              <Col>
+                <FaInstagram />
               </Col>
-              <Col className="text-center">
-                <Image
-                  src="/images/footer-twitter.png"
-                  width="24"
-                  height="26"
-                  alt=""
-                />
+              <Col>
+                <TbBrandTwitter />
               </Col>
             </Row>
           </Col>

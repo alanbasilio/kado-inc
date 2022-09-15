@@ -7,6 +7,7 @@ import {
   InputGroup,
   Card,
   Container,
+  Spinner,
 } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -240,7 +241,8 @@ const Student: NextPage = () => {
               </Form.Group>
               <div className="d-grid gap-2">
                 <Button variant="primary" type="submit" disabled={loading}>
-                  Signup
+                  {loading && <Spinner animation="border" />}{" "}
+                  {loading ? "Loading..." : "Signup"}
                 </Button>
               </div>
             </Form>
@@ -306,7 +308,8 @@ const Student: NextPage = () => {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-2">
                     <Button variant="primary" type="submit">
-                      Next
+                      {loading && <Spinner animation="border" />}{" "}
+                      {loading ? "Loading..." : "Next"}
                     </Button>
                     <a className="text-muted" onClick={() => setStep(4)}>
                       Skip

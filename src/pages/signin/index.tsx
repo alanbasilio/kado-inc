@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -134,7 +134,8 @@ const Signin: NextPage = () => {
             </p>
             <div className="d-grid gap-2 my-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Sign in
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Sign in"}
               </Button>
             </div>
             <Form.Text className="text-center">

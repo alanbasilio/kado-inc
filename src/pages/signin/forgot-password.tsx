@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -62,7 +62,8 @@ const ForgotPassword: NextPage = () => {
             </InputGroup>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Send email instructions
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Send email instructions"}
               </Button>
             </div>
           </Form>

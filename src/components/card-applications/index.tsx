@@ -42,14 +42,14 @@ const CardApplications: NextPage = () => {
         <Row className="mt-2 mb-2">
           <Col md={6}>
             <div className="rounded-40 d-grid gap-2">
-              <Button variant="outline-primary" type="submit" size="sm">
+              <Button variant="outline-primary" size="sm">
                 Approve
               </Button>
             </div>
           </Col>
           <Col md={6}>
             <div className="d-grid">
-              <Button variant="outline-primary" type="submit" size="sm">
+              <Button variant="outline-primary" size="sm">
                 View Profile
               </Button>
             </div>

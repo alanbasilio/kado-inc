@@ -33,7 +33,7 @@ const MagicLink: NextPage = () => {
             </InputGroup>
 
             <div className="d-grid gap-2 my-2">
-              <Button href="/magic-link-02" variant="primary" type="submit">
+              <Button href="/magic-link-02" variant="primary">
                 Sign in with email
               </Button>
             </div>

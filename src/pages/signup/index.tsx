@@ -83,12 +83,7 @@ const Signup: NextPage = () => {
               className="mt-md-3"
             >
               <Link href={`/signup/${active}`} passHref>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="w-100"
-                  disabled={!active}
-                >
+                <Button variant="primary" className="w-100" disabled={!active}>
                   Continue
                 </Button>
               </Link>

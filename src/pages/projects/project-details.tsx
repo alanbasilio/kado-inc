@@ -59,7 +59,7 @@ const ProjectDetails: NextPage = () => {
           }}
         >
           <div className="mb-3">
-            <Button variant="light" type="submit" disabled={loading}>
+            <Button variant="light" disabled={loading}>
               Mark complete
             </Button>
           </div>
@@ -79,24 +79,14 @@ const ProjectDetails: NextPage = () => {
                   <Row className="mb-3">
                     <Col md={5}>
                       <div>
-                        <Button
-                          variant="primary"
-                          type="submit"
-                          size="sm"
-                          disabled={loading}
-                        >
+                        <Button variant="primary" size="sm" disabled={loading}>
                           Webdesign
                         </Button>
                       </div>
                     </Col>
                     <Col md={6}>
                       <div>
-                        <Button
-                          variant="primary"
-                          type="submit"
-                          size="sm"
-                          disabled={loading}
-                        >
+                        <Button variant="primary" size="sm" disabled={loading}>
                           Unisense
                         </Button>
                       </div>
@@ -190,12 +180,7 @@ const ProjectDetails: NextPage = () => {
                 </Col>
                 <Col md={4}>
                   <div>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      size="sm"
-                      disabled={loading}
-                    >
+                    <Button variant="primary" size="sm" disabled={loading}>
                       View Applications
                     </Button>
                   </div>

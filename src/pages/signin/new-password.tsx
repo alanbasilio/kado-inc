@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -79,7 +79,8 @@ const NewPassword: NextPage = () => {
             </InputGroup>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Create
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Create"}
               </Button>
             </div>
           </Form>

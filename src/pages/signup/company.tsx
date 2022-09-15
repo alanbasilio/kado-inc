@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -123,7 +123,8 @@ const Company: NextPage = () => {
             </Form.Group>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Join Waitlist
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Join Waitlist"}
               </Button>
             </div>
           </Col>

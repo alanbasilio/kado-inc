@@ -43,7 +43,7 @@ const Layout = (props) => {
         <meta name="description" content="Kado Inc" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar bg="light" expand="lg" fixed="top">
+      <Navbar bg={props.home ? "white" : "light"} expand="lg" fixed="top">
         <Container>
           <Link href="/" passHref>
             <Navbar.Brand>
@@ -84,6 +84,7 @@ const Layout = (props) => {
             )}
             {user ? (
               <>
+                <Navbar.Text className="ms-2 my-2 my-md-0">|</Navbar.Text>
                 <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${user.first_name}`}</Navbar.Text>
                 <Button
                   size="sm"
@@ -109,26 +110,36 @@ const Layout = (props) => {
                   </>
                 )}
                 {props.signin && !props.home && (
-                  <Link href="/signin" passHref>
-                    <Button
-                      size="sm"
-                      variant="primary"
-                      className="ms-2 my-2 my-md-0"
-                    >
-                      Signin
-                    </Button>
-                  </Link>
+                  <>
+                    <Navbar.Text className="ms-2 my-2 my-md-0">
+                      Have an account?
+                    </Navbar.Text>
+                    <Link href="/signin" passHref>
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        className="ms-2 my-2 my-md-0"
+                      >
+                        Signin
+                      </Button>
+                    </Link>
+                  </>
                 )}
                 {props.signup && !props.home && (
-                  <Link href="/signup" passHref>
-                    <Button
-                      size="sm"
-                      variant="primary"
-                      className="ms-2 my-2 my-md-0"
-                    >
-                      Signup
-                    </Button>
-                  </Link>
+                  <>
+                    <Navbar.Text className="ms-2 my-2 my-md-0">
+                      New to Kado?
+                    </Navbar.Text>
+                    <Link href="/signup" passHref>
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        className="ms-2 my-2 my-md-0"
+                      >
+                        Signup
+                      </Button>
+                    </Link>
+                  </>
                 )}
               </>
             )}

@@ -64,12 +64,12 @@ const ApplicationDetails: NextPage = () => {
 
             <Col md={3}>
               <div className="rounded-40 d-grid gap-2 mb-1">
-                <Button variant="outline-primary" type="submit" size="sm">
+                <Button variant="outline-primary" size="sm">
                   Approve
                 </Button>
               </div>
               <div className="d-grid">
-                <Button variant="outline-primary" type="submit" size="sm">
+                <Button variant="outline-primary" size="sm">
                   Decline
                 </Button>
               </div>
