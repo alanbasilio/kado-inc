@@ -43,10 +43,7 @@ const Settings: NextPage = () => {
   };
 
   return (
-    <Layout>
-      <Row>
-        <h2 className="mb-2">Edit Profile</h2>
-      </Row>
+    <Layout title="Edit Profile">
       <Row
         className=" bg-white rounded shadow p-2"
         as="form"

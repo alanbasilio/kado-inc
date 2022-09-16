@@ -2,12 +2,8 @@ import type { NextPage } from "next";
 
 import Layout from "../components/dashboard-layout";
 
-const Home: NextPage = () => {
-  return (
-    <Layout>
-      <h2>Profile</h2>
-    </Layout>
-  );
+const Profile: NextPage = () => {
+  return <Layout title="Profile"></Layout>;
 };
 
-export default Home;
+export default Profile;
