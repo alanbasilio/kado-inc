@@ -55,11 +55,8 @@ const Layout = (props) => {
               />
             </Navbar.Brand>
           </Link>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="justify-content-end"
-          >
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
             {props.home && (
               <>
                 <NavDropdown title="Services" className="ms-2 my-2 my-md-0">

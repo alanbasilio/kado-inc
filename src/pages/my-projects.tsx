@@ -36,10 +36,10 @@ const MyProjects: NextPage = () => {
   };
 
   useEffect(() => {
-    token = JSON.parse(localStorage.getItem("token_kado"));
-    if (token) {
-      getProjects();
-    }
+    // token = JSON.parse(localStorage.getItem("token_kado"));
+    // if (token) {
+    //   getProjects();
+    // }
   }, []);
 
   return (
