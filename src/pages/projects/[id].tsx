@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
@@ -12,7 +12,10 @@ import API from "../../services";
 
 const ProjectDetails: NextPage = () => {
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(null);
+
   const router = useRouter();
+  const { id } = router.query;
 
   const {
     register,
@@ -21,9 +24,13 @@ const ProjectDetails: NextPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const getProjectDetails = () => {
     setLoading(true);
-    API.post("/user", data)
+    API.get(`/project/${id}/details`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
       .then((response) => {
         setLoading(false);
         reset();
@@ -43,6 +50,21 @@ const ProjectDetails: NextPage = () => {
       });
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("token_kado")) {
+      setToken(JSON.parse(localStorage.getItem("token_kado")));
+    } else {
+      router.push("/");
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (id && token) {
+      getProjectDetails();
+      console.log(id);
+    }
+  }, [id, token]);
+
   return (
     <Layout>
       <Row>
@@ -51,8 +73,6 @@ const ProjectDetails: NextPage = () => {
 
         <Col
           className="bg-white rounded shadow p-2"
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
           md={{
             span: 8,
             offset: 2,
