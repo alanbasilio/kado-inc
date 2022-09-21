@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                   />
                   <div className="d-grid">
                     <Button variant="outline-primary" type="submit" size="sm">
-                      Decline
+                      View School
                     </Button>
                   </div>
                 </Col>
