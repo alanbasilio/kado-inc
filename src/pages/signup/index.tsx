@@ -1,19 +1,17 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, Card } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 import Layout from "../../components/main-layout";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         <Col md={8} className="text-center">
-          <h1 className="mb-2 fs-2">How do you plan on using Kado?</h1>
+          <h2 className="mb-2">How do you plan on using Kado?</h2>
           <p className="mb-5 text-muted">
             We’ll streamline your experience accordingly
           </p>
@@ -83,12 +81,7 @@ const Signup: NextPage = () => {
               className="mt-md-3"
             >
               <Link href={`/signup/${active}`} passHref>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="w-100"
-                  disabled={!active}
-                >
+                <Button variant="primary" className="w-100" disabled={!active}>
                   Continue
                 </Button>
               </Link>

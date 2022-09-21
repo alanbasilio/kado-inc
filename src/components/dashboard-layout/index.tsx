@@ -13,6 +13,7 @@ import {
   InputGroup,
   Overlay,
   Popover,
+  Breadcrumb,
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
 import {
@@ -29,7 +30,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = (props) => {
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -44,16 +45,17 @@ const DashboardLayout = ({ children }) => {
 
   useEffect(() => {
     // storing input name
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
+    if (localStorage.getItem("user_kado")) {
+      setUser(JSON.parse(localStorage.getItem("user_kado")));
     } else {
       router.push("/");
     }
-  }, []);
+  }, [router]);
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("user_kado");
+    localStorage.removeItem("token_kado");
     router.push("/");
   };
 
@@ -93,8 +95,14 @@ const DashboardLayout = ({ children }) => {
   return (
     user && (
       <Container fluid>
-        <Row className="vh-100  ">
-          <Col lg={2} md={3} sm={6} xs={12} className="px-4 py-3 bg-white">
+        <Row className="vh-100">
+          <Col
+            lg={2}
+            md={3}
+            sm={6}
+            xs={12}
+            className="px-4 py-3 bg-white d-none d-md-block"
+          >
             <Link href="/home" passHref>
               <a>
                 <Image
@@ -127,11 +135,46 @@ const DashboardLayout = ({ children }) => {
               })}
             </Nav>
           </Col>
-          <Col lg={10} md={9} sm={6} xs={12} className="bg-light">
+          <Col lg={10} md={9} sm={12} xs={12} className="bg-light">
             <Navbar bg="light" expand="lg" className="px-2">
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Form className="w-50">
+              <Link href="/" passHref>
+                <Navbar.Brand className="d-block d-md-none">
+                  <Image
+                    src="/images/logo.svg"
+                    width="96"
+                    height="26"
+                    alt="React Bootstrap logo"
+                  />
+                </Navbar.Brand>
+              </Link>
+
+              <Navbar.Toggle />
+              <Navbar.Collapse>
+                <div className="d-block d-md-none">
+                  {routes.map((route, index) => {
+                    const isActive = router.pathname === route.url;
+                    return (
+                      !route.hidden && (
+                        <Link key={index} href={route.url} passHref>
+                          <Nav.Link
+                            className={`my-2 p-0 ${
+                              isActive ? "fw-bold" : "text-muted"
+                            }`}
+                          >
+                            <span
+                              className={`fs-4 ${isActive && "text-primary"}`}
+                            >
+                              {route.icon}
+                            </span>{" "}
+                            {route.title}
+                          </Nav.Link>
+                        </Link>
+                      )
+                    );
+                  })}
+                </div>
+
+                <Form className="w-50 d-none d-md-block">
                   <InputGroup>
                     <InputGroup.Text>
                       <MdSearch />
@@ -143,17 +186,23 @@ const DashboardLayout = ({ children }) => {
                   </InputGroup>
                 </Form>
                 <Link href="/projects/new" passHref>
-                  <Button variant="primary" className="me-1 ms-auto">
+                  <Button
+                    variant="primary"
+                    className="me-1 ms-auto d-none d-md-block"
+                  >
                     <MdAdd /> Create Project
                   </Button>
                 </Link>
-                <Nav.Link className="mx-1 fs-4">
+                <Nav.Link className="mx-1 fs-4 d-none d-md-block">
                   <MdOutlineNotifications />
                 </Nav.Link>
-                <Nav.Link className="mx-1 fs-4">
+                <Nav.Link className="mx-1 fs-4 d-none d-md-block">
                   <MdOutlineMailOutline />
                 </Nav.Link>
-                <Nav.Link className="mx-1 d-flex align-items-center" ref={ref}>
+                <Nav.Link
+                  className="mx-1  align-items-center d-none d-md-flex"
+                  ref={ref}
+                >
                   <Image
                     src={user.image_url_google || user.image}
                     className="rounded-circle"
@@ -175,11 +224,6 @@ const DashboardLayout = ({ children }) => {
                   >
                     <Popover className="p-2">
                       <Nav className="flex-column">
-                        <Link href="/profile" passHref>
-                          <Nav.Link className="mb-2">
-                            <MdPerson /> Profile
-                          </Nav.Link>
-                        </Link>
                         <Nav.Link onClick={logout}>
                           <MdLogout /> Logout
                         </Nav.Link>
@@ -189,7 +233,27 @@ const DashboardLayout = ({ children }) => {
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
-            <main className="p-2">{children}</main>
+            <Container className="py-2">
+              {props.breadcrumb && props.step && props.setStep && (
+                <Breadcrumb className="mb-2">
+                  {props.breadcrumb.map((item, index) => (
+                    <Breadcrumb.Item
+                      key={index}
+                      active={props.step === index + 1}
+                      // onClick={() => props.setStep(index + 1)}
+                    >
+                      {item}
+                    </Breadcrumb.Item>
+                  ))}
+                </Breadcrumb>
+              )}
+
+              {props.title && <h3 className="fw-semibold">{props.title}</h3>}
+              {props.subtitle && (
+                <p className="text-muted mb-4">{props.subtitle}</p>
+              )}
+              {props.children}
+            </Container>
           </Col>
         </Row>
       </Container>

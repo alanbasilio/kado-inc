@@ -8,10 +8,10 @@ import Layout from "../../components/main-layout";
 
 const MagicLink: NextPage = () => {
   return (
-    <Layout signin>
+    <Layout signup>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Sign in</h1>
+          <h2 className="mb-2">Sign in</h2>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
           <Link href="#" passHref>
             <a className="mb-2 d-block">
@@ -33,7 +33,7 @@ const MagicLink: NextPage = () => {
             </InputGroup>
 
             <div className="d-grid gap-2 my-2">
-              <Button href="/magic-link-02" variant="primary" type="submit">
+              <Button href="/magic-link-02" variant="primary">
                 Sign in with email
               </Button>
             </div>

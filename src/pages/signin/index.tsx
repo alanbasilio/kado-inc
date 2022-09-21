@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -31,7 +31,8 @@ const Signin: NextPage = () => {
     API.post("/user/authenticate", data)
       .then((response) => {
         setLoading(false);
-        localStorage.setItem("user", JSON.stringify(response.data.data));
+        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
+        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
         reset();
         router.push("/home");
       })
@@ -56,7 +57,8 @@ const Signin: NextPage = () => {
     })
       .then((response) => {
         setLoading(false);
-        localStorage.setItem("user", JSON.stringify(response.data.data));
+        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
+        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
         reset();
         router.push("/home");
       })
@@ -73,10 +75,10 @@ const Signin: NextPage = () => {
   };
 
   return (
-    <Layout signin>
+    <Layout signup>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
-          <h1 className="mb-2">Sign in</h1>
+          <h2 className="mb-2">Sign in</h2>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
           <div className="mb-2 d-flex justify-content-center">
             <GoogleLogin
@@ -132,7 +134,8 @@ const Signin: NextPage = () => {
             </p>
             <div className="d-grid gap-2 my-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Sign in
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Sign in"}
               </Button>
             </div>
             <Form.Text className="text-center">

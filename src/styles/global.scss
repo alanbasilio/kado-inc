@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap");
+
 @import "~bootstrap/scss/_functions";
 
 @import "variables";
@@ -6,6 +8,24 @@
 
 @import "~react-datepicker/src/stylesheets/datepicker";
 @import "~bootstrap/scss/bootstrap";
+
+.ff-poppins {
+  font-family: "Poppins", $font-family-sans-serif;
+}
+
+.background-wave {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    right: -15px;
+    background: url(/images/home/wave.svg) center center no-repeat;
+    background-size: 100% auto;
+    height: 623px;
+    z-index: -1;
+  }
+}
 
 .card {
   cursor: pointer;
@@ -44,12 +64,6 @@
   border: 0;
 }
 
-.shadow {
-  @include media-breakpoint-down(md) {
-    box-shadow: none !important;
-  }
-}
-
 .input-group-text {
   &:first-child {
     border-right: 0;
@@ -80,7 +94,16 @@
 
 .react-select > div {
   min-height: 48px;
-  // > div {
-  //   padding-left: 1.6rem;
-  // }
+}
+
+.tox-statusbar__branding {
+  display: none;
+}
+
+.navbar {
+  box-shadow: 0px 1px 0px rgba(87, 136, 242, 0.15);
+}
+
+.breadcrumb-item > a {
+  color: $body-color;
 }

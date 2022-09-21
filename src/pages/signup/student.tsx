@@ -7,6 +7,7 @@ import {
   InputGroup,
   Card,
   Container,
+  Spinner,
 } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,7 +27,7 @@ const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [base64File, setBase64File] = useState();
   const [user, setUser] = useState();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -152,11 +153,11 @@ const Student: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout signin>
       <Row className="justify-content-center">
         {step === 1 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Getting Started</h1>
+            <h2 className="mb-2">Getting Started</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
             <div className="mb-2 d-flex justify-content-center">
               <GoogleLogin
@@ -240,7 +241,8 @@ const Student: NextPage = () => {
               </Form.Group>
               <div className="d-grid gap-2">
                 <Button variant="primary" type="submit" disabled={loading}>
-                  Signup
+                  {loading && <Spinner animation="border" />}{" "}
+                  {loading ? "Loading..." : "Signup"}
                 </Button>
               </div>
             </Form>
@@ -306,7 +308,8 @@ const Student: NextPage = () => {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-2">
                     <Button variant="primary" type="submit">
-                      Next
+                      {loading && <Spinner animation="border" />}{" "}
+                      {loading ? "Loading..." : "Next"}
                     </Button>
                     <a className="text-muted" onClick={() => setStep(4)}>
                       Skip

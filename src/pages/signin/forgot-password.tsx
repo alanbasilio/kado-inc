@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ const ForgotPassword: NextPage = () => {
     API.post("/user/forgot-password", data)
       .then((response) => {
         setLoading(false);
-        router.push("/email-sent");
+        router.push("/signin/email-sent");
       })
       .catch((err) => {
         setLoading(false);
@@ -40,7 +40,7 @@ const ForgotPassword: NextPage = () => {
   };
 
   return (
-    <Layout signin>
+    <Layout signup>
       <Row className="justify-content-center">
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h2 className="mb-2">Forgot Password</h2>
@@ -62,7 +62,8 @@ const ForgotPassword: NextPage = () => {
             </InputGroup>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Send email instructions
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Send email instructions"}
               </Button>
             </div>
           </Form>

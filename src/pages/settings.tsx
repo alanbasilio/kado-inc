@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
@@ -43,10 +43,7 @@ const Settings: NextPage = () => {
   };
 
   return (
-    <Layout>
-      <Row>
-        <h2 className="mb-2">Edit Profile</h2>
-      </Row>
+    <Layout title="Edit Profile">
       <Row
         className=" bg-white rounded shadow p-2"
         as="form"
@@ -173,8 +170,9 @@ const Settings: NextPage = () => {
           </Form.Group>
         </Col>
         <Col md={12} className="text-end">
-          <Button variant="primary" type="submit">
-            Submit
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading && <Spinner animation="border" />}{" "}
+            {loading ? "Loading..." : "Submit"}
           </Button>
         </Col>
       </Row>

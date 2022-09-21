@@ -3,11 +3,7 @@ import type { NextPage } from "next";
 import Layout from "../components/dashboard-layout";
 
 const Home: NextPage = () => {
-  return (
-    <Layout>
-      <h1>Bookmarks</h1>
-    </Layout>
-  );
+  return <Layout title="Bookmarks"></Layout>;
 };
 
 export default Home;

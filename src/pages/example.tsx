@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
-import { Button, Col, Form, Row, InputGroup, Card } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Form,
+  Row,
+  InputGroup,
+  Card,
+  Spinner,
+} from "react-bootstrap";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import Layout from "../components/dashboard-layout";
@@ -44,6 +52,9 @@ const Example: NextPage = () => {
 
   return (
     <Layout>
+      <Row className="my-3">
+        <h2>Form</h2>
+      </Row>
       <Row
         className="justify-content-center"
         as="form"
@@ -84,8 +95,28 @@ const Example: NextPage = () => {
         </InputGroup>
 
         <Button variant="primary" type="submit" disabled={!loading}>
-          Continue
+          {loading && <Spinner animation="border" />}{" "}
+          {loading ? "Loading..." : "Continue"}
         </Button>
+      </Row>
+      <Row className="my-3">
+        <h2>Buttons (Two in a row)</h2>
+      </Row>
+      <Row className="my-3">
+        <Col md={2}>
+          <div>
+            <Button variant="primary" size="sm" disabled={loading}>
+              Webdesign
+            </Button>
+          </div>
+        </Col>
+        <Col md={2}>
+          <div>
+            <Button variant="primary" size="sm" disabled={loading}>
+              Unisense
+            </Button>
+          </div>
+        </Col>
       </Row>
     </Layout>
   );

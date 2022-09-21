@@ -48,7 +48,7 @@ const FileUploader = ({ required, setValue, name }) => {
           ref={hiddenFileInput}
           onChange={handleChange}
           style={{ width: 0, opacity: 0 }}
-          required={required}
+          // required={required}
           name="icon"
           accept="image/jpeg, image/png"
         />

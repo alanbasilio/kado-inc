@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
-import { Col, Row } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 
-import Layout from "../../components/main-layout";
 import CardApplications from "../../components/card-applications";
+import Layout from "../../components/main-layout";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");
@@ -12,7 +11,7 @@ const Signup: NextPage = () => {
     <Layout>
       <Row className="d-flex justify-content-left">
         <Col md={12}>
-          <h1 className="mt-5 fs-2">Projects</h1>
+          <h2 className="mt-5">Projects</h2>
         </Col>
       </Row>
 

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -53,7 +53,7 @@ const Company: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout signin>
       <Row
         className="justify-content-center"
         as="form"
@@ -61,7 +61,7 @@ const Company: NextPage = () => {
       >
         {isWaitingList && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Join Waitlist</h1>
+            <h2 className="mb-2">Join Waitlist</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
             <Row>
               <Col md={6}>
@@ -123,7 +123,8 @@ const Company: NextPage = () => {
             </Form.Group>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                Join Waitlist
+                {loading && <Spinner animation="border" />}{" "}
+                {loading ? "Loading..." : "Join Waitlist"}
               </Button>
             </div>
           </Col>
@@ -191,7 +192,7 @@ const Company: NextPage = () => {
         )}
         {!isWaitingList && step === 3 && (
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
-            <h1 className="mb-2">Company Info</h1>
+            <h2 className="mb-2">Company Info</h2>
             <p className="text-muted mb-2">Add company details</p>
 
             <InputGroup className="mb-2">

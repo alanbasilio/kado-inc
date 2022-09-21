@@ -2,12 +2,8 @@ import type { NextPage } from "next";
 
 import Layout from "../components/dashboard-layout";
 
-const Home: NextPage = () => {
-  return (
-    <Layout>
-      <h1>Payments</h1>
-    </Layout>
-  );
+const Payments: NextPage = () => {
+  return <Layout title="Payments"></Layout>;
 };
 
-export default Home;
+export default Payments;
