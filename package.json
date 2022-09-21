@@ -25,7 +25,9 @@
     "react-hook-form": "^7.34.0",
     "react-icons": "^4.4.0",
     "react-phone-number-input": "^3.2.7",
+    "react-redux": "^8.0.2",
     "react-select": "^5.4.0",
+    "redux-persist": "^6.0.0",
     "sass": "^1.54.4",
     "sweetalert": "^2.1.2"
   },
