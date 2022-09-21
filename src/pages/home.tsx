@@ -19,17 +19,16 @@ const Home: NextPage = () => {
                 alt="React Bootstrap logo"
               />
             </Col>
-            <Col md={3}>
+            <Col md={6}>
               <h5>Guy Howkins</h5>
               <p className="text-muted">Student</p>
               <p className="text-muted">Computer Science</p>
               <p className="text-muted">Toronto, ON</p>
             </Col>
-            <Col md={3}></Col>
 
             <Col md={4}>
               <Row>
-                <Col md={12}>
+                <Col className="text-center" md={12}>
                   <Image
                     className="img-fluid"
                     src="/images/uni-toronto.png"
@@ -38,7 +37,7 @@ const Home: NextPage = () => {
                     alt="React Bootstrap logo"
                   />
                 </Col>
-                <Col md={4}>
+                <Col md={12} className="text-center">
                   <Image
                     className="img-fluid"
                     src="/images/feather-mail.png"
