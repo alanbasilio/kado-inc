@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Col, Form, Row } from "react-bootstrap";
 import Link from "next/link";
 
-import Layout from "../../components/main-layout";
+import Layout from "@/components/main-layout";
 import Image from "next/image";
 
 const EmailSent: NextPage = () => {

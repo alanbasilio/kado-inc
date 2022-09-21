@@ -3,60 +3,55 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import {
+  Breadcrumb,
+  Button,
   Col,
   Container,
-  Row,
-  Navbar,
-  Nav,
   Form,
-  Button,
   InputGroup,
+  Nav,
+  Navbar,
   Overlay,
   Popover,
-  Breadcrumb,
+  Row,
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
 import {
-  MdSearch,
   MdAdd,
-  MdOutlineNotifications,
-  MdOutlineMailOutline,
-  MdKeyboardArrowDown,
-  MdDashboard,
   MdBookmarkBorder,
+  MdDashboard,
   MdDashboardCustomize,
-  MdSettings,
-  MdPerson,
+  MdKeyboardArrowDown,
   MdLogout,
+  MdOutlineMailOutline,
+  MdOutlineNotifications,
+  MdSearch,
+  MdSettings,
 } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/slices/userSlice";
 
 const DashboardLayout = (props) => {
-  const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userInfo) {
+      router.push("/");
+    }
+  }, [userInfo, router]);
+
+  const logoutUser = () => {
+    dispatch(logout());
+  };
 
   const handleClick = (event) => {
     setShow(!show);
     setTarget(event.target);
-  };
-
-  const router = useRouter();
-
-  useEffect(() => {
-    // storing input name
-    if (localStorage.getItem("user_kado")) {
-      setUser(JSON.parse(localStorage.getItem("user_kado")));
-    } else {
-      router.push("/");
-    }
-  }, [router]);
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user_kado");
-    localStorage.removeItem("token_kado");
-    router.push("/");
   };
 
   const routes = [
@@ -93,7 +88,7 @@ const DashboardLayout = (props) => {
   ];
 
   return (
-    user && (
+    userInfo && (
       <Container fluid>
         <Row className="vh-100">
           <Col
@@ -204,9 +199,9 @@ const DashboardLayout = (props) => {
                   ref={ref}
                 >
                   <Image
-                    src={user.image_url_google || user.image}
+                    src={userInfo.image_url_google || userInfo.image}
                     className="rounded-circle"
-                    alt={`${user.first_name} ${user.last_name}`}
+                    alt={`${userInfo.first_name} ${userInfo.last_name}`}
                     width={40}
                     height={40}
                     onClick={handleClick}
@@ -224,7 +219,7 @@ const DashboardLayout = (props) => {
                   >
                     <Popover className="p-2">
                       <Nav className="flex-column">
-                        <Nav.Link onClick={logout}>
+                        <Nav.Link onClick={logoutUser}>
                           <MdLogout /> Logout
                         </Nav.Link>
                       </Nav>

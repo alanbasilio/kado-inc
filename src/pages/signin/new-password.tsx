@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import swal from "sweetalert";
 
-import Layout from "../../components/main-layout";
-import API from "../../services";
+import Layout from "@/components/main-layout";
+import API from "@/services";
 
 const NewPassword: NextPage = () => {
   const [loading, setLoading] = useState(false);

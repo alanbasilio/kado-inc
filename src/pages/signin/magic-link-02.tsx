@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 
-import Layout from "../../components/main-layout";
+import Layout from "@/components/main-layout";
 
 const MagicLink: NextPage = () => {
   return (

@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
-import CardProject from "../components/card-project";
-import CardProjectProgbar from "../components/card-project-progbar";
-import Layout from "../components/dashboard-layout";
-import API from "../services";
+import CardProject from "@/components/card-project";
+import CardProjectProgbar from "@/components/card-project-progbar";
+import Layout from "@/components/dashboard-layout";
+import API from "@/services";
 import swal from "sweetalert";
 
 const MyProjects: NextPage = () => {
@@ -21,7 +21,6 @@ const MyProjects: NextPage = () => {
     })
       .then((response) => {
         setLoading(false);
-        console.log(response);
       })
       .catch((err) => {
         setLoading(false);
@@ -34,13 +33,6 @@ const MyProjects: NextPage = () => {
         );
       });
   };
-
-  useEffect(() => {
-    // token = JSON.parse(localStorage.getItem("token_kado"));
-    // if (token) {
-    //   getProjects();
-    // }
-  }, []);
 
   return (
     <Layout title="My projects">

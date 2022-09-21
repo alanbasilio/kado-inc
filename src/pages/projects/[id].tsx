@@ -7,8 +7,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
 
-import Layout from "../../components/dashboard-layout";
-import API from "../../services";
+import Layout from "@/components/dashboard-layout";
+import API from "@/services";
 
 const ProjectDetails: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,6 @@ const ProjectDetails: NextPage = () => {
       .then((response) => {
         setLoading(false);
         setProject(response.data.data[0]);
-        console.log(response.data.data[0]);
       })
       .catch((err) => {
         setLoading(false);
@@ -62,7 +61,6 @@ const ProjectDetails: NextPage = () => {
   useEffect(() => {
     if (id && token) {
       getProjectDetails();
-      console.log(id);
     }
   }, [id, token]);
 

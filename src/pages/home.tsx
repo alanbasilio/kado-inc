@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import { Button, Col, Row } from "react-bootstrap";
 
-import Layout from "../components/dashboard-layout";
+import Layout from "@/components/dashboard-layout";
 
 const Home: NextPage = () => {
   return (

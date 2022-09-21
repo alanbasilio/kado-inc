@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import Image from "next/image";
 
-import Layout from "../../components/main-layout";
+import Layout from "@/components/main-layout";
 
 const MagicLink: NextPage = () => {
   return (

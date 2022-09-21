@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 
 import { Button, Col, Row } from "react-bootstrap";
-import Layout from "../../components/main-layout";
+import Layout from "@/components/main-layout";
 
 const ApplicationDetails: NextPage = () => {
   return (

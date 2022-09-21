@@ -1,78 +1,53 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import swal from "sweetalert";
-import { useRouter } from "next/router";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  userLogin,
+  userLoginGoogle,
+} from "@/store/slices/userSlice/userActions";
+
+import Layout from "@/components/main-layout";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import { useRouter } from "next/router";
 
-import API from "../../services";
-import Layout from "../../components/main-layout";
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading, userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch<any>();
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data) => {
-    setLoading(true);
-    API.post("/user/authenticate", data)
-      .then((response) => {
-        setLoading(false);
-        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
-        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
-        reset();
-        router.push("/home");
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    dispatch(userLogin(data));
   };
 
-  const googleSignin = async (user) => {
-    setLoading(true);
-    API.post("/user/authenticate-google", user, {
-      headers: {
-        Authorization: `${user.token_id}`,
-      },
-    })
-      .then((response) => {
-        setLoading(false);
-        localStorage.setItem("user_kado", JSON.stringify(response.data.data));
-        localStorage.setItem("token_kado", JSON.stringify(response.data.token));
-        reset();
-        router.push("/home");
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+  const googleSignin = (data) => {
+    dispatch(userLoginGoogle(data));
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/home");
+    }
+  }, [userInfo, router]);
 
   return (
     <Layout signup>
@@ -83,14 +58,14 @@ const Signin: NextPage = () => {
           <div className="mb-2 d-flex justify-content-center">
             <GoogleLogin
               onSuccess={({ credential }) => {
-                const userInfo = jwtDecode(credential);
+                const userData = jwtDecode(credential);
                 const user = {
-                  email: userInfo.email,
-                  first_name: userInfo.family_name,
-                  last_name: userInfo.given_name,
-                  google_id: userInfo.sub,
-                  image_url_google: userInfo.picture,
-                  name: userInfo.name,
+                  email: userData.email,
+                  first_name: userData.family_name,
+                  last_name: userData.given_name,
+                  google_id: userData.sub,
+                  image_url_google: userData.picture,
+                  name: userData.name,
                   token_id: credential,
                 };
                 googleSignin(user);

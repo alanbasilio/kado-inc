@@ -8,8 +8,8 @@ import swal from "sweetalert";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { useRouter } from "next/router";
 
-import Layout from "../../components/main-layout";
-import API from "../../services";
+import Layout from "@/components/main-layout";
+import API from "@/services";
 
 const School: NextPage = () => {
   const router = useRouter();

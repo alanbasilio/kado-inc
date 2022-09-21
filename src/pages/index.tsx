@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Button, Card, Col, Row, Container } from "react-bootstrap";
 import Image from "next/image";
-import Layout from "../components/main-layout";
+import Layout from "@/components/main-layout";
 import Link from "next/link";
 import { TbBrandLinkedin, TbBrandTwitter } from "react-icons/tb";
 import { AiOutlineFacebook } from "react-icons/ai";

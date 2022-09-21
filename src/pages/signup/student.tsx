@@ -18,10 +18,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
-import ProjectCategories from "../../mocks/project-categories.json";
+import ProjectCategories from "@/mocks/project-categories.json";
 
-import Layout from "../../components/main-layout";
-import API from "../../services";
+import Layout from "@/components/main-layout";
+import API from "@/services";
 
 const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);

@@ -1,68 +1,58 @@
 import moment from "moment";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import swal from "sweetalert";
 
-import Layout from "../../components/dashboard-layout";
-import HTMLEditor from "../../components/editor";
-import FileUploader from "../../components/file-uploader";
-import Select from "../../components/select";
-
-import DatePicker from "../../components/datepicker";
+import Layout from "@/components/dashboard-layout";
+import HTMLEditor from "@/components/editor";
+import FileUploader from "@/components/file-uploader";
+import Select from "@/components/select";
+import categories from "@/mocks/project-categories.json";
 
 import Image from "next/image";
-import ProjectCategories from "../../mocks/project-categories.json";
-import API from "../../services";
+import { useDispatch, useSelector } from "react-redux";
+import DatePicker from "@/components/datepicker";
+import {
+  getCities,
+  getCompanies,
+  getSkills,
+  newProject,
+} from "@/store/slices/projectsSlice/projectsActions";
 
 type Inputs = {
-  user_id: number; //user
-  profile_id: number; //user?
-  location_city_id: number; //ok
-  photo_id: number; //upload
-  company_organization_id: number; //ok
-  proposal_title_role: string; //ok
-  proposal_description: string; //ok
-  job_skills: string; //ok
-  paid: boolean; //ok
-  duration_hours_week: number; //ok
-  start_date: Date; //ok
-  due_date: Date; //ok
-  project_requeriments: string; //ok
-  notify_project_following_users: string; //ok
-  location_remote: boolean; //ok
-  expiration_date: Date; //ok
-  require_resume: number; //ok
-  request_additional_documents: boolean; //ok
+  user_id: number;
+  profile_id: number;
+  location_city_id: number;
+  photo_id: number;
+  company_organization_id: number;
+  proposal_title_role: string;
+  proposal_description: string;
+  job_skills: string;
+  paid: boolean;
+  duration_hours_week: number;
+  start_date: Date;
+  due_date: Date;
+  project_requeriments: string;
+  notify_project_following_users: string;
+  location_remote: boolean;
+  expiration_date: Date;
+  require_resume: number;
+  request_additional_documents: boolean;
   signature: string;
   agree: boolean;
 };
 
 const NewProject: NextPage = () => {
-  const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState();
-  const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [companies, setCompanies] = useState([]);
-  const [skills, setSkills] = useState([]);
-  const [cities, setCities] = useState([]);
   const [subtitle, setSubtitle] = useState("Pick a category to get started.");
-
-  useEffect(() => {
-    if (
-      localStorage.getItem("user_kado") &&
-      localStorage.getItem("token_kado")
-    ) {
-      setUser(JSON.parse(localStorage.getItem("user_kado")));
-      setToken(JSON.parse(localStorage.getItem("token_kado")));
-    } else {
-      router.push("/");
-    }
-  }, [router]);
+  const { loading, companies, cities, skills } = useSelector(
+    (state) => state.projects
+  );
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch<any>();
 
   const {
     register,
@@ -88,94 +78,9 @@ const NewProject: NextPage = () => {
     setSubtitle("Add the details of the project.");
   };
 
-  const getCities = () => {
-    API.get("/cities", {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        const results = response.data.data.map((result) => {
-          return {
-            value: result.id,
-            label: result.city,
-          };
-        });
-        localStorage.setItem("cities_kado", JSON.stringify(results));
-        setCities(results);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
-  const getSkills = () => {
-    API.get("/job-skills", {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        const results = response.data.data.map((result) => {
-          return {
-            value: result.label,
-            label: result.label,
-          };
-        });
-        localStorage.setItem("skills_kado", JSON.stringify(results));
-        setSkills(results);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
-  const getCompanies = () => {
-    API.get("/companies", {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        const results = response.data.data.map((result) => {
-          return {
-            value: result.id,
-            label: result.name,
-          };
-        });
-        localStorage.setItem("companies_kado", JSON.stringify(results));
-        setCompanies(results);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setLoading(true);
     const defaultValues = {
-      user_id: user ? user.id : 3,
+      user_id: userInfo ? userInfo.id : 3,
       profile_id: 3,
       location_city_id: 1,
       photo_id: 19,
@@ -194,51 +99,15 @@ const NewProject: NextPage = () => {
       require_resume: 1,
       request_additional_documents: true,
     };
-    API.post("/project", defaultValues, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal("Success", "Project created", "success").then(function () {
-          router.push("/my-projects");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    dispatch(newProject(defaultValues));
   };
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
-
-  useEffect(() => {
-    if (token) {
-      if (localStorage.getItem("cities_kado")) {
-        setCities(JSON.parse(localStorage.getItem("cities_kado")));
-      }
-      if (localStorage.getItem("companies_kado")) {
-        setCompanies(JSON.parse(localStorage.getItem("companies_kado")));
-      }
-      if (localStorage.getItem("skills_kado")) {
-        setSkills(JSON.parse(localStorage.getItem("skills_kado")));
-      }
-
-      getCompanies();
-      getCities();
-      getSkills();
-    }
-  }, [token]);
+    dispatch(getCompanies());
+    dispatch(getCities());
+    dispatch(getSkills());
+    // dispatch(getCategories());
+  }, [dispatch]);
 
   const breadcrumbArray = [
     "Select Project Template",
@@ -258,7 +127,7 @@ const NewProject: NextPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="container-md">
         {step === 1 && (
           <Row>
-            {ProjectCategories.map((category) => (
+            {categories.map((category) => (
               <Col key={category.id} md={4} sm={6} className="my-1">
                 <a
                   href="#"
@@ -621,7 +490,7 @@ const NewProject: NextPage = () => {
               <Row className="mt-1 mb-4 d-flex align-items-center">
                 <Col md={3}>
                   <Image
-                    src={user.image_url_google || user.image}
+                    src={userInfo.image_url_google || userInfo.image}
                     width={47}
                     height={47}
                     alt={"icon"}
@@ -631,9 +500,9 @@ const NewProject: NextPage = () => {
 
                 <Col md={9}>
                   <p className="fw-semibold">
-                    {user.first_name} {user.last_name}
+                    {userInfo.first_name} {userInfo.last_name}
                   </p>
-                  <p className="fw-semibold small">{user.description}</p>
+                  <p className="fw-semibold small">{userInfo.description}</p>
                 </Col>
               </Row>
               <h5 className="fw-semibold">Posted on:</h5>

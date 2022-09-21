@@ -1,7 +1,7 @@
 import "react-phone-number-input/style.css";
-import "../styles/global.scss";
+import "@/styles/global.scss";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { persistor, store } from "../store";
+import { persistor, store } from "@/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 

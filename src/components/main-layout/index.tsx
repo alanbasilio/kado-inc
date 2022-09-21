@@ -1,35 +1,26 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  Button,
   Col,
-  Row,
-  NavDropdown,
   Container,
   Nav,
   Navbar,
-  Button,
+  NavDropdown,
+  Row,
 } from "react-bootstrap";
-import Head from "next/head";
-import { useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/slices/userSlice";
 import styles from "./main-layout.module.scss";
 
 const Layout = (props) => {
-  const [user, setUser] = useState(null);
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // storing input name
-    if (localStorage.getItem("user_kado")) {
-      setUser(JSON.parse(localStorage.getItem("user_kado")));
-    } else {
-      setUser(null);
-    }
-  }, []);
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user_kado");
-    localStorage.removeItem("token_kado");
+  const logoutUser = () => {
+    dispatch(logout());
   };
 
   return (
@@ -79,14 +70,14 @@ const Layout = (props) => {
                 </Nav.Link>
               </>
             )}
-            {user ? (
+            {userInfo ? (
               <>
                 <Navbar.Text className="ms-2 my-2 my-md-0">|</Navbar.Text>
-                <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${user.first_name}`}</Navbar.Text>
+                <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${userInfo.first_name}`}</Navbar.Text>
                 <Button
                   size="sm"
                   variant="primary"
-                  onClick={() => logout()}
+                  onClick={() => logoutUser()}
                   className="ms-2 my-2 my-md-0"
                 >
                   Logout

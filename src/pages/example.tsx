@@ -14,8 +14,8 @@ import {
 } from "react-bootstrap";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
-import Layout from "../components/dashboard-layout";
-import API from "../services";
+import Layout from "@/components/dashboard-layout";
+import API from "@/services";
 
 const Example: NextPage = () => {
   const [loading, setLoading] = useState(false);

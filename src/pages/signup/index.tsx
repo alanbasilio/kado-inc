@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
-import Layout from "../../components/main-layout";
+import Layout from "@/components/main-layout";
 
 const Signup: NextPage = () => {
   const [active, setActive] = useState("");
