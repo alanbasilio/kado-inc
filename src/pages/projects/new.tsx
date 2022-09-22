@@ -136,7 +136,6 @@ const NewProject: NextPage = () => {
                   onClick={() => handleCategory(category.id)}
                 >
                   <Image
-                    className="no-border"
                     width={65}
                     height={65}
                     src={category.icon}

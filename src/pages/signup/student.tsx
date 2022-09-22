@@ -336,13 +336,7 @@ const Student: NextPage = () => {
                       href="#"
                       className="shadow rounded bg-white rounded pt-4 pb-2 px-5 text-center d-block"
                     >
-                      <Image
-                        className="no-border"
-                        width={65}
-                        height={65}
-                        src={icon}
-                        alt="title"
-                      />
+                      <Image width={65} height={65} src={icon} alt="title" />
                       <h5 className="mt-2 mb-0">{title}</h5>
                     </a>
                   </Col>

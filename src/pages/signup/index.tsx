@@ -19,13 +19,15 @@ const Signup: NextPage = () => {
             <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("student")}
-                className={active === "student" ? "active" : ""}
+                className={`card-signup ${active === "student" && "active"}`}
               >
-                <Card.Img
-                  width={35}
-                  height={35}
-                  src="/images/student-icon.svg"
-                />
+                <div className="border rounded-circle card-img-container">
+                  <Card.Img
+                    width={70}
+                    height={70}
+                    src="/images/student-icon.svg"
+                  />
+                </div>
 
                 <Card.Body>
                   <Card.Title>As a student</Card.Title>
@@ -38,13 +40,15 @@ const Signup: NextPage = () => {
             <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("school")}
-                className={active === "school" ? "active" : ""}
+                className={`card-signup ${active === "school" && "active"}`}
               >
-                <Card.Img
-                  width={35}
-                  height={35}
-                  src="/images/school-icon.svg"
-                />
+                <div className="border rounded-circle card-img-container">
+                  <Card.Img
+                    width={70}
+                    height={70}
+                    src="/images/school-icon.svg"
+                  />
+                </div>
 
                 <Card.Body>
                   <Card.Title>As a school</Card.Title>
@@ -57,13 +61,15 @@ const Signup: NextPage = () => {
             <Col md={4} className="mb-2">
               <Card
                 onClick={() => setActive("company")}
-                className={active === "company" ? "active" : ""}
+                className={`card-signup ${active === "company" && "active"}`}
               >
-                <Card.Img
-                  width={35}
-                  height={35}
-                  src="/images/business-icon.svg"
-                />
+                <div className="border rounded-circle card-img-container">
+                  <Card.Img
+                    width={70}
+                    height={70}
+                    src="/images/business-icon.svg"
+                  />
+                </div>
 
                 <Card.Body>
                   <Card.Title>As a company</Card.Title>

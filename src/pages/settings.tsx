@@ -132,7 +132,7 @@ const Settings: NextPage = () => {
                   <Form.Group>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
-                      className="bg-light no-border"
+                      className="bg-light border-0"
                       placeholder="Email Address"
                       type="email"
                       isInvalid={errorsAccount.email ? true : false}
@@ -144,7 +144,7 @@ const Settings: NextPage = () => {
                   <Form.Group>
                     <Form.Label>Phone Number</Form.Label>
                     <Form.Control
-                      className="bg-light no-border"
+                      className="bg-light border-0"
                       placeholder="Phone Number"
                       type="tel"
                       isInvalid={errorsAccount.phone_number ? true : false}
@@ -163,7 +163,7 @@ const Settings: NextPage = () => {
                   <Form.Group>
                     <Form.Label>Old Password</Form.Label>
                     <Form.Control
-                      className="bg-light no-border"
+                      className="bg-light border-0"
                       placeholder="Old Password"
                       type="password"
                       isInvalid={errorsPassword.newPassword ? true : false}
@@ -175,7 +175,7 @@ const Settings: NextPage = () => {
                   <Form.Group>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                      className="bg-light no-border"
+                      className="bg-light border-0"
                       placeholder="Password"
                       type="password"
                       isInvalid={

@@ -9,6 +9,32 @@
 @import "~react-datepicker/src/stylesheets/datepicker";
 @import "~bootstrap/scss/bootstrap";
 
+@mixin recolor($color: #000, $opacity: 1) {
+  $r: red($color) / 255;
+  $g: green($color) / 255;
+  $b: blue($color) / 255;
+  $a: $opacity;
+
+  // grayscale fallback if SVG from data url is not supported
+  $lightness: lightness($color);
+  filter: saturate(0%) brightness(0%) invert($lightness) opacity($opacity);
+
+  // color filter
+  $svg-filter-id: "recolor";
+  filter: url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg">\
+      <filter id="#{$svg-filter-id}" color-interpolation-filters="sRGB">\
+        <feColorMatrix type="matrix" values="\
+          0 0 0 0 #{$r}\
+          0 0 0 0 #{$g}\
+          0 0 0 0 #{$b}\
+          0 0 0 #{$a} 0\
+        "/>\
+      </filter>\
+    </svg>\
+    ##{$svg-filter-id}');
+}
+
 .ff-poppins {
   font-family: "Poppins", $font-family-sans-serif;
 }
@@ -27,10 +53,6 @@
   }
 }
 
-.no-border {
-  border-width: 0;
-}
-
 .background-wave {
   position: relative;
   &:before {
@@ -46,38 +68,52 @@
 }
 
 .card {
-  cursor: pointer;
-  &.active {
-    background-color: $gray-400;
-  }
-  .card-img {
-    padding: 12.5px;
-    border: 1px solid $black;
-    display: block;
-    max-width: 70px;
-    max-height: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin: 20px auto;
-    background: $white;
-    &.no-border {
-      border: 0;
-    }
-  }
-
   .card-title {
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
   }
 
   .card-subtitle {
-    font-size: 12px;
+    font-size: 1.2rem;
     font-weight: 500;
     color: $gray-500;
   }
 
   .card-text {
-    font-size: 12px;
+    font-size: 1.2rem;
+  }
+
+  &.card-signup {
+    cursor: pointer;
+    transition: all 150ms ease;
+    border: 3px solid transparent;
+    .card-title {
+      font-size: 1.8rem;
+    }
+    .card-subtitle,
+    .card-text {
+      font-size: 1.4rem;
+    }
+    .card-img-container {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      margin: 20px auto 0;
+      overflow: hidden;
+      padding: 10px;
+    }
+    &:hover {
+      border: 3px solid $light;
+    }
+    &.active {
+      background-color: $light;
+      border: 3px solid $primary;
+      .card-img-container {
+        img {
+          @include recolor($primary, 1);
+        }
+      }
+    }
   }
 }
 
