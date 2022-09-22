@@ -9,18 +9,18 @@ const CardApplications: NextPage = () => {
       <Row className="d-flex align-items-center">
         <Col md={3}>
           <Image
-            className=" border rounded-circle"
+            className="border rounded-circle"
             src="/images/avatar.png"
             width="80"
             height="80"
-            alt="React Bootstrap logo"
+            alt=""
           />
         </Col>
         <Col md={7}>
           <h5>Guy Howkins</h5>
-          <h6 className="text-muted">WebDesign</h6>
+          <h6>WebDesign</h6>
           <h5 className="mt-1">
-            $30 <span className="text-muted">/hr</span>
+            $30 <span>/hr</span>
           </h5>
         </Col>
         <Col md={2}>
@@ -29,14 +29,14 @@ const CardApplications: NextPage = () => {
             src="/images/heart.png"
             width="22"
             height="18"
-            alt="React Bootstrap logo"
+            alt=""
           />
           <Image
             className=""
             src="/images/feather-mail.png"
             width="22"
             height="18"
-            alt="React Bootstrap logo"
+            alt=""
           />
         </Col>
         <Row className="mt-2 mb-2">
@@ -62,12 +62,12 @@ const CardApplications: NextPage = () => {
             src="/images/uni-california.png"
             width="40"
             height="40"
-            alt="React Bootstrap logo"
+            alt=""
           />
         </Col>
         <Col md={10}>
-          <h5 className="text-muted">University of California ‘21</h5>
-          <h6 className="text-muted">Communication and Culture</h6>
+          <h5>University of California ‘21</h5>
+          <h6>Communication and Culture</h6>
         </Col>
       </Row>
     </Card>

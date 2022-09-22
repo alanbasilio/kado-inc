@@ -23,7 +23,7 @@ const Home: NextPage = () => {
                 src="/images/avatar.png"
                 width="80"
                 height="80"
-                alt="React Bootstrap logo"
+                alt=""
               />
             </Col>
             <Col md={6}>
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
                     src="/images/uni-toronto.png"
                     width="150"
                     height="70"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                 </Col>
                 <Col md={12} className="text-center">
@@ -50,21 +50,21 @@ const Home: NextPage = () => {
                     src="/images/feather-mail.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                   <Image
                     className=""
                     src="/images/linkedin.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                   <Image
                     className=""
                     src="/images/share.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                   <div className="d-grid">
                     <Button variant="outline-primary" type="submit" size="sm">

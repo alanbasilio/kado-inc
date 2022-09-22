@@ -1,56 +1,38 @@
-import Image from "next/image";
-import type { NextPage } from "next";
+import UsersAvatars from "@/components/users-avatars";
+import { Badge, Card, ProgressBar } from "react-bootstrap";
+import { faker } from "@faker-js/faker";
+import ProgBar from "@/components/progress-bar";
 
-import { Card, Col, Row } from "react-bootstrap";
-
-const CardProject: NextPage = () => {
+const CardProjectProgbar = ({ status }) => {
+  let badgeBg;
+  if (status === "todo") {
+    badgeBg = "light";
+  }
+  if (status === "ongoing") {
+    badgeBg = "warning";
+  }
+  if (status === "completed") {
+    badgeBg = "success";
+  }
   return (
-    <Card className="p-2 mb-2">
-      <Row>
-        <Col className="p-2">
-          <h5 className="mt-2">Boxboard Multipurpose Ui Kit</h5>
-          <h6 className="mb-2 text-muted">Boxboard</h6>
-          <p className="mb-2 text-muted">15 Days left</p>
-
-          <Image
-            className=" border rounded-circle"
-            src="/images/jerome.png"
-            width="40"
-            height="40"
-            alt="React Bootstrap logo"
-          />
-          <Image
-            className=" border rounded-circle"
-            src="/images/jerome.png"
-            width="40"
-            height="40"
-            alt="React Bootstrap logo"
-          />
-          <Image
-            className=" border rounded-circle"
-            src="/images/jerome.png"
-            width="40"
-            height="40"
-            alt="React Bootstrap logo"
-          />
-          <Image
-            className=" border rounded-circle"
-            src="/images/jerome.png"
-            width="40"
-            height="40"
-            alt="React Bootstrap logo"
-          />
-          <Image
-            className=" border rounded-circle"
-            src="/images/jerome.png"
-            width="40"
-            height="40"
-            alt="React Bootstrap logo"
-          />
-        </Col>
-      </Row>
+    <Card className="mb-2">
+      <Card.Body>
+        <Card.Title>{faker.name.jobTitle()}</Card.Title>
+        <Card.Subtitle>{faker.company.name()}</Card.Subtitle>
+        <Badge bg={badgeBg} pill className="my-2">
+          {status === "completed"
+            ? "COMPLETED"
+            : `${faker.datatype.number(30)} days left`}
+        </Badge>
+        {status !== "todo" && (
+          <div className="mb-2">
+            <ProgBar now={faker.datatype.number(100)} />
+          </div>
+        )}
+        <UsersAvatars />
+      </Card.Body>
     </Card>
   );
 };
 
-export default CardProject;
+export default CardProjectProgbar;

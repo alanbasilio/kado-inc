@@ -16,14 +16,14 @@ const ApplicationDetails: NextPage = () => {
                 src="/images/avatar.png"
                 width="80"
                 height="80"
-                alt="React Bootstrap logo"
+                alt=""
               />
             </Col>
             <Col md={3}>
               <h5>Guy Howkins</h5>
-              <p className="text-muted">Student</p>
-              <p className="text-muted">Computer Science</p>
-              <p className="text-muted">Toronto, ON</p>
+              <p>Student</p>
+              <p>Computer Science</p>
+              <p>Toronto, ON</p>
             </Col>
             <Col md={4}>
               <Row>
@@ -33,7 +33,7 @@ const ApplicationDetails: NextPage = () => {
                     src="/images/uni-toronto.png"
                     width="150"
                     height="70"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                 </Col>
                 <Col md={4}>
@@ -42,21 +42,21 @@ const ApplicationDetails: NextPage = () => {
                     src="/images/feather-mail.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                   <Image
                     className=""
                     src="/images/linkedin.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                   <Image
                     className=""
                     src="/images/share.png"
                     width="22"
                     height="18"
-                    alt="React Bootstrap logo"
+                    alt=""
                   />
                 </Col>
               </Row>
@@ -77,7 +77,7 @@ const ApplicationDetails: NextPage = () => {
 
             <hr className="my-2" />
             <Col md={8}>
-              <h4 className="mb-2 text-muted">Summary</h4>
+              <h4 className="mb-2 ">Summary</h4>
               <p>
                 I am a current student at University of Toronto studying
                 Computer Science. I have experience in Full stack development
@@ -112,13 +112,13 @@ const ApplicationDetails: NextPage = () => {
               </ul>
             </Col>
             <Col md={4}>
-              <h4 className="mb-2 text-muted">Skills</h4>
-              <p className="mb-2 text-muted">SEO</p>
-              <p className="mb-2 text-muted">Mobile Development</p>
-              <p className="mb-2 text-muted">Mobile Design</p>
-              <p className="mb-2 text-muted">Full Stack</p>
-              <p className="mb-2 text-muted">User Interface Design</p>
-              <p className="mb-2 text-muted">Front-end Development</p>
+              <h4 className="mb-2 ">Skills</h4>
+              <p className="mb-2 ">SEO</p>
+              <p className="mb-2 ">Mobile Development</p>
+              <p className="mb-2 ">Mobile Design</p>
+              <p className="mb-2 ">Full Stack</p>
+              <p className="mb-2 ">User Interface Design</p>
+              <p className="mb-2 ">Front-end Development</p>
             </Col>
           </Row>
         </Col>

@@ -1,13 +1,13 @@
-import type { NextPage } from "next";
-import { Button, Card, Col, Row, Container } from "react-bootstrap";
-import Image from "next/image";
 import Layout from "@/components/main-layout";
+import type { NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { TbBrandLinkedin, TbBrandTwitter } from "react-icons/tb";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
+import { TbBrandLinkedin, TbBrandTwitter } from "react-icons/tb";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <Layout fluid home>
       <Container>
@@ -304,4 +304,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;

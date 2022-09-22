@@ -174,28 +174,28 @@ const ProjectDetails: NextPage = () => {
                       src="/images/design.png"
                       width="40"
                       height="40"
-                      alt="React Bootstrap logo"
+                      alt=""
                     />
                     <Image
                       className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
-                      alt="React Bootstrap logo"
+                      alt=""
                     />
                     <Image
                       className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
-                      alt="React Bootstrap logo"
+                      alt=""
                     />
                     <Image
                       className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
-                      alt="React Bootstrap logo"
+                      alt=""
                     />
                   </Col>
                   <Col md={4}>

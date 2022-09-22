@@ -15,7 +15,7 @@ const EmailSent: NextPage = () => {
               width="150"
               height="135"
               src="/images/check-email.png"
-              alt="React Bootstrap logo"
+              alt=""
             />
           </div>
           <h2 className="mb-2">Check your e-mail</h2>

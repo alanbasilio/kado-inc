@@ -259,7 +259,7 @@ const Student: NextPage = () => {
                 src={base64File ? base64File : "/images/photo.png"}
                 width="151"
                 height="151"
-                alt="React Bootstrap logo"
+                alt=""
               />
             </div>
 

@@ -38,7 +38,7 @@ const Profile: NextPage = () => {
               src={userImage(userInfo)}
               width="151"
               height="151"
-              alt="React Bootstrap logo"
+              alt=""
             />
             <Button className="mx-2" variant="primary" type="button">
               Upload new picture

@@ -11,8 +11,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["google.com", "vercel.app", "lh3.googleusercontent.com"],
+    domains: [
+      "google.com",
+      "vercel.app",
+      "lh3.googleusercontent.com",
+      "cloudflare-ipfs.com",
+    ],
   },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;

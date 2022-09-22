@@ -135,12 +135,7 @@ const DashboardLayout = (props) => {
             <Navbar bg="light" expand="lg" className="px-2">
               <Link href="/" passHref>
                 <Navbar.Brand className="d-block d-md-none">
-                  <Image
-                    src="/images/logo.svg"
-                    width="96"
-                    height="26"
-                    alt="React Bootstrap logo"
-                  />
+                  <Image src="/images/logo.svg" width="96" height="26" alt="" />
                 </Navbar.Brand>
               </Link>
 
@@ -249,7 +244,11 @@ const DashboardLayout = (props) => {
                 </Breadcrumb>
               )}
 
-              {props.title && <h3 className="fw-semibold">{props.title}</h3>}
+              {props.title && (
+                <h3 className={`fw-semibold ${!props.subtitle && "mb-4"}`}>
+                  {props.title}
+                </h3>
+              )}
               {props.subtitle && (
                 <p className="text-muted mb-4">{props.subtitle}</p>
               )}

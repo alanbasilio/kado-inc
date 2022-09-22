@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@react-oauth/google": "^0.2.6",
     "@reduxjs/toolkit": "^1.8.4",
     "@tabler/core": "^1.0.0-beta11",

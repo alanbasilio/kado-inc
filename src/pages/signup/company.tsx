@@ -139,7 +139,7 @@ const Company: NextPage = () => {
                 src="/images/photo.png"
                 width="151"
                 height="151"
-                alt="React Bootstrap logo"
+                alt=""
               />
             </div>
 
@@ -229,7 +229,7 @@ const Company: NextPage = () => {
                 width="214"
                 height="172"
                 src="/images/sticker.png"
-                alt="React Bootstrap logo"
+                alt=""
               />
             </div>
 
