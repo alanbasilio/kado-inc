@@ -65,7 +65,7 @@ const Example: NextPage = () => {
             <Form.Control
               placeholder="Test"
               type="text"
-              isInvalid={errors.test ? true : false}
+              isInvalid={errors.test && true}
               {...register("test", { required: true })}
             />
           </Form.Group>
@@ -76,7 +76,7 @@ const Example: NextPage = () => {
             <Form.Control
               placeholder="Test 2"
               type="text"
-              isInvalid={errors.test2 ? true : false}
+              isInvalid={errors.test2 && true}
               {...register("test2", { required: true })}
             />
           </Form.Group>
@@ -89,7 +89,7 @@ const Example: NextPage = () => {
           <Form.Control
             placeholder="Your E-mail"
             type="email"
-            isInvalid={errors.email ? true : false}
+            isInvalid={errors.email && true}
             {...register("email", { required: true })}
           />
         </InputGroup>

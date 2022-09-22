@@ -16,35 +16,35 @@ const CardProjectProgbar: NextPage = () => {
             <ProgBar />
           </div>
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"

@@ -8,39 +8,22 @@ import { useRouter } from "next/router";
 
 import Layout from "@/components/dashboard-layout";
 import API from "@/services";
+import userImage from "@/utils/userImage";
+import { useSelector } from "react-redux";
 
 const Profile: NextPage = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { loading, userInfo } = useSelector((state) => state.user);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: userInfo,
+  });
 
-  const onSubmit = (data) => {
-    setLoading(true);
-    API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal("Success", "Message", "success").then(function () {
-          router.push("/");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
+  const onSubmit = (data) => {};
 
   return (
     <Layout title="Edit Profile">
@@ -51,8 +34,8 @@ const Profile: NextPage = () => {
         <Row>
           <Col className="d-flex align-items-center mb-2">
             <Image
-              className="img-fluid border rounded-circle"
-              src="/images/photo.png"
+              className=" border rounded-circle"
+              src={userImage(userInfo)}
               width="151"
               height="151"
               alt="React Bootstrap logo"

@@ -62,7 +62,7 @@ const ProjectDetails: NextPage = () => {
     if (id && token) {
       getProjectDetails();
     }
-  }, [id, token]);
+  }, [id, token, getProjectDetails]);
 
   return (
     <Layout>
@@ -170,28 +170,28 @@ const ProjectDetails: NextPage = () => {
                 <Row className="mt-5">
                   <Col md={3}>
                     <Image
-                      className="img-fluid border rounded-circle"
+                      className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
                       alt="React Bootstrap logo"
                     />
                     <Image
-                      className="img-fluid border rounded-circle"
+                      className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
                       alt="React Bootstrap logo"
                     />
                     <Image
-                      className="img-fluid border rounded-circle"
+                      className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"
                       alt="React Bootstrap logo"
                     />
                     <Image
-                      className="img-fluid border rounded-circle"
+                      className=" border rounded-circle"
                       src="/images/design.png"
                       width="40"
                       height="40"

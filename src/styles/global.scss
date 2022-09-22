@@ -15,14 +15,16 @@
 
 .form-switch {
   &.form-check-reverse {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+    text-align: left;
   }
   .form-check-input:checked {
     background-color: $teal;
     border-color: $teal;
   }
+}
+
+.no-border {
+  border-width: 0;
 }
 
 .background-wave {

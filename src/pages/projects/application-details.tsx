@@ -12,7 +12,7 @@ const ApplicationDetails: NextPage = () => {
           <Row>
             <Col md={2}>
               <Image
-                className="img-fluid border rounded-circle"
+                className=" border rounded-circle"
                 src="/images/avatar.png"
                 width="80"
                 height="80"
@@ -29,7 +29,7 @@ const ApplicationDetails: NextPage = () => {
               <Row>
                 <Col md={12}>
                   <Image
-                    className="img-fluid"
+                    className=""
                     src="/images/uni-toronto.png"
                     width="150"
                     height="70"
@@ -38,21 +38,21 @@ const ApplicationDetails: NextPage = () => {
                 </Col>
                 <Col md={4}>
                   <Image
-                    className="img-fluid"
+                    className=""
                     src="/images/feather-mail.png"
                     width="22"
                     height="18"
                     alt="React Bootstrap logo"
                   />
                   <Image
-                    className="img-fluid"
+                    className=""
                     src="/images/linkedin.png"
                     width="22"
                     height="18"
                     alt="React Bootstrap logo"
                   />
                   <Image
-                    className="img-fluid"
+                    className=""
                     src="/images/share.png"
                     width="22"
                     height="18"

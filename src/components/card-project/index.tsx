@@ -13,35 +13,35 @@ const CardProject: NextPage = () => {
           <p className="mb-2 text-muted">15 Days left</p>
 
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/jerome.png"
             width="40"
             height="40"

@@ -16,7 +16,7 @@ export const getAllProjects = createAsyncThunk(
       const { data } = await API.get("projects", config);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -41,7 +41,7 @@ export const getMyProjects = createAsyncThunk(
       const { data } = await API.get("projects", config);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -66,7 +66,7 @@ export const getProject = createAsyncThunk(
       const { data } = await API.get(`project/${payload.id}/user`, config);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -91,7 +91,7 @@ export const newProject = createAsyncThunk(
       const { data } = await API.post(`project`, payload, config);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -123,7 +123,7 @@ export const getSkills = createAsyncThunk(
       });
 
       return AllSkills;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -155,7 +155,7 @@ export const getCompanies = createAsyncThunk(
       });
 
       return AllCompanies;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -187,7 +187,7 @@ export const getCities = createAsyncThunk(
       });
 
       return AllCities;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -214,7 +214,7 @@ export const getCategories = createAsyncThunk(
       console.log(data.data);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {

@@ -9,7 +9,7 @@ const CardApplications: NextPage = () => {
       <Row className="d-flex align-items-center">
         <Col md={3}>
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/avatar.png"
             width="80"
             height="80"
@@ -25,14 +25,14 @@ const CardApplications: NextPage = () => {
         </Col>
         <Col md={2}>
           <Image
-            className="img-fluid"
+            className=""
             src="/images/heart.png"
             width="22"
             height="18"
             alt="React Bootstrap logo"
           />
           <Image
-            className="img-fluid"
+            className=""
             src="/images/feather-mail.png"
             width="22"
             height="18"
@@ -58,7 +58,7 @@ const CardApplications: NextPage = () => {
         <hr className="mb-2" />
         <Col md={2}>
           <Image
-            className="img-fluid border rounded-circle"
+            className=" border rounded-circle"
             src="/images/uni-california.png"
             width="40"
             height="40"

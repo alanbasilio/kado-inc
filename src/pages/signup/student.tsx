@@ -255,7 +255,7 @@ const Student: NextPage = () => {
             <h2 className="mb-2">Upload your photo</h2>
             <div className="mb-2">
               <Image
-                className="img-fluid border rounded-circle"
+                className=" border rounded-circle"
                 src={base64File ? base64File : "/images/photo.png"}
                 width="151"
                 height="151"

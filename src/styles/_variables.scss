@@ -653,7 +653,7 @@ $blockquote-font-size: $font-size-base * 1.25 !default;
 $blockquote-footer-color: $gray-600 !default;
 $blockquote-footer-font-size: $small-font-size !default;
 
-$hr-margin-y: $spacer !default;
+$hr-margin-y: $spacer * 2 !default;
 $hr-color: #f1f1f1 !default;
 
 // fusv-disable
