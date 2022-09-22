@@ -43,15 +43,8 @@ const Profile: NextPage = () => {
   };
 
   return (
-    <Layout>
-      <Row>
-        <h2 className="mb-2">Edit Profile</h2>
-      </Row>
-      <Row
-        className=" bg-white rounded shadow p-2"
-        as="form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <Layout title="Edit Profile">
+      <Row className="mt-2 m-0 bg-white rounded p-2">
         <Col md={12}>
           <h4 className="mb-2">Personal and Company Information</h4>
         </Col>

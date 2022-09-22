@@ -13,6 +13,18 @@
   font-family: "Poppins", $font-family-sans-serif;
 }
 
+.form-switch {
+  &.form-check-reverse {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+  .form-check-input:checked {
+    background-color: $teal;
+    border-color: $teal;
+  }
+}
+
 .background-wave {
   position: relative;
   &:before {

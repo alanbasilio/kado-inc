@@ -27,6 +27,7 @@ import {
   MdOutlineNotifications,
   MdSearch,
   MdSettings,
+  MdPerson,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/slices/userSlice";
@@ -222,13 +223,18 @@ const DashboardLayout = (props) => {
                         <Nav.Link onClick={logoutUser}>
                           <MdLogout /> Logout
                         </Nav.Link>
+                        <Link href="/profile" passHref>
+                          <Nav.Link>
+                            <MdPerson /> Profile
+                          </Nav.Link>
+                        </Link>
                       </Nav>
                     </Popover>
                   </Overlay>
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
-            <Container className="py-2">
+            <Container className="p-2">
               {props.breadcrumb && props.step && props.setStep && (
                 <Breadcrumb className="mb-2">
                   {props.breadcrumb.map((item, index) => (
