@@ -215,14 +215,14 @@ const DashboardLayout = (props) => {
                   >
                     <Popover className="p-2">
                       <Nav className="flex-column">
-                        <Nav.Link onClick={logoutUser}>
-                          <MdLogout /> Logout
-                        </Nav.Link>
                         <Link href="/profile" passHref>
                           <Nav.Link>
                             <MdPerson /> Profile
                           </Nav.Link>
                         </Link>
+                        <Nav.Link onClick={logoutUser}>
+                          <MdLogout /> Logout
+                        </Nav.Link>
                       </Nav>
                     </Popover>
                   </Overlay>

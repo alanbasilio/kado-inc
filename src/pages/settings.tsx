@@ -39,7 +39,7 @@ const Settings: NextPage = () => {
 
   const onSubmit = (data) => {};
   const updatePassword = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   const notificationArray = [

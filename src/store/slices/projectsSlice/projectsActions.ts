@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "@/services";
+import swal from "sweetalert";
 
 export const getAllProjects = createAsyncThunk(
   "projects/all",
@@ -63,7 +64,7 @@ export const getProject = createAsyncThunk(
         },
       };
 
-      const { data } = await API.get(`project/${payload.id}/user`, config);
+      const { data } = await API.get(`project/${payload.id}/details`, config);
 
       return data;
     } catch (error: any) {
@@ -89,6 +90,10 @@ export const newProject = createAsyncThunk(
       };
 
       const { data } = await API.post(`project`, payload, config);
+
+      swal("Success", "Project Created with success!", "success").then(() => {
+        window.location.replace("/projects/" + data.id);
+      });
 
       return data;
     } catch (error: any) {
@@ -210,8 +215,6 @@ export const getCategories = createAsyncThunk(
       };
 
       const { data } = await API.get("categories", config);
-
-      console.log(data.data);
 
       return data;
     } catch (error: any) {

@@ -1,92 +1,41 @@
 import type { NextPage } from "next";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
-import swal from "sweetalert";
 
 import Layout from "@/components/dashboard-layout";
-import API from "@/services";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getProject } from "@/store/slices/projectsSlice/projectsActions";
 
 const ProjectDetails: NextPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
-  const [project, setProject] = useState();
+  const { loading, project } = useSelector((state) => state.projects);
+  const { userInfo } = useSelector((state) => state.user);
 
   const router = useRouter();
   const { id } = router.query;
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  const getProjectDetails = () => {
-    setLoading(true);
-    API.get(`/project/${id}/details`, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        setLoading(false);
-        setProject(response.data.data[0]);
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("token_kado")) {
-      setToken(JSON.parse(localStorage.getItem("token_kado")));
-      setUser(JSON.parse(localStorage.getItem("user_kado")));
-    } else {
-      router.push("/");
+    if (id) {
+      dispatch(getProject({ id: id }));
     }
-  }, [router]);
+  }, [dispatch, id]);
 
   useEffect(() => {
-    if (id && token) {
-      getProjectDetails();
-    }
-  }, [id, token, getProjectDetails]);
+    console.log("project", project);
+  }, [project]);
 
   return (
-    <Layout>
-      {project && (
-        <Row>
-          <h2>Projects</h2>
-          <h4 className="mb-2">Preview details of the project.</h4>
-
-          <Col
-            className="bg-white rounded shadow p-2"
-            md={{
-              span: 8,
-              offset: 2,
-            }}
-          >
-            <div className="mb-3">
-              <Button variant="light" disabled={loading}>
-                Mark complete
-              </Button>
-            </div>
-            <hr />
-            <h2 className="mt-3">{project.project_title_role}</h2>
+    project && (
+      <Layout title={project.project_title_role}>
+        <Row className="bg-white rounded p-2">
+          <Col md={12}>
             <p className="text-muted">
-              {`Added by ${user.first_name} ${user.last_name}`}, 4 hours ago
+              {`Added by ${userInfo.first_name} ${userInfo.last_name}`}, 4 hours
+              ago
             </p>
             <Row className="mt-3 mb-3 d-flex align-items-center">
               <Col md={12}>
@@ -210,8 +159,8 @@ const ProjectDetails: NextPage = () => {
             </Row>
           </Col>
         </Row>
-      )}
-    </Layout>
+      </Layout>
+    )
   );
 };
 

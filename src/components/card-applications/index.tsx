@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
+import Link from "next/link";
 
 const CardApplications: NextPage = () => {
   return (
@@ -49,9 +50,11 @@ const CardApplications: NextPage = () => {
           </Col>
           <Col md={6}>
             <div className="d-grid">
-              <Button variant="outline-primary" size="sm">
-                View Profile
-              </Button>
+              <Link href="/application-details" passHref>
+                <Button variant="outline-primary" size="sm">
+                  View Profile
+                </Button>
+              </Link>
             </div>
           </Col>
         </Row>

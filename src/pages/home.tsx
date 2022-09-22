@@ -6,13 +6,11 @@ import Layout from "@/components/dashboard-layout";
 
 const Home: NextPage = () => {
   return (
-    <Layout>
+    <Layout
+      title="Good day, Guy"
+      subtitle=" Have an amazing and productive time with ease"
+    >
       <Row className="d-flex justify-content-center">
-        <h2>Good day, Guy</h2>
-        <p className="mb-2 text-muted">
-          Have an amazing and productive time with ease
-        </p>
-
         <Col className="bg-white rounded shadow p-2" md={8}>
           <h4 className="my-2">Profile summary</h4>
           <hr className="my-2"></hr>

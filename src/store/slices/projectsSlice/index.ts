@@ -67,6 +67,7 @@ const projectsSlice = createSlice({
     },
     [getProject.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      state.project = payload.data[0];
     },
     [getProject.rejected]: (state, { payload }) => {
       state.loading = false;

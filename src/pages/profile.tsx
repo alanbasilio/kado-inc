@@ -1,13 +1,9 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import swal from "sweetalert";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
 import Layout from "@/components/dashboard-layout";
-import API from "@/services";
 import userImage from "@/utils/userImage";
 import { useSelector } from "react-redux";
 
