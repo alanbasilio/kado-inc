@@ -8,7 +8,12 @@ import { useRouter } from "next/router";
 import Layout from "@/components/dashboard-layout";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProject } from "@/store/slices/projectsSlice/projectsActions";
+import {
+  getProject,
+  studentApply,
+  StudentApplyProps,
+} from "@/store/slices/projectsSlice/projectsActions";
+import { SubmitHandler } from "react-hook-form";
 
 const ProjectDetails: NextPage = () => {
   const { loading, project } = useSelector((state) => state.projects);
@@ -18,21 +23,24 @@ const ProjectDetails: NextPage = () => {
   const { id } = router.query;
   const dispatch = useDispatch();
 
+  const handleApply = (data) => {
+    dispatch(studentApply({ user_id: userInfo.id, project_id: project.id }));
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(getProject({ id: id }));
     }
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log("project", project);
-  }, [project]);
-
   return (
     project && (
       <Layout title={project.project_title_role}>
         <Row className="bg-white rounded p-2">
-          <Col md={12}>
+          <Col md={3}>
+            <Button onClick={handleApply}>Apply</Button>
+          </Col>
+          {/* <Col md={12}>
             <p className="text-muted">
               {`Added by ${userInfo.first_name} ${userInfo.last_name}`}, 4 hours
               ago
@@ -157,7 +165,7 @@ const ProjectDetails: NextPage = () => {
                 </Row>
               </Col>
             </Row>
-          </Col>
+          </Col> */}
         </Row>
       </Layout>
     )

@@ -43,6 +43,10 @@
   font-weight: 500;
 }
 
+.dashboard {
+  height: calc(100vh - 88px);
+}
+
 .form-switch {
   &.form-check-reverse {
     text-align: left;

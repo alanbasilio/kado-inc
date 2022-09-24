@@ -2,6 +2,32 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "@/services";
 import swal from "sweetalert";
 
+export interface NewProjectData {
+  user_id: number;
+  company_organization_id: number;
+  project_title_role: string;
+  project_description: string;
+  job_skill_ids: [number];
+  paid: boolean;
+  duration_hours_week: number;
+  start_date: string;
+  due_date: string;
+  project_requeriments: string;
+  notify_project_following_user_ids: [number];
+  location_remote: boolean;
+  location_city_id: number;
+  expiration_date: string;
+  require_resume: boolean;
+  request_additional_documents: boolean;
+  icon: string;
+  base64Image: string;
+}
+
+export interface StudentApplyProps {
+  user_id: number;
+  project_id: number;
+}
+
 export const getAllProjects = createAsyncThunk(
   "projects/all",
   async (payload, { getState, rejectWithValue }) => {
@@ -79,7 +105,7 @@ export const getProject = createAsyncThunk(
 
 export const newProject = createAsyncThunk(
   "projects/new",
-  async (payload, { getState, rejectWithValue }) => {
+  async (payload: NewProjectData, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
@@ -215,6 +241,31 @@ export const getCategories = createAsyncThunk(
       };
 
       const { data } = await API.get("categories", config);
+
+      return data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const studentApply = createAsyncThunk(
+  "projects/categories",
+  async (payload: StudentApplyProps, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+      };
+
+      const { data } = await API.post("student-apply-project", payload, config);
 
       return data;
     } catch (error: any) {

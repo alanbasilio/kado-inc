@@ -14,16 +14,25 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/slices/userSlice";
 import styles from "./main-layout.module.scss";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-const Layout = (props) => {
+const Layout: React.FC = (props) => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const logoutUser = () => {
     dispatch(logout());
   };
 
-  return (
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/home");
+    }
+  }, [userInfo, router]);
+
+  return !userInfo ? (
     <div
       className={`${
         !props.home && styles.defaultBG
@@ -173,7 +182,7 @@ const Layout = (props) => {
         </Container>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export default Layout;

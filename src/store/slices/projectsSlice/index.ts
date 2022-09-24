@@ -8,6 +8,7 @@ import {
   getSkills,
   newProject,
   getCategories,
+  studentApply,
 } from "./projectsActions";
 
 const initialState = {
@@ -134,6 +135,18 @@ const projectsSlice = createSlice({
       state.categories = payload.data;
     },
     [getCategories.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // student apply
+    [studentApply.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [studentApply.fulfilled]: (state) => {
+      state.loading = false;
+    },
+    [studentApply.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
