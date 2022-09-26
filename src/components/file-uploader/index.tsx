@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-const FileUploader = ({ required, setValue, iconName, base64Name }) => {
+const FileUploader = ({ required, setValue, name }) => {
   const hiddenFileInput = useRef(null);
   const [base64, setBase64] = useState(null);
 
@@ -28,8 +28,7 @@ const FileUploader = ({ required, setValue, iconName, base64Name }) => {
     if (!fileUploaded) return;
     const base64File = await convertBase64(fileUploaded);
     setBase64(base64File);
-    setValue(iconName, base64File);
-    setValue(base64Name, base64File);
+    setValue(name, base64File);
   };
 
   return (

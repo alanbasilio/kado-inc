@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState, type PropsWithChildren } from "react";
+import userImage from "@/utils/userImage";
+
 import {
   Breadcrumb,
   Button,
@@ -101,10 +103,6 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
       hidden: false,
     },
   ];
-
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
 
   return userInfo ? (
     <Container fluid className="overflow-hidden">
@@ -212,7 +210,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 ref={ref}
               >
                 <Image
-                  src={userInfo.image_url_google || userInfo.image}
+                  src={userImage(userInfo)}
                   className="rounded-circle"
                   alt={`${userInfo.first_name} ${userInfo.last_name}`}
                   width={40}

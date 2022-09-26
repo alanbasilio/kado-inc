@@ -1,22 +1,21 @@
+import ProjectCategories from "@/mocks/project-categories.json";
 import type { NextPage } from "next";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import {
   Button,
   Col,
-  Form,
-  Row,
-  InputGroup,
-  Card,
   Container,
-  Spinner,
+  Form,
+  InputGroup,
+  Row,
+  Spinner
 } from "react-bootstrap";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import ProjectCategories from "@/mocks/project-categories.json";
 
 import Layout from "@/components/main-layout";
 import API from "@/services";

@@ -3,8 +3,23 @@ import { Col, Row } from "react-bootstrap";
 
 import CardProject from "@/components/card-project";
 import Layout from "@/components/dashboard-layout";
+import { getMyProjects } from "@/store/slices/projectsSlice/projectsActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const MyProjects: NextPage = () => {
+  const dispatch = useDispatch();
+  const { myProjects } = useSelector((state) => state.projects);
+  const { userInfo } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getMyProjects());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log(myProjects);
+  }, [myProjects]);
+
   return (
     <Layout title="My projects">
       <Row>

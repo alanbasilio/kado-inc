@@ -37,7 +37,7 @@ const projectsSlice = createSlice({
   extraReducers: {
     // my projects
     [getMyProjects.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getMyProjects.fulfilled]: (state, { payload }) => {
@@ -50,7 +50,7 @@ const projectsSlice = createSlice({
     },
     // all projects
     [getAllProjects.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getAllProjects.fulfilled]: (state, { payload }) => {
@@ -63,7 +63,7 @@ const projectsSlice = createSlice({
     },
     // single projects
     [getProject.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getProject.fulfilled]: (state, { payload }) => {
@@ -76,7 +76,7 @@ const projectsSlice = createSlice({
     },
     // new project
     [newProject.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [newProject.fulfilled]: (state, { payload }) => {
@@ -88,7 +88,7 @@ const projectsSlice = createSlice({
     },
     // get cities
     [getCities.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getCities.fulfilled]: (state, { payload }) => {
@@ -101,7 +101,7 @@ const projectsSlice = createSlice({
     },
     // get cities
     [getCompanies.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getCompanies.fulfilled]: (state, { payload }) => {
@@ -114,7 +114,7 @@ const projectsSlice = createSlice({
     },
     // get kills
     [getSkills.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getSkills.fulfilled]: (state, { payload }) => {
@@ -127,7 +127,7 @@ const projectsSlice = createSlice({
     },
     // get categories
     [getCategories.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [getCategories.fulfilled]: (state, { payload }) => {
@@ -140,7 +140,7 @@ const projectsSlice = createSlice({
     },
     // student apply
     [studentApply.pending]: (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.error = null;
     },
     [studentApply.fulfilled]: (state) => {

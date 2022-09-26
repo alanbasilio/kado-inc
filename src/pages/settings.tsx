@@ -38,9 +38,7 @@ const Settings: NextPage = () => {
   } = useForm();
 
   const onSubmit = (data) => {};
-  const updatePassword = (data) => {
-    // console.log(data);
-  };
+  const updatePassword = (data) => {};
 
   const notificationArray = [
     { id: "referral_orders_notifications", label: "Referral offers" },

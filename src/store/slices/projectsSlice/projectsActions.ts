@@ -65,7 +65,10 @@ export const getMyProjects = createAsyncThunk(
         },
       };
 
-      const { data } = await API.get("projects", config);
+      const { data } = await API.get(
+        `projects/user/${user.userInfo.id}`,
+        config
+      );
 
       return data;
     } catch (error: any) {

@@ -7,19 +7,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 
+import { userLogin, UserData } from "@/store/slices/userSlice/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  userLogin,
-  userLoginGoogle,
-} from "@/store/slices/userSlice/userActions";
 
 import Layout from "@/components/main-layout";
 import { useRouter } from "next/router";
-
-type FormValues = {
-  email: string;
-  password: string;
-};
 
 const Signin: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,12 +23,11 @@ const Signin: NextPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<UserData>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<UserData> = (data) => {
     dispatch(userLogin(data));
   };
-
 
   useEffect(() => {
     if (userInfo) {

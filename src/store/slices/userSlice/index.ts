@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./userActions";
 
+export interface User {
+  email: string;
+  first_name: string;
+  last_name: string;
+  google_id: string;
+  image_url_google: string;
+  name: string;
+  token_id: string;
+}
+
 const initialState = {
   loading: false,
   userInfo: null,
