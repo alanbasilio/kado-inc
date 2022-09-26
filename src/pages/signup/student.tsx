@@ -16,8 +16,6 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { GoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
 import ProjectCategories from "@/mocks/project-categories.json";
 
 import Layout from "@/components/main-layout";
@@ -43,28 +41,6 @@ const Student: NextPage = () => {
     setLoading(true);
     data.account_id = 1;
     API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        setUser(response.data.user);
-        reset();
-        setStep(2);
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
-  };
-
-  const googleSignup = (data) => {
-    setLoading(true);
-    data.account_id = 1;
-    API.post("/user/authenticate-google", data)
       .then((response) => {
         setLoading(false);
         setUser(response.data.user);
@@ -159,27 +135,6 @@ const Student: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
             <h2 className="mb-2">Getting Started</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
-            <div className="mb-2 d-flex justify-content-center">
-              <GoogleLogin
-                onSuccess={({ credential }) => {
-                  const userInfo = jwtDecode(credential);
-                  const user = {
-                    email: userInfo.email,
-                    first_name: userInfo.family_name,
-                    last_name: userInfo.given_name,
-                    google_id: userInfo.sub,
-                    image_url_google: userInfo.picture,
-                    name: userInfo.name,
-                    token_id: credential,
-                  };
-                  googleSignup(user);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            </div>
-            <p className="mb-2 text-muted">OR</p>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Row>
                 <Col md={6}>

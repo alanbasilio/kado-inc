@@ -14,8 +14,6 @@ import {
 } from "@/store/slices/userSlice/userActions";
 
 import Layout from "@/components/main-layout";
-import { GoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
 
 type FormValues = {
@@ -39,9 +37,6 @@ const Signin: NextPage = () => {
     dispatch(userLogin(data));
   };
 
-  const googleSignin = (data) => {
-    dispatch(userLoginGoogle(data));
-  };
 
   useEffect(() => {
     if (userInfo) {
@@ -55,27 +50,6 @@ const Signin: NextPage = () => {
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h2 className="mb-2">Sign in</h2>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
-          <div className="mb-2 d-flex justify-content-center">
-            <GoogleLogin
-              onSuccess={({ credential }) => {
-                const userData = jwtDecode(credential);
-                const user = {
-                  email: userData.email,
-                  first_name: userData.family_name,
-                  last_name: userData.given_name,
-                  google_id: userData.sub,
-                  image_url_google: userData.picture,
-                  name: userData.name,
-                  token_id: credential,
-                };
-                googleSignin(user);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
-          </div>
-          <p className="mb-2 text-muted">OR</p>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup className="mb-2">
               <InputGroup.Text>
