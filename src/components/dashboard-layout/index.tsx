@@ -31,6 +31,7 @@ import {
   MdPerson,
   MdSearch,
   MdSettings,
+  MdOutlineSearch,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -76,6 +77,12 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
       url: "/home",
       icon: <MdDashboard />,
       title: "Dashboard",
+      hidden: false,
+    },
+    {
+      url: "/find-jobs",
+      icon: <MdOutlineSearch />,
+      title: "Find Jobs",
       hidden: false,
     },
     {

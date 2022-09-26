@@ -53,7 +53,7 @@ export const getAllProjects = createAsyncThunk(
   }
 );
 
-export const getMyProjects = createAsyncThunk(
+export const getMyProject = createAsyncThunk(
   "projects/my",
   async (payload, { getState, rejectWithValue }) => {
     try {
@@ -65,10 +65,7 @@ export const getMyProjects = createAsyncThunk(
         },
       };
 
-      const { data } = await API.get(
-        `projects/user/${user.userInfo.id}`,
-        config
-      );
+      const { data } = await API.get(`projects/user/${payload.id}`, config);
 
       return data;
     } catch (error: any) {

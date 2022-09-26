@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import ProgBar from "@/components/progress-bar";
 import Link from "next/link";
 
-const CardProjectProgbar = ({ status }) => {
+const CardProjectProgbar = ({ status, project }) => {
   let badgeBg;
   if (status === "todo") {
     badgeBg = "light";
@@ -16,17 +16,21 @@ const CardProjectProgbar = ({ status }) => {
     badgeBg = "success";
   }
   return (
-    <Link href="/projects/14">
-      <Card className="mb-2">
+    <Link href={`/projects/${project.id}`} passHref>
+      <Card className="mb-2" as={"a"}>
         <Card.Body>
-          <Card.Title>{faker.name.jobTitle()}</Card.Title>
-          <Card.Subtitle>{faker.company.name()}</Card.Subtitle>
+          <Card.Title>{project.project_title_role}</Card.Title>
+          {project.CompanyOrganization ? (
+            <Card.Subtitle>{project.CompanyOrganization}</Card.Subtitle>
+          ) : (
+            <Card.Subtitle>Kado inc</Card.Subtitle>
+          )}
           <Badge bg={badgeBg} pill className="my-2">
-            {status === "completed"
+            {project.ProjectStatus.id === 3
               ? "COMPLETED"
               : `${faker.datatype.number(30)} days left`}
           </Badge>
-          {status !== "todo" && (
+          {project.ProjectStatus.id !== 1 && (
             <div className="mb-2">
               <ProgBar now={faker.datatype.number(100)} />
             </div>

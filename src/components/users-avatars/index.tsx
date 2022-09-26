@@ -1,28 +1,19 @@
+import userImage from "@/utils/userImage";
 import Image from "next/image";
-import { faker } from "@faker-js/faker";
-import fakerGenerator from "@/utils/fakerGenerator";
+import { useSelector } from "react-redux";
 
 const UsersAvatars: React.FC = () => {
-  const clientsSchema = {
-    image: "{{image.avatar}}",
-  };
-
-  const imagesArray = fakerGenerator(clientsSchema, 1, 7);
+  const { userInfo } = useSelector((state) => state.user);
 
   return (
     <div>
-      {imagesArray.map((item, index) => {
-        return (
-          <img
-            key={index}
-            className="me-n1 border rounded-circle"
-            src={item.image}
-            width={32}
-            height={32}
-            alt="teste"
-          />
-        );
-      })}
+      <Image
+        className="border rounded-circle"
+        src={userImage(userInfo)}
+        width={32}
+        height={32}
+        alt="teste"
+      />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <Layout
       title="Good day, Guy"
-      subtitle=" Have an amazing and productive time with ease"
+      subtitle="Have an amazing and productive time with ease"
     >
       <Row className="d-flex justify-content-center">
         <Col className="bg-white rounded shadow p-2" md={8}>
