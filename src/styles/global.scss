@@ -143,9 +143,12 @@
   background-color: #edffe1 !important;
 }
 
-.form-control .PhoneInputInput {
-  outline: none;
-  border: 0;
+.PhoneInput {
+  display: flex;
+  .PhoneInputInput {
+    outline: none;
+    border: 0;
+  }
 }
 
 .input-group-text {

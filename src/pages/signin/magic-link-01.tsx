@@ -13,17 +13,7 @@ const MagicLink: NextPage = () => {
         <Col md={5} className="bg-white rounded shadow p-2 text-center">
           <h2 className="mb-2">Sign in</h2>
           <p className="mb-2 text-muted">Welcome back, you’ve been missed!</p>
-          <Link href="#" passHref>
-            <a className="mb-2 d-block">
-              <Image
-                src="/images/login-google.png"
-                width={231}
-                height={51}
-                alt="login with google"
-              />
-            </a>
-          </Link>
-          <p className="mb-2 text-muted">OR</p>
+
           <Form>
             <InputGroup className="mb-2">
               <InputGroup.Text>

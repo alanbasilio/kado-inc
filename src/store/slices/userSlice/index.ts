@@ -2,16 +2,49 @@ import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./userActions";
 
 export interface User {
-  email: string;
-  first_name: string;
-  last_name: string;
-  google_id: string;
-  image_url_google: string;
-  name: string;
-  token_id: string;
+  id: number;
+  first_name: string | null;
+  last_name: string | null;
+  email: string | null;
+  image_url_google: string | null;
+  image: string | null;
+  google_id: string | null;
+  phone_number: string | null;
+  status: string | null;
+  is_reset_password: number;
+  createdAt: string;
+  updatedAt: string;
+  Profile: {
+    id: number;
+    name: string | null;
+    phone_number_company: string | null;
+    location: string | null;
+    website: string | null;
+    intro_yourself: string | null;
+    any_additional_comments: string | null;
+    description: string | null;
+    vip_code: string | null;
+    user_id: number;
+    account_id: number;
+    createdAt: string;
+    updatedAt: string;
+    AccountType: {
+      id: number;
+      name: string;
+    };
+  };
+  userType: string;
 }
 
-const initialState = {
+export interface InitialState {
+  loading: boolean;
+  userInfo: User | null;
+  userToken: string | null;
+  error: string | null;
+  success: boolean;
+}
+
+const initialState: InitialState = {
   loading: false,
   userInfo: null,
   userToken: null,

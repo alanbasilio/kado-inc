@@ -6,7 +6,7 @@ const EditorComponent = ({
   size = 400,
   control,
   name,
-  required,
+  required = false,
   setValue,
   initialValue,
 }) => {
@@ -25,6 +25,7 @@ const EditorComponent = ({
       rules={{ required: required }}
       render={({ field }) => (
         <Editor
+          {...field}
           apiKey={API_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
           onChange={onChange}

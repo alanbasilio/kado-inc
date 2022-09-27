@@ -1,5 +1,8 @@
-import { useSelector } from "react-redux";
+import { store } from "@/store";
 
-const UseUser = () => useSelector((state) => state.user);
+const UseUser = () => {
+  const state = store.getState();
+  return state.user;
+};
 
 export default UseUser;

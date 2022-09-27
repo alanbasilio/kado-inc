@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-const FileUploader = ({ required, setValue, name }) => {
+const FileUploader = ({ setValue, iconName, base64Name }) => {
   const hiddenFileInput = useRef(null);
   const [base64, setBase64] = useState(null);
 
@@ -28,12 +28,13 @@ const FileUploader = ({ required, setValue, name }) => {
     if (!fileUploaded) return;
     const base64File = await convertBase64(fileUploaded);
     setBase64(base64File);
-    setValue(name, base64File);
+    setValue(base64Name, base64File);
+    setValue(iconName, event.target.files[0].name);
   };
 
   return (
     <div className="d-flex align-items-center">
-      {base64 && <Image src={base64} width={47} height={47} alt={name} />}
+      {base64 && <Image src={base64} width={47} height={47} alt={iconName} />}
       <div>
         <Button
           onClick={handleClick}
@@ -48,7 +49,6 @@ const FileUploader = ({ required, setValue, name }) => {
           ref={hiddenFileInput}
           onChange={handleChange}
           style={{ width: 0, opacity: 0 }}
-          // required={required}
           name="icon"
           accept="image/jpeg, image/png"
         />

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 
 import { useRouter } from "next/router";
@@ -10,15 +10,12 @@ import {
   getProject,
   studentApply,
 } from "@/store/slices/projectsSlice/projectsActions";
-import UseProjects from "@/utils/useProjects";
-import UseUser from "@/utils/useUser";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProjectDetails: NextPage = () => {
-  const { loading, projects } = UseProjects();
-  const { userInfo } = UseUser();
-  const [project, setProjects] = useState();
+  const { loading, projects, project } = useSelector((state) => state.projects);
+  const { userInfo } = useSelector((state) => state.user);
 
   const router = useRouter();
   const { id } = router.query;
@@ -29,13 +26,8 @@ const ProjectDetails: NextPage = () => {
   };
 
   useEffect(() => {
-    if (projects) {
-      const tempProject = projects?.Project?.filter((item) => item.id == id);
-      if (tempProject) {
-        setProjects(tempProject[0]);
-      }
-    }
-  }, [projects, id]);
+    dispatch(getProject({ id: id }));
+  }, [dispatch, id]);
 
   return (
     project && (

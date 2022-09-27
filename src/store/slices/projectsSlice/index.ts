@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getAllProjects,
-  getMyProject,
+  getMyProjects,
   getProject,
   getCities,
   getCompanies,
@@ -36,15 +36,15 @@ const projectsSlice = createSlice({
   },
   extraReducers: {
     // my projects
-    [getMyProject.pending]: (state) => {
+    [getMyProjects.pending]: (state) => {
       // state.loading = true;
       state.error = null;
     },
-    [getMyProject.fulfilled]: (state, { payload }) => {
+    [getMyProjects.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.myProjects = payload.data;
+      state.myProjects = payload.User[0].Projects;
     },
-    [getMyProject.rejected]: (state, { payload }) => {
+    [getMyProjects.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

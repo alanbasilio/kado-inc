@@ -11,6 +11,7 @@ const SelectKADO = ({
   multiple = false,
   errors,
   defaultValue,
+  className,
 }) => {
   return (
     <Controller
@@ -35,11 +36,11 @@ const SelectKADO = ({
               setValue(name, results.value);
             }
           }}
-          className={
+          className={`${className} ${
             errors[name]
               ? "form-control p-0 is-invalid react-select"
               : "react-select"
-          }
+          }`}
           isMulti={multiple}
         />
       )}

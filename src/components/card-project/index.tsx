@@ -26,11 +26,11 @@ const CardProjectProgbar = ({ status, project }) => {
             <Card.Subtitle>Kado inc</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
-            {project.ProjectStatus.id === 3
+            {project.ProjectStatus?.id === 3
               ? "COMPLETED"
               : `${faker.datatype.number(30)} days left`}
           </Badge>
-          {project.ProjectStatus.id !== 1 && (
+          {project.ProjectStatus?.id !== 1 && (
             <div className="mb-2">
               <ProgBar now={faker.datatype.number(100)} />
             </div>

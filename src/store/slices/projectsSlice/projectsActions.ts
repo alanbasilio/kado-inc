@@ -53,7 +53,7 @@ export const getAllProjects = createAsyncThunk(
   }
 );
 
-export const getMyProject = createAsyncThunk(
+export const getMyProjects = createAsyncThunk(
   "projects/my",
   async (payload, { getState, rejectWithValue }) => {
     try {
@@ -65,13 +65,18 @@ export const getMyProject = createAsyncThunk(
         },
       };
 
-      const { data } = await API.get(`projects/user/${payload.id}`, config);
+      const { data } = await API.get(
+        `projects/user/student/${user.userInfo.id}`,
+        config
+      );
 
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -95,8 +100,10 @@ export const getProject = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -124,8 +131,12 @@ export const newProject = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
+
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
+
         return rejectWithValue(error.message);
       }
     }
@@ -148,7 +159,7 @@ export const getSkills = createAsyncThunk(
 
       const AllSkills = data.data.map((result) => {
         return {
-          value: result.label,
+          value: result.id,
           label: result.label,
         };
       });
@@ -254,7 +265,7 @@ export const getCategories = createAsyncThunk(
 );
 
 export const studentApply = createAsyncThunk(
-  "projects/categories",
+  "projects/apply",
   async (payload: StudentApplyProps, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
@@ -266,6 +277,10 @@ export const studentApply = createAsyncThunk(
       };
 
       const { data } = await API.post("student-apply-project", payload, config);
+
+      swal("Succes", data.message, "success").then(() =>
+        window.location.replace("/my-projects")
+      );
 
       return data;
     } catch (error: any) {

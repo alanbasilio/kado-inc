@@ -18,20 +18,20 @@ import {
   newProject,
   NewProjectData,
 } from "@/store/slices/projectsSlice/projectsActions";
+import { IsStudent } from "@/utils/profileType";
 import UseProjects from "@/utils/useProjects";
 import userImage from "@/utils/userImage";
-import UseUser from "@/utils/useUser";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { IsStudent } from "@/utils/profileType";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 const NewProject: NextPage = () => {
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState();
   const [subtitle, setSubtitle] = useState("Pick a category to get started.");
   const { loading, companies, cities, skills } = UseProjects();
-  const { userInfo } = UseUser();
+  const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch<any>();
   const router = useRouter();
 
@@ -60,30 +60,13 @@ const NewProject: NextPage = () => {
   };
 
   const onSubmit: SubmitHandler<NewProjectData> = (data) => {
-    // data = {
-    //   user_id: 3,
-    //   company_organization_id: 1,
-    //   project_title_role: data.project_title_role,
-    //   project_description:
-    //     "Review requirements, study industry standards and apply it to design a website.Deliverables: Collaborate with out Marketing team to define marketing strategy and create marketing collaterals Create the end-to-end website along with Google Analytics ",
-    //   job_skill_ids: [1, 2, 3, 4],
-    //   paid: true,
-    //   duration_hours_week: 40,
-    //   start_date: "2021-12-10",
-    //   due_date: "2021-12-10",
-    //   project_requeriments:
-    //     "Familiarity with webiste design best practices, attention to detail and collaborative working style. Website content management software experience preferred ( like Wordpress, Squarespace etc.)",
-    //   notify_project_following_user_ids: [1, 2],
-    //   location_remote: true,
-    //   location_city_id: 1,
-    //   expiration_date: "2021-12-12",
-    //   require_resume: true,
-    //   request_additional_documents: true,
-    //   icon: "1660342908180-kado.png",
-    //   base64Image: "",
-    // };
-    // data.user_id = userInfo?.id;
-    data.company_organization_id = 1;
+    data.duration_hours_week = Number(data.duration_hours_week);
+    data.start_date = moment(data.start_date).format("YYYY-MM-DD");
+    data.due_date = moment(data.due_date).format("YYYY-MM-DD");
+    data.expiration_date = moment(data.expiration_date).format("YYYY-MM-DD");
+    data.location_remote = data.location_remote === "1";
+    data.require_resume = data.require_resume === "1";
+    data.user_id = userInfo?.id;
     dispatch(newProject(data));
   };
 
@@ -105,6 +88,10 @@ const NewProject: NextPage = () => {
       router.push("/home");
     }
   }, [router]);
+
+  useEffect(() => {
+    console.log("values", values);
+  }, [values]);
 
   return (
     <Layout
@@ -142,7 +129,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Company / Organization
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8}>
                 <Select
                   defaultValue=""
                   placeholder="Select or Search for a Company"
@@ -163,7 +150,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Project Title/Role
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-2">
                 <Form.Control
                   placeholder="Enter a title"
                   isInvalid={errors.project_title_role && true}
@@ -173,7 +160,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Project Description
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-3">
                 <HTMLEditor
                   initialValue={values.project_description}
                   name={"project_description"}
@@ -185,9 +172,8 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Project Icon
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-2">
                 <FileUploader
-                  required={true}
                   setValue={setValue}
                   iconName="icon"
                   base64Name="base64Image"
@@ -196,7 +182,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Job Skills
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8}>
                 <Select
                   defaultValue=""
                   placeholder="Search your skills"
@@ -226,7 +212,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Duration (hours)
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-2">
                 <Form.Control
                   placeholder="Hours"
                   type="number"
@@ -237,7 +223,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Start Date
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-2">
                 <DatePicker
                   required={true}
                   errors={errors}
@@ -250,7 +236,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Due Date
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="mb-md-2">
                 <DatePicker
                   required={true}
                   errors={errors}
@@ -263,7 +249,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Project Requirements
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8}>
                 <HTMLEditor
                   initialValue={values.project_requeriments}
                   name={"project_requeriments"}
@@ -281,7 +267,7 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Notify this project to the following users
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8}>
                 <Select
                   defaultValue=""
                   placeholder="Select users"
@@ -297,22 +283,24 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Location
               </Form.Label>
-              <Col md={3} className="mb-2 d-flex align-items-center">
+              <Col md={3} className="d-flex align-items-center">
                 <Form.Check
                   type="radio"
                   label="Remote"
                   value={1}
+                  className="me-2 mb-md-2"
                   {...register("location_remote")}
                 />
                 <Form.Check
                   type="radio"
                   label="Local"
                   value={2}
+                  className="mb-md-2"
                   {...register("location_remote")}
                 />
               </Col>
-              <Col md={5} className="mb-2">
-                {values.location_remote === 2 && (
+              <Col md={5}>
+                {values.location_remote === "2" && (
                   <Select
                     defaultValue=""
                     placeholder="Select city"
@@ -322,13 +310,14 @@ const NewProject: NextPage = () => {
                     required={true}
                     setValue={setValue}
                     errors={errors}
+                    className="mb-md-2"
                   />
                 )}
               </Col>
               <Form.Label column md={4}>
                 Expiration Date
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8}>
                 <DatePicker
                   required={true}
                   errors={errors}
@@ -341,11 +330,12 @@ const NewProject: NextPage = () => {
               <Form.Label column md={4}>
                 Require resume
               </Form.Label>
-              <Col md={8} className="mb-2">
+              <Col md={8} className="d-flex align-items-center">
                 <Form.Check
                   type="radio"
                   label="Yes"
                   value={1}
+                  className="me-2"
                   {...register("require_resume")}
                 />
                 <Form.Check
@@ -371,6 +361,12 @@ const NewProject: NextPage = () => {
                   onClick={() => {
                     setStep(3);
                     setSubtitle("Preview details of the project");
+                    // if (isValid) {
+                    //   setStep(3);
+                    //   setSubtitle("Preview details of the project");
+                    // } else {
+                    //   swal("Error", "Please fill all fields", "error");
+                    // }
                   }}
                 >
                   Preview and Submit
@@ -391,7 +387,7 @@ const NewProject: NextPage = () => {
                 {values.icon && (
                   <Col md={2}>
                     <Image
-                      src={values.icon}
+                      src={values.base64Image}
                       width={47}
                       height={47}
                       alt={"icon"}
@@ -500,7 +496,7 @@ const NewProject: NextPage = () => {
 
         {step === 4 && (
           <Row className="mb-3 bg-white p-2 rounded">
-            <h5 className="mb-2">Project Terms of Service Agreement</h5>
+            <h5>Project Terms of Service Agreement</h5>
             <hr />
 
             <Row>
@@ -560,12 +556,12 @@ const NewProject: NextPage = () => {
                 <p className="text-muted mt-2">Your Signature</p>
               </Col>
               <Col md={9} className="mx-10">
-                <Form.Group className="mb-2">
+                <Form.Group>
                   <Form.Control
                     className="text-center"
                     placeholder="Sign your name here"
                     type="text"
-                    isInvalid={errors.signature ? true : false}
+                    isInvalid={errors.signature && true}
                     {...register("signature", { required: true })}
                   />
                 </Form.Group>
@@ -576,7 +572,7 @@ const NewProject: NextPage = () => {
                     <Form.Check
                       type="checkbox"
                       label="I've read and agree to the terms"
-                      isInvalid={errors.agree ? true : false}
+                      isInvalid={errors.agree && true}
                       {...register("agree", { required: true })}
                     />
                   </Form>
