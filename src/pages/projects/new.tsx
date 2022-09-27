@@ -60,6 +60,7 @@ const NewProject: NextPage = () => {
   };
 
   const onSubmit: SubmitHandler<NewProjectData> = (data) => {
+    data.location_city_id = data.location_city_id || 1;
     data.duration_hours_week = Number(data.duration_hours_week);
     data.start_date = moment(data.start_date).format("YYYY-MM-DD");
     data.due_date = moment(data.due_date).format("YYYY-MM-DD");
