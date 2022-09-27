@@ -26,8 +26,8 @@ const MyProjects: NextPage = () => {
         <Col md={4}>
           <h6 className="mb-2 fw-lightbold">TODO</h6>
           {myProjects.length &&
-            myProjects?.map((project) => (
-              <CardProject status="todo" project={project} />
+            myProjects?.map((project, index) => (
+              <CardProject key={index} status="todo" project={project} />
             ))}
         </Col>
 
