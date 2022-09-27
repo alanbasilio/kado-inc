@@ -77,7 +77,7 @@ const Layout: React.FC = (props) => {
             {userInfo ? (
               <>
                 <Navbar.Text className="ms-2 my-2 my-md-0">|</Navbar.Text>
-                <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${userInfo.first_name}`}</Navbar.Text>
+                <Navbar.Text className="ms-2 my-2 my-md-0">{`Welcome, ${userInfo?.first_name}`}</Navbar.Text>
                 <Button
                   size="sm"
                   variant="primary"

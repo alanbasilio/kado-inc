@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, type PropsWithChildren } from "react";
 import userImage from "@/utils/userImage";
 
 import {
+  Badge,
   Breadcrumb,
   Button,
   Col,
@@ -34,6 +35,7 @@ import {
   MdOutlineSearch,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 
 export interface Props {
   breadcrumb?: string[];
@@ -77,37 +79,61 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
       url: "/home",
       icon: <MdDashboard />,
       title: "Dashboard",
-      hidden: false,
+      show: true,
     },
     {
       url: "/find-jobs",
       icon: <MdOutlineSearch />,
       title: "Find Jobs",
-      hidden: false,
+      show: IsStudent(),
+    },
+    {
+      url: "/projects",
+      icon: <MdOutlineSearch />,
+      title: "Projects",
+      show: IsSchool(),
+    },
+    {
+      url: "/departments",
+      icon: <MdOutlineSearch />,
+      title: "Departments",
+      show: IsSchool(),
+    },
+    {
+      url: "/students",
+      icon: <MdOutlineSearch />,
+      title: "Students",
+      show: IsSchool(),
+    },
+    {
+      url: "/business-partners",
+      icon: <MdOutlineSearch />,
+      title: "Business Partners",
+      show: IsSchool(),
     },
     {
       url: "/bookmarks",
       icon: <MdBookmarkBorder />,
       title: "Bookmarks",
-      hidden: false,
+      show: !IsSchool(),
     },
     {
       url: "/my-projects",
       icon: <MdDashboardCustomize />,
       title: "My Projects",
-      hidden: false,
+      show: !IsSchool(),
     },
     {
       url: "/payments",
       icon: <AiOutlineBank />,
       title: "Payments",
-      hidden: false,
+      show: !IsSchool(),
     },
     {
       url: "/settings",
       icon: <MdSettings />,
       title: "Settings",
-      hidden: false,
+      show: true,
     },
   ];
 
@@ -129,13 +155,29 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 width={161}
                 height={45}
               />
+
+              {IsStudent() && (
+                <Badge pill bg="secondary" className="ms-auto">
+                  Student
+                </Badge>
+              )}
+              {IsSchool() && (
+                <Badge pill bg="primary" className="ms-auto">
+                  School
+                </Badge>
+              )}
+              {IsCompany() && (
+                <Badge pill bg="danger" className="ms-auto">
+                  Company
+                </Badge>
+              )}
             </a>
           </Link>
           <Nav className="flex-column mt-12">
             {routes.map((route, index) => {
               const isActive = router.pathname === route.url;
               return (
-                !route.hidden && (
+                route.show && (
                   <Link key={index} href={route.url} passHref>
                     <Nav.Link
                       className={`mb-4 p-0 ${
@@ -167,7 +209,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 {routes.map((route, index) => {
                   const isActive = router.pathname === route.url;
                   return (
-                    !route.hidden && (
+                    !route.show && (
                       <Link key={index} href={route.url} passHref>
                         <Nav.Link
                           className={`my-2 p-0 ${
@@ -187,26 +229,34 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 })}
               </div>
 
-              <Form className="w-50 d-none d-md-block">
-                <InputGroup>
-                  <InputGroup.Text>
-                    <MdSearch />
-                  </InputGroup.Text>
-                  <Form.Control
-                    placeholder="Search for students"
-                    type="search"
-                  />
-                </InputGroup>
-              </Form>
-              <Link href="/projects/new" passHref>
-                <Button
-                  variant="primary"
-                  className="me-1 ms-auto d-none d-md-block"
-                >
-                  <MdAdd /> Create Project
-                </Button>
-              </Link>
-              <Nav.Link className="mx-1 fs-4 d-none d-md-block">
+              {!IsStudent() && (
+                <Form className="w-50 d-none d-md-block">
+                  <InputGroup>
+                    <InputGroup.Text>
+                      <MdSearch />
+                    </InputGroup.Text>
+                    <Form.Control
+                      placeholder="Search for students"
+                      type="search"
+                    />
+                  </InputGroup>
+                </Form>
+              )}
+              {!IsStudent() && (
+                <Link href="/projects/new" passHref>
+                  <Button
+                    variant="primary"
+                    className="me-1 ms-auto d-none d-md-block"
+                  >
+                    <MdAdd /> Create Project
+                  </Button>
+                </Link>
+              )}
+              <Nav.Link
+                className={`mx-1 fs-4 d-none d-md-block ${
+                  IsStudent() && "me-1 ms-auto"
+                }`}
+              >
                 <MdOutlineNotifications />
               </Nav.Link>
               <Nav.Link className="mx-1 fs-4 d-none d-md-block">
@@ -217,9 +267,9 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 ref={ref}
               >
                 <Image
-                  src={userImage(userInfo)}
+                  src={userImage()}
                   className="rounded-circle"
-                  alt={`${userInfo.first_name} ${userInfo.last_name}`}
+                  alt={`${userInfo?.first_name} ${userInfo?.last_name}`}
                   width={40}
                   height={40}
                   onClick={handleClick}

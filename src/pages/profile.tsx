@@ -31,7 +31,7 @@ const Profile: NextPage = () => {
           <Col className="d-flex align-items-center mb-2">
             <Image
               className=" border rounded-circle"
-              src={userImage(userInfo)}
+              src={userImage()}
               width="151"
               height="151"
               alt=""

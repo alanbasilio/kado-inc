@@ -28,6 +28,7 @@ const userSlice = createSlice({
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
+      window.location.replace("/");
     },
   },
   extraReducers: {

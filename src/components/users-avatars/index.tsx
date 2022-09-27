@@ -9,7 +9,7 @@ const UsersAvatars: React.FC = () => {
     <div>
       <Image
         className="border rounded-circle"
-        src={userImage(userInfo)}
+        src={userImage()}
         width={32}
         height={32}
         alt="teste"

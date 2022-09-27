@@ -1,56 +1,65 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import Layout from "@/components/dashboard-layout";
 
-import { useDispatch, useSelector } from "react-redux";
 import {
   getProject,
   studentApply,
-  StudentApplyProps,
 } from "@/store/slices/projectsSlice/projectsActions";
-import { SubmitHandler } from "react-hook-form";
+import UseProjects from "@/utils/useProjects";
+import UseUser from "@/utils/useUser";
+import moment from "moment";
+import { useDispatch } from "react-redux";
 
 const ProjectDetails: NextPage = () => {
-  const { loading, project } = useSelector((state) => state.projects);
-  const { userInfo } = useSelector((state) => state.user);
+  const { loading, projects } = UseProjects();
+  const { userInfo } = UseUser();
+  const [project, setProjects] = useState();
 
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
 
   const handleApply = (data) => {
-    dispatch(studentApply({ user_id: userInfo.id, project_id: project.id }));
+    dispatch(studentApply({ user_id: userInfo?.id, project_id: project.id }));
   };
 
   useEffect(() => {
-    if (id) {
-      dispatch(getProject({ id: id }));
+    if (projects) {
+      const tempProject = projects?.Project?.filter((item) => item.id == id);
+      if (tempProject) {
+        setProjects(tempProject[0]);
+      }
     }
-  }, [dispatch, id]);
+  }, [projects, id]);
 
   return (
     project && (
-      <Layout title={project.project_title_role}>
+      <Layout title={"Projects"}>
         <Row className="bg-white rounded p-2">
-          <Col md={3}>
+          <Col md={12} className="text-end">
             <Button onClick={handleApply}>Apply</Button>
           </Col>
-          {/* <Col md={12}>
+
+          <Col md={12} className="mt-3">
+            <h3>{project.project_title_role}</h3>
+            <hr />
             <p className="text-muted">
-              {`Added by ${userInfo.first_name} ${userInfo.last_name}`}, 4 hours
-              ago
+              {`Added by ${userInfo?.first_name} ${userInfo?.last_name}`}, 4
+              hours ago
             </p>
             <Row className="mt-3 mb-3 d-flex align-items-center">
               <Col md={12}>
                 <Row className="d-flex align-items-center">
                   <Col md={4}>
                     <p className="text-muted">START DATE</p>
-                    <p className="text-muted">{project.start_date}</p>
+                    <p className="text-muted">
+                      {moment(project.start_date).format("DD/MM/YY")}
+                    </p>
                   </Col>
                   <Col md={4}>
                     <p className="text-muted">Labels</p>
@@ -83,24 +92,26 @@ const ProjectDetails: NextPage = () => {
                   </Col>
                   <Col md={4}>
                     <p className="text-muted">DUE DATE</p>
-                    <p className="text-muted">{project.due_date}</p>
+                    <p className="text-muted">
+                      {moment(project.DUE_DATE).format("DD/MM/YY")}
+                    </p>
                   </Col>
                 </Row>
                 <hr />
                 <h4 className="mt-3">Description</h4>
                 <p>{project.project_description}</p>
-                <h5 className="text-muted">SHOW FULL DESCRIPTION</h5>
+                {/* <h5 className="text-muted">SHOW FULL DESCRIPTION</h5> */}
 
-                <h4 className="mt-4">Attachment</h4>
+                {/* <h4 className="mt-4">Attachment</h4>
                 <Row className="bg-light py-2">
                   <Col md={3}></Col>
                   <Col md={4}>
                     <h4>Move_01.jpg</h4>
                     <p className="text-muted">384 KB</p>
                   </Col>
-                </Row>
+                </Row> */}
 
-                <h4 className="mt-4">Timeline</h4>
+                {/* <h4 className="mt-4">Timeline</h4>
                 <Row>
                   <Col md={1}>
                     <p>40%</p>
@@ -122,8 +133,8 @@ const ProjectDetails: NextPage = () => {
                       }}
                     ></div>
                   </Col>
-                </Row>
-                <h4 className="mt-4">Applications</h4>
+                </Row> */}
+                {/* <h4 className="mt-4">Applications</h4>
                 <Row className="mt-5">
                   <Col md={3}>
                     <Image
@@ -162,10 +173,10 @@ const ProjectDetails: NextPage = () => {
                       </Button>
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
               </Col>
             </Row>
-          </Col> */}
+          </Col>
         </Row>
       </Layout>
     )

@@ -118,7 +118,7 @@ export const newProject = createAsyncThunk(
       const { data } = await API.post(`project`, payload, config);
 
       swal("Success", "Project Created with success!", "success").then(() => {
-        window.location.replace("/projects/" + data.id);
+        window.location.replace("/my-projects/");
       });
 
       return data;
