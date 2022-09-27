@@ -1,13 +1,10 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
 import Layout from "@/components/dashboard-layout";
-import Image from "next/image";
-import userImage from "@/utils/userImage";
 
 const Settings: NextPage = () => {
   const router = useRouter();

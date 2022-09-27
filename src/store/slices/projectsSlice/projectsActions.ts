@@ -45,8 +45,10 @@ export const getAllProjects = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -125,18 +127,16 @@ export const newProject = createAsyncThunk(
       const { data } = await API.post(`project`, payload, config);
 
       swal("Success", "Project Created with success!", "success").then(() => {
-        window.location.replace("/my-projects/");
+        window.location.replace("/my-projects");
       });
 
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         swal("Error", error.response.data.message, "error");
-
         return rejectWithValue(error.response.data.message);
       } else {
         swal("Error", error.message, "error");
-
         return rejectWithValue(error.message);
       }
     }
@@ -167,8 +167,10 @@ export const getSkills = createAsyncThunk(
       return AllSkills;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -199,8 +201,10 @@ export const getCompanies = createAsyncThunk(
       return AllCompanies;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -231,8 +235,10 @@ export const getCities = createAsyncThunk(
       return AllCities;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -256,8 +262,10 @@ export const getCategories = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -278,15 +286,17 @@ export const studentApply = createAsyncThunk(
 
       const { data } = await API.post("student-apply-project", payload, config);
 
-      swal("Succes", data.message, "success").then(() =>
+      swal("Success", data.message, "success").then(() =>
         window.location.replace("/my-projects")
       );
 
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
+        swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }

@@ -1,15 +1,16 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
+import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import swal from "sweetalert";
 
 import Layout from "@/components/main-layout";
-import API from "@/services";
+import { updatePassword } from "@/store/slices/userSlice/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const NewPassword: NextPage = () => {
-  const [loading, setLoading] = useState(false);
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const router = useRouter();
   const { token, email } = router.query;
 
@@ -26,31 +27,9 @@ const NewPassword: NextPage = () => {
     }
 
     data.email = email;
+    data.token = token;
 
-    setLoading(true);
-    API.post("/user/update-password", data, {
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        setLoading(false);
-        swal("Success", "Your password was updated.", "success").then(
-          function () {
-            router.push("/signin");
-          }
-        );
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    dispatch(updatePassword(data));
   };
   return (
     <Layout signup>

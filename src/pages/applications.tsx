@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
 import CardApplications from "@/components/card-applications";

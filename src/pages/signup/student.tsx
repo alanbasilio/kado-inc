@@ -1,7 +1,6 @@
 import ProjectCategories from "@/mocks/project-categories.json";
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   Button,
@@ -10,7 +9,7 @@ import {
   Form,
   InputGroup,
   Row,
-  Spinner
+  Spinner,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
@@ -19,6 +18,8 @@ import swal from "sweetalert";
 
 import Layout from "@/components/main-layout";
 import API from "@/services";
+import { registerUser } from "@/store/slices/userSlice/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Student: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,10 +27,12 @@ const Student: NextPage = () => {
   const [user, setUser] = useState();
   const [step, setStep] = useState(1);
   const [active, setActive] = useState("");
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -37,25 +40,8 @@ const Student: NextPage = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    setLoading(true);
-    data.account_id = 1;
-    API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        setUser(response.data.user);
-        reset();
-        setStep(2);
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    data.account_id = 2;
+    dispatch(registerUser(data));
   };
 
   const convertBase64 = (file) => {

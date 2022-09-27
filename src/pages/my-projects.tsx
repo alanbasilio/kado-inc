@@ -10,15 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 const MyProjects: NextPage = () => {
   const dispatch = useDispatch();
   const { myProjects } = useSelector((state) => state.projects);
-  const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getMyProjects());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log(myProjects);
-  }, [myProjects]);
 
   return (
     <Layout title="My projects">

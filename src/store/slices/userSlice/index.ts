@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, userLogin } from "./userActions";
+import {
+  registerUser,
+  userLogin,
+  forgotPassword,
+  updatePassword,
+} from "./userActions";
 
 export interface User {
   id: number;
@@ -61,7 +66,6 @@ const userSlice = createSlice({
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
-      window.location.replace("/");
     },
   },
   extraReducers: {
@@ -84,11 +88,37 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    [registerUser.fulfilled]: (state, { payload }) => {
+    [registerUser.fulfilled]: (state) => {
       state.loading = false;
-      state.success = true; // registration successful
+      state.success = true;
     },
     [registerUser.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // forgot password
+    [forgotPassword.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [forgotPassword.fulfilled]: (state) => {
+      state.loading = false;
+      state.success = true;
+    },
+    [forgotPassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // update password
+    [updatePassword.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [updatePassword.fulfilled]: (state) => {
+      state.loading = false;
+      state.success = true;
+    },
+    [updatePassword.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

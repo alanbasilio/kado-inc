@@ -1,20 +1,20 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
 import { useState } from "react";
+import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import swal from "sweetalert";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
-import { useRouter } from "next/router";
 
 import Layout from "@/components/main-layout";
-import API from "@/services";
+import { registerUser } from "@/store/slices/userSlice/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const School: NextPage = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -26,30 +26,7 @@ const School: NextPage = () => {
 
   const onSubmit = (data) => {
     data.account_id = 2;
-    setLoading(true);
-    API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal(
-          "Success",
-          "Our Partner Relations Team will be in touch soon!",
-          "success"
-        ).then(function () {
-          setLoading(false);
-          router.push("/");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    dispatch(registerUser(data));
   };
 
   return (

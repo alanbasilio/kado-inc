@@ -1,22 +1,22 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import swal from "sweetalert";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useState } from "react";
+import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import Layout from "@/components/main-layout";
-import API from "@/services";
+import { registerUser } from "@/store/slices/userSlice/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Company: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isWaitingList, setIsWaitingList] = useState(true);
-  const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const router = useRouter();
+
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -27,29 +27,7 @@ const Company: NextPage = () => {
 
   const onSubmit = (data) => {
     data.account_id = 3;
-    setLoading(true);
-    API.post("/user", data)
-      .then((response) => {
-        setLoading(false);
-        reset();
-        swal(
-          "Success",
-          "Now you are in the waiting list. We will contact you very soon.",
-          "success"
-        ).then(function () {
-          router.push("/");
-        });
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    dispatch(registerUser(data));
   };
 
   return (
@@ -63,28 +41,16 @@ const Company: NextPage = () => {
           <Col md={5} className="bg-white rounded shadow p-2 text-center">
             <h2 className="mb-2">Join Waitlist</h2>
             <p className="mb-2 text-muted">Create an account to continue!</p>
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="First Name"
-                    type="text"
-                    isInvalid={errors.first_name ? true : false}
-                    {...register("first_name", { required: true })}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-2">
-                  <Form.Control
-                    placeholder="Last Name"
-                    type="text"
-                    isInvalid={errors.last_name ? true : false}
-                    {...register("last_name", { required: true })}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+
+            <Form.Group className="mb-2">
+              <Form.Control
+                placeholder="Company Name"
+                type="text"
+                isInvalid={errors.name ? true : false}
+                {...register("name", { required: true })}
+              />
+            </Form.Group>
+
             <InputGroup className="mb-2">
               <InputGroup.Text>
                 <MdOutlineAlternateEmail />
@@ -178,7 +144,7 @@ const Company: NextPage = () => {
                   <Button
                     variant="primary"
                     type="button"
-                    onClick={() => setStep(4)}
+                    onClick={() => setStep(3)}
                   >
                     Next
                   </Button>

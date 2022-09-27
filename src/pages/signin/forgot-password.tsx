@@ -1,17 +1,15 @@
 import type { NextPage } from "next";
-import { Button, Col, Form, Row, InputGroup, Spinner } from "react-bootstrap";
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { useRouter } from "next/router";
+import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import swal from "sweetalert";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 import Layout from "@/components/main-layout";
-import API from "@/services";
+import { forgotPassword } from "@/store/slices/userSlice/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const ForgotPassword: NextPage = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -21,22 +19,7 @@ const ForgotPassword: NextPage = () => {
 
   const onSubmit = (data) => {
     data.url_origin = `${window.location.origin}/signin/new-password`;
-    setLoading(true);
-    API.post("/user/forgot-password", data)
-      .then((response) => {
-        setLoading(false);
-        router.push("/signin/email-sent");
-      })
-      .catch((err) => {
-        setLoading(false);
-        swal(
-          "Error",
-          err.response?.data?.message
-            ? err.response?.data?.message
-            : "An error occured: " + err,
-          "error"
-        );
-      });
+    dispatch(forgotPassword(data));
   };
 
   return (

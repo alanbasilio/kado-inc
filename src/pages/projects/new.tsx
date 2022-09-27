@@ -24,7 +24,6 @@ import userImage from "@/utils/userImage";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import swal from "sweetalert";
 
 const NewProject: NextPage = () => {
   const [step, setStep] = useState(1);
