@@ -4,13 +4,12 @@ import { Col, Row } from "react-bootstrap";
 import CardProject from "@/components/card-project";
 import Layout from "@/components/dashboard-layout";
 import { getAllProjects } from "@/store/slices/projectsSlice/projectsActions";
-import UseProjects from "@/utils/useProjects";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Projects: NextPage = () => {
   const dispatch = useDispatch();
-  const { projects } = UseProjects();
+  const { projects } = useSelector((state) => state.projects);
 
   useEffect(() => {
     dispatch(getAllProjects());

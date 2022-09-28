@@ -82,7 +82,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
       show: true,
     },
     {
-      url: "/find-jobs",
+      url: "/projects",
       icon: <MdOutlineSearch />,
       title: "Find Jobs",
       show: IsStudent(),

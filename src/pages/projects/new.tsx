@@ -19,7 +19,6 @@ import {
   NewProjectData,
 } from "@/store/slices/projectsSlice/projectsActions";
 import { IsStudent } from "@/utils/profileType";
-import UseProjects from "@/utils/useProjects";
 import userImage from "@/utils/userImage";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -29,7 +28,9 @@ const NewProject: NextPage = () => {
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState();
   const [subtitle, setSubtitle] = useState("Pick a category to get started.");
-  const { loading, companies, cities, skills } = UseProjects();
+  const { loading, companies, cities, skills } = useSelector(
+    (state) => state.projects
+  );
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch<any>();
   const router = useRouter();
