@@ -20,10 +20,8 @@ const CardProjectProgbar = ({ status, project }) => {
       <Card className="mb-2" as={"a"}>
         <Card.Body>
           <Card.Title>{project.project_title_role}</Card.Title>
-          {project.CompanyOrganization ? (
+          {project.CompanyOrganization && (
             <Card.Subtitle>{project.CompanyOrganization.name}</Card.Subtitle>
-          ) : (
-            <Card.Subtitle>Kado inc</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
             {project.ProjectStatus?.id === 1 &&

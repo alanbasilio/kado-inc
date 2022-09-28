@@ -90,10 +90,10 @@ export const getMyProjects = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        // swal("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        // swal("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }

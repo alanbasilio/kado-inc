@@ -6,6 +6,7 @@ import Layout from "@/components/dashboard-layout";
 import { getMyProjects } from "@/store/slices/projectsSlice/projectsActions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IsStudent } from "@/utils/profileType";
 
 const MyProjects: NextPage = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,19 @@ const MyProjects: NextPage = () => {
       <Row>
         <Col md={4}>
           <h6 className="mb-2 fw-lightbold">TODO</h6>
-          {myProjects?.Project?.map(
-            (project, index) =>
-              project.ProjectStatus.id === 1 && (
-                <CardProject key={index} status="todo" project={project} />
+          {IsStudent()
+            ? myProjects?.User?.[0]?.Projects?.map(
+                (project, index) =>
+                  project.ProjectStatus.id === 1 && (
+                    <CardProject key={index} status="todo" project={project} />
+                  )
               )
-          )}
+            : myProjects?.Project?.map(
+                (project, index) =>
+                  project.ProjectStatus.id === 1 && (
+                    <CardProject key={index} status="todo" project={project} />
+                  )
+              )}
         </Col>
 
         <Col md={4}>
