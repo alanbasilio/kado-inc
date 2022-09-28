@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "@/services";
 import swal from "sweetalert";
+import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 
 export interface NewProjectData {
   user_id: number;
@@ -67,8 +68,22 @@ export const getMyProjects = createAsyncThunk(
         },
       };
 
+      let profile;
+
+      if (IsStudent()) {
+        profile = "student";
+      }
+
+      if (IsCompany()) {
+        profile = "company";
+      }
+
+      if (IsSchool()) {
+        profile = "company";
+      }
+
       const { data } = await API.get(
-        `projects/user/student/${user.userInfo.id}`,
+        `projects/user/${profile}/${user.userInfo.id}`,
         config
       );
 

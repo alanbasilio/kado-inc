@@ -20,30 +20,32 @@ const MyProjects: NextPage = () => {
       <Row>
         <Col md={4}>
           <h6 className="mb-2 fw-lightbold">TODO</h6>
-          {myProjects.length > 0 &&
-            myProjects?.map((project, index) => (
-              <CardProject key={index} status="todo" project={project} />
-            ))}
+          {myProjects?.Project?.map(
+            (project, index) =>
+              project.ProjectStatus.id === 1 && (
+                <CardProject key={index} status="todo" project={project} />
+              )
+          )}
         </Col>
 
         <Col md={4}>
           <h6 className="mb-2 fw-lightbold">ONGOING</h6>
-          {/* {myProjects?.map(
-            (project) =>
+          {myProjects?.Project?.map(
+            (project, index) =>
               project.ProjectStatus.id === 2 && (
-                <CardProject status="todo" project={project} />
+                <CardProject key={index} status="todo" project={project} />
               )
-          )} */}
+          )}
         </Col>
 
         <Col md={4}>
           <h6 className="mb-2 fw-lightbold">COMPLETED</h6>
-          {/* {myProjects?.map(
-            (project) =>
+          {myProjects?.Project?.map(
+            (project, index) =>
               project.ProjectStatus.id === 3 && (
-                <CardProject status="todo" project={project} />
+                <CardProject key={index} status="todo" project={project} />
               )
-          )} */}
+          )}
         </Col>
       </Row>
     </Layout>

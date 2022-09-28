@@ -2,13 +2,15 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "@/components/dashboard-layout";
+import { logout } from "@/store/slices/userSlice";
 
 const Settings: NextPage = () => {
   const router = useRouter();
   const { loading, userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -34,7 +36,7 @@ const Settings: NextPage = () => {
     formState: { errors: errorsPassword },
   } = useForm();
 
-  const onSubmit = (data) => {};
+  const onSubmitAccount = (data) => {};
   const updatePassword = (data) => {};
 
   const notificationArray = [
@@ -122,7 +124,7 @@ const Settings: NextPage = () => {
                 <h5 className="fw-semibold mb-0">Account Access</h5>
                 <hr />
               </Col>
-              <Row as="form" onSubmit={handleSubmitAccount(onSubmit)}>
+              <Row as="form" onSubmit={handleSubmitAccount(onSubmitAccount)}>
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label>Email Address</Form.Label>
@@ -211,6 +213,7 @@ const Settings: NextPage = () => {
                   className="bg-light text-muted"
                   variant="light"
                   disabled={loading}
+                  onClick={() => dispatch(logout())}
                 >
                   Log Out
                 </Button>

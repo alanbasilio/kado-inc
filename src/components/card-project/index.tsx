@@ -21,14 +21,15 @@ const CardProjectProgbar = ({ status, project }) => {
         <Card.Body>
           <Card.Title>{project.project_title_role}</Card.Title>
           {project.CompanyOrganization ? (
-            <Card.Subtitle>{project.CompanyOrganization}</Card.Subtitle>
+            <Card.Subtitle>{project.CompanyOrganization.name}</Card.Subtitle>
           ) : (
             <Card.Subtitle>Kado inc</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
-            {project.ProjectStatus?.id === 3
-              ? "COMPLETED"
-              : `${faker.datatype.number(30)} days left`}
+            {project.ProjectStatus?.id === 1 &&
+              `${faker.datatype.number(30)} days left`}
+
+            {project.ProjectStatus?.id === 3 && "COMPLETED"}
           </Badge>
           {project.ProjectStatus?.id !== 1 && (
             <div className="mb-2">

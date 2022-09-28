@@ -42,7 +42,7 @@ const projectsSlice = createSlice({
     },
     [getMyProjects.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.myProjects = payload.User[0].Projects;
+      state.myProjects = payload;
     },
     [getMyProjects.rejected]: (state, { payload }) => {
       state.loading = false;

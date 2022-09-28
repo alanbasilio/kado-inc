@@ -107,7 +107,7 @@ const NewProject: NextPage = () => {
         {step === 1 && (
           <Row>
             {categories.map((item) => (
-              <Col key={item.id} md={4} sm={6} className="my-1">
+              <Col key={item.id} md={4} sm={6} className="my-1 category-box">
                 <a
                   href="#"
                   className="bg-white rounded pt-4 pb-2 px-5 text-center d-block"

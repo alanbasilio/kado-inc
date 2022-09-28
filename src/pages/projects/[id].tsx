@@ -12,6 +12,7 @@ import {
 } from "@/store/slices/projectsSlice/projectsActions";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
+import { IsStudent } from "@/utils/profileType";
 
 const ProjectDetails: NextPage = () => {
   const { loading, projects, project } = useSelector((state) => state.projects);
@@ -33,11 +34,13 @@ const ProjectDetails: NextPage = () => {
     project && (
       <Layout title={"Projects"}>
         <Row className="bg-white rounded p-2">
-          <Col md={12} className="text-end">
-            <Button onClick={handleApply}>Apply</Button>
-          </Col>
+          {IsStudent() && (
+            <Col md={12} className="text-end mb-2">
+              <Button onClick={handleApply}>Apply</Button>
+            </Col>
+          )}
 
-          <Col md={12} className="mt-3">
+          <Col md={12}>
             <h3>{project.project_title_role}</h3>
             <hr />
             <p className="text-muted">
@@ -90,8 +93,14 @@ const ProjectDetails: NextPage = () => {
                   </Col>
                 </Row>
                 <hr />
-                <h4 className="mt-3">Description</h4>
-                <p>{project.project_description}</p>
+                <h4 className="my-3">Description</h4>
+
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: project.project_description,
+                  }}
+                />
+
                 {/* <h5 className="text-muted">SHOW FULL DESCRIPTION</h5> */}
 
                 {/* <h4 className="mt-4">Attachment</h4>
