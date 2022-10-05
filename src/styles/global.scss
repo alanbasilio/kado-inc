@@ -198,3 +198,27 @@
 .category-box a {
   min-height: 200px;
 }
+
+.college-draw,
+.students-draw {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+  }
+}
+
+.college-draw:before {
+  width: 167px;
+  height: 21px;
+  background: url(/images/home/college-draw.svg) center center no-repeat;
+  left: -5px;
+  bottom: 0px;
+}
+.students-draw:before {
+  width: 353px;
+  height: 54px;
+  background: url(/images/home/students-draw.svg) center center no-repeat;
+  right: -50px;
+  bottom: -22px;
+}

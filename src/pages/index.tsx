@@ -13,7 +13,10 @@ const HomePage: NextPage = () => {
       <Container>
         <Row className="align-items-center">
           <Col md={6}>
-            <h1>On-Demand Jobs for College Students.</h1>
+            <h1>
+              On-Demand Jobs for <span className="college-draw">College</span>{" "}
+              <span className="students-draw">Students</span>.
+            </h1>
             <p className="ff-poppins">
               On-demand marketplace connecting college students to projects,
               <br />
