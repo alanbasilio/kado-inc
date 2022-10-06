@@ -84,14 +84,8 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
     {
       url: "/projects",
       icon: <MdOutlineSearch />,
-      title: "Find Jobs",
-      show: IsStudent(),
-    },
-    {
-      url: "/projects",
-      icon: <MdOutlineSearch />,
-      title: "Projects",
-      show: IsSchool(),
+      title: IsSchool() ? "Projects" : "Find Jobs",
+      show: IsSchool() || IsStudent(),
     },
     {
       url: "/departments",
@@ -158,17 +152,17 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
               />
 
               {IsStudent() && (
-                <Badge pill bg="secondary" className="ms-auto">
+                <Badge pill bg="secondary" className="mt-1">
                   Student
                 </Badge>
               )}
               {IsSchool() && (
-                <Badge pill bg="primary" className="ms-auto">
+                <Badge pill bg="primary" className="mt-1">
                   School
                 </Badge>
               )}
               {IsCompany() && (
-                <Badge pill bg="danger" className="ms-auto">
+                <Badge pill bg="danger" className="mt-1">
                   Company
                 </Badge>
               )}
@@ -216,7 +210,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 {routes.map((route, index) => {
                   const isActive = router.pathname === route.url;
                   return (
-                    !route.show && (
+                    route.show && (
                       <Link key={index} href={route.url} passHref>
                         <Nav.Link
                           className={`my-2 p-0 ${
@@ -308,21 +302,27 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
               </Nav.Link>
             </Navbar.Collapse>
           </Navbar>
-          <Container className="p-2 overflow-scroll dashboard">
-            {breadcrumb && step && (
-              <Breadcrumb className="mb-2">
-                {breadcrumb.map((item, index) => (
-                  <Breadcrumb.Item key={index} active={step === index + 1}>
-                    {item}
-                  </Breadcrumb.Item>
-                ))}
-              </Breadcrumb>
-            )}
+          <Container className="overflow-scroll dashboard p-2">
+            <Row>
+              <Col>
+                {breadcrumb && step && (
+                  <Breadcrumb className="mb-2">
+                    {breadcrumb.map((item, index) => (
+                      <Breadcrumb.Item key={index} active={step === index + 1}>
+                        {item}
+                      </Breadcrumb.Item>
+                    ))}
+                  </Breadcrumb>
+                )}
 
-            {title && (
-              <h3 className={`fw-semibold ${!subtitle && "mb-4"}`}>{title}</h3>
-            )}
-            {subtitle && <p className="text-muted mb-4">{subtitle}</p>}
+                {title && (
+                  <h3 className={`fw-semibold ${!subtitle && "mb-4"}`}>
+                    {title}
+                  </h3>
+                )}
+                {subtitle && <p className="text-muted mb-4">{subtitle}</p>}
+              </Col>
+            </Row>
             {children}
           </Container>
         </Col>

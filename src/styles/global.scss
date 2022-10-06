@@ -39,8 +39,8 @@
   font-family: "Poppins", $font-family-sans-serif;
 }
 
-.fw-lightbold {
-  font-weight: 500;
+.fw-medium {
+  font-weight: $font-weight-medium;
 }
 
 .dashboard {

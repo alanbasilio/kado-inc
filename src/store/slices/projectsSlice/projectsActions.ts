@@ -83,7 +83,7 @@ export const getMyProjects = createAsyncThunk(
       }
 
       const { data } = await API.get(
-        `projects/user/${profile}/${user.userInfo.id}`,
+        `projects/user/${profile}/${user.userInfo?.id}`,
         config
       );
 

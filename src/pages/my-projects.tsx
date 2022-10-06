@@ -20,7 +20,7 @@ const MyProjects: NextPage = () => {
     <Layout title="My projects">
       <Row>
         <Col md={4}>
-          <h6 className="mb-2 fw-lightbold">TODO</h6>
+          <h6 className="mb-2 fw-medium">TODO</h6>
           {IsStudent()
             ? myProjects?.User?.[0]?.Projects?.map(
                 (project, index) =>
@@ -37,7 +37,7 @@ const MyProjects: NextPage = () => {
         </Col>
 
         <Col md={4}>
-          <h6 className="mb-2 fw-lightbold">ONGOING</h6>
+          <h6 className="mb-2 fw-medium">ONGOING</h6>
           {myProjects?.Project?.map(
             (project, index) =>
               project.ProjectStatus.id === 2 && (
@@ -47,7 +47,7 @@ const MyProjects: NextPage = () => {
         </Col>
 
         <Col md={4}>
-          <h6 className="mb-2 fw-lightbold">COMPLETED</h6>
+          <h6 className="mb-2 fw-medium">COMPLETED</h6>
           {myProjects?.Project?.map(
             (project, index) =>
               project.ProjectStatus.id === 3 && (
