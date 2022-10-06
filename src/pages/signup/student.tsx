@@ -196,7 +196,7 @@ const Student: NextPage = () => {
             <div className="mb-2">
               <Image
                 className="img-fluid border rounded-circle"
-                src={base64File ? base64File : "/images/photo.png"}
+                src={base64File ? base64File : "/images/applications/photo.png"}
                 width="151"
                 height="151"
                 alt=""

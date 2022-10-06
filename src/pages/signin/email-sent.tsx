@@ -14,7 +14,7 @@ const EmailSent: NextPage = () => {
             <Image
               width="150"
               height="135"
-              src="/images/check-email.png"
+              src="/images/applications/check-email.png"
               className="img-fluid"
               alt=""
             />

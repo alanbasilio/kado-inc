@@ -13,12 +13,15 @@ import {
 } from "@/store/slices/projectsSlice/projectsActions";
 import { useEffect, useState } from "react";
 import CardProject from "@/components/card-project";
+import UserImage from "@/utils/userImage";
+import StatusBox from "@/components/status-box";
 
 const Home: NextPage = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { myProjects, projects } = useSelector((state) => state.projects);
-  const [formattedProjects, setFormattedProjects] = useState([]);
+  const [allProjects, setAllProjects] = useState(null);
+  const [userProjects, setUserProjects] = useState(null);
 
   useEffect(() => {
     dispatch(getMyProjects());
@@ -28,9 +31,18 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (projects.Project) {
       const temp = Object.entries(projects.Project).map((entry) => entry[1]);
-      setFormattedProjects(temp);
+      setAllProjects(temp);
     }
   }, [projects]);
+
+  useEffect(() => {
+    if (IsStudent() && myProjects?.User?.[0]?.Projects) {
+      setUserProjects(myProjects?.User?.[0]?.Projects);
+    }
+    if (!IsStudent() && myProjects?.Project) {
+      setUserProjects(myProjects?.Project);
+    }
+  }, [myProjects]);
 
   return (
     <Layout
@@ -43,23 +55,29 @@ const Home: NextPage = () => {
         <Col md={8}>
           <div className="bg-white rounded border p-2 mb-2">
             <p className="fw-medium">Overview</p>
-            {/* <Row>
+            <Row>
               <Col>
-                <div className="status-box completed">
-                  <div className="icon">
-                    <i className="fa fa-facebook"></i>
-                  </div>
-                  <div className="status">completed</div>
-                  <div className="number">5</div>
-                </div>
+                <StatusBox
+                  status="completed"
+                  title="Completed"
+                  number={myProjects?.Overview?.completed}
+                />
               </Col>
               <Col>
-                <div className="status-box completed">Ongoing</div>
+                <StatusBox
+                  status="ongoing"
+                  title="Ongoing"
+                  number={myProjects?.Overview?.ongoing}
+                />
               </Col>
               <Col>
-                <div className="status-box completed">Overdue</div>
+                <StatusBox
+                  status="overdue"
+                  title="Overdue"
+                  number={myProjects?.Overview?.todo}
+                />
               </Col>
-            </Row> */}
+            </Row>
           </div>
           {IsCompany() && (
             <div className="bg-white rounded border p-2 mb-2">
@@ -88,7 +106,7 @@ const Home: NextPage = () => {
                 <Col md={2}>
                   <Image
                     className="img-fluid border rounded-circle"
-                    src="/images/avatar.png"
+                    src={UserImage()}
                     width="80"
                     height="80"
                     alt=""
@@ -106,7 +124,7 @@ const Home: NextPage = () => {
                     <Col className="text-center" md={12}>
                       <Image
                         className="img-fluid"
-                        src="/images/uni-toronto.png"
+                        src="/images/applications/uni-toronto.png"
                         width="150"
                         height="70"
                         alt=""
@@ -115,21 +133,21 @@ const Home: NextPage = () => {
                     <Col md={12} className="text-center">
                       <Image
                         className="img-fluid"
-                        src="/images/feather-mail.png"
+                        src="/images/applications/feather-mail.png"
                         width="22"
                         height="18"
                         alt=""
                       />
                       <Image
                         className="img-fluid"
-                        src="/images/linkedin.png"
+                        src="/images/applications/linkedin.png"
                         width="22"
                         height="18"
                         alt=""
                       />
                       <Image
                         className="img-fluid"
-                        src="/images/share.png"
+                        src="/images/applications/share.png"
                         width="22"
                         height="18"
                         alt=""
@@ -205,27 +223,16 @@ const Home: NextPage = () => {
               </Link>
             </p>
             <hr />
-            {IsStudent()
-              ? myProjects?.User?.[0]?.Projects?.map(
-                  (project, index) =>
-                    index === 0 && (
-                      <CardProject
-                        key={index}
-                        status="todo"
-                        project={project}
-                      />
-                    )
-                )
-              : myProjects?.Project?.map(
-                  (project, index) =>
-                    index === 0 && (
-                      <CardProject
-                        key={index}
-                        status="todo"
-                        project={project}
-                      />
-                    )
-                )}
+            {userProjects ? (
+              userProjects.map(
+                (project, index) =>
+                  index === 0 && (
+                    <CardProject key={index} status="todo" project={project} />
+                  )
+              )
+            ) : (
+              <p>No projects yet.</p>
+            )}
           </div>
           {IsCompany() && (
             <div className="bg-white rounded border p-2">
@@ -248,11 +255,19 @@ const Home: NextPage = () => {
                 </Link>
               </p>
               <hr />
-              {formattedProjects.map(
-                (project, index) =>
-                  index <= 2 && (
-                    <CardProject key={index} status="todo" project={project} />
-                  )
+              {allProjects ? (
+                allProjects.map(
+                  (project, index) =>
+                    index <= 2 && (
+                      <CardProject
+                        key={index}
+                        status="todo"
+                        project={project}
+                      />
+                    )
+                )
+              ) : (
+                <p>No projects yet.</p>
               )}
             </div>
           )}

@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
 import Link from "next/link";
+import UserImage from "@/utils/userImage";
 
 const CardApplications: NextPage = () => {
   return (
@@ -11,7 +12,7 @@ const CardApplications: NextPage = () => {
         <Col md={3}>
           <Image
             className="img-fluid border rounded-circle"
-            src="/images/avatar.png"
+            src={UserImage()}
             width="80"
             height="80"
             alt=""
@@ -27,14 +28,14 @@ const CardApplications: NextPage = () => {
         <Col md={2}>
           <Image
             className="img-fluid"
-            src="/images/heart.png"
+            src="/images/applications/heart.png"
             width="22"
             height="18"
             alt=""
           />
           <Image
             className="img-fluid"
-            src="/images/feather-mail.png"
+            src="/images/applications/feather-mail.png"
             width="22"
             height="18"
             alt=""
@@ -62,7 +63,7 @@ const CardApplications: NextPage = () => {
         <Col md={2}>
           <Image
             className="img-fluid border rounded-circle"
-            src="/images/uni-california.png"
+            src="/images/applications/uni-california.png"
             width="40"
             height="40"
             alt=""

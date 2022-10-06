@@ -25,7 +25,7 @@ const Signup: NextPage = () => {
                   <Card.Img
                     width={70}
                     height={70}
-                    src="/images/student-icon.svg"
+                    src="/images/icons/signup/student-icon.svg"
                   />
                 </div>
 
@@ -46,7 +46,7 @@ const Signup: NextPage = () => {
                   <Card.Img
                     width={70}
                     height={70}
-                    src="/images/school-icon.svg"
+                    src="/images/icons/signup/school-icon.svg"
                   />
                 </div>
 
@@ -67,7 +67,7 @@ const Signup: NextPage = () => {
                   <Card.Img
                     width={70}
                     height={70}
-                    src="/images/business-icon.svg"
+                    src="/images/icons/signup/business-icon.svg"
                   />
                 </div>
 

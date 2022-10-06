@@ -1,0 +1,44 @@
+.Container {
+  width: 100%;
+  border-radius: 5px;
+  border-left: 5px solid #000;
+  padding: 12px 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &.completed {
+    background: rgba(#e2f8d4, 0.5);
+    border-color: #6eda28;
+  }
+
+  &.ongoing {
+    background: rgba(#f2f3fe, 0.5);
+    border-color: #4857ec;
+  }
+
+  &.overdue {
+    background: rgba(#ffcccc, 0.5);
+    border-color: #ff0000;
+  }
+}
+
+.Icon {
+  margin-bottom: 5px;
+}
+
+.Title {
+  font-size: 12px;
+  color: #242424;
+  margin-bottom: 0;
+}
+
+.Number {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 34px;
+  color: #242424;
+  font-weight: 500;
+}

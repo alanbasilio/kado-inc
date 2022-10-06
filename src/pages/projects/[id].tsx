@@ -141,28 +141,28 @@ const ProjectDetails: NextPage = () => {
                   <Col md={3}>
                     <Image
                       className="img-fluid border rounded-circle"
-                      src="/images/design.png"
+                      src="/images/applications/design.png"
                       width={40}
                       height={40}
                       alt=""
                     />
                     <Image
                       className="img-fluid border rounded-circle"
-                      src="/images/design.png"
+                      src="/images/applications/design.png"
                       width={40}
                       height={40}
                       alt=""
                     />
                     <Image
                       className="img-fluid border rounded-circle"
-                      src="/images/design.png"
+                      src="/images/applications/design.png"
                       width={40}
                       height={40}
                       alt=""
                     />
                     <Image
                       className="img-fluid border rounded-circle"
-                      src="/images/design.png"
+                      src="/images/applications/design.png"
                       width={40}
                       height={40}
                       alt=""

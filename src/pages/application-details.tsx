@@ -3,6 +3,7 @@ import Image from "next/future/image";
 
 import { Button, Col, Row } from "react-bootstrap";
 import Layout from "@/components/dashboard-layout";
+import UserImage from "@/utils/userImage";
 
 const ApplicationDetails: NextPage = () => {
   return (
@@ -13,7 +14,7 @@ const ApplicationDetails: NextPage = () => {
             <Col md={2}>
               <Image
                 className="img-fluid border rounded-circle"
-                src="/images/avatar.png"
+                src={UserImage()}
                 width="80"
                 height="80"
                 alt=""
@@ -30,7 +31,7 @@ const ApplicationDetails: NextPage = () => {
                 <Col md={12}>
                   <Image
                     className="img-fluid"
-                    src="/images/uni-toronto.png"
+                    src="/images/applications/uni-toronto.png"
                     width="150"
                     height="70"
                     alt=""
@@ -39,21 +40,21 @@ const ApplicationDetails: NextPage = () => {
                 <Col md={4}>
                   <Image
                     className="img-fluid"
-                    src="/images/feather-mail.png"
+                    src="/images/applications/feather-mail.png"
                     width="22"
                     height="18"
                     alt=""
                   />
                   <Image
                     className="img-fluid"
-                    src="/images/linkedin.png"
+                    src="/images/applications/linkedin.png"
                     width="22"
                     height="18"
                     alt=""
                   />
                   <Image
                     className="img-fluid"
-                    src="/images/share.png"
+                    src="/images/applications/share.png"
                     width="22"
                     height="18"
                     alt=""

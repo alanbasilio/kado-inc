@@ -102,7 +102,7 @@ const Company: NextPage = () => {
             <div className="mb-2">
               <Image
                 className="img-fluid border rounded-circle"
-                src="/images/photo.png"
+                src="/images/applications/photo.png"
                 width="151"
                 height="151"
                 alt=""
@@ -194,7 +194,7 @@ const Company: NextPage = () => {
               <Image
                 width="214"
                 height="172"
-                src="/images/sticker.png"
+                src="/images/applications/sticker.png"
                 className="img-fluid"
                 alt=""
               />
