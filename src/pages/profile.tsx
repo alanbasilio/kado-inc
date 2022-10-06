@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
@@ -30,7 +30,7 @@ const Profile: NextPage = () => {
         <Row>
           <Col className="d-flex align-items-center mb-2">
             <Image
-              className=" border rounded-circle"
+              className="img-fluid border rounded-circle"
               src={userImage()}
               width="151"
               height="151"
@@ -146,7 +146,7 @@ const Profile: NextPage = () => {
         </Col>
         <Col md={12} className="text-end">
           <Button variant="primary" type="submit" disabled={loading}>
-            {loading && <Spinner animation="border" />}{" "}
+            {loading && <Spinner animation="border" className="me-2" />}
             {loading ? "Loading..." : "Submit"}
           </Button>
         </Col>

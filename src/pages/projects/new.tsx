@@ -20,9 +20,10 @@ import {
 } from "@/store/slices/projectsSlice/projectsActions";
 import { IsStudent } from "@/utils/profileType";
 import userImage from "@/utils/userImage";
-import Image from "next/image";
+import Image from "next/future/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 const NewProject: NextPage = () => {
   const [step, setStep] = useState(1);
@@ -34,6 +35,7 @@ const NewProject: NextPage = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch<any>();
   const router = useRouter();
+  const today = moment().toDate();
 
   const {
     register,
@@ -101,7 +103,6 @@ const NewProject: NextPage = () => {
       subtitle={subtitle}
       breadcrumb={breadcrumbArray}
       step={step}
-      setStep={setStep}
     >
       <Form onSubmit={handleSubmit(onSubmit)} className="container-md">
         {step === 1 && (
@@ -113,7 +114,13 @@ const NewProject: NextPage = () => {
                   className="bg-white rounded pt-4 pb-2 px-5 text-center d-block"
                   onClick={() => handleCategory(item.id)}
                 >
-                  <Image width={65} height={65} src={item.icon} alt="title" />
+                  <Image
+                    width={65}
+                    height={65}
+                    src={item.icon}
+                    alt="title"
+                    className="img-fluid"
+                  />
                   <h5 className="mt-2 mb-0">{item.title}</h5>
                 </a>
               </Col>
@@ -232,7 +239,7 @@ const NewProject: NextPage = () => {
                   control={control}
                   name="start_date"
                   setValue={setValue}
-                  minDate={moment().toDate()}
+                  minDate={today}
                 />
               </Col>
               <Form.Label column md={4}>
@@ -326,7 +333,7 @@ const NewProject: NextPage = () => {
                   control={control}
                   name="expiration_date"
                   setValue={setValue}
-                  minDate={moment().toDate()}
+                  minDate={today}
                 />
               </Col>
               <Form.Label column md={4}>
@@ -361,14 +368,12 @@ const NewProject: NextPage = () => {
                 <Button
                   size="lg"
                   onClick={() => {
-                    setStep(3);
-                    setSubtitle("Preview details of the project");
-                    // if (isValid) {
-                    //   setStep(3);
-                    //   setSubtitle("Preview details of the project");
-                    // } else {
-                    //   swal("Error", "Please fill all fields", "error");
-                    // }
+                    if (isValid) {
+                      setStep(3);
+                      setSubtitle("Preview details of the project");
+                    } else {
+                      swal("Error", "Please fill all fields", "error");
+                    }
                   }}
                 >
                   Preview and Submit
@@ -393,6 +398,7 @@ const NewProject: NextPage = () => {
                       width={47}
                       height={47}
                       alt={"icon"}
+                      className="img-fluid"
                     />
                   </Col>
                 )}
@@ -426,7 +432,7 @@ const NewProject: NextPage = () => {
                     width={47}
                     height={47}
                     alt={"icon"}
-                    className="rounded-circle"
+                    className="img-fluid border rounded-circle"
                   />
                 </Col>
 
@@ -588,7 +594,9 @@ const NewProject: NextPage = () => {
                       type="submit"
                       disabled={loading || !values.agree || !values.signature}
                     >
-                      {loading && <Spinner animation="border" />}{" "}
+                      {loading && (
+                        <Spinner animation="border" className="me-2" />
+                      )}
                       {loading ? "Publishing" : "Post Project"}
                     </Button>
                   </div>

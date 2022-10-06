@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import {
   Button,
@@ -47,7 +47,13 @@ const Layout: React.FC = (props) => {
         <Container>
           <Link href="/" passHref>
             <Navbar.Brand>
-              <Image src="/images/logo.svg" width="96" height="26" alt="" />
+              <Image
+                src="/images/logo.svg"
+                width="96"
+                height="26"
+                className="img-fluid"
+                alt="logo"
+              />
             </Navbar.Brand>
           </Link>
           <Navbar.Toggle />

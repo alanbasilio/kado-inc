@@ -74,7 +74,7 @@ const Signin: NextPage = () => {
             </p>
             <div className="d-grid gap-2 my-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                {loading && <Spinner animation="border" />}{" "}
+                {loading && <Spinner animation="border" className="me-2" />}
                 {loading ? "Loading..." : "Sign in"}
               </Button>
             </div>

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import { Button, Col, Row } from "react-bootstrap";
 
 import Layout from "@/components/dashboard-layout";
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
           <Row>
             <Col md={2}>
               <Image
-                className=" border rounded-circle"
+                className="img-fluid border rounded-circle"
                 src="/images/avatar.png"
                 width="80"
                 height="80"
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
               <Row>
                 <Col className="text-center" md={12}>
                   <Image
-                    className=""
+                    className="img-fluid"
                     src="/images/uni-toronto.png"
                     width="150"
                     height="70"
@@ -44,21 +44,21 @@ const Home: NextPage = () => {
                 </Col>
                 <Col md={12} className="text-center">
                   <Image
-                    className=""
+                    className="img-fluid"
                     src="/images/feather-mail.png"
                     width="22"
                     height="18"
                     alt=""
                   />
                   <Image
-                    className=""
+                    className="img-fluid"
                     src="/images/linkedin.png"
                     width="22"
                     height="18"
                     alt=""
                   />
                   <Image
-                    className=""
+                    className="img-fluid"
                     src="/images/share.png"
                     width="22"
                     height="18"

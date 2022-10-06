@@ -1,5 +1,5 @@
 import { logout } from "@/store/slices/userSlice";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState, type PropsWithChildren } from "react";
@@ -154,6 +154,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                 alt={`KADO INC`}
                 width={161}
                 height={45}
+                className="img-fluid"
               />
 
               {IsStudent() && (
@@ -199,7 +200,13 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
           <Navbar bg="light" expand="lg" className="px-2">
             <Link href="/" passHref>
               <Navbar.Brand className="d-block d-md-none">
-                <Image src="/images/logo.svg" width="96" height="26" alt="" />
+                <Image
+                  src="/images/logo.svg"
+                  width="96"
+                  height="26"
+                  className="img-fluid"
+                  alt="logo"
+                />
               </Navbar.Brand>
             </Link>
 
@@ -268,7 +275,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
               >
                 <Image
                   src={userImage()}
-                  className="rounded-circle"
+                  className="img-fluid border rounded-circle"
                   alt={`${userInfo?.first_name} ${userInfo?.last_name}`}
                   width={40}
                   height={40}

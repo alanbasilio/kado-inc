@@ -58,7 +58,7 @@ const NewPassword: NextPage = () => {
             </InputGroup>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                {loading && <Spinner animation="border" />}{" "}
+                {loading && <Spinner animation="border" className="me-2" />}
                 {loading ? "Loading..." : "Create"}
               </Button>
             </div>

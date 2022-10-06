@@ -3,7 +3,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import Link from "next/link";
 
 import Layout from "@/components/main-layout";
-import Image from "next/image";
+import Image from "next/future/image";
 
 const EmailSent: NextPage = () => {
   return (
@@ -15,6 +15,7 @@ const EmailSent: NextPage = () => {
               width="150"
               height="135"
               src="/images/check-email.png"
+              className="img-fluid"
               alt=""
             />
           </div>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
@@ -34,11 +34,19 @@ const FileUploader = ({ setValue, iconName, base64Name }) => {
 
   return (
     <div className="d-flex align-items-center">
-      {base64 && <Image src={base64} width={47} height={47} alt={iconName} />}
+      {base64 && (
+        <Image
+          src={base64}
+          className="img-fluid"
+          width={47}
+          height={47}
+          alt={iconName}
+        />
+      )}
       <div>
         <Button
           onClick={handleClick}
-          className={base64 && "ms-7"}
+          className={base64 ? "ms-7" : ""}
           variant="outline-primary"
           size="sm"
         >

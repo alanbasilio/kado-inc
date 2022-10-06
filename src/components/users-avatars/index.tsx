@@ -1,5 +1,5 @@
 import userImage from "@/utils/userImage";
-import Image from "next/image";
+import Image from "next/future/image";
 import { useSelector } from "react-redux";
 
 const UsersAvatars: React.FC = () => {
@@ -8,7 +8,7 @@ const UsersAvatars: React.FC = () => {
   return (
     <div>
       <Image
-        className="border rounded-circle"
+        className="img-fluid border rounded-circle"
         src={userImage()}
         width={32}
         height={32}

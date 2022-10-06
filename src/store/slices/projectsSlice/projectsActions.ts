@@ -46,10 +46,10 @@ export const getAllProjects = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -90,10 +90,10 @@ export const getMyProjects = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        // swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        // swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -117,10 +117,10 @@ export const getProject = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -148,10 +148,10 @@ export const newProject = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -182,10 +182,10 @@ export const getSkills = createAsyncThunk(
       return AllSkills;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -216,10 +216,10 @@ export const getCompanies = createAsyncThunk(
       return AllCompanies;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -250,10 +250,10 @@ export const getCities = createAsyncThunk(
       return AllCities;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -277,10 +277,10 @@ export const getCategories = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }
@@ -308,10 +308,10 @@ export const studentApply = createAsyncThunk(
       return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
+        console.error("Error", error.response.data.message, "error");
         return rejectWithValue(error.response.data.message);
       } else {
-        swal("Error", error.message, "error");
+        console.error("Error", error.message, "error");
         return rejectWithValue(error.message);
       }
     }

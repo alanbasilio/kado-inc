@@ -13,6 +13,7 @@ import {
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { IsStudent } from "@/utils/profileType";
+import Image from "next/future/image";
 
 const ProjectDetails: NextPage = () => {
   const { loading, projects, project } = useSelector((state) => state.projects);
@@ -101,18 +102,18 @@ const ProjectDetails: NextPage = () => {
                   }}
                 />
 
-                {/* <h5 className="text-muted">SHOW FULL DESCRIPTION</h5> */}
+                <h5 className="text-muted">SHOW FULL DESCRIPTION</h5>
 
-                {/* <h4 className="mt-4">Attachment</h4>
+                <h4 className="mt-4">Attachment</h4>
                 <Row className="bg-light py-2">
                   <Col md={3}></Col>
                   <Col md={4}>
                     <h4>Move_01.jpg</h4>
                     <p className="text-muted">384 KB</p>
                   </Col>
-                </Row> */}
+                </Row>
 
-                {/* <h4 className="mt-4">Timeline</h4>
+                <h4 className="mt-4">Timeline</h4>
                 <Row>
                   <Col md={1}>
                     <p>40%</p>
@@ -134,36 +135,36 @@ const ProjectDetails: NextPage = () => {
                       }}
                     ></div>
                   </Col>
-                </Row> */}
-                {/* <h4 className="mt-4">Applications</h4>
+                </Row>
+                <h4 className="mt-4">Applications</h4>
                 <Row className="mt-5">
                   <Col md={3}>
                     <Image
-                      className=" border rounded-circle"
+                      className="img-fluid border rounded-circle"
                       src="/images/design.png"
-                      width="40"
-                      height="40"
+                      width={40}
+                      height={40}
                       alt=""
                     />
                     <Image
-                      className=" border rounded-circle"
+                      className="img-fluid border rounded-circle"
                       src="/images/design.png"
-                      width="40"
-                      height="40"
+                      width={40}
+                      height={40}
                       alt=""
                     />
                     <Image
-                      className=" border rounded-circle"
+                      className="img-fluid border rounded-circle"
                       src="/images/design.png"
-                      width="40"
-                      height="40"
+                      width={40}
+                      height={40}
                       alt=""
                     />
                     <Image
-                      className=" border rounded-circle"
+                      className="img-fluid border rounded-circle"
                       src="/images/design.png"
-                      width="40"
-                      height="40"
+                      width={40}
+                      height={40}
                       alt=""
                     />
                   </Col>
@@ -174,7 +175,7 @@ const ProjectDetails: NextPage = () => {
                       </Button>
                     </div>
                   </Col>
-                </Row> */}
+                </Row>
               </Col>
             </Row>
           </Col>

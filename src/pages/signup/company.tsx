@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import { useState } from "react";
 import { Button, Col, Form, InputGroup, Row, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -89,7 +89,7 @@ const Company: NextPage = () => {
             </Form.Group>
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={loading}>
-                {loading && <Spinner animation="border" />}{" "}
+                {loading && <Spinner animation="border" className="me-2" />}
                 {loading ? "Loading..." : "Join Waitlist"}
               </Button>
             </div>
@@ -101,7 +101,7 @@ const Company: NextPage = () => {
             <h2 className="mb-2">Upload your photo</h2>
             <div className="mb-2">
               <Image
-                className=" border rounded-circle"
+                className="img-fluid border rounded-circle"
                 src="/images/photo.png"
                 width="151"
                 height="151"
@@ -195,6 +195,7 @@ const Company: NextPage = () => {
                 width="214"
                 height="172"
                 src="/images/sticker.png"
+                className="img-fluid"
                 alt=""
               />
             </div>

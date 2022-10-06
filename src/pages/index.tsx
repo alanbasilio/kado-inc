@@ -1,6 +1,6 @@
 import Layout from "@/components/main-layout";
 import type { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { AiOutlineFacebook } from "react-icons/ai";
@@ -41,6 +41,7 @@ const HomePage: NextPage = () => {
               width="649"
               height="587"
               alt=""
+              className="img-fluid"
             />
           </Col>
         </Row>
@@ -69,10 +70,11 @@ const HomePage: NextPage = () => {
             <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
-                  alt=""
                   width={67}
                   height={66}
                   src="/images/home/company-icon.svg"
+                  alt=""
+                  className="img-fluid"
                 />
                 <h5 className="my-1">COMPANIES LOVE THE SPEED</h5>
                 <p className="fs-12">
@@ -88,10 +90,11 @@ const HomePage: NextPage = () => {
             <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
-                  alt=""
                   width={67}
                   height={66}
                   src="/images/home/school-icon.svg"
+                  alt=""
+                  className="img-fluid"
                 />
                 <h5 className="my-1">SCHOOLS PREPARE THEIR STUDENTS</h5>
                 <p className="fs-12">
@@ -106,10 +109,11 @@ const HomePage: NextPage = () => {
             <Col md={4} className="px-md-3">
               <div className="bg-white rounded shadow px-3 py-4 h-100">
                 <Image
-                  alt=""
                   width={67}
                   height={66}
                   src="/images/home/student-icon.svg"
+                  alt=""
+                  className="img-fluid"
                 />
                 <h5 className="my-1">STUDENTS LOVE THIS MODEL</h5>
                 <p className="fs-12">
@@ -133,6 +137,7 @@ const HomePage: NextPage = () => {
               width="622"
               height="499"
               alt=""
+              className="img-fluid"
             />
           </Col>
           <Col md={6}>
@@ -164,6 +169,7 @@ const HomePage: NextPage = () => {
               src="/images/home/dashboard-example.png"
               width="997"
               height="759"
+              className="img-fluid"
               alt=""
             />
           </Col>
@@ -174,6 +180,7 @@ const HomePage: NextPage = () => {
               src="/images/home/integrations.svg"
               width="524"
               height="373"
+              className="img-fluid"
               alt=""
             />
           </Col>
@@ -211,7 +218,13 @@ const HomePage: NextPage = () => {
             xs={12}
             className="my-2 my-md-0 text-center text-md-start"
           >
-            <Image src="/images/logo.svg" width="127" height="35" alt="" />
+            <Image
+              src="/images/logo.svg"
+              width="127"
+              height="35"
+              className="img-fluid"
+              alt=""
+            />
             <p className="fs-14 text-muted">
               © 2020 Rocket Global. <br />
               All rights reserved.

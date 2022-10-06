@@ -1,6 +1,6 @@
 import ProjectCategories from "@/mocks/project-categories.json";
 import type { NextPage } from "next";
-import Image from "next/image";
+import Image from "next/future/image";
 import { useState } from "react";
 import {
   Button,
@@ -181,7 +181,7 @@ const Student: NextPage = () => {
               </Form.Group>
               <div className="d-grid gap-2">
                 <Button variant="primary" type="submit" disabled={loading}>
-                  {loading && <Spinner animation="border" />}{" "}
+                  {loading && <Spinner animation="border" className="me-2" />}
                   {loading ? "Loading..." : "Signup"}
                 </Button>
               </div>
@@ -195,7 +195,7 @@ const Student: NextPage = () => {
             <h2 className="mb-2">Upload your photo</h2>
             <div className="mb-2">
               <Image
-                className=" border rounded-circle"
+                className="img-fluid border rounded-circle"
                 src={base64File ? base64File : "/images/photo.png"}
                 width="151"
                 height="151"
@@ -248,7 +248,9 @@ const Student: NextPage = () => {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-2">
                     <Button variant="primary" type="submit">
-                      {loading && <Spinner animation="border" />}{" "}
+                      {loading && (
+                        <Spinner animation="border" className="me-2" />
+                      )}
                       {loading ? "Loading..." : "Next"}
                     </Button>
                     <a className="text-muted" onClick={() => setStep(4)}>
@@ -276,7 +278,13 @@ const Student: NextPage = () => {
                       href="#"
                       className="shadow rounded bg-white rounded pt-4 pb-2 px-5 text-center d-block"
                     >
-                      <Image width={65} height={65} src={icon} alt="title" />
+                      <Image
+                        width={65}
+                        height={65}
+                        src={icon}
+                        alt="title"
+                        className="img-fluid"
+                      />
                       <h5 className="mt-2 mb-0">{title}</h5>
                     </a>
                   </Col>

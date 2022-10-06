@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import type { NextPage } from "next";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
@@ -10,7 +10,7 @@ const CardApplications: NextPage = () => {
       <Row className="d-flex align-items-center">
         <Col md={3}>
           <Image
-            className="border rounded-circle"
+            className="img-fluid border rounded-circle"
             src="/images/avatar.png"
             width="80"
             height="80"
@@ -26,14 +26,14 @@ const CardApplications: NextPage = () => {
         </Col>
         <Col md={2}>
           <Image
-            className=""
+            className="img-fluid"
             src="/images/heart.png"
             width="22"
             height="18"
             alt=""
           />
           <Image
-            className=""
+            className="img-fluid"
             src="/images/feather-mail.png"
             width="22"
             height="18"
@@ -61,7 +61,7 @@ const CardApplications: NextPage = () => {
         <hr className="mb-2" />
         <Col md={2}>
           <Image
-            className=" border rounded-circle"
+            className="img-fluid border rounded-circle"
             src="/images/uni-california.png"
             width="40"
             height="40"
