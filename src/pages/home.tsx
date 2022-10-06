@@ -82,7 +82,7 @@ const Home: NextPage = () => {
           )}
           {IsStudent() && (
             <div className="bg-white rounded border p-2">
-              <h4 className="my-2">Profile summary</h4>
+              <p className="fw-medium mb-2">Profile summary</p>
               <hr className="my-2"></hr>
               <Row>
                 <Col md={2}>
