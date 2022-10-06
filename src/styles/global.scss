@@ -202,6 +202,7 @@
 .college-draw,
 .students-draw {
   position: relative;
+  display: inline-block;
   &:before {
     content: "";
     position: absolute;
