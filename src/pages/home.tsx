@@ -16,6 +16,7 @@ import {
 import { IsCompany, IsStudent } from "@/utils/profileType";
 import UserImage from "@/utils/userImage";
 import { MdModeEdit } from "react-icons/md";
+import { isCompleted } from "@/utils/daysLeft";
 
 const Home: NextPage = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -31,17 +32,24 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (projects.Project) {
-      const temp = Object.entries(projects.Project).map((entry) => entry[1]);
+      let temp = Object.entries(projects.Project).map((entry) => entry[1]);
+      temp = temp.filter((project) => !isCompleted(project?.due_date));
       setAllProjects(temp);
     }
   }, [projects]);
 
   useEffect(() => {
     if (IsStudent() && myProjects?.User?.[0]?.Projects) {
-      setUserProjects(myProjects?.User?.[0]?.Projects);
+      setUserProjects(
+        myProjects?.User?.[0]?.Projects.filter(
+          (project) => !isCompleted(project?.due_date)
+        )
+      );
     }
     if (!IsStudent() && myProjects?.Project) {
-      setUserProjects(myProjects?.Project);
+      setUserProjects(
+        myProjects?.Project.filter((project) => !isCompleted(project?.due_date))
+      );
     }
   }, [myProjects]);
 
