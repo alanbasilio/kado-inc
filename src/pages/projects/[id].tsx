@@ -1,187 +1,167 @@
-import type { NextPage } from "next";
-import { useEffect } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-
-import { useRouter } from "next/router";
-
 import Layout from "@/components/dashboard-layout";
-
-import {
-  getProject,
-  studentApply,
-} from "@/store/slices/projectsSlice/projectsActions";
-import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import ModalApply from "@/components/modal-apply";
+import { getProject } from "@/store/slices/projectsSlice/projectsActions";
 import { IsStudent } from "@/utils/profileType";
+import UserImage from "@/utils/userImage";
+import moment from "moment";
+import type { NextPage } from "next";
 import Image from "next/future/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Badge, Button, Col, Row } from "react-bootstrap";
+import { HiOutlineClock } from "react-icons/hi";
+import { IoBriefcase } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProjectDetails: NextPage = () => {
-  const { loading, projects, project } = useSelector((state) => state.projects);
+  const { project } = useSelector((state) => state.projects);
   const { userInfo } = useSelector((state) => state.user);
+  const [showApply, setShowApply] = useState(false);
 
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
-
-  const handleApply = (data) => {
-    dispatch(studentApply({ user_id: userInfo?.id, project_id: project?.id }));
-  };
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     dispatch(getProject({ id: id }));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (!project?.Users.find((user) => user.id === userInfo?.id)) {
+      setShowApply(true);
+    }
+  }, [project, userInfo]);
+
   return (
-    project && (
-      <Layout title={"Projects"}>
-        <Row className="bg-white rounded p-2">
-          {IsStudent() && (
-            <Col md={12} className="text-end mb-2">
-              <Button onClick={handleApply}>Apply</Button>
-            </Col>
-          )}
-
-          <Col md={12}>
-            <h3>{project?.project_title_role}</h3>
-            <hr />
-            <p className="text-muted">
-              {`Added by ${userInfo?.first_name} ${userInfo?.last_name}`}, 4
-              hours ago
+    <Layout title={project?.project_title_role}>
+      <Row className="bg-white rounded p-4">
+        <Col
+          md={IsStudent() && showApply ? 9 : 12}
+          className="d-flex align-items-center"
+        >
+          <Image
+            className="img-fluid border rounded-circle me-2"
+            src={UserImage()}
+            width="55"
+            height="55"
+            alt=""
+          />
+          <div>
+            {project?.CompanyOrganization && (
+              <p className="fs-20 text-muted">
+                {project?.CompanyOrganization?.name}
+              </p>
+            )}
+            <p className="mb-0">
+              {project?.location_remote && (
+                <Badge bg="primary" pill className="me-1 fs-14">
+                  Remote
+                </Badge>
+              )}
+              <Badge bg="primary" pill className="me-1 fs-14">
+                <IoBriefcase /> {project?.duration_hours_week} hrs/week
+              </Badge>
             </p>
-            <Row className="mt-3 mb-3 d-flex align-items-center">
-              <Col md={12}>
-                <Row className="d-flex align-items-center">
-                  <Col md={4}>
-                    <p className="text-muted">START DATE</p>
-                    <p className="text-muted">
-                      {moment(project?.start_date).format("DD/MM/YY")}
-                    </p>
-                  </Col>
-                  <Col md={4}>
-                    <p className="text-muted">Labels</p>
-
-                    <Row className="mb-3">
-                      <Col md={5}>
-                        <div>
-                          <Button
-                            variant="primary"
-                            size="sm"
-                            disabled={loading}
-                          >
-                            Webdesign
-                          </Button>
-                        </div>
-                      </Col>
-                      <Col md={6}>
-                        <div>
-                          <Button
-                            className="ms-2"
-                            variant="primary"
-                            size="sm"
-                            disabled={loading}
-                          >
-                            Unisense
-                          </Button>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col md={4}>
-                    <p className="text-muted">DUE DATE</p>
-                    <p className="text-muted">
-                      {moment(project?.DUE_DATE).format("DD/MM/YY")}
-                    </p>
-                  </Col>
-                </Row>
-                <hr />
-                <h4 className="my-3">Description</h4>
-
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: project?.project_description,
-                  }}
-                />
-
-                <h5 className="text-muted">SHOW FULL DESCRIPTION</h5>
-
-                <h4 className="mt-4">Attachment</h4>
-                <Row className="bg-light py-2">
-                  <Col md={3}></Col>
-                  <Col md={4}>
-                    <h4>Move_01.jpg</h4>
-                    <p className="text-muted">384 KB</p>
-                  </Col>
-                </Row>
-
-                <h4 className="mt-4">Timeline</h4>
-                <Row>
-                  <Col md={1}>
-                    <p>40%</p>
-                  </Col>
-                  <Col md={11} className="d-flex align-items-center">
-                    <div
-                      style={{
-                        background: "#ccc",
-                        width: "50%",
-                        height: "5px",
-                      }}
-                    ></div>
-                    <div
-                      style={{
-                        background: "#e5e5e5",
-                        width: "100%",
-                        height: "5px",
-                        zIndex: 1,
-                      }}
-                    ></div>
-                  </Col>
-                </Row>
-                <h4 className="mt-4">Applications</h4>
-                <Row className="mt-5">
-                  <Col md={3}>
-                    <Image
-                      className="img-fluid border rounded-circle"
-                      src="/images/applications/design.png"
-                      width={40}
-                      height={40}
-                      alt=""
-                    />
-                    <Image
-                      className="img-fluid border rounded-circle"
-                      src="/images/applications/design.png"
-                      width={40}
-                      height={40}
-                      alt=""
-                    />
-                    <Image
-                      className="img-fluid border rounded-circle"
-                      src="/images/applications/design.png"
-                      width={40}
-                      height={40}
-                      alt=""
-                    />
-                    <Image
-                      className="img-fluid border rounded-circle"
-                      src="/images/applications/design.png"
-                      width={40}
-                      height={40}
-                      alt=""
-                    />
-                  </Col>
-                  <Col md={4}>
-                    <div>
-                      <Button variant="primary" size="sm" disabled={loading}>
-                        View Applications
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
+          </div>
+        </Col>
+        {IsStudent() && showApply && (
+          <Col md={3} className="text-end">
+            <Button onClick={handleShow}>Apply</Button>
+            <Button
+              // onClick={handleApply}
+              variant="outline-primary"
+              className="ms-2"
+            >
+              Save
+            </Button>
           </Col>
-        </Row>
-      </Layout>
-    )
+        )}
+        <Col md={12}>
+          <p className="text-muted fs-12 my-2">
+            Posted on {moment(project?.created_at).format("LL")}
+          </p>
+        </Col>
+        <Col md={3}>
+          <p className="text-uppercase text-muted fs-12">Start Date</p>
+          <Badge bg="light" pill className="text-muted">
+            <HiOutlineClock /> {moment(project?.start_date).format("LL")}
+          </Badge>
+        </Col>
+        <Col md={3}>
+          <p className="text-uppercase text-muted fs-12">Compensation</p>
+          <Badge bg="light" pill className="text-muted">
+            ${project?.duration_hours_week} /hr
+          </Badge>
+        </Col>
+        <Col md={6}>
+          <p className="text-uppercase text-muted fs-12">Timeline</p>
+          <Badge bg="light" pill className="text-muted text-uppercase">
+            <HiOutlineClock />{" "}
+            {moment(project?.due_date).diff(
+              moment(project?.start_date),
+              "days"
+            )}{" "}
+            days
+          </Badge>
+        </Col>
+        <Col md={12}>
+          <hr className="my-5" />
+          <h6 className="fw-medium mb-3">Description</h6>
+          <div
+            className="text-muted fs-12 fw-medium mb-5"
+            dangerouslySetInnerHTML={{
+              __html: project?.project_description,
+            }}
+          />
+          {/* <Button variant="link" className="p-0 text-uppercase fs-12" size="sm">
+            show full description
+          </Button> */}
+        </Col>
+        <Col md={12}>
+          <h6 className="fw-medium mb-3">Attachment</h6>
+          <p className="text-muted fs-12 fw-medium mb-5">
+            {/* {project?.PhotoProject
+              ? project?.PhotoProject?.map((photo, index) => (
+                  <Image
+                    key="index"
+                    src={photo.icon}
+                    width={228}
+                    height={138}
+                    className="img-fluid me-1"
+                    alt=""
+                  />
+                ))
+              : "No attachments yet"} */}
+            No attachments yet
+          </p>
+        </Col>
+        <Col md={12}>
+          <h6 className="fw-medium mb-3">Skills</h6>
+          <p className="text-muted fs-12 fw-medium mb-5">
+            {project?.Skill
+              ? project?.Skill?.map((skill, index) => (
+                  <Badge key="index" bg="primary" pill className="me-1 fs-14">
+                    {skill.label}
+                  </Badge>
+                ))
+              : "No skills yet"}
+          </p>
+        </Col>
+        {/* <Col md={12}>
+          <h6 className="fw-medium mb-3">Posted by</h6>
+          <p className="text-muted fs-12 fw-medium mb-5"></p>
+        </Col> */}
+        {IsStudent() && showApply && (
+          <Col md={12}>
+            <Button onClick={handleShow}>Apply</Button>
+          </Col>
+        )}
+      </Row>
+      <ModalApply show={show} handleClose={handleClose} project={project} />
+    </Layout>
   );
 };
 

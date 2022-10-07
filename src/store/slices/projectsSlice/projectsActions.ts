@@ -27,6 +27,8 @@ export interface NewProjectData {
 export interface StudentApplyProps {
   user_id: number;
   project_id: number;
+  proposed_compensation: string;
+  cover_letter: string;
 }
 
 export const getAllProjects = createAsyncThunk(

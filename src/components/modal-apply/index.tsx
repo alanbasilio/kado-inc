@@ -1,4 +1,5 @@
 import HTMLEditor from "@/components/editor";
+import { studentApply } from "@/store/slices/projectsSlice/projectsActions";
 import UserImage from "@/utils/userImage";
 import Image from "next/future/image";
 import {
@@ -10,25 +11,34 @@ import {
   InputGroup,
   Modal,
   Row,
+  Spinner,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { IoBriefcase } from "react-icons/io5";
 import { MdAttachMoney } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
 const ModalApply = ({ show, handleClose, project }) => {
   const {
     register,
     handleSubmit,
     control,
-    reset,
     setValue,
-    watch,
-    setFocus,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm();
+  const { userInfo, loading } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log("data", data);
+    dispatch(
+      studentApply({
+        user_id: userInfo?.id,
+        project_id: project?.id,
+        proposed_compensation: data.proposed_compensation,
+        cover_letter: data.cover_letter,
+      })
+    );
   };
 
   return (
@@ -39,7 +49,7 @@ const ModalApply = ({ show, handleClose, project }) => {
       <Modal.Body>
         <Container as="form" onSubmit={handleSubmit(onSubmit)}>
           <Row>
-            <Col className="d-flex align-items-center">
+            <Col md={12} className="d-flex align-items-center">
               <Image
                 className="img-fluid border rounded-circle me-2"
                 src={UserImage()}
@@ -52,14 +62,14 @@ const ModalApply = ({ show, handleClose, project }) => {
                   <p className="fs-20">{project?.CompanyOrganization?.name}</p>
                 )}
 
-                <p>
-                  {project.location_remote && (
+                <p className="mb-0">
+                  {project?.location_remote && (
                     <Badge bg="primary" pill className="me-1 fs-14">
                       Remote
                     </Badge>
                   )}
                   <Badge bg="primary" pill className="me-1 fs-14">
-                    <IoBriefcase /> {project.duration_hours_week} hrs/week
+                    <IoBriefcase /> {project?.duration_hours_week} hrs/week
                   </Badge>
                 </p>
               </div>
@@ -79,7 +89,7 @@ const ModalApply = ({ show, handleClose, project }) => {
               <hr />
               <h5 className="fw-semibold mb-2">Proposed Compensation</h5>
               <Row className="align-items-center">
-                <Col md={2}>
+                <Col md={3}>
                   <InputGroup>
                     <InputGroup.Text>
                       <MdAttachMoney />
@@ -101,15 +111,23 @@ const ModalApply = ({ show, handleClose, project }) => {
                 initialValue={null}
                 name={"cover_letter"}
                 control={control}
-                required={true}
+                required={false}
                 setValue={setValue}
                 size={200}
               />
             </Col>
+            <Col md={12}>
+              <Button
+                variant="primary"
+                type="submit"
+                disabled={loading}
+                className="w-100"
+              >
+                {loading && <Spinner animation="border" className="me-2" />}
+                {loading ? "Loading..." : "Apply"}
+              </Button>
+            </Col>
           </Row>
-          <Button variant="primary" className="w-100 mt-5" type="submit">
-            Apply
-          </Button>
         </Container>
       </Modal.Body>
     </Modal>
