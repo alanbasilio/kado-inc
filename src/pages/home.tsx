@@ -31,8 +31,8 @@ const Home: NextPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (projects.Project) {
-      let temp = Object.entries(projects.Project).map((entry) => entry[1]);
+    if (projects?.Project) {
+      let temp = Object.entries(projects?.Project).map((entry) => entry[1]);
       temp = temp.filter((project) => !isCompleted(project?.due_date));
       setAllProjects(temp);
     }
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (IsStudent() && myProjects?.User?.[0]?.Projects) {
       setUserProjects(
-        myProjects?.User?.[0]?.Projects.filter(
+        myProjects?.User?.[0]?.Projects?.filter(
           (project) => !isCompleted(project?.due_date)
         )
       );
@@ -172,7 +172,7 @@ const Home: NextPage = () => {
             </p>
             <hr />
             {userProjects ? (
-              userProjects.map(
+              userProjects?.map(
                 (project, index) =>
                   index === 0 && (
                     <CardProject
@@ -208,7 +208,7 @@ const Home: NextPage = () => {
               </p>
               <hr />
               {allProjects ? (
-                allProjects.map(
+                allProjects?.map(
                   (project, index) =>
                     index <= 3 && (
                       <CardProject
