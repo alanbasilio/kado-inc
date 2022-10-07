@@ -16,20 +16,20 @@ const CardProject = ({ status, project }) => {
     badgeBg = "success";
   }
   return (
-    <Link href={`/projects/${project.id}`} passHref>
+    <Link href={`/projects/${project?.id}`} passHref>
       <Card className="mb-2" as={"a"}>
         <Card.Body>
-          <Card.Title>{project.project_title_role}</Card.Title>
-          {project.CompanyOrganization && (
-            <Card.Subtitle>{project.CompanyOrganization.name}</Card.Subtitle>
+          <Card.Title>{project?.project_title_role}</Card.Title>
+          {project?.CompanyOrganization && (
+            <Card.Subtitle>{project?.CompanyOrganization.name}</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
-            {project.ProjectStatus?.id === 1 &&
+            {project?.ProjectStatus?.id === 1 &&
               `${faker.datatype.number(30)} days left`}
 
-            {project.ProjectStatus?.id === 3 && "COMPLETED"}
+            {project?.ProjectStatus?.id === 3 && "COMPLETED"}
           </Badge>
-          {project.ProjectStatus?.id !== 1 && (
+          {project?.ProjectStatus?.id !== 1 && (
             <div className="mb-2">
               <ProgBar now={faker.datatype.number(100)} />
             </div>

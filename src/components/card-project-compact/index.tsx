@@ -1,12 +1,12 @@
+import ModalApply from "@/components/modal-apply";
 import UserImage from "@/utils/userImage";
 import Image from "next/future/image";
 import Link from "next/link";
-import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Badge, Button, Col, Container, Row } from "react-bootstrap";
+import { HiOutlineClock } from "react-icons/hi";
 import { TbDots } from "react-icons/tb";
 import { TiAttachment } from "react-icons/ti";
-import { HiOutlineClock } from "react-icons/hi";
-import ModalApply from "@/components/modal-apply";
-import { useState } from "react";
 
 const CardProjectCompact = ({ myproject, project }) => {
   const [show, setShow] = useState(false);

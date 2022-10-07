@@ -93,10 +93,6 @@ const NewProject: NextPage = () => {
     }
   }, [router]);
 
-  useEffect(() => {
-    console.log("values", values);
-  }, [values]);
-
   return (
     <Layout
       title="Create Project"
@@ -534,26 +530,26 @@ const NewProject: NextPage = () => {
                       Thank you for agreeing to post a project and help bridge
                       the gap between education and meaningful work experience
                       within your community. Please read and understand the
-                      following terms when posting a project. By submitting your
-                      project you are agreeing to the following terms between
-                      you, (the “Poster”) and the applicant (the “Project
-                      Recipient”). You must agree to these terms to post a
-                      project. Please feel free to contact us if you have any
-                      questions. Payment for projects If this project is a paid
-                      project, you, the Poster, are responsible for arranging
-                      payment with the Project Recipient. If payments for the
-                      project exceed $600 in any calendar year, the Poster is
-                      responsible for any necessary tax documents such as a W9
-                      or 1099. Thank you for agreeing to post a project and help
-                      bridge the gap between education and meaningful work
-                      experience within your community. Please read and
-                      understand the following terms when posting a project. By
+                      following terms when posting a project?. By submitting
+                      your project you are agreeing to the following terms
+                      between you, (the “Poster”) and the applicant (the
+                      “Project Recipient”). You must agree to these terms to
+                      post a project?. Please feel free to contact us if you
+                      have any questions. Payment for projects If this project
+                      is a paid project, you, the Poster, are responsible for
+                      arranging payment with the Project Recipient. If payments
+                      for the project exceed $600 in any calendar year, the
+                      Poster is responsible for any necessary tax documents such
+                      as a W9 or 1099. Thank you for agreeing to post a project
+                      and help bridge the gap between education and meaningful
+                      work experience within your community. Please read and
+                      understand the following terms when posting a project?. By
                       submitting your project you are agreeing to the following
                       terms between you, (the “Poster”) and the applicant (the
                       “Project Recipient”). You must agree to these terms to
-                      post a project. Please feel free to contact us if you have
-                      any questions. Payment for projects If this project is a
-                      paid project, you, the Poster, are responsible for
+                      post a project?. Please feel free to contact us if you
+                      have any questions. Payment for projects If this project
+                      is a paid project, you, the Poster, are responsible for
                       arranging payment with the Project Recipient. If payments
                       for the project exceed $600 in any calendar year, the
                       Poster is responsible for any necessary tax documents such

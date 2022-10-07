@@ -138,6 +138,10 @@
     color: $dark;
     background-color: $light !important;
   }
+  &.bg-primary {
+    color: $primary;
+    background-color: #f2f3fe !important;
+  }
   &.bg-warning {
     color: $warning;
     background-color: #fdf4e0 !important;
@@ -235,4 +239,9 @@
 
 #react-select-3-listbox {
   z-index: 100;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 3rem;
 }

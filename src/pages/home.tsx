@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Image from "next/future/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import CardProject from "@/components/card-project-compact";
@@ -44,10 +44,6 @@ const Home: NextPage = () => {
       setUserProjects(myProjects?.Project);
     }
   }, [myProjects]);
-
-  useEffect(() => {
-    console.log(userInfo?.Profile);
-  }, [userInfo]);
 
   return (
     <Layout

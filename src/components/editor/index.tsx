@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 
@@ -30,6 +30,7 @@ const EditorComponent = ({
           onInit={(evt, editor) => (editorRef.current = editor)}
           onChange={onChange}
           initialValue={initialValue}
+          placeholder="Tell us how you would be a good fit for this project."
           init={{
             height: size,
             menubar: false,

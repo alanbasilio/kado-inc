@@ -33,7 +33,7 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">TODO</h6>
           {userProjects.map(
             (project, index) =>
-              project.ProjectStatus.id === 1 && (
+              project?.ProjectStatus.id === 1 && (
                 <CardProject key={index} status="todo" project={project} />
               )
           )}
@@ -43,7 +43,7 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">ONGOING</h6>
           {userProjects.map(
             (project, index) =>
-              project.ProjectStatus.id === 2 && (
+              project?.ProjectStatus.id === 2 && (
                 <CardProject key={index} status="todo" project={project} />
               )
           )}
@@ -53,7 +53,7 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">COMPLETED</h6>
           {userProjects.map(
             (project, index) =>
-              project.ProjectStatus.id === 3 && (
+              project?.ProjectStatus.id === 3 && (
                 <CardProject key={index} status="todo" project={project} />
               )
           )}

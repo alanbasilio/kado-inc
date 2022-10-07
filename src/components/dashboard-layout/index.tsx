@@ -1,10 +1,11 @@
 import { logout } from "@/store/slices/userSlice";
+import userImage from "@/utils/userImage";
 import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState, type PropsWithChildren } from "react";
-import userImage from "@/utils/userImage";
 
+import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 import {
   Badge,
   Breadcrumb,
@@ -20,6 +21,8 @@ import {
   Row,
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
+import { HiOutlineChatAlt2 } from "react-icons/hi";
 import {
   MdAdd,
   MdBookmarkBorder,
@@ -29,15 +32,12 @@ import {
   MdLogout,
   MdOutlineMailOutline,
   MdOutlineNotifications,
-  MdPerson,
-  MdSearch,
-  MdSettings,
   MdOutlineSearch,
+  MdOutlineSettings,
+  MdSearch,
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
-import { FaRegEdit } from "react-icons/fa";
-import { HiOutlineChatAlt2 } from "react-icons/hi";
+import ModalContact from "@/components/modal-contact";
 
 export interface Props {
   breadcrumb?: string[];
@@ -60,6 +60,11 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => {
+    setShowModal(true);
+  };
 
   useEffect(() => {
     if (!userInfo) {
@@ -127,7 +132,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
     },
     {
       url: "/settings",
-      icon: <MdSettings />,
+      icon: <MdOutlineSettings />,
       title: "Settings",
       show: true,
     },
@@ -288,7 +293,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                   placement="bottom"
                   container={ref}
                 >
-                  <Popover className="p-2">
+                  <Popover className="p-2" onClick={() => setShow(false)}>
                     <Nav className="flex-column">
                       <Link href="/profile" passHref>
                         <Nav.Link>
@@ -298,12 +303,12 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                       </Link>
                       <Link href="/settings" passHref>
                         <Nav.Link>
-                          <MdSettings className="text-primary me-3" /> Account
-                          Settings
+                          <MdOutlineSettings className="text-primary me-3" />{" "}
+                          Account Settings
                         </Nav.Link>
                       </Link>
 
-                      <Nav.Link>
+                      <Nav.Link onClick={handleShow}>
                         <HiOutlineChatAlt2 className="text-primary me-3" />{" "}
                         Contact Us
                       </Nav.Link>
@@ -342,6 +347,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
           </Container>
         </Col>
       </Row>
+      <ModalContact show={showModal} handleClose={handleClose} />
     </Container>
   ) : null;
 };

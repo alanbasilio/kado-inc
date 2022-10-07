@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  registerUser,
-  userLogin,
   forgotPassword,
+  registerUser,
   updatePassword,
+  userLogin,
 } from "./userActions";
 
 export interface User {

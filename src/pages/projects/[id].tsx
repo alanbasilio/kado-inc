@@ -24,7 +24,7 @@ const ProjectDetails: NextPage = () => {
   const dispatch = useDispatch();
 
   const handleApply = (data) => {
-    dispatch(studentApply({ user_id: userInfo?.id, project_id: project.id }));
+    dispatch(studentApply({ user_id: userInfo?.id, project_id: project?.id }));
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const ProjectDetails: NextPage = () => {
           )}
 
           <Col md={12}>
-            <h3>{project.project_title_role}</h3>
+            <h3>{project?.project_title_role}</h3>
             <hr />
             <p className="text-muted">
               {`Added by ${userInfo?.first_name} ${userInfo?.last_name}`}, 4
@@ -54,7 +54,7 @@ const ProjectDetails: NextPage = () => {
                   <Col md={4}>
                     <p className="text-muted">START DATE</p>
                     <p className="text-muted">
-                      {moment(project.start_date).format("DD/MM/YY")}
+                      {moment(project?.start_date).format("DD/MM/YY")}
                     </p>
                   </Col>
                   <Col md={4}>
@@ -89,7 +89,7 @@ const ProjectDetails: NextPage = () => {
                   <Col md={4}>
                     <p className="text-muted">DUE DATE</p>
                     <p className="text-muted">
-                      {moment(project.DUE_DATE).format("DD/MM/YY")}
+                      {moment(project?.DUE_DATE).format("DD/MM/YY")}
                     </p>
                   </Col>
                 </Row>
@@ -98,7 +98,7 @@ const ProjectDetails: NextPage = () => {
 
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: project.project_description,
+                    __html: project?.project_description,
                   }}
                 />
 
