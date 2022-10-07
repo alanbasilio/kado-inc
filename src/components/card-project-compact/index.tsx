@@ -46,19 +46,28 @@ const CardProjectCompact = ({ myproject, project }) => {
               </a>
             </Link>
           </p>
-          {project?.CompanyOrganization && (
-            <p className="fs-10">
-              <span>{project?.CompanyOrganization?.name}</span>
-              <Badge bg="light" pill className="ms-1 fs-10 ">
-                <TiAttachment className="fs-12" /> 21
-              </Badge>
-              <Badge bg="light" pill className="ms-1 fs-10 ">
-                <HiOutlineClock className="fs-12" /> 1 Days left
-              </Badge>
-            </p>
-          )}
+
+          <p>
+            {project?.CompanyOrganization && (
+              <span className="me-1 fs-10">
+                {project?.CompanyOrganization?.name}
+              </span>
+            )}
+            <Badge bg="light" pill className="me-1 fs-10 ">
+              <TiAttachment className="fs-12" /> 21
+            </Badge>
+            <Badge bg="light" pill className="me-1 fs-10 ">
+              <HiOutlineClock className="fs-12" /> 1 Days left
+            </Badge>
+            {myproject && (
+              <Link href={`/projects/${project?.id}`} passHref>
+                <a className="float-end fw-medium">View</a>
+              </Link>
+            )}
+          </p>
+
           {myproject ? (
-            <Badge bg={badgeBg} className="my-2 text-uppercase">
+            <Badge bg={badgeBg} className="text-uppercase">
               {badgeText}
             </Badge>
           ) : (
