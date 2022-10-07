@@ -36,6 +36,8 @@ import {
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
+import { FaRegEdit } from "react-icons/fa";
+import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 export interface Props {
   breadcrumb?: string[];
@@ -290,11 +292,24 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                     <Nav className="flex-column">
                       <Link href="/profile" passHref>
                         <Nav.Link>
-                          <MdPerson /> Profile
+                          <FaRegEdit className="text-primary me-3" /> Edit
+                          Profile
                         </Nav.Link>
                       </Link>
+                      <Link href="/settings" passHref>
+                        <Nav.Link>
+                          <MdSettings className="text-primary me-3" /> Account
+                          Settings
+                        </Nav.Link>
+                      </Link>
+
+                      <Nav.Link>
+                        <HiOutlineChatAlt2 className="text-primary me-3" />{" "}
+                        Contact Us
+                      </Nav.Link>
+
                       <Nav.Link onClick={logoutUser}>
-                        <MdLogout /> Logout
+                        <MdLogout className="text-primary me-3" /> Signout
                       </Nav.Link>
                     </Nav>
                   </Popover>
