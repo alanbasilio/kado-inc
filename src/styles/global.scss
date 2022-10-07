@@ -125,22 +125,31 @@
   background-color: $gray-400;
 }
 
-.badge.bg-light {
+.btn-lightblue {
   color: $gray-600;
+  &:hover {
+    background-color: $primary;
+    color: $white;
+  }
 }
 
-.badge.bg-light {
-  color: $gray-500;
-}
-
-.badge.bg-warning {
-  color: $warning;
-  background-color: #fdf4e0 !important;
-}
-
-.badge.bg-success {
-  color: $success;
-  background-color: #edffe1 !important;
+.badge {
+  &.bg-light {
+    color: $dark;
+    background-color: $light !important;
+  }
+  &.bg-warning {
+    color: $warning;
+    background-color: #fdf4e0 !important;
+  }
+  &.bg-success {
+    color: $success;
+    background-color: #edffe1 !important;
+  }
+  &.bg-danger {
+    color: #ff0000;
+    background-color: #ffcccc !important;
+  }
 }
 
 .PhoneInput {

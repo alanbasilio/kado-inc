@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import ProgBar from "@/components/progress-bar";
 import Link from "next/link";
 
-const CardProjectProgbar = ({ status, project }) => {
+const CardProject = ({ status, project }) => {
   let badgeBg;
   if (status === "todo") {
     badgeBg = "light";
@@ -41,4 +41,4 @@ const CardProjectProgbar = ({ status, project }) => {
   );
 };
 
-export default CardProjectProgbar;
+export default CardProject;

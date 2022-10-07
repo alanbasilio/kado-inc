@@ -1,20 +1,21 @@
+import moment from "moment";
 import type { NextPage } from "next";
 import Image from "next/future/image";
-import { Button, Col, Row } from "react-bootstrap";
-
-import Layout from "@/components/dashboard-layout";
 import Link from "next/link";
-import { IsCompany, IsStudent } from "@/utils/profileType";
+import { useEffect, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+
+import CardProject from "@/components/card-project-compact";
+import Layout from "@/components/dashboard-layout";
+import StatusBox from "@/components/status-box";
 import {
   getAllProjects,
   getMyProjects,
 } from "@/store/slices/projectsSlice/projectsActions";
-import { useEffect, useState } from "react";
-import CardProject from "@/components/card-project";
+import { IsCompany, IsStudent } from "@/utils/profileType";
 import UserImage from "@/utils/userImage";
-import StatusBox from "@/components/status-box";
+import { MdModeEdit } from "react-icons/md";
 
 const Home: NextPage = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -43,6 +44,10 @@ const Home: NextPage = () => {
       setUserProjects(myProjects?.Project);
     }
   }, [myProjects]);
+
+  useEffect(() => {
+    console.log(userInfo?.Profile);
+  }, [userInfo]);
 
   return (
     <Layout
@@ -99,116 +104,55 @@ const Home: NextPage = () => {
             </div>
           )}
           {IsStudent() && (
-            <div className="bg-white rounded border p-2">
-              <p className="fw-medium mb-2">Profile summary</p>
-              <hr className="my-2"></hr>
+            <div className="bg-white rounded border px-4 py-2">
               <Row>
-                <Col md={2}>
-                  <Image
-                    className="img-fluid border rounded-circle"
-                    src={UserImage()}
-                    width="80"
-                    height="80"
-                    alt=""
-                  />
-                </Col>
-                <Col md={6}>
-                  <h5>Guy Howkins</h5>
-                  <p className="text-muted">Student</p>
-                  <p className="text-muted">Computer Science</p>
-                  <p className="text-muted">Toronto, ON</p>
-                </Col>
-
-                <Col md={4}>
-                  <Row>
-                    <Col className="text-center" md={12}>
-                      <Image
-                        className="img-fluid"
-                        src="/images/applications/uni-toronto.png"
-                        width="150"
-                        height="70"
-                        alt=""
-                      />
-                    </Col>
-                    <Col md={12} className="text-center">
-                      <Image
-                        className="img-fluid"
-                        src="/images/applications/feather-mail.png"
-                        width="22"
-                        height="18"
-                        alt=""
-                      />
-                      <Image
-                        className="img-fluid"
-                        src="/images/applications/linkedin.png"
-                        width="22"
-                        height="18"
-                        alt=""
-                      />
-                      <Image
-                        className="img-fluid"
-                        src="/images/applications/share.png"
-                        width="22"
-                        height="18"
-                        alt=""
-                      />
-                      <div className="d-grid">
-                        <Button
-                          variant="outline-primary"
-                          type="submit"
-                          size="sm"
-                        >
-                          View School
-                        </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                </Col>
-
-                <hr className="my-2" />
-                <Col md={8}>
-                  <h4 className="mb-2 text-muted">Summary</h4>
-                  <p>
-                    I am a current student at University of Toronto studying
-                    Computer Science. I have experience in Full stack
-                    development projects.
+                <Col md={12}>
+                  <p className="fw-medium mb-2">
+                    Profile summary
+                    <Link href="/profile" passHref>
+                      <a className="float-end fs-20">
+                        <MdModeEdit />
+                      </a>
+                    </Link>
                   </p>
-                  <h4 className="mt-5 mb-2">Experience</h4>
-                  <Row>
-                    <Col md={6}>
-                      <h5 className="mb-2">Full Stack developer Intern</h5>
-                    </Col>
-                    <Col md={6}>
-                      <p className="text-right">June 2021 - Present</p>
-                    </Col>
-                  </Row>
-                  <p>Gekko.Co</p>
-                  <ul className="m-2">
-                    <li>Led the project for app developement</li>
-                    <li>Delivered the product in given deadlines</li>
-                  </ul>
-                  <Row>
-                    <Col md={6}>
-                      <h5 className="mb-2">Full Stack developer Intern</h5>
-                    </Col>
-                    <Col md={6}>
-                      <p className="text-right">June 2021 - May</p>
-                    </Col>
-                  </Row>
-                  <p>Gekko.Co</p>
-                  <ul className="m-2">
-                    <li>Led the project for app developement</li>
-                    <li>Delivered the product in given deadlines</li>
-                  </ul>
+                  <hr className="mb-4" />
                 </Col>
+                <Col md={8}>
+                  <Row className="mb-7 align-items-center">
+                    <Col xs={3}>
+                      <Image
+                        className="img-fluid border rounded-circle"
+                        src={UserImage()}
+                        width="80"
+                        height="80"
+                        alt=""
+                      />
+                    </Col>
+                    <Col xs={9}>
+                      <h5 className="fw-medium mb-1">
+                        {userInfo?.first_name} {userInfo?.last_name}
+                      </h5>
+                      <p className="text-muted mb-0">Student</p>
+                      {userInfo?.Profile?.location && (
+                        <p className="text-muted mb-0">
+                          {userInfo?.Profile?.location}
+                        </p>
+                      )}
+                    </Col>
+                  </Row>
+                  <h5 className="fw-medium mb-1">Summary</h5>
+                  <p className="text-muted fs-12 mb-5">
+                    {userInfo?.Profile?.description
+                      ? userInfo?.Profile?.description
+                      : "No description yet."}
+                  </p>
+                  <h5 className="fw-medium mb-1">Experience</h5>
+                  <p className="text-muted fs-12 mb-0">No experience yet</p>
+                </Col>
+
                 <Col md={4}>
-                  <h4 className="mb-2 text-muted">Skills</h4>
-                  <p className="mb-2 text-muted">SEO</p>
-                  <p className="mb-2 text-muted">Mobile Development</p>
-                  <p className="mb-2 text-muted">Mobile Design</p>
-                  <p className="mb-2 text-muted">Full Stack</p>
-                  <p className="mb-2 text-muted">User Interface Design</p>
-                  <p className="mb-2 text-muted">Front-end Development</p>
+                  <h5 className="fw-medium mb-2">Skills</h5>
+                  <p className="mb-0 text-muted">No skills yet</p>
                 </Col>
               </Row>
             </div>
@@ -227,7 +171,11 @@ const Home: NextPage = () => {
               userProjects.map(
                 (project, index) =>
                   index === 0 && (
-                    <CardProject key={index} status="todo" project={project} />
+                    <CardProject
+                      key={index}
+                      myproject={true}
+                      project={project}
+                    />
                   )
               )
             ) : (
@@ -258,10 +206,10 @@ const Home: NextPage = () => {
               {allProjects ? (
                 allProjects.map(
                   (project, index) =>
-                    index <= 2 && (
+                    index <= 3 && (
                       <CardProject
                         key={index}
-                        status="todo"
+                        myproject={false}
                         project={project}
                       />
                     )
