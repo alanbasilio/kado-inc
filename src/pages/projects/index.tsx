@@ -6,6 +6,7 @@ import Layout from "@/components/dashboard-layout";
 import { getAllProjects } from "@/store/slices/projectsSlice/projectsActions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { isCompleted } from "@/utils/daysLeft";
 
 const Projects: NextPage = () => {
   const dispatch = useDispatch();
@@ -27,11 +28,14 @@ const Projects: NextPage = () => {
     <Layout title="Projects">
       <Row>
         {formattedProjects &&
-          formattedProjects.map((project, index) => (
-            <Col md={4} key={index}>
-              <CardProject status="todo" project={project} />{" "}
-            </Col>
-          ))}
+          formattedProjects.map(
+            (project, index) =>
+              !isCompleted(project?.due_date) && (
+                <Col md={4} key={index}>
+                  <CardProject project={project} />{" "}
+                </Col>
+              )
+          )}
       </Row>
     </Layout>
   );

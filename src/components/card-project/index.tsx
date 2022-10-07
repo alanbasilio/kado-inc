@@ -1,20 +1,26 @@
-import UsersAvatars from "@/components/users-avatars";
-import { Badge, Card, ProgressBar } from "react-bootstrap";
-import { faker } from "@faker-js/faker";
 import ProgBar from "@/components/progress-bar";
+import UsersAvatars from "@/components/users-avatars";
+import { DaysLeft, isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
+import PercentageDays from "@/utils/percentageDays";
 import Link from "next/link";
+import { Badge, Card } from "react-bootstrap";
 
-const CardProject = ({ status, project }) => {
+const CardProject = ({ project }) => {
   let badgeBg;
-  if (status === "todo") {
+
+  if (IsTodo(project?.start_date)) {
     badgeBg = "light";
   }
-  if (status === "ongoing") {
+  if (IsOngoing(project?.start_date, project?.due_date)) {
     badgeBg = "warning";
   }
-  if (status === "completed") {
+  if (isCompleted(project?.due_date)) {
     badgeBg = "success";
   }
+  if (project?.ProjectStatus?.id === 4) {
+    badgeBg = "danger";
+  }
+
   return (
     <Link href={`/projects/${project?.id}`} passHref>
       <Card className="mb-2" as={"a"}>
@@ -24,16 +30,17 @@ const CardProject = ({ status, project }) => {
             <Card.Subtitle>{project?.CompanyOrganization.name}</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
-            {project?.ProjectStatus?.id === 1 &&
-              `${faker.datatype.number(30)} days left`}
-
-            {project?.ProjectStatus?.id === 3 && "COMPLETED"}
+            {isCompleted(project?.due_date)
+              ? "COMPLETED"
+              : DaysLeft(project?.due_date)}
           </Badge>
-          {project?.ProjectStatus?.id !== 1 && (
-            <div className="mb-2">
-              <ProgBar now={faker.datatype.number(100)} />
-            </div>
-          )}
+
+          <div className="mb-2">
+            <ProgBar
+              now={PercentageDays(project?.start_date, project?.due_date)}
+            />
+          </div>
+
           <UsersAvatars />
         </Card.Body>
       </Card>

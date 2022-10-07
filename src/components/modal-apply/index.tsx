@@ -116,7 +116,7 @@ const ModalApply = ({ show, handleClose, project }) => {
                 size={200}
               />
             </Col>
-            <Col md={12}>
+            <Col md={12} className="mt-5">
               <Button
                 variant="primary"
                 type="submit"

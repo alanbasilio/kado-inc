@@ -1,4 +1,5 @@
 import ModalApply from "@/components/modal-apply";
+import { DaysLeft, isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
 import UserImage from "@/utils/userImage";
 import Image from "next/future/image";
 import Link from "next/link";
@@ -15,15 +16,15 @@ const CardProjectCompact = ({ myproject, project }) => {
 
   let badgeBg;
   let badgeText;
-  if (project?.ProjectStatus?.id === 1) {
+  if (IsTodo(project?.start_date)) {
     badgeBg = "light";
     badgeText = "todo";
   }
-  if (project?.ProjectStatus?.id === 2) {
+  if (IsOngoing(project?.start_date, project?.due_date)) {
     badgeBg = "warning";
     badgeText = "ongoing";
   }
-  if (project?.ProjectStatus?.id === 3) {
+  if (isCompleted(project?.due_date)) {
     badgeBg = "success";
     badgeText = "completed";
   }
@@ -31,6 +32,7 @@ const CardProjectCompact = ({ myproject, project }) => {
     badgeBg = "danger";
     badgeText = "overdue";
   }
+
   return (
     <>
       <Container className="my-4 px-2">
@@ -61,10 +63,11 @@ const CardProjectCompact = ({ myproject, project }) => {
                 </span>
               )}
               <Badge bg="light" pill className="me-1 fs-10 ">
-                <TiAttachment className="fs-12" /> 21
+                <TiAttachment className="fs-12" /> 1
               </Badge>
               <Badge bg="light" pill className="me-1 fs-10 ">
-                <HiOutlineClock className="fs-12" /> 1 Days left
+                <HiOutlineClock className="fs-12" />{" "}
+                {DaysLeft(project?.due_date)}
               </Badge>
               {myproject && (
                 <Link href={`/projects/${project?.id}`} passHref>

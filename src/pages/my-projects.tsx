@@ -4,9 +4,10 @@ import { Col, Row } from "react-bootstrap";
 import CardProject from "@/components/card-project";
 import Layout from "@/components/dashboard-layout";
 import { getMyProjects } from "@/store/slices/projectsSlice/projectsActions";
+import { isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
+import { IsStudent } from "@/utils/profileType";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IsStudent } from "@/utils/profileType";
 
 const MyProjects: NextPage = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,8 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">TODO</h6>
           {userProjects.map(
             (project, index) =>
-              project?.ProjectStatus.id === 1 && (
-                <CardProject key={index} status="todo" project={project} />
+              IsTodo(project?.start_date) && (
+                <CardProject key={index} project={project} />
               )
           )}
         </Col>
@@ -43,8 +44,8 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">ONGOING</h6>
           {userProjects.map(
             (project, index) =>
-              project?.ProjectStatus.id === 2 && (
-                <CardProject key={index} status="todo" project={project} />
+              IsOngoing(project?.start_date, project?.due_date) && (
+                <CardProject key={index} project={project} />
               )
           )}
         </Col>
@@ -53,8 +54,8 @@ const MyProjects: NextPage = () => {
           <h6 className="mb-2 fw-medium">COMPLETED</h6>
           {userProjects.map(
             (project, index) =>
-              project?.ProjectStatus.id === 3 && (
-                <CardProject key={index} status="todo" project={project} />
+              isCompleted(project?.due_date) && (
+                <CardProject key={index} project={project} />
               )
           )}
         </Col>
