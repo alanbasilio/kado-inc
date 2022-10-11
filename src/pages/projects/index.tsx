@@ -18,8 +18,8 @@ const Projects: NextPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (projects.Project) {
-      const temp = Object.entries(projects.Project).map((entry) => entry[1]);
+    if (projects?.Project) {
+      const temp = Object.entries(projects?.Project).map((entry) => entry[1]);
       setFormattedProjects(temp);
     }
   }, [projects]);
@@ -27,15 +27,14 @@ const Projects: NextPage = () => {
   return (
     <Layout title="Projects">
       <Row>
-        {formattedProjects &&
-          formattedProjects.map(
-            (project, index) =>
-              !isCompleted(project?.due_date) && (
-                <Col md={4} key={index}>
-                  <CardProject project={project} />{" "}
-                </Col>
-              )
-          )}
+        {formattedProjects?.map(
+          (project, index) =>
+            !isCompleted(project?.due_date) && (
+              <Col md={4} key={index}>
+                <CardProject project={project} />{" "}
+              </Col>
+            )
+        )}
       </Row>
     </Layout>
   );

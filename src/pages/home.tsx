@@ -48,7 +48,9 @@ const Home: NextPage = () => {
     }
     if (!IsStudent() && myProjects?.Project) {
       setUserProjects(
-        myProjects?.Project.filter((project) => !isCompleted(project?.due_date))
+        myProjects?.Project?.filter(
+          (project) => !isCompleted(project?.due_date)
+        )
       );
     }
   }, [myProjects]);
