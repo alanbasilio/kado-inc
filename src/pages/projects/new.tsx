@@ -18,7 +18,7 @@ import {
   newProject,
   NewProjectData,
 } from "@/store/slices/projectsSlice/projectsActions";
-import { IsStudent } from "@/utils/profileType";
+import { IsCompany, IsStudent } from "@/utils/profileType";
 import userImage from "@/utils/userImage";
 import Image from "next/future/image";
 import { useRouter } from "next/router";
@@ -88,7 +88,7 @@ const NewProject: NextPage = () => {
   ];
 
   useEffect(() => {
-    if (IsStudent()) {
+    if (!IsCompany()) {
       router.push("/home");
     }
   }, [router]);

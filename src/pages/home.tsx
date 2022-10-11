@@ -13,7 +13,7 @@ import {
   getAllProjects,
   getMyProjects,
 } from "@/store/slices/projectsSlice/projectsActions";
-import { IsCompany, IsStudent } from "@/utils/profileType";
+import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 import UserImage from "@/utils/userImage";
 import { MdModeEdit } from "react-icons/md";
 import { isCompleted } from "@/utils/daysLeft";
@@ -95,7 +95,14 @@ const Home: NextPage = () => {
               <p>No trends yet</p>
             </div>
           )}
-          {IsCompany() && (
+          {IsSchool() && (
+            <div className="bg-white rounded border p-2 mb-2">
+              <p className="fw-medium">Analysis</p>
+              <hr />
+              <p>No analysis yet</p>
+            </div>
+          )}
+          {!IsStudent() && (
             <div className="bg-white rounded border p-2 mb-2">
               <p className="fw-medium">
                 Students
@@ -163,29 +170,31 @@ const Home: NextPage = () => {
           )}
         </Col>
         <Col md={4}>
-          <div className="bg-white rounded border p-2 mb-2">
-            <p className="fw-medium">
-              My Projects
-              <Link href="/my-projects" passHref>
-                <a className="float-end">View All</a>
-              </Link>
-            </p>
-            <hr />
-            {userProjects ? (
-              userProjects?.map(
-                (project, index) =>
-                  index === 0 && (
-                    <CardProject
-                      key={index}
-                      myproject={true}
-                      project={project}
-                    />
-                  )
-              )
-            ) : (
-              <p>No projects yet.</p>
-            )}
-          </div>
+          {IsCompany() && (
+            <div className="bg-white rounded border p-2 mb-2">
+              <p className="fw-medium">
+                My Projects
+                <Link href="/my-projects" passHref>
+                  <a className="float-end">View All</a>
+                </Link>
+              </p>
+              <hr />
+              {userProjects ? (
+                userProjects?.map(
+                  (project, index) =>
+                    index === 0 && (
+                      <CardProject
+                        key={index}
+                        myproject={true}
+                        project={project}
+                      />
+                    )
+                )
+              ) : (
+                <p>No projects yet.</p>
+              )}
+            </div>
+          )}
           {IsCompany() && (
             <div className="bg-white rounded border p-2">
               <p className="fw-medium">
@@ -198,10 +207,10 @@ const Home: NextPage = () => {
               <p>No school yet</p>
             </div>
           )}
-          {IsStudent() && (
-            <div className="bg-white rounded border p-2">
+          {!IsCompany() && (
+            <div className="bg-white rounded border p-2 mb-2">
               <p className="fw-medium">
-                Recommended Projects
+                {IsStudent() ? "Recommended Projects" : "Projects"}
                 <Link href="/projects" passHref>
                   <a className="float-end">View All</a>
                 </Link>
@@ -213,7 +222,7 @@ const Home: NextPage = () => {
                     index <= 3 && (
                       <CardProject
                         key={index}
-                        myproject={false}
+                        myproject={true}
                         project={project}
                       />
                     )
@@ -221,6 +230,18 @@ const Home: NextPage = () => {
               ) : (
                 <p>No projects yet.</p>
               )}
+            </div>
+          )}
+          {IsSchool() && (
+            <div className="bg-white rounded border p-2 mb-2">
+              <p className="fw-medium">
+                Departments
+                <Link href="/departments" passHref>
+                  <a className="float-end">View All</a>
+                </Link>
+              </p>
+              <hr />
+              <p>No departments yet</p>
             </div>
           )}
         </Col>

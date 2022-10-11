@@ -22,7 +22,7 @@ import {
 } from "react-bootstrap";
 import { AiOutlineBank } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
-import { HiOutlineChatAlt2 } from "react-icons/hi";
+import { HiOutlineChatAlt2, HiOutlineAcademicCap } from "react-icons/hi";
 import {
   MdAdd,
   MdBookmarkBorder,
@@ -38,6 +38,7 @@ import {
 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import ModalContact from "@/components/modal-contact";
+import { IoBriefcase } from "react-icons/io5";
 
 export interface Props {
   breadcrumb?: string[];
@@ -96,19 +97,19 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
     },
     {
       url: "/departments",
-      icon: <MdOutlineSearch />,
+      icon: <AiOutlineBank />,
       title: "Departments",
       show: IsSchool(),
     },
     {
       url: "/students",
-      icon: <MdOutlineSearch />,
+      icon: <HiOutlineAcademicCap />,
       title: "Students",
       show: IsSchool(),
     },
     {
-      url: "/business-partners",
-      icon: <MdOutlineSearch />,
+      url: "/partners",
+      icon: <IoBriefcase />,
       title: "Business Partners",
       show: IsSchool(),
     },
@@ -146,7 +147,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
           md={3}
           sm={6}
           xs={12}
-          className="px-4 py-3 bg-white d-none d-md-block"
+          className="p-2 bg-white d-none d-md-block"
         >
           <Link href="/home" passHref>
             <a>
@@ -250,13 +251,23 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                   </InputGroup>
                 </Form>
               )}
-              {!IsStudent() && (
+              {IsCompany() && (
                 <Link href="/projects/new" passHref>
                   <Button
                     variant="primary"
                     className="me-1 ms-auto d-none d-md-block"
                   >
                     <MdAdd /> Create Project
+                  </Button>
+                </Link>
+              )}
+              {IsSchool() && (
+                <Link href="/proposal/new" passHref>
+                  <Button
+                    variant="primary"
+                    className="me-1 ms-auto d-none d-md-block"
+                  >
+                    <MdAdd /> Create Proposal
                   </Button>
                 </Link>
               )}
@@ -273,6 +284,7 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
               <Nav.Link
                 className="mx-1  align-items-center d-none d-md-flex"
                 ref={ref}
+                onClick={handleClick}
               >
                 <Image
                   src={userImage()}
@@ -280,46 +292,44 @@ const DashboardLayout: React.FC<PropsWithChildren<Props>> = ({
                   alt={`${userInfo?.first_name} ${userInfo?.last_name}`}
                   width={40}
                   height={40}
-                  onClick={handleClick}
                 />
                 <MdKeyboardArrowDown
                   className={`fs-4 ${
                     router.pathname === "/home" && "text-primary"
                   }`}
                 />
-                <Overlay
-                  show={show}
-                  target={target}
-                  placement="bottom"
-                  container={ref}
-                >
-                  <Popover className="p-2" onClick={() => setShow(false)}>
-                    <Nav className="flex-column">
-                      <Link href="/profile" passHref>
-                        <Nav.Link>
-                          <FaRegEdit className="text-primary me-3" /> Edit
-                          Profile
-                        </Nav.Link>
-                      </Link>
-                      <Link href="/settings" passHref>
-                        <Nav.Link>
-                          <MdOutlineSettings className="text-primary me-3" />{" "}
-                          Account Settings
-                        </Nav.Link>
-                      </Link>
-
-                      <Nav.Link onClick={handleShow}>
-                        <HiOutlineChatAlt2 className="text-primary me-3" />{" "}
-                        Contact Us
-                      </Nav.Link>
-
-                      <Nav.Link onClick={logoutUser}>
-                        <MdLogout className="text-primary me-3" /> Signout
-                      </Nav.Link>
-                    </Nav>
-                  </Popover>
-                </Overlay>
               </Nav.Link>
+              <Overlay
+                show={show}
+                target={target}
+                placement="bottom"
+                container={ref}
+              >
+                <Popover className="p-2" onClick={() => setShow(false)}>
+                  <Nav className="flex-column">
+                    <Link href="/profile" passHref>
+                      <Nav.Link>
+                        <FaRegEdit className="text-primary me-3" /> Edit Profile
+                      </Nav.Link>
+                    </Link>
+                    <Link href="/settings" passHref>
+                      <Nav.Link>
+                        <MdOutlineSettings className="text-primary me-3" />{" "}
+                        Account Settings
+                      </Nav.Link>
+                    </Link>
+
+                    <Nav.Link onClick={handleShow}>
+                      <HiOutlineChatAlt2 className="text-primary me-3" />{" "}
+                      Contact Us
+                    </Nav.Link>
+
+                    <Nav.Link onClick={logoutUser}>
+                      <MdLogout className="text-primary me-3" /> Signout
+                    </Nav.Link>
+                  </Nav>
+                </Popover>
+              </Overlay>
             </Navbar.Collapse>
           </Navbar>
           <Container className="overflow-scroll dashboard p-2">
