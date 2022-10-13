@@ -75,9 +75,15 @@ const MyProjects: NextPage = () => {
           <Col>
             <h6 className="fw-medium">
               No projects yet.{" "}
-              <Link href="/projects" passHref>
-                <a>Apply for a project.</a>
-              </Link>
+              {IsCompany() ? (
+                <Link href="/projects/new" passHref>
+                  <a>Create a project.</a>
+                </Link>
+              ) : (
+                <Link href="/projects" passHref>
+                  <a>Apply for a project.</a>
+                </Link>
+              )}
             </h6>
           </Col>
         </Row>
