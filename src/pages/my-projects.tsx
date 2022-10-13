@@ -9,6 +9,7 @@ import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const MyProjects: NextPage = () => {
   const dispatch = useDispatch();
@@ -37,37 +38,50 @@ const MyProjects: NextPage = () => {
 
   return (
     <Layout title="My projects">
-      <Row>
-        <Col md={4}>
-          <h6 className="mb-2 fw-medium">TODO</h6>
-          {userProjects?.map(
-            (project, index) =>
-              IsTodo(project?.start_date) && (
-                <CardProject key={index} project={project} />
-              )
-          )}
-        </Col>
+      {userProjects?.length > 0 ? (
+        <Row>
+          <Col md={4}>
+            <h6 className="mb-2 fw-medium">TODO</h6>
+            {userProjects?.map(
+              (project, index) =>
+                IsTodo(project?.start_date) && (
+                  <CardProject key={index} project={project} />
+                )
+            )}
+          </Col>
 
-        <Col md={4}>
-          <h6 className="mb-2 fw-medium">ONGOING</h6>
-          {userProjects?.map(
-            (project, index) =>
-              IsOngoing(project?.start_date, project?.due_date) && (
-                <CardProject key={index} project={project} />
-              )
-          )}
-        </Col>
+          <Col md={4}>
+            <h6 className="mb-2 fw-medium">ONGOING</h6>
+            {userProjects?.map(
+              (project, index) =>
+                IsOngoing(project?.start_date, project?.due_date) && (
+                  <CardProject key={index} project={project} />
+                )
+            )}
+          </Col>
 
-        <Col md={4}>
-          <h6 className="mb-2 fw-medium">COMPLETED</h6>
-          {userProjects?.map(
-            (project, index) =>
-              isCompleted(project?.due_date) && (
-                <CardProject key={index} project={project} />
-              )
-          )}
-        </Col>
-      </Row>
+          <Col md={4}>
+            <h6 className="mb-2 fw-medium">COMPLETED</h6>
+            {userProjects?.map(
+              (project, index) =>
+                isCompleted(project?.due_date) && (
+                  <CardProject key={index} project={project} />
+                )
+            )}
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col>
+            <h6 className="fw-medium">
+              No projects yet.{" "}
+              <Link href="/projects" passHref>
+                <a>Apply for a project.</a>
+              </Link>
+            </h6>
+          </Col>
+        </Row>
+      )}
     </Layout>
   );
 };
