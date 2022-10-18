@@ -19,10 +19,7 @@ export const IsTodo = (startDate) => {
 
 export const IsOngoing = (startDate, dueDate) => {
   const today = moment();
-  if (
-    today.isAfter(moment(startDate), "day") &&
-    today.isBefore(moment(dueDate), "day")
-  ) {
+  if (today.isBetween(moment(startDate), moment(dueDate), "day")) {
     return true;
   }
   return false;
