@@ -66,29 +66,36 @@ const Home: NextPage = () => {
         <Col md={8}>
           <div className="bg-white rounded border p-2 mb-2">
             <p className="fw-medium">Overview</p>
-            <Row>
-              <Col>
-                <StatusBox
-                  status="completed"
-                  title="Completed"
-                  number={myProjects?.Overview?.completed}
-                />
-              </Col>
-              <Col>
-                <StatusBox
-                  status="ongoing"
-                  title="Ongoing"
-                  number={myProjects?.Overview?.ongoing}
-                />
-              </Col>
-              <Col>
-                <StatusBox
-                  status="overdue"
-                  title="Overdue"
-                  number={myProjects?.Overview?.todo}
-                />
-              </Col>
-            </Row>
+            {myProjects?.Overview ? (
+              <Row>
+                <Col>
+                  <StatusBox
+                    status="completed"
+                    title="Completed"
+                    number={myProjects?.Overview?.completed}
+                  />
+                </Col>
+                <Col>
+                  <StatusBox
+                    status="ongoing"
+                    title="Ongoing"
+                    number={myProjects?.Overview?.ongoing}
+                  />
+                </Col>
+                <Col>
+                  <StatusBox
+                    status="overdue"
+                    title="Overdue"
+                    number={myProjects?.Overview?.todo}
+                  />
+                </Col>
+              </Row>
+            ) : (
+              <>
+                <hr />
+                <p>No overview yet</p>
+              </>
+            )}
           </div>
           {IsCompany() && (
             <div className="bg-white rounded border p-2 mb-2">

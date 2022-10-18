@@ -1,6 +1,9 @@
 import Layout from "@/components/dashboard-layout";
 import ModalApply from "@/components/modal-apply";
-import { getProject } from "@/store/slices/projectsSlice/projectsActions";
+import {
+  getProject,
+  setBookmark,
+} from "@/store/slices/projectsSlice/projectsActions";
 import { IsStudent } from "@/utils/profileType";
 import UserImage from "@/utils/userImage";
 import moment from "moment";
@@ -34,6 +37,22 @@ const ProjectDetails: NextPage = () => {
       setShowApply(true);
     }
   }, [project, userInfo]);
+
+  const handleBookmark = () => {
+    dispatch(
+      setBookmark({
+        id: id,
+        data: {
+          favorites: [
+            {
+              estudent_id: userInfo?.id,
+              favorite: true,
+            },
+          ],
+        },
+      })
+    );
+  };
 
   return (
     <Layout title={project?.project_title_role}>
@@ -71,7 +90,7 @@ const ProjectDetails: NextPage = () => {
           <Col md={3} className="text-end">
             <Button onClick={handleShow}>Apply</Button>
             <Button
-              // onClick={handleApply}
+              onClick={handleBookmark}
               variant="outline-primary"
               className="ms-2"
             >

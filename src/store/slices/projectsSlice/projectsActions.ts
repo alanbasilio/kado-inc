@@ -319,3 +319,36 @@ export const studentApply = createAsyncThunk(
     }
   }
 );
+
+export const setBookmark = createAsyncThunk(
+  "projects/bookmark",
+  async (payload, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+      };
+
+      const { data } = await API.put(
+        `project/${payload.id}/favorite`,
+        payload.data,
+        config
+      );
+
+      swal("Success", "The project was bookmarked", "success");
+
+      return data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        swal("Error", error.response.data.message, "error");
+        return rejectWithValue(error.response.data.message);
+      } else {
+        swal("Error", error.message, "error");
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
