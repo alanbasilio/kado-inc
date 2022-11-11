@@ -9,6 +9,8 @@ import {
   newProject,
   getCategories,
   studentApply,
+  getBookmarks,
+  getNotify,
 } from "./projectsActions";
 
 const initialState = {
@@ -18,7 +20,9 @@ const initialState = {
   companies: [],
   skills: [],
   cities: [],
+  notify: [],
   categories: [],
+  bookmarks: [],
   error: null,
   success: false,
 };
@@ -125,6 +129,19 @@ const projectsSlice = createSlice({
       state.loading = false;
       state.error = payload;
     },
+    // get notify
+    [getNotify.pending]: (state) => {
+      // state.loading = true;
+      state.error = null;
+    },
+    [getNotify.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.notify = payload;
+    },
+    [getNotify.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
     // get categories
     [getCategories.pending]: (state) => {
       // state.loading = true;
@@ -147,6 +164,19 @@ const projectsSlice = createSlice({
       state.loading = false;
     },
     [studentApply.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // student apply
+    [getBookmarks.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getBookmarks.fulfilled]: (state) => {
+      state.bookmarks = payload;
+      state.loading = false;
+    },
+    [getBookmarks.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

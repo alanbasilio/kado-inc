@@ -8,26 +8,21 @@ export interface UserData {
 }
 
 export const userLogin = createAsyncThunk(
-  "user/signin",
+  "user/userLogin",
   async ({ email, password }: UserData, { rejectWithValue }) => {
     try {
       const { data } = await API.post("user/authenticate", { email, password });
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        swal("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const registerUser = createAsyncThunk(
-  "user/signup",
+  "user/registerUser",
   async (payload, { rejectWithValue }) => {
     try {
       const { data } = await API.post("user", payload);
@@ -54,13 +49,8 @@ export const registerUser = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        swal("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
@@ -75,24 +65,21 @@ export const forgotPassword = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        swal("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const updatePassword = createAsyncThunk(
   "user/updatePassword",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { getState, rejectWithValue }) => {
     try {
+      const { user } = getState();
+
       const config = {
         headers: {
-          Authorization: `Bearer ${payload.token}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -106,13 +93,22 @@ export const updatePassword = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        swal("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+export const uploadBase64 = createAsyncThunk(
+  "profile/upload-single-base64",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post("/profile/upload-single-base64", payload);
+
+      return data;
+    } catch (error: any) {
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );

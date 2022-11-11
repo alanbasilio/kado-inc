@@ -1,6 +1,6 @@
 import ProgBar from "@/components/progress-bar";
 import UsersAvatars from "@/components/users-avatars";
-import { DaysLeft, isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
+import { DaysLeft, IsCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
 import PercentageDays from "@/utils/percentageDays";
 import Link from "next/link";
 import { Badge, Card } from "react-bootstrap";
@@ -14,7 +14,7 @@ const CardProject = ({ project }) => {
   if (IsOngoing(project?.start_date, project?.due_date)) {
     badgeBg = "warning";
   }
-  if (isCompleted(project?.due_date)) {
+  if (IsCompleted(project?.due_date)) {
     badgeBg = "success";
   }
   if (project?.ProjectStatus?.id === 4) {
@@ -30,7 +30,7 @@ const CardProject = ({ project }) => {
             <Card.Subtitle>{project?.CompanyOrganization.name}</Card.Subtitle>
           )}
           <Badge bg={badgeBg} pill className="my-2">
-            {isCompleted(project?.due_date)
+            {IsCompleted(project?.due_date)
               ? "COMPLETED"
               : DaysLeft(project?.due_date)}
           </Badge>

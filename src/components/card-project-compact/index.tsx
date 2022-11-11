@@ -1,5 +1,5 @@
 import ModalApply from "@/components/modal-apply";
-import { DaysLeft, isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
+import { DaysLeft, IsCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
 import UserImage from "@/utils/userImage";
 import Image from "next/future/image";
 import Link from "next/link";
@@ -24,7 +24,7 @@ const CardProjectCompact = ({ myproject, project }) => {
     badgeBg = "warning";
     badgeText = "ongoing";
   }
-  if (isCompleted(project?.due_date)) {
+  if (IsCompleted(project?.due_date)) {
     badgeBg = "success";
     badgeText = "completed";
   }

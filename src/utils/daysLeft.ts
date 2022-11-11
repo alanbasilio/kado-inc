@@ -25,7 +25,7 @@ export const IsOngoing = (startDate, dueDate) => {
   return false;
 };
 
-export const isCompleted = (dueDate) => {
+export const IsCompleted = (dueDate) => {
   const today = moment();
   if (today.isAfter(moment(dueDate), "day")) {
     return true;

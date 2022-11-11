@@ -32,14 +32,14 @@ export interface StudentApplyProps {
 }
 
 export const getAllProjects = createAsyncThunk(
-  "projects/all",
+  "projects/getAllProjects",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -47,26 +47,21 @@ export const getAllProjects = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const getMyProjects = createAsyncThunk(
-  "projects/my",
+  "projects/getMyProjects",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -81,36 +76,31 @@ export const getMyProjects = createAsyncThunk(
       }
 
       if (IsSchool()) {
-        profile = "company";
+        profile = "school";
       }
 
       const { data } = await API.get(
-        `projects/user/${profile}/${user.userInfo?.id}`,
+        `projects/user/${profile}/${user?.userInfo?.id}`,
         config
       );
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const getProject = createAsyncThunk(
-  "projects/single",
+  "projects/getProject",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -118,26 +108,21 @@ export const getProject = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const newProject = createAsyncThunk(
-  "projects/new",
+  "projects/newProject",
   async (payload: NewProjectData, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -149,26 +134,21 @@ export const newProject = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const getSkills = createAsyncThunk(
-  "projects/skills",
+  "projects/getSkills",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -183,26 +163,21 @@ export const getSkills = createAsyncThunk(
 
       return AllSkills;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const getCompanies = createAsyncThunk(
-  "projects/companies",
+  "projects/getCompanies",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -217,26 +192,21 @@ export const getCompanies = createAsyncThunk(
 
       return AllCompanies;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const getCities = createAsyncThunk(
-  "projects/cities",
+  "projects/getCities",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -251,26 +221,65 @@ export const getCities = createAsyncThunk(
 
       return AllCities;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
-export const getCategories = createAsyncThunk(
-  "projects/categories",
+export const getCityByName = createAsyncThunk(
+  "projects/getCityByName",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
+        },
+      };
+
+      const { data } = await API.get(`city/${payload.name}`, config);
+
+      return data;
+    } catch (error: any) {
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+export const getNotify = createAsyncThunk(
+  "projects/getNotify",
+  async (payload, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.userToken}`,
+        },
+      };
+
+      const { data } = await API.get("notify-project-following-users", config);
+
+      return data;
+    } catch (error: any) {
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+export const getCategories = createAsyncThunk(
+  "projects/getCategories",
+  async (payload, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -278,26 +287,21 @@ export const getCategories = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const studentApply = createAsyncThunk(
-  "projects/apply",
+  "projects/studentApply",
   async (payload: StudentApplyProps, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
@@ -309,31 +313,40 @@ export const studentApply = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        console.error("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error("Error", error.message, "error");
-        return rejectWithValue(error.message);
-      }
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );
 
 export const setBookmark = createAsyncThunk(
-  "projects/bookmark",
+  "projects/setBookmark",
   async (payload, { getState, rejectWithValue }) => {
     try {
       const { user } = getState();
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user?.userToken}`,
         },
       };
 
+      let profile;
+
+      if (IsStudent()) {
+        profile = "student";
+      }
+
+      if (IsCompany()) {
+        profile = "company";
+      }
+
+      if (IsSchool()) {
+        profile = "school";
+      }
+
       const { data } = await API.put(
-        `project/${payload.id}/favorite`,
+        `${profile}/project/${payload.id}/favorite`,
         payload.data,
         config
       );
@@ -342,13 +355,44 @@ export const setBookmark = createAsyncThunk(
 
       return data;
     } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        swal("Error", error.response.data.message, "error");
-        return rejectWithValue(error.response.data.message);
-      } else {
-        swal("Error", error.message, "error");
-        return rejectWithValue(error.message);
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
+    }
+  }
+);
+
+export const getBookmarks = createAsyncThunk(
+  "projects/getBookmarks",
+  async (payload, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.userToken}`,
+        },
+      };
+
+      let profile;
+
+      if (IsStudent()) {
+        profile = "student";
       }
+
+      if (IsCompany()) {
+        profile = "company";
+      }
+
+      if (IsSchool()) {
+        profile = "school";
+      }
+
+      const { data } = await API.get(`/bookmarks`, config);
+
+      return data;
+    } catch (error: any) {
+      swal("Error", error?.response?.data?.message || error?.message, "error");
+      return rejectWithValue(error?.response?.data?.message || error?.message);
     }
   }
 );

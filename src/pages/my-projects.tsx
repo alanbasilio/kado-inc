@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import CardProject from "@/components/card-project";
 import Layout from "@/components/dashboard-layout";
 import { getMyProjects } from "@/store/slices/projectsSlice/projectsActions";
-import { isCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
+import { IsCompleted, IsOngoing, IsTodo } from "@/utils/daysLeft";
 import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,7 +64,7 @@ const MyProjects: NextPage = () => {
             <h6 className="mb-2 fw-medium">COMPLETED</h6>
             {userProjects?.map(
               (project, index) =>
-                isCompleted(project?.due_date) && (
+                IsCompleted(project?.due_date) && (
                   <CardProject key={index} project={project} />
                 )
             )}
@@ -73,7 +73,7 @@ const MyProjects: NextPage = () => {
       ) : (
         <Row>
           <Col>
-            <h6 className="fw-medium">
+            <p>
               No projects yet.{" "}
               {IsCompany() ? (
                 <Link href="/projects/new" passHref>
@@ -81,10 +81,12 @@ const MyProjects: NextPage = () => {
                 </Link>
               ) : (
                 <Link href="/projects" passHref>
-                  <a>Apply for a project.</a>
+                  <a>
+                    <strong>Apply for a project.</strong>
+                  </a>
                 </Link>
               )}
-            </h6>
+            </p>
           </Col>
         </Row>
       )}

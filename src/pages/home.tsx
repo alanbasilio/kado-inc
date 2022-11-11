@@ -16,14 +16,14 @@ import {
 import { IsCompany, IsSchool, IsStudent } from "@/utils/profileType";
 import UserImage from "@/utils/userImage";
 import { MdModeEdit } from "react-icons/md";
-import { isCompleted } from "@/utils/daysLeft";
+import { IsTodo } from "@/utils/daysLeft";
 
 const Home: NextPage = () => {
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { myProjects, projects } = useSelector((state) => state.projects);
-  const [allProjects, setAllProjects] = useState(null);
-  const [userProjects, setUserProjects] = useState(null);
+  const [allProjects, setAllProjects] = useState([]);
+  const [userProjects, setUserProjects] = useState([]);
 
   useEffect(() => {
     dispatch(getMyProjects());
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (projects?.Project) {
       let temp = Object.entries(projects?.Project).map((entry) => entry[1]);
-      temp = temp.filter((project) => !isCompleted(project?.due_date));
+      temp = temp.filter((project) => IsTodo(project?.start_date));
       setAllProjects(temp);
     }
   }, [projects]);
@@ -41,16 +41,14 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (IsStudent() && myProjects?.User?.[0]?.Projects) {
       setUserProjects(
-        myProjects?.User?.[0]?.Projects?.filter(
-          (project) => !isCompleted(project?.due_date)
+        myProjects?.User?.[0]?.Projects?.filter((project) =>
+          IsTodo(project?.start_date)
         )
       );
     }
     if (!IsStudent() && myProjects?.Project) {
       setUserProjects(
-        myProjects?.Project?.filter(
-          (project) => !isCompleted(project?.due_date)
-        )
+        myProjects?.Project?.filter((project) => IsTodo(project?.start_date))
       );
     }
   }, [myProjects]);
@@ -124,7 +122,7 @@ const Home: NextPage = () => {
             </div>
           )}
           {IsStudent() && (
-            <div className="bg-white rounded border px-4 py-2">
+            <div className="bg-white rounded border p-2">
               <Row>
                 <Col md={12}>
                   <p className="fw-medium mb-2">
@@ -188,7 +186,7 @@ const Home: NextPage = () => {
                 </Link>
               </p>
               <hr />
-              {userProjects ? (
+              {userProjects.length > 0 ? (
                 userProjects?.map(
                   (project, index) =>
                     index === 0 && (
@@ -225,7 +223,7 @@ const Home: NextPage = () => {
                 </Link>
               </p>
               <hr />
-              {allProjects ? (
+              {allProjects.length > 0 ? (
                 allProjects?.map(
                   (project, index) =>
                     index <= 3 && (
